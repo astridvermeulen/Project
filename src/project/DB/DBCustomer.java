@@ -20,7 +20,7 @@ public class DBCustomer {
       // worden via phpmyadmin
       Connection con = DBConnector.getConnection();
       Statement stmt = con.createStatement();
-      String sql = "CREATE TABLE customer("
+      String sql = "CREATE TABLE db2019_18.customer("
   + "firstName VARCHAR(45) NULL, "
   + "lastName` VARCHAR(45) NULL,"
   + "passportNumber` VARCHAR(45) NOT NULL,"
@@ -28,7 +28,8 @@ public class DBCustomer {
   + "PRIMARY KEY (`passportNumber`)" + ")";
       stmt.executeUpdate(sql);
       DBConnector.closeConnection(con);
-    } catch (SQLException e) {
+    }
+    catch (SQLException e) {
       e.printStackTrace();
     }
   }
