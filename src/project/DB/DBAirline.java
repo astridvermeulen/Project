@@ -5,6 +5,7 @@
  */
 package project.DB;
 
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -21,7 +22,7 @@ public class DBAirline {
       Connection con = DBConnector.getConnection();
       Statement stmt = con.createStatement();
       String sql = 
-    "CREATE TABLE airline("
+    "CREATE TABLE db2019_18.airline("
   + "airlineCode VARCHAR(45) NOT NULL,"
   + "name VARCHAR(45) NULL,"
   + "PRIMARY KEY (airlineCode)"+")";
