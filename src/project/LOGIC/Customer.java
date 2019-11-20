@@ -5,11 +5,8 @@
  */
 package project.LOGIC;
 
-/**
- *
- * @author klaas
- */
 import java.util.ArrayList;
+//dit is een tesst 
 
 public class Customer {
 
