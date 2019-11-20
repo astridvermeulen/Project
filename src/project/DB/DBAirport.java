@@ -19,7 +19,7 @@ public class DBAirport {
     
       Connection con = DBConnector.getConnection();
       Statement stmt = con.createStatement();
-      String sql = "CREATE TABLE airport ("
+      String sql = "CREATE TABLE db2019_18.airport ("
   + "airportCode VARCHAR(45) NOT NULL, "
   + "airportName VARCHAR(45) NULL, "
   + "PRIMARY KEY (airportCode)" + ")";
