@@ -12,7 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import project.LOGIC.DomeinController;
+import project.LOGIC.DomainController;
 
 /**
  * FXML Controller class
@@ -26,14 +26,14 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Label label;
 
-    private DomeinController dc;
+    private DomainController dc;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        dc = DomeinController.getInstance();
+        dc = DomainController.getInstance();
     }    
 
     @FXML
