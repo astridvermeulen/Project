@@ -10,18 +10,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import project.LOGIC.DomeinController;
+import project.LOGIC.DomainController;
 
 /**
  *
  * @author astridvermeulen
  */
 public class ProjectApplication extends Application {
-    private DomeinController dc;
+    private DomainController dc;
     
     @Override
     public void start(Stage stage) throws Exception {
-        dc = new DomeinController();
+        dc = new DomainController();
         Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
         
         Scene scene = new Scene(root);
