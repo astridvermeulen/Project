@@ -23,10 +23,10 @@ public class DBBooking {
     + "bookingNumber INT NOT NULL," 
     + "promotion DOUBLE NULL," 
     + "serviceFee DOUBLE NULL," 
-    +"PRIMARY KEY (bookingNumber)" 
-    +"FOREIGN KEY (flightNumber, departureDate)"
-    +"REFERENCES db2019_18.flight (flightNumber, departureDate)" 
-    +"ON DELETE CASCADE" 
+    +"PRIMARY KEY (bookingNumber)," 
+    +"FOREIGN KEY (flightNumber, departureDate) "
+    +"REFERENCES db2019_18.flight (flightNumber, departureDate) " 
+    +"ON DELETE CASCADE " 
     +"ON UPDATE CASCADE" + ")";
       
       stmt.executeUpdate(sql);

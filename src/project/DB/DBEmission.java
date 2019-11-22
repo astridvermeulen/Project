@@ -11,27 +11,22 @@ import java.sql.Statement;
 
 /**
  *
- * @author Lenovo
+ * @author klaas
  */
-public class DBExecution {
+public class DBEmission {
     public static void createTables() throws DBException {
     try {
       // dit maakt de tabellen aan, de relaties moeten nog wel gelegd
       // worden via phpmyadmin
       Connection con = DBConnector.getConnection();
       Statement stmt = con.createStatement();
-      String sql = "CREATE TABLE execution ("
-    + "passportNumber VARCHAR(45) NOT NULL, "
-    + "bookingNumber INT NOT NULL, "
-    + "PRIMARY KEY (passportNumber, bookingNumber), " 
-    +"FOREIGN KEY (passportNuber) "
-    +"REFERENCES db2019_18.flight (passportNumber) " 
-    +"ON DELETE CASCADE "
-    +"ON UPDATE CASCADE,"       
-    +"FOREIGN KEY (bookingNumber) "
-    +"REFERENCES db2019_18.flight (booking) " 
-    +"ON DELETE CASCADE "
-    +"ON UPDATE CASCADE"  + ")";
+      String sql = "CREATE TABLE emission ("
+    + "CO2 DOUBLE NOT NULL, "
+    + "PRIMARY KEY (departureTime, arrivalTime), " 
+    + "FOREIGN KEY (departureTime, arrivalTime) "
+    + "REFERENCES db2019_18.flight (flight) " 
+    + "ON DELETE CASCADE "
+    + "ON UPDATE CASCADE" + ")";
         stmt.executeUpdate(sql);
       DBConnector.closeConnection(con);
     } catch (SQLException e) {

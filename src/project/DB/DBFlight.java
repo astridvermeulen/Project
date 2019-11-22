@@ -30,10 +30,10 @@ public class DBFlight {
     +"origin VARCHAR(45) NULL," 
     +"destination VARCHAR(45) NULL," 
     +"airlineCode VARCHAR(45) NOT NULL," 
-    +"PRIMARY KEY (flightNumber, departureDate, airlineCode)" 
-    +"FOREIGN KEY (airlineCode)"
-    +"REFERENCES db2019_18.airline (airlineCode)" 
-    +"ON DELETE CASCADE" 
+    +"PRIMARY KEY (flightNumber, departureDate)," 
+    +"FOREIGN KEY (airlineCode) "
+    +"REFERENCES db2019_18.airline (airlineCode) " 
+    +"ON DELETE CASCADE " 
     +"ON UPDATE CASCADE" + ")";
       
       stmt.executeUpdate(sql);
