@@ -25,7 +25,7 @@ public class DBExecution {
     + "bookingNumber INT NOT NULL, "
     + "PRIMARY KEY (passportNumber, bookingNumber), " 
     +"FOREIGN KEY (passportNuber) "
-    +"REFERENCES db2019_18.flight (passportNumber) " 
+    +"REFERENCES db2019_18.flight (customer) " 
     +"ON DELETE CASCADE "
     +"ON UPDATE CASCADE,"       
     +"FOREIGN KEY (bookingNumber) "
