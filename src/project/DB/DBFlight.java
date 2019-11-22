@@ -29,7 +29,7 @@ public class DBFlight {
     +"price DOUBLE NULL," 
     +"origin VARCHAR(45) NULL," 
     +"destination VARCHAR(45) NULL," 
-    +"airlineCode VARCHAR(45) NOT NULL," 
+    +"airlineCode VARCHAR(45) NOT NULL,"          
     +"PRIMARY KEY (flightNumber, departureDate, airlineCode)" 
     +"FOREIGN KEY (airlineCode)"
     +"REFERENCES db2019_18.airline (airlineCode)" 
