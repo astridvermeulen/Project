@@ -21,14 +21,14 @@ public class DBFlightLeg {
       Statement stmt = con.createStatement();
       String sql = "CREATE TABLE db2019_18.flightLeg("              
     + "legNumber VARCHAR(45) NOT NULL,"  
-    +"PRIMARY KEY (legNumber)" 
-    +"FOREIGN KEY (flightNumber, departureDate)"
-    +"REFERENCES db2019_18.flight (flightNumber, departureDate)" 
-    +"ON DELETE CASCADE"
-    +"ON UPDATE CASCADE"          
-    +"FOREIGN KEY (airportCode)"
-    +"REFERENCES db2019_18.airport (airportCode)"          
-    +"ON DELETE CASCADE" 
+    +"PRIMARY KEY (legNumber, flightNumber, departureDate)," 
+    +"FOREIGN KEY (flightNumber, departureDate) "
+    +"REFERENCES db2019_18.flight (flightNumber, departureDate) " 
+    +"ON DELETE CASCADE "
+    +"ON UPDATE CASCADE,"          
+    +"FOREIGN KEY (airportCode) "
+    +"REFERENCES db2019_18.airport (airportCode) "          
+    +"ON DELETE CASCADE " 
     +"ON UPDATE CASCADE" + ")";
       
       stmt.executeUpdate(sql);
