@@ -6,9 +6,11 @@
 package project.DB;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Time;
 import java.util.ArrayList;
 import project.LOGIC.Flight;
 
@@ -47,7 +49,7 @@ public class DBFlight {
     }  
 }
  
-     private static Flight getFlight(String flightNumber, String departureTime) throws DBException {
+     private static Flight getFlight(String flightNumber, Date departureDate) throws DBException {
         Connection con = null;
     try {
       con = DBConnector.getConnection();
@@ -56,20 +58,22 @@ public class DBFlight {
       String sql = "SELECT flightNumber, departureDate, departureTime, arrivalDate, arrivalTime, price, origin, destination, airlineCode "
 	+ "FROM db2019_18.flight "
 	+ "WHERE flightNumber = " + flightNumber
-        + " AND departureTime = " + departureTime;
+        + " AND departureTime = " + departureDate;
 
       ResultSet srs = stmt.executeQuery(sql);
      
         boolean fullTime, graduate;
-      String departureDate, arrivalDate, arrivalTime, origin, destination, airlineCode;
+      String origin, destination, airlineCode;
       double price;
+      Date arrivalDate;
+      Time arrivalTime, departureTime;
       
       if (srs.next()) {
           flightNumber = srs.getString("flightNumber");
-          departureDate = srs.getString("departureDate");
-          departureTime = srs.getString("departureTime");
-          arrivalDate = srs.getString("arrivalDate");
-          arrivalTime = srs.getString("arrivalTime");
+          departureDate = srs.getDate("departureDate");
+          departureTime = srs.getTime("departureTime");
+          arrivalDate = srs.getDate("arrivalDate");
+          arrivalTime = srs.getTime("arrivalTime");
           price = srs.getDouble("price");
           origin = srs.getString("origin");
           destination = srs.getString("destination");
@@ -104,7 +108,7 @@ public class DBFlight {
       ResultSet srs = stmt.executeQuery(sql);
       ArrayList<Flight> vluchten = new ArrayList<>();
       while (srs.next())
-        vluchten.add(getFlight(srs.getString("flightNumber"), srs.getString("departureDate")));
+        vluchten.add(getFlight(srs.getString("flightNumber"), srs.getDate("departureDate")));
       DBConnector.closeConnection(con);
       return vluchten;
     } catch (DBException dbe) {
