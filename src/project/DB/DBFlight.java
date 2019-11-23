@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import project.LOGIC.Flight;
 
@@ -62,6 +64,7 @@ public class DBFlight {
 
       ResultSet srs = stmt.executeQuery(sql);
      
+      //werken let LocalDate en LocalTime? zie slide 20 tips project database!!
       String origin, destination, airlineCode;
       double price;
       Date arrivalDate;
@@ -82,6 +85,7 @@ public class DBFlight {
 	DBConnector.closeConnection(con);
 	return null;
       }
+      //aantal flightlegs moet er ook nog bij? 
       Flight vlucht = new Flight(flightNumber, departureDate, departureTime, arrivalDate, arrivalTime, price, origin, destination, airlineCode);
       DBConnector.closeConnection(con);
       return vlucht;
