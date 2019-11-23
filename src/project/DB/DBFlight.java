@@ -62,7 +62,6 @@ public class DBFlight {
 
       ResultSet srs = stmt.executeQuery(sql);
      
-        boolean fullTime, graduate;
       String origin, destination, airlineCode;
       double price;
       Date arrivalDate;
