@@ -13,17 +13,16 @@ import java.util.ArrayList;
  */
 public class MergeSort {
 
-    public static void sort(ArrayList<Flight> flightsFilteredOnLegs) {
+    public static void sort(ArrayList<Flight> flightsFilteredOnLegs, String filter) {
         if (flightsFilteredOnLegs.size() >= 2) {
             int halfLenght = flightsFilteredOnLegs.size() / 2;
             ArrayList<Flight> firstHalf = new ArrayList<>(halfLenght);
             ArrayList<Flight> lastHalf = new ArrayList<>(flightsFilteredOnLegs.size() - halfLenght);
 
             divide(flightsFilteredOnLegs, firstHalf, lastHalf);
-            sort(firstHalf);
-            sort(lastHalf);
-            merge(flightsFilteredOnLegs, firstHalf, lastHalf);
-
+            sort(firstHalf, filter);
+            sort(lastHalf, filter);
+            merge(flightsFilteredOnLegs, firstHalf, lastHalf, filter);
         }
     }
 
@@ -36,16 +35,36 @@ public class MergeSort {
         }
     }
 
-    private static void merge(ArrayList<Flight> flightsFilteredOnLegs, ArrayList<Flight> firstHalf, ArrayList<Flight> lastHalf) {
+    private static void merge(ArrayList<Flight> flightsFilteredOnLegs, ArrayList<Flight> firstHalf, ArrayList<Flight> lastHalf, String filter) {
         int firstHalfIndex = 0, lastHalfIndex = 0, aIndex = 0;
         while ((firstHalfIndex < firstHalf.size()) && (lastHalfIndex < lastHalf.size())) {
-            if (firstHalf.get(firstHalfIndex).getDuration() < lastHalf.get(lastHalfIndex).getDuration()) {
-                flightsFilteredOnLegs.set(aIndex, firstHalf.get(firstHalfIndex));
-                firstHalfIndex++;
+            if (filter.equalsIgnoreCase("Duration")) {
+                if (firstHalf.get(firstHalfIndex).getDuration() < lastHalf.get(lastHalfIndex).getDuration()) {
+                    flightsFilteredOnLegs.set(aIndex, firstHalf.get(firstHalfIndex));
+                    firstHalfIndex++;
 
+                } else {
+                    flightsFilteredOnLegs.set(aIndex, lastHalf.get(firstHalfIndex));
+                    lastHalfIndex++;
+                }
+            } else if (filter.equalsIgnoreCase("Price")) {
+                if (firstHalf.get(firstHalfIndex).getPrice() < lastHalf.get(lastHalfIndex).getPrice()) {
+                    flightsFilteredOnLegs.set(aIndex, firstHalf.get(firstHalfIndex));
+                    firstHalfIndex++;
+
+                } else {
+                    flightsFilteredOnLegs.set(aIndex, lastHalf.get(firstHalfIndex));
+                    lastHalfIndex++;
+                }
             } else {
-                flightsFilteredOnLegs.set(aIndex, lastHalf.get(firstHalfIndex));
-                lastHalfIndex++;
+                if (firstHalf.get(firstHalfIndex).getEmission() < lastHalf.get(lastHalfIndex).getEmission()) {
+                    flightsFilteredOnLegs.set(aIndex, firstHalf.get(firstHalfIndex));
+                    firstHalfIndex++;
+
+                } else {
+                    flightsFilteredOnLegs.set(aIndex, lastHalf.get(firstHalfIndex));
+                    lastHalfIndex++;
+                }
             }
             aIndex++;
         }

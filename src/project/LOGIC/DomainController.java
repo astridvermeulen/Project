@@ -39,39 +39,14 @@ public class DomainController {
         return flightsFiltered;
     }
 
-    //Helping method to filter the fligts according to duration price or emission
+    
+
+    //Helping method to filter the flights
     private ArrayList<Flight> filterDurationPriceEmission(ArrayList<Flight> flightsFilteredOnLegs, String filter) {
-        ArrayList<Flight> flightsFiltered = new ArrayList<>();
-        switch (filter) {
-            case "duration":
-                flightsFiltered = this.filterDuration(flightsFilteredOnLegs);
-                break;
-            case "price":
-                flightsFiltered = this.filterPrice(flightsFilteredOnLegs);
-                break;
-            case "emission":
-                flightsFiltered = this.filterEmission(flightsFilteredOnLegs);
-                break;
-        }
-        return flightsFiltered;
-    }
-
-    //Helping method to filter the flights on duratation
-    private ArrayList<Flight> filterDuration(ArrayList<Flight> flightsFilteredOnLegs) {
-        MergeSort.sort(flightsFilteredOnLegs);
+        MergeSort.sort(flightsFilteredOnLegs, filter);
         return flightsFilteredOnLegs;
     }
 
-    //Helping method to filter the flights on price
-    private ArrayList<Flight> filterPrice(ArrayList<Flight> flightsFilteredOnLegs) {
-        MergeSort.sort(flightsFilteredOnLegs);
-        return flightsFilteredOnLegs;
-    }
-
-    //Helping method to filter the flights on emission
-    private ArrayList<Flight> filterEmission(ArrayList<Flight> flightsFilteredOnLegs) {
-        MergeSort.sort(flightsFilteredOnLegs);
-        return flightsFilteredOnLegs;
-    }
+    
 
 }

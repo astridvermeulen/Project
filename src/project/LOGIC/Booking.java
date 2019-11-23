@@ -68,7 +68,7 @@ public class Booking {
     //Method to calculate the net price of a flight 
     public double calculateNetPrice() {
         double netPrice = 0.0;
-        netPrice = this.serviceFee + originele prijs vliegtuig - promotion;
+        //netPrice = this.serviceFee + originele prijs vliegtuig - promotion;
         return netPrice;
     }
 }

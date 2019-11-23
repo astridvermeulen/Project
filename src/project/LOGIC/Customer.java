@@ -49,6 +49,8 @@ public class Customer {
 
     //Method to get an overview of all the flights booked by a customer 
     public ArrayList<Flight> flightOverview() {
+        ArrayList<Flight> vluchten = new ArrayList<Flight>();
+        return vluchten;
     }
     
     
