@@ -6,13 +6,10 @@
 package project.DB;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Time;
 import project.LOGIC.Airport;
-import project.LOGIC.Flight;
 
 /**
  *
@@ -42,7 +39,7 @@ public class DBAirport {
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
       String sql = "SELECT airportCode, airportName "
-        + "FROM db2019_18.flight "
+        + "FROM db2019_18.airport "
 	+ "WHERE airportCode = " + airportCode;
 
       ResultSet srs = stmt.executeQuery(sql);
@@ -58,7 +55,7 @@ public class DBAirport {
 	return null;
       }
       
-      Airport luchthaven = new Airport(String airportCode, String airportName);
+      Airport luchthaven = new Airport(airportCode, airportName);
               DBConnector.closeConnection(con);
       return luchthaven;
     }
