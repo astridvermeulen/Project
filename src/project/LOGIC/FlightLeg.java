@@ -10,5 +10,5 @@ package project.LOGIC;
  * @author klaas
  */
 public class FlightLeg {
-    
+    private int numberOfLegs;
 }
