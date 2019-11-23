@@ -48,7 +48,7 @@ public class DBFlight {
       e.printStackTrace();
     }  
 }
- 
+     // retourneert 1 vlucht
      private static Flight getFlight(String flightNumber, Date departureDate) throws DBException {
         Connection con = null;
     try {
@@ -95,7 +95,7 @@ public class DBFlight {
     }
     
      
-
+     // retourneert een arraylist van alle vluchten
     public static ArrayList<Flight> getFlights() throws DBException {
     Connection con = null;
     try {
