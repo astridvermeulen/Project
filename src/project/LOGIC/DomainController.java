@@ -17,62 +17,61 @@ public class DomainController {
     }
 
     //Method to filter the flights, returns the filtered flights 
-    public ArrayList<Flight> vluchtenFilteren(int legs, String filter) {
-        ArrayList<Flight> vluchten = new ArrayList<>();
-        switch (legs) {
-            case 0:
-                switch (filter) {
-                    case "duration":
-                        break;
-                    case "price":
-                        break;
-
-                    case "emission":
-                        break;
-                }
-            case 1:
-                switch (filter) {
-                    case "duration":
-                        break;
-
-                    case "price":
-                        break;
-
-                    case "emission":
-                        break;
-                }
-        }
-        return vluchten;
+    public ArrayList<Flight> vluchtenFilteren(Boolean legs, String filter) {
+        ArrayList<Flight> flightsAll = new ArrayList<>(); //call naar databoys om een arraylist van alle vluchten te krijgen 
+        ArrayList<Flight> flightsFilteredOnLegs = this.fliterOnLegs(legs, flightsAll);
+        ArrayList<Flight> flightsFiltered = this.filterDurationPriceEmission(flightsFilteredOnLegs, filter);
+        return flightsFiltered;
     }
 
-    private ArrayList<Flight> noLegs() {
-        ArrayList<Flight> vluchten = new ArrayList<>();
-        for (int i = 1; i <= vluchten.size(); i++) {
-            Flight vlucht = vluchten.get(i);
-            if (vlucht.) {
-                
+    //Helping method to filter: stopover possible or not
+    private ArrayList<Flight> fliterOnLegs(Boolean legs, ArrayList<Flight> flightsAll) {
+        ArrayList<Flight> flightsFiltered = new ArrayList<>();
+        if (legs) {
+            flightsFiltered = flightsAll;
+        } else {
+            for (Flight vlucht : flightsAll) {
+                if (!(vlucht.getFlightLegs().size() > 1)) {
+                    flightsFiltered.add(vlucht);
+                }
             }
         }
-        return vluchten;
+        return flightsFiltered;
     }
 
-    private ArrayList<Flight> yesLegs() {
-        ArrayList<Flight> vluchten;
-        return vluchten;
+    //Helping method to filter the fligts according to duration price or emission
+    private ArrayList<Flight> filterDurationPriceEmission(ArrayList<Flight> flightsFilteredOnLegs, String filter) {
+        ArrayList<Flight> flightsFiltered = new ArrayList<>();
+        switch (filter) {
+            case "duration":
+                flightsFiltered = this.filterDuration(flightsFilteredOnLegs);
+                break;
+            case "price":
+                flightsFiltered = this.filterPrice(flightsFilteredOnLegs);
+                break;
+            case "emission":
+                flightsFiltered = this.filterEmission(flightsFilteredOnLegs);
+                break;
+        }
+        return flightsFiltered;
     }
 
-    private ArrayList<Flight> filterDuration() {
-        ArrayList<Flight> vluchten;
-        return vluchten;
+    //Helping method to filter the flights on duratation
+    private ArrayList<Flight> filterDuration(ArrayList<Flight> flightsFilteredOnLegs) {
+        MergeSort.sort(flightsFilteredOnLegs);
+        return flightsFilteredOnLegs;
     }
 
-    private ArrayList<Flight> filterPrice() {
-        ArrayList<Flight> vluchten;
-        return vluchten;
+    //Helping method to filter the flights on price
+    private ArrayList<Flight> filterPrice(ArrayList<Flight> flightsFilteredOnLegs) {
+        MergeSort.sort(flightsFilteredOnLegs);
+        return flightsFilteredOnLegs;
     }
 
-    private ArrayList<Flight> filterEmission() {
-        ArrayList<Flight> vluchten;
-        return vluchten;
+    //Helping method to filter the flights on emission
+    private ArrayList<Flight> filterEmission(ArrayList<Flight> flightsFilteredOnLegs) {
+        MergeSort.sort(flightsFilteredOnLegs);
+        return flightsFilteredOnLegs;
     }
+
 }
