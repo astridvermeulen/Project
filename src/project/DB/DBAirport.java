@@ -100,19 +100,19 @@ public class DBAirport {
       
       String sql = "SELECT airportCode "
               + "FROM airport "
-              + "WHERE airportCode = " + s.getAirportCode();
+              + "WHERE airportCode = '" + s.getAirportCode() + "'";
       ResultSet srs = stmt.executeQuery(sql);
       if (srs.next()) {
         // UPDATE
 	sql = "UPDATE airport "
                 + "SET airportCode = '" + s.getAirportCode() + "'"
-		+ ", aiportName = " + s.getAirportName();
+		+ ", aiportName = '" + s.getAirportName() + "'";
         stmt.executeUpdate(sql);
       } else {
 	// INSERT
 	sql = "INSERT into airport "
                 + "(airportCode, airportName) "
-		+ "VALUES (" + s.getAirportCode()
+		+ "VALUES ('" + s.getAirportCode() + "'"
 		+ ", '" + s.getAirportName() + "')";
         
         stmt.executeUpdate(sql);
