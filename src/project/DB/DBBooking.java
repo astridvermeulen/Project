@@ -46,7 +46,7 @@ public class DBBooking {
       con = DBConnector.getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
-      String sql = "bookingNumber, serviceFee, promotion, flightNumber, departureDate "
+      String sql = "SELECT bookingNumber, serviceFee, promotion, flightNumber, departureDate "
         + "FROM db2019_18.booking "
 	+ "WHERE bookingNumber = " + bookingNumber;
 
