@@ -6,13 +6,9 @@
 package project.DB;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Time;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import project.LOGIC.Flight;
 
@@ -51,7 +47,7 @@ public class DBFlight {
     }  
 }
      // retourneert 1 vlucht
-     private static Flight getFlight(String flightNumber, Date departureDate) throws DBException {
+     private static Flight getFlight(String flightNumber, int departureDate) throws DBException {
         Connection con = null;
     try {
       con = DBConnector.getConnection();
@@ -60,35 +56,36 @@ public class DBFlight {
       String sql = "SELECT flightNumber, departureDate, departureTime, arrivalDate, arrivalTime, price, origin, destination, airlineCode "
 	+ "FROM db2019_18.flight "
 	+ "WHERE flightNumber = " + flightNumber
-        + " AND departureTime = " + departureDate;
+        + " AND departureDate = " + departureDate;
 
       ResultSet srs = stmt.executeQuery(sql);
      
       //werken let LocalDate en LocalTime? zie slide 20 tips project database!!
       String origin, destination, airlineCode;
       double price;
-      Date arrivalDate;
-      Time arrivalTime, departureTime;
+      int arrivalDate, arrivalTime, departureTime;
+      double emission; 
       
       if (srs.next()) {
           flightNumber = srs.getString("flightNumber");
-          departureDate = srs.getDate("departureDate");
-          departureTime = srs.getTime("departureTime");
-          arrivalDate = srs.getDate("arrivalDate");
-          arrivalTime = srs.getTime("arrivalTime");
+          departureDate = srs.getInt("departureDate");
+          departureTime = srs.getInt("departureTime");
+          arrivalDate = srs.getInt("arrivalDate");
+          arrivalTime = srs.getInt("arrivalTime");
           price = srs.getDouble("price");
           origin = srs.getString("origin");
           destination = srs.getString("destination");
           airlineCode = srs.getString("airlineCode");
-          
+                    
 	} else {// we verwachten slechts 1 rij...
 	DBConnector.closeConnection(con);
 	return null;
       }
       //aantal flightlegs moet er ook nog bij? 
-      Flight vlucht = new Flight(flightNumber, departureDate, departureTime, arrivalDate, arrivalTime, price, origin, destination, airlineCode);
+      // Flight vlucht = new Flight(destination, origin, flightNumber, emission, price, departureDate, arrivalDate, departureTime, arrivalTime);
       DBConnector.closeConnection(con);
-      return vlucht;
+      //return vlucht;
+      return null;
     }
     
     catch (Exception ex) {
@@ -111,7 +108,7 @@ public class DBFlight {
       ResultSet srs = stmt.executeQuery(sql);
       ArrayList<Flight> vluchten = new ArrayList<>();
       while (srs.next())
-        vluchten.add(getFlight(srs.getString("flightNumber"), srs.getDate("departureDate")));
+        vluchten.add(getFlight(srs.getString("flightNumber"), srs.getInt("departureDate")));
       DBConnector.closeConnection(con);
       return vluchten;
     } catch (DBException dbe) {

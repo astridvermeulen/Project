@@ -10,7 +10,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import project.LOGIC.Airline;
+import java.util.ArrayList;
+import project.LOGIC.Airline;;
 
 /**
  *
@@ -71,6 +72,30 @@ public class DBAirline {
     }
          
      }
+   public static ArrayList<Airline> getAirlines() throws DBException {
+    Connection con = null;
+    try {
+      con = DBConnector.getConnection();
+      Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+      
+      String sql = "SELECT AirlineCode "
+              + "FROM db2019_18.airline";
+      ResultSet srs = stmt.executeQuery(sql);
+      ArrayList<Airline> vliegmaatschappij = new ArrayList<>();
+      while (srs.next())
+        vliegmaatschappij.add(getAirline(srs.getInt("airlineCode")));
+      DBConnector.closeConnection(con);
+      return vliegmaatschappij;
+    } catch (DBException dbe) {
+      dbe.printStackTrace();
+      DBConnector.closeConnection(con);
+      throw dbe;
+    } catch (Exception ex) {
+      ex.printStackTrace();
+      DBConnector.closeConnection(con);
+      throw new DBException(ex);
+    }
+  }
 
     
 }

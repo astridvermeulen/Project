@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import project.LOGIC.Airport;
 
 /**
@@ -67,5 +68,29 @@ public class DBAirport {
     }
          
      }
+     public static ArrayList<Airport> getAirports() throws DBException {
+    Connection con = null;
+    try {
+      con = DBConnector.getConnection();
+      Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+      
+      String sql = "SELECT airportCode "
+              + "FROM db2019_18.airport";
+      ResultSet srs = stmt.executeQuery(sql);
+      ArrayList<Airport> luchthavens = new ArrayList<>();
+      while (srs.next())
+        luchthavens.add(getAirport(srs.getString("airportCode")));
+      DBConnector.closeConnection(con);
+      return luchthavens;
+    } catch (DBException dbe) {
+      dbe.printStackTrace();
+      DBConnector.closeConnection(con);
+      throw dbe;
+    } catch (Exception ex) {
+      ex.printStackTrace();
+      DBConnector.closeConnection(con);
+      throw new DBException(ex);
+    }
+  }
   
 }

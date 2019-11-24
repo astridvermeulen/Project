@@ -10,8 +10,7 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Time;
-import project.LOGIC.Flight;
+import project.LOGIC.FlightLeg;
 
 /**
  *
@@ -70,9 +69,10 @@ public class DBFlightLeg {
 	return null;
       }
       
-      FlightLeg tussenvlucht = new FlightLeg(legNumber, flightNumber, departureDate, airportCode);
+     // FlightLeg tussenvlucht = new FlightLeg(legNumber, flightNumber, departureDate, airportCode);
       DBConnector.closeConnection(con);
-      return tussenvlucht;
+      //return tussenvlucht;
+      return null;
     }
     
     catch (Exception ex) {
