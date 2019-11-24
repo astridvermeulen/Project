@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import project.LOGIC.Customer;
 
 /**
@@ -73,5 +74,29 @@ public class DBCustomer {
     }
          
      }
+     public static ArrayList<Customer> getCustomers() throws DBException {
+    Connection con = null;
+    try {
+      con = DBConnector.getConnection();
+      Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+      
+      String sql = "SELECT passportNumber "
+              + "FROM db2019_18.customer";
+      ResultSet srs = stmt.executeQuery(sql);
+      ArrayList<Customer> klanten = new ArrayList<>();
+      while (srs.next())
+        klanten.add(getCustomer(srs.getString("bookingNumber")));
+      DBConnector.closeConnection(con);
+      return klanten;
+    } catch (DBException dbe) {
+      dbe.printStackTrace();
+      DBConnector.closeConnection(con);
+      throw dbe;
+    } catch (Exception ex) {
+      ex.printStackTrace();
+      DBConnector.closeConnection(con);
+      throw new DBException(ex);
+    }
+  }
     }
 
