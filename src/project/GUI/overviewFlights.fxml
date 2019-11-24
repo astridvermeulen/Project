@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="799.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.GUI.OverviewFlightsController">
+   <children>
+      <TableView prefHeight="400.0" prefWidth="799.0">
+        <columns>
+          <TableColumn fx:id="airlinecolumn" prefWidth="49.0" text="Airline" />
+          <TableColumn fx:id="originAirportcolumn" prefWidth="95.0" text="Origin airport" />
+            <TableColumn fx:id="destinationAirportcolumn" prefWidth="121.0" text="Destination airport" />
+            <TableColumn fx:id="departureTimecolumn" prefWidth="108.0" text="Departure time" />
+            <TableColumn fx:id="destinationTimecolumn" prefWidth="111.0" text="Destination time" />
+            <TableColumn fx:id="durationcolumn" prefWidth="68.0" text="Duration" />
+            <TableColumn fx:id="flightNumbercolumn" prefWidth="97.0" text="Flight number" />
+            <TableColumn fx:id="pricecolumn" prefWidth="53.0" text="Price" />
+            <TableColumn fx:id="co2Emissioncolumn" prefWidth="98.0" text="CO2 emission" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

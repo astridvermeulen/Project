@@ -3,42 +3,36 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package project;
+package project.GUI;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import project.LOGIC.DomainController;
+import javafx.scene.control.TableColumn;
 
 /**
  * FXML Controller class
  *
  * @author eliseverschelde
  */
-public class FXMLDocumentController implements Initializable {
+public class OverviewCustomersController implements Initializable {
 
     @FXML
-    private Button button;
+    private TableColumn<?, ?> firstNamecolumn;
     @FXML
-    private Label label;
+    private TableColumn<?, ?> lastNamecolumn;
+    @FXML
+    private TableColumn<?, ?> passportNumbercolumn;
+    @FXML
+    private TableColumn<?, ?> homeCountrycolumn;
 
-    private DomainController dc;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        dc = DomainController.getInstance();
     }    
-
-    @FXML
-    private void handleButtonAction(ActionEvent event) {
-        label.setText(dc.toonVluchtNaam());
-    }
     
 }

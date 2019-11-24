@@ -21,8 +21,8 @@ public class ProjectApplication extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        dc = new DomeinController();
-        Parent root = FXMLLoader.load(getClass().getResource("searchFlight.fxml"));
+        dc = new DomainController();
+        Parent root = FXMLLoader.load(getClass().getResource("/project/GUI/searchFlight.fxml"));
         
         Scene scene = new Scene(root);
         
