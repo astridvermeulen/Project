@@ -49,9 +49,14 @@ public class Customer {
 
     //Method to get an overview of all the flights booked by a customer 
     public ArrayList<Flight> flightOverview() {
-        ArrayList<Flight> vluchten = new ArrayList<Flight>();
-        return vluchten;
+        ArrayList<Flight> flightsAll = new ArrayList<>(); //call naar databoys om een arraylist van alle vluchten te krijgen 
+        ArrayList<Flight> flightsOfCustomer = new ArrayList<>();
+        for (Flight vlucht : flightsAll) {
+            if (!(vlucht.getFlightLegs().size() > 1)) {
+                flightsOfCustomer.add(vlucht);
+            }
+        }
+        return flightsOfCustomer;
+
     }
-    
-    
 }

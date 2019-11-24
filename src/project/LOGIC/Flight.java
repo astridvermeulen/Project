@@ -5,7 +5,6 @@
  */
 package project.LOGIC;
 
-import java.sql.Date;
 import java.util.ArrayList;
 
 /**
@@ -26,11 +25,11 @@ public class Flight {
     private int arrivalTime;
     private int duration;
 
-    public Flight(String destination, String origin, String flightNumber, double emission, int price, int departureDate, int arrivalDate, int departureTime, int arrivalTime, int duration) {
+    public Flight(String destination, String origin, String flightNumber, int price, int departureDate, int arrivalDate, int departureTime, int arrivalTime) {
         this.destination = destination;
         this.origin = origin;
         this.flightNumber = flightNumber;
-        this.emission = emission;
+        this.emission = this.calculateEmission();
         this.price = price;
         this.departureDate = departureDate;
         this.arrivalDate = arrivalDate;
@@ -83,10 +82,14 @@ public class Flight {
         return duration;
     }
     
-    
-    
     public int calculateDuration(){
-        int duration = 0;
-        return duration;
+        int dur = arrivalTime - departureTime;
+        return dur;
+    }
+    
+    public double calculateEmission(){
+        double em =0;
+       // em = duration* waarde opzoeken co2 per uur;
+        return em;
     }
 }

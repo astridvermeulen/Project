@@ -6,6 +6,8 @@
 package project.LOGIC;
 
 import java.util.ArrayList;
+import project.DB.DBException;
+import project.DB.DBFlight;
 
 /**
  *
@@ -16,12 +18,18 @@ public class DomainController {
     public DomainController() {
     }
 
+    public static DomainController domainController = new DomainController();
+
+    public static DomainController getInstance() {
+        return domainController;
+    }
+
     //Method to filter the flights, returns the filtered flights 
-    public ArrayList<Flight> vluchtenFilteren(Boolean legs, String filter) {
-        ArrayList<Flight> flightsAll = new ArrayList<>(); //call naar databoys om een arraylist van alle vluchten te krijgen 
+    public ArrayList<Flight> vluchtenFilteren(Boolean legs, String filter) throws DBException  {
+        ArrayList<Flight> flightsAll = DBFlight.getFlights();
         ArrayList<Flight> flightsFilteredOnLegs = this.fliterOnLegs(legs, flightsAll);
-        ArrayList<Flight> flightsFiltered = this.filterDurationPriceEmission(flightsFilteredOnLegs, filter);
-        return flightsFiltered;
+        MergeSort.sort(flightsFilteredOnLegs, filter);
+        return flightsFilteredOnLegs;
     }
 
     //Helping method to filter: stopover possible or not
@@ -38,15 +46,5 @@ public class DomainController {
         }
         return flightsFiltered;
     }
-
-    
-
-    //Helping method to filter the flights
-    private ArrayList<Flight> filterDurationPriceEmission(ArrayList<Flight> flightsFilteredOnLegs, String filter) {
-        MergeSort.sort(flightsFilteredOnLegs, filter);
-        return flightsFilteredOnLegs;
-    }
-
-    
 
 }
