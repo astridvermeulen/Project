@@ -22,14 +22,14 @@ public class DBAirport {
      public static void createTables() throws DBException {
     try {
     
-      Connection con = DBConnector.getConnection();
+      Connection con = DBConnection.getConnection();
       Statement stmt = con.createStatement();
       String sql = "CREATE TABLE db2019_18.airport ("
   + "airportCode VARCHAR(45) NOT NULL, "
   + "airportName VARCHAR(45) NULL, "
   + "PRIMARY KEY (airportCode)" + ")";
         stmt.executeUpdate(sql);
-      DBConnector.closeConnection(con);
+      DBConnection.closeConnection(con);
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -38,7 +38,7 @@ public class DBAirport {
      public static Airport getAirport(String airportCode) throws DBException{
          Connection con = null;
     try {
-      con = DBConnector.getConnection();
+      con = DBConnection.getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
       String sql = "SELECT airportCode, airportName "
@@ -54,18 +54,18 @@ public class DBAirport {
           airportName = srs.getString("airportName");
           
 	} else {// we verwachten slechts 1 rij...
-	DBConnector.closeConnection(con);
+	DBConnection.closeConnection(con);
 	return null;
       }
       
       Airport luchthaven = new Airport(airportCode, airportName);
-              DBConnector.closeConnection(con);
+              DBConnection.closeConnection(con);
       return luchthaven;
     }
     
     catch (Exception ex) {
       ex.printStackTrace();
-      DBConnector.closeConnection(con);
+      DBConnection.closeConnection(con);
       throw new DBException(ex);
     }
          
@@ -73,7 +73,7 @@ public class DBAirport {
      public static ArrayList<Airport> getAirports() throws DBException {
     Connection con = null;
     try {
-      con = DBConnector.getConnection();
+      con = DBConnection.getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
       String sql = "SELECT airportCode "
@@ -82,22 +82,22 @@ public class DBAirport {
       ArrayList<Airport> luchthavens = new ArrayList<>();
       while (srs.next())
         luchthavens.add(getAirport(srs.getString("airportCode")));
-      DBConnector.closeConnection(con);
+      DBConnection.closeConnection(con);
       return luchthavens;
     } catch (DBException dbe) {
       dbe.printStackTrace();
-      DBConnector.closeConnection(con);
+      DBConnection.closeConnection(con);
       throw dbe;
     } catch (Exception ex) {
       ex.printStackTrace();
-      DBConnector.closeConnection(con);
+      DBConnection.closeConnection(con);
       throw new DBException(ex);
     }
   }
    public static void save(Airport s) throws DBException {
     Connection con = null;
     try {
-      con = DBConnector.getConnection();
+      con = DBConnection.getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
       String sql = "SELECT airportCode "
@@ -120,10 +120,10 @@ public class DBAirport {
         
         stmt.executeUpdate(sql);
       }
-      DBConnector.closeConnection(con);
+      DBConnection.closeConnection(con);
     } catch (Exception ex) {
       ex.printStackTrace();
-      DBConnector.closeConnection(con);
+      DBConnection.closeConnection(con);
       throw new DBException(ex);
     }
   }

@@ -18,7 +18,7 @@ public class DBExecution {
     try {
       // dit maakt de tabellen aan, de relaties moeten nog wel gelegd
       // worden via phpmyadmin
-      Connection con = DBConnector.getConnection();
+      Connection con = DBConnection.getConnection();
       Statement stmt = con.createStatement();
       String sql = "CREATE TABLE execution ("
     + "passportNumber VARCHAR(45) NOT NULL, "
@@ -33,7 +33,7 @@ public class DBExecution {
     +"ON DELETE CASCADE "
     +"ON UPDATE CASCADE"  + ")";
         stmt.executeUpdate(sql);
-      DBConnector.closeConnection(con);
+      DBConnection.closeConnection(con);
     } catch (SQLException e) {
       e.printStackTrace();
     }

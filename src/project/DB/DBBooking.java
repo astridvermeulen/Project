@@ -20,7 +20,7 @@ public class DBBooking {
     public static void createTables() throws DBException {
     try {
    
-      Connection con = DBConnector.getConnection();
+      Connection con = DBConnection.getConnection();
       Statement stmt = con.createStatement();
       String sql = "CREATE TABLE db2019_18.booking("              
     + "bookingNumber INT NOT NULL," 
@@ -33,7 +33,7 @@ public class DBBooking {
     +"ON UPDATE CASCADE" + ")";
       
       stmt.executeUpdate(sql);
-      DBConnector.closeConnection(con);
+      DBConnection.closeConnection(con);
     }
     catch (SQLException e) {
       e.printStackTrace();
@@ -43,7 +43,7 @@ public class DBBooking {
  public static Booking getBooking(int bookingNumber) throws DBException{
          Connection con = null;
     try {
-      con = DBConnector.getConnection();
+      con = DBConnection.getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
       String sql = "SELECT bookingNumber "
@@ -65,19 +65,19 @@ public class DBBooking {
           //departureDate = srs.getDate("departureDate");
 	} 
       else {// we verwachten slechts 1 rij...
-	DBConnector.closeConnection(con);
+	DBConnection.closeConnection(con);
 	return null;
       }
       
       Booking boeking = new Booking(bookingNumber);
-              DBConnector.closeConnection(con);
+              DBConnection.closeConnection(con);
       return boeking;
       
     }
     
     catch (Exception ex) {
       ex.printStackTrace();
-      DBConnector.closeConnection(con);
+      DBConnection.closeConnection(con);
       throw new DBException(ex);
     }
     
@@ -86,7 +86,7 @@ public class DBBooking {
  public static ArrayList<Booking> getBookings() throws DBException {
     Connection con = null;
     try {
-      con = DBConnector.getConnection();
+      con = DBConnection.getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
       String sql = "SELECT bookingNumber "
@@ -95,22 +95,22 @@ public class DBBooking {
       ArrayList<Booking> boekingen = new ArrayList<>();
       while (srs.next())
         boekingen.add(getBooking(srs.getInt("bookingNumber")));
-      DBConnector.closeConnection(con);
+      DBConnection.closeConnection(con);
       return boekingen;
     } catch (DBException dbe) {
       dbe.printStackTrace();
-      DBConnector.closeConnection(con);
+      DBConnection.closeConnection(con);
       throw dbe;
     } catch (Exception ex) {
       ex.printStackTrace();
-      DBConnector.closeConnection(con);
+      DBConnection.closeConnection(con);
       throw new DBException(ex);
     }
   }
       public static void save(Booking s) throws DBException {
     Connection con = null;
     try {
-      con = DBConnector.getConnection();
+      con = DBConnection.getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
       String sql = "SELECT bookingNumber "
@@ -139,10 +139,10 @@ public class DBBooking {
                 + ")";
         stmt.executeUpdate(sql);
       }
-      DBConnector.closeConnection(con);
+      DBConnection.closeConnection(con);
     } catch (Exception ex) {
       ex.printStackTrace();
-      DBConnector.closeConnection(con);
+      DBConnection.closeConnection(con);
       throw new DBException(ex);
     }
   }

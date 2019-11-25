@@ -21,7 +21,7 @@ public class DBCustomer {
     try {
       // dit maakt de tabellen aan, de relaties moeten nog wel gelegd
       // worden via phpmyadmin
-      Connection con = DBConnector.getConnection();
+      Connection con = DBConnection.getConnection();
       Statement stmt = con.createStatement();
       String sql = "CREATE TABLE db2019_18.customer("
   + "firstName VARCHAR(45) NULL, "
@@ -30,7 +30,7 @@ public class DBCustomer {
   + "homeCountry` VARCHAR(45) NULL,"
   + "PRIMARY KEY (`passportNumber`)" + ")";
       stmt.executeUpdate(sql);
-      DBConnector.closeConnection(con);
+      DBConnection.closeConnection(con);
     }
     catch (SQLException e) {
       e.printStackTrace();
@@ -40,7 +40,7 @@ public class DBCustomer {
      public static Customer getCustomer(String passportNumber) throws DBException{
          Connection con = null;
     try {
-      con = DBConnector.getConnection();
+      con = DBConnection.getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
       String sql = "SELECT firstName, lastName, PassportNumber, homeCounrty "
@@ -58,18 +58,18 @@ public class DBCustomer {
           homeCountry = srs.getString("homeCountry");
 	} 
       else {// we verwachten slechts 1 rij...
-	DBConnector.closeConnection(con);
+	DBConnection.closeConnection(con);
 	return null;
       }
       
       Customer klant = new Customer(passportNumber, firstName, lastName, homeCountry);
-              DBConnector.closeConnection(con);
+              DBConnection.closeConnection(con);
       return klant;
     }
     
     catch (Exception ex) {
       ex.printStackTrace();
-      DBConnector.closeConnection(con);
+      DBConnection.closeConnection(con);
       throw new DBException(ex);
     }
          
@@ -77,7 +77,7 @@ public class DBCustomer {
      public static ArrayList<Customer> getCustomers() throws DBException {
     Connection con = null;
     try {
-      con = DBConnector.getConnection();
+      con = DBConnection.getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
       String sql = "SELECT passportNumber "
@@ -86,22 +86,22 @@ public class DBCustomer {
       ArrayList<Customer> klanten = new ArrayList<>();
       while (srs.next())
         klanten.add(getCustomer(srs.getString("bookingNumber")));
-      DBConnector.closeConnection(con);
+      DBConnection.closeConnection(con);
       return klanten;
     } catch (DBException dbe) {
       dbe.printStackTrace();
-      DBConnector.closeConnection(con);
+      DBConnection.closeConnection(con);
       throw dbe;
     } catch (Exception ex) {
       ex.printStackTrace();
-      DBConnector.closeConnection(con);
+      DBConnection.closeConnection(con);
       throw new DBException(ex);
     }
   }
      public static void save(Customer s) throws DBException {
     Connection con = null;
     try {
-      con = DBConnector.getConnection();
+      con = DBConnection.getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
       String sql = "SELECT passportNumber "
@@ -128,10 +128,10 @@ public class DBCustomer {
 		+ ")";
         stmt.executeUpdate(sql);
       }
-      DBConnector.closeConnection(con);
+      DBConnection.closeConnection(con);
     } catch (Exception ex) {
       ex.printStackTrace();
-      DBConnector.closeConnection(con);
+      DBConnection.closeConnection(con);
       throw new DBException(ex);
     }
   }

@@ -21,7 +21,7 @@ public class DBFlight {
     try {
       // dit maakt de tabellen aan, de relaties moeten nog wel gelegd
       // worden via phpmyadmin
-      Connection con = DBConnector.getConnection();
+      Connection con = DBConnection.getConnection();
       Statement stmt = con.createStatement();
       String sql = "CREATE TABLE db2019_18.flight("              
     + "flightNumber VARCHAR(45) NOT NULL," 
@@ -40,7 +40,7 @@ public class DBFlight {
     +"ON UPDATE CASCADE" + ")";
       
       stmt.executeUpdate(sql);
-      DBConnector.closeConnection(con);
+      DBConnection.closeConnection(con);
     }
     catch (SQLException e) {
       e.printStackTrace();
@@ -50,7 +50,7 @@ public class DBFlight {
      private static Flight getFlight(String flightNumber, int departureDate) throws DBException {
         Connection con = null;
     try {
-      con = DBConnector.getConnection();
+      con = DBConnection.getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
       String sql = "SELECT flightNumber, departureDate, departureTime, arrivalDate, arrivalTime, price, origin, destination, airlineCode "
@@ -78,19 +78,19 @@ public class DBFlight {
           airlineCode = srs.getString("airlineCode");
                     
 	} else {// we verwachten slechts 1 rij...
-	DBConnector.closeConnection(con);
+	DBConnection.closeConnection(con);
 	return null;
       }
       //aantal flightlegs moet er ook nog bij? 
       Flight vlucht = new Flight(destination, origin, flightNumber, price, departureDate, arrivalDate, departureTime, arrivalTime);
-      DBConnector.closeConnection(con);
+      DBConnection.closeConnection(con);
       return vlucht;
       
     }
     
     catch (Exception ex) {
       ex.printStackTrace();
-      DBConnector.closeConnection(con);
+      DBConnection.closeConnection(con);
       throw new DBException(ex);
     }
     }
@@ -100,7 +100,7 @@ public class DBFlight {
     public static ArrayList<Flight> getFlights() throws DBException {
     Connection con = null;
     try {
-      con = DBConnector.getConnection();
+      con = DBConnection.getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
       String sql = "SELECT flightNumber, departureDate "
@@ -109,15 +109,15 @@ public class DBFlight {
       ArrayList<Flight> vluchten = new ArrayList<>();
       while (srs.next())
         vluchten.add(getFlight(srs.getString("flightNumber"), srs.getInt("departureDate")));
-      DBConnector.closeConnection(con);
+      DBConnection.closeConnection(con);
       return vluchten;
     } catch (DBException dbe) {
       dbe.printStackTrace();
-      DBConnector.closeConnection(con);
+      DBConnection.closeConnection(con);
       throw dbe;
     } catch (Exception ex) {
       ex.printStackTrace();
-      DBConnector.closeConnection(con);
+      DBConnection.closeConnection(con);
       throw new DBException(ex);
     }
   }

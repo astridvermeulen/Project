@@ -5,20 +5,17 @@
  */
 package project.DB;
 
-
-import java.sql.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 /**
- * Deze klasse heb ik aangemaakt omdat het openen en sluiten van een connectie
- * maar voor alle klasse in de persistence layer is.
  *
- * @author klaas
+ * @author Lenovo
  */
-public class DBConnector {
-
-    private static final String DB_NAME = "db2019_18";//vul hier uw databank naam in
+public class DBConnection {
+    
+       private static final String DB_NAME = "db2019_18";//vul hier uw databank naam in
     private static final String DB_PASS = "jshwuehd";//vul hier uw databank paswoord in
 
     public static Connection getConnection() throws DBException {
@@ -58,22 +55,18 @@ public class DBConnector {
         
     }
     
-     public static void main(String[] args){
-        Connection con = null;
-        try {
-            con = DBConnector.getConnection();
-        } catch (DBException ex) {
-            Logger.getLogger(DBConnector.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        if (con != null){
-            System.out.println("gelukt");
-            closeConnection(con);            
-        }
-        else{
-            System.out.println("niet gelukt");
-            closeConnection(con);       
-                   
-        }
-        
-    }
+    public static void main(String[] args) {
+        String url = "jdbc:mysql://pdbmbook.com/db2019_18";
+String username = "db2019_18";
+String password = "jshwuehd";
+
+System.out.println("Connecting database...");
+
+try (Connection connection = DriverManager.getConnection(url, username, password)) {
+    System.out.println("Database connected!");
+} catch (SQLException e) {
+    throw new IllegalStateException("Cannot connect the database!", e);
 }
+        }
+    }
+

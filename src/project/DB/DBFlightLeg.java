@@ -20,7 +20,7 @@ public class DBFlightLeg {
     public static void createTables() throws DBException {
     try {
    
-      Connection con = DBConnector.getConnection();
+      Connection con = DBConnection.getConnection();
       Statement stmt = con.createStatement();
       String sql = "CREATE TABLE db2019_18.flightLeg("              
     + "legNumber VARCHAR(45) NOT NULL,"  
@@ -35,7 +35,7 @@ public class DBFlightLeg {
     +"ON UPDATE CASCADE" + ")";
       
       stmt.executeUpdate(sql);
-      DBConnector.closeConnection(con);
+      DBConnection.closeConnection(con);
     }
     catch (SQLException e) {
       e.printStackTrace();
@@ -44,7 +44,7 @@ public class DBFlightLeg {
     private static FlightLeg getFlightLeg(String legNumber, String flightNumber, Date departureDate) throws DBException {
         Connection con = null;
     try {
-      con = DBConnector.getConnection();
+      con = DBConnection.getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
       String sql = "SELECT legNumber, flightNumber, departureDate "
@@ -65,19 +65,19 @@ public class DBFlightLeg {
           airportCode = srs.getString("airportCode");
 
 	} else {
-	DBConnector.closeConnection(con);
+	DBConnection.closeConnection(con);
 	return null;
       }
       
      // FlightLeg tussenvlucht = new FlightLeg(legNumber, flightNumber, departureDate, airportCode);
-      DBConnector.closeConnection(con);
+      DBConnection.closeConnection(con);
       //return tussenvlucht;
       return null;
     }
     
     catch (Exception ex) {
       ex.printStackTrace();
-      DBConnector.closeConnection(con);
+      DBConnection.closeConnection(con);
       throw new DBException(ex);
     }
     }
