@@ -58,7 +58,7 @@ public class Flight {
         return emission;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
