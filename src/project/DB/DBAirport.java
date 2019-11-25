@@ -25,13 +25,13 @@ public class DBAirport {
       Connection con = DBConnection.getConnection();
       Statement stmt = con.createStatement();
       String sql = "CREATE TABLE db2019_18.airport ("
-  + "airportCode VARCHAR(45) NOT NULL, "
-  + "airportName VARCHAR(45) NULL, "
-  + "PRIMARY KEY (airportCode)" + ")";
-        stmt.executeUpdate(sql);
+     + "airportCode VARCHAR(45) NOT NULL, "
+     + "airportName VARCHAR(45) NULL, "
+     + "PRIMARY KEY (airportCode)" + ")";
+     stmt.executeUpdate(sql);
       DBConnection.closeConnection(con);
     } catch (SQLException e) {
-      e.printStackTrace();
+     e.printStackTrace();
     }
   }
      // retourneert 1 airport
@@ -108,7 +108,7 @@ public class DBAirport {
         // UPDATE
 	sql = "UPDATE airport "
                 + "SET airportCode = '" + s.getAirportCode() + "'"
-		+ ", aiportName = '" + s.getAirportName() + "'"
+		+ ", airportName = '" + s.getAirportName() + "'"
                 + " WHERE airportCode = '" + s.getAirportCode() + "'";
         stmt.executeUpdate(sql);
       } else {
@@ -130,7 +130,7 @@ public class DBAirport {
    
   //test
   public static void main(String[] args) throws DBException {
-      DBAirport.createTables();
+      
       try {
       DBAirport.save(new Airport("BRU" , "Zaventem"));
     } catch (DBException ex) {
