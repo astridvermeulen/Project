@@ -12,6 +12,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import project.LOGIC.Booking;
+import project.LOGIC.Customer;
 /**
  *
  * @author Lenovo
@@ -101,6 +102,45 @@ public class DBBooking {
       dbe.printStackTrace();
       DBConnector.closeConnection(con);
       throw dbe;
+    } catch (Exception ex) {
+      ex.printStackTrace();
+      DBConnector.closeConnection(con);
+      throw new DBException(ex);
+    }
+  }
+      public static void save(Booking s) throws DBException {
+    Connection con = null;
+    try {
+      con = DBConnector.getConnection();
+      Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+      
+      String sql = "SELECT bookingNumber "
+              + "FROM booking "
+              + "WHERE bookingNumber = " + s.getBookingNumber();
+      ResultSet srs = stmt.executeQuery(sql);
+      if (srs.next()) {
+        // UPDATE
+	sql = "UPDATE booking "
+                + "SET bookingNummer = " + s.getBookingNumber()
+		+ ", promotion = " + s.getPromotion()
+		+ ", serviceFee = " + s.getServiceFee()
+		// + ", flightNumber = '" + s.getFlightNumber() + "'"
+               // + ", departureDate = " + s.getdepartureDate()
+                + " WHERE bookingNumber = '" + s.getBookingNumber() + "'";
+        stmt.executeUpdate(sql);
+      } else {
+	// INSERT
+	sql = "INSERT into booking "
+                + "(bookingNumber, promotion, serviceFee) "
+		+ "VALUES (" + s.getBookingNumber() 
+                + ", " + s.getPromotion() 
+		+ ", " + s.getServiceFee()
+             // + ", '" + s.getFlightNumber() + "'"
+             // + ", " + s.getdepartureDate()                
+                + ")";
+        stmt.executeUpdate(sql);
+      }
+      DBConnector.closeConnection(con);
     } catch (Exception ex) {
       ex.printStackTrace();
       DBConnector.closeConnection(con);
