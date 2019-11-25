@@ -18,14 +18,14 @@ public class Flight {
     private String origin;
     private String flightNumber;
     private double emission;
-    private int price;
+    private double price;
     private int departureDate;
     private int arrivalDate;
     private int departureTime;
     private int arrivalTime;
     private int duration;
 
-    public Flight(String destination, String origin, String flightNumber, int price, int departureDate, int arrivalDate, int departureTime, int arrivalTime) {
+    public Flight(String destination, String origin, String flightNumber, double price, int departureDate, int arrivalDate, int departureTime, int arrivalTime) {
         this.destination = destination;
         this.origin = origin;
         this.flightNumber = flightNumber;
