@@ -130,7 +130,7 @@ public class DBAirport {
    
   //test
   public static void main(String[] args) throws DBException {
-      DBAirport.createTables();
+     
       try {
       DBAirport.save(new Airport("BRU" , "Zaventem"));
     } catch (DBException ex) {
