@@ -17,28 +17,7 @@ import project.LOGIC.Booking;
  * @author Lenovo
  */
 public class DBBooking {
-    public static void createTables() throws DBException {
-    try {
-   
-      Connection con = DBConnection.getConnection();
-      Statement stmt = con.createStatement();
-      String sql = "CREATE TABLE db2019_18.booking("              
-    + "bookingNumber INT NOT NULL," 
-    + "promotion DOUBLE NULL," 
-    + "serviceFee DOUBLE NULL," 
-    +"PRIMARY KEY (bookingNumber)," 
-    +"FOREIGN KEY (flightNumber, departureDate) "
-    +"REFERENCES db2019_18.flight (flightNumber, departureDate) " 
-    +"ON DELETE CASCADE " 
-    +"ON UPDATE CASCADE" + ")";
-      
-      stmt.executeUpdate(sql);
-      DBConnection.closeConnection(con);
-    }
-    catch (SQLException e) {
-      e.printStackTrace();
-    }
-}
+  
 
  public static Booking getBooking(int bookingNumber) throws DBException{
          Connection con = null;

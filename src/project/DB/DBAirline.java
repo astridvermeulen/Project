@@ -18,23 +18,7 @@ import project.LOGIC.Airline;;
  * @author klaas
  */
 public class DBAirline {
-    public static void createTables() throws DBException {
-    try {
-      // dit maakt de tabellen aan, de relaties moeten nog wel gelegd
-      // worden via phpmyadmin
-      Connection con = DBConnection.getConnection();
-      Statement stmt = con.createStatement();
-      String sql = 
-    "CREATE TABLE db2019_18.airline("
-  + "airlineCode INT NOT NULL,"
-  + "airlineName VARCHAR(45) NULL,"
-  + "PRIMARY KEY (airlineCode)"+")";
-      stmt.executeUpdate(sql);
-      DBConnection.closeConnection(con);
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
-  }
+    
     
    public static Airline getAirline(int airlineCode) throws DBException{
          Connection con = null;

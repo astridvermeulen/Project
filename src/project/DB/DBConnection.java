@@ -57,8 +57,8 @@ public class DBConnection {
     
     public static void main(String[] args) {
         String url = "jdbc:mysql://pdbmbook.com/db2019_18";
-String username = "db2019_18";
-String password = "jshwuehd";
+        String username = "db2019_18";
+        String password = "jshwuehd";
 
 System.out.println("Connecting database...");
 
