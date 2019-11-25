@@ -110,7 +110,8 @@ public class DBAirline {
         // UPDATE
 	sql = "UPDATE airline "
                 + "SET airlineCode = '" + s.getAirlineCode() + "'"
-		+ ", airlineName = '" + s.getAirlineName() + "'";        
+		+ ", airlineName = '" + s.getAirlineName() + "'"
+                + " WHERE airlineCode = '" + s.getAirlineCode() + "'";
         stmt.executeUpdate(sql);
       } else {
 	// INSERT

@@ -108,7 +108,8 @@ public class DBAirport {
         // UPDATE
 	sql = "UPDATE airport "
                 + "SET airportCode = '" + s.getAirportCode() + "'"
-		+ ", aiportName = '" + s.getAirportName() + "'";
+		+ ", aiportName = '" + s.getAirportName() + "'"
+                + " WHERE airportCode = '" + s.getAirportCode() + "'";
         stmt.executeUpdate(sql);
       } else {
 	// INSERT

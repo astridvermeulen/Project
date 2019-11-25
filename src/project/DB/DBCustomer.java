@@ -98,5 +98,42 @@ public class DBCustomer {
       throw new DBException(ex);
     }
   }
+     public static void save(Customer s) throws DBException {
+    Connection con = null;
+    try {
+      con = DBConnector.getConnection();
+      Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+      
+      String sql = "SELECT passportNumber "
+              + "FROM customer "
+              + "WHERE passportNumber = '" + s.getPassportNumber() + "'";
+      ResultSet srs = stmt.executeQuery(sql);
+      if (srs.next()) {
+        // UPDATE
+	sql = "UPDATE customer "
+                + "SET firstname = '" + s.getFirstName() + "'"
+		+ ", lastname = '" + s.getLastName() + "'"
+		+ ", PassportNumber = '" + s.getPassportNumber() + "'"
+		+ ", homeCountry = '" + s.getHomeCountry() + "'"
+                + " WHERE passportNumber = '" + s.getPassportNumber() + "'";
+        stmt.executeUpdate(sql);
+      } else {
+	// INSERT
+	sql = "INSERT into customer "
+                + "(firstName, lastName, passportNumber, homeCountry) "
+		+ "VALUES ('" + s.getFirstName() + "'"
+		+ ", '" + s.getLastName() + "'"
+		+ ", '" + s.getPassportNumber() + "'"
+                + ", '" + s.getHomeCountry() + "'"
+		+ ")";
+        stmt.executeUpdate(sql);
+      }
+      DBConnector.closeConnection(con);
+    } catch (Exception ex) {
+      ex.printStackTrace();
+      DBConnector.closeConnection(con);
+      throw new DBException(ex);
+    }
+  }
     }
 
