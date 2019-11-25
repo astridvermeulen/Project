@@ -12,7 +12,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import project.LOGIC.Booking;
-import project.LOGIC.Customer;
 /**
  *
  * @author Lenovo
