@@ -7,6 +7,8 @@ package project.DB;
 
 
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Deze klasse heb ik aangemaakt omdat het openen en sluiten van een connectie
@@ -53,6 +55,25 @@ public class DBConnector {
         } catch (SQLException sqle) {
             //do nothing
         }
+        
     }
     
+     public static void main(String[] args){
+        Connection con = null;
+        try {
+            con = DBConnector.getConnection();
+        } catch (DBException ex) {
+            Logger.getLogger(DBConnector.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (con != null){
+            System.out.println("gelukt");
+            closeConnection(con);            
+        }
+        else{
+            System.out.println("niet gelukt");
+            closeConnection(con);       
+                   
+        }
+        
+    }
 }

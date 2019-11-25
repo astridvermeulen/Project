@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import project.LOGIC.Airport;
 
 /**
@@ -128,9 +130,12 @@ public class DBAirport {
   //test
   public static void main(String[] args) throws DBException {
       DBAirport.createTables();
-      Airport zaventem = new Airport("BRU", "Zaventem");
-      save(zaventem);        
-      
+      try {
+      DBAirport.save(new Airport("BRU" , "Zaventem"));
+    } catch (DBException ex) {
+      Logger.getLogger(DBAirport.class.getName()).log(Level.SEVERE, null, ex);
+    }
+  
   }
    
 }
