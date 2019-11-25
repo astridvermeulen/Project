@@ -64,7 +64,7 @@ public class DBFlight {
       String origin, destination, airlineCode;
       double price;
       int arrivalDate, arrivalTime, departureTime;
-      double emission; 
+       
       
       if (srs.next()) {
           flightNumber = srs.getString("flightNumber");
@@ -82,10 +82,10 @@ public class DBFlight {
 	return null;
       }
       //aantal flightlegs moet er ook nog bij? 
-      // Flight vlucht = new Flight(destination, origin, flightNumber, emission, price, departureDate, arrivalDate, departureTime, arrivalTime);
+      Flight vlucht = new Flight(destination, origin, flightNumber, price, departureDate, arrivalDate, departureTime, arrivalTime);
       DBConnector.closeConnection(con);
-      //return vlucht;
-      return null;
+      return vlucht;
+      
     }
     
     catch (Exception ex) {

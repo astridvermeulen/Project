@@ -129,7 +129,7 @@ public class DBAirport {
   public static void main(String[] args) throws DBException {
       DBAirport.createTables();
       Airport zaventem = new Airport("BRU", "Zaventem");
-      DBAirport.save(zaventem);        
+      save(zaventem);        
       
   }
    
