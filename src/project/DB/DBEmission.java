@@ -14,25 +14,7 @@ import java.sql.Statement;
  * @author klaas
  */
 public class DBEmission {
-    public static void createTables() throws DBException {
-    try {
-      // dit maakt de tabellen aan, de relaties moeten nog wel gelegd
-      // worden via phpmyadmin
-      Connection con = DBConnection.getConnection();
-      Statement stmt = con.createStatement();
-      String sql = "CREATE TABLE emission ("
-    + "CO2 DOUBLE NOT NULL, "
-    + "PRIMARY KEY (departureTime, arrivalTime), " 
-    + "FOREIGN KEY (departureTime, arrivalTime) "
-    + "REFERENCES db2019_18.flight (flight) " 
-    + "ON DELETE CASCADE "
-    + "ON UPDATE CASCADE" + ")";
-        stmt.executeUpdate(sql);
-      DBConnection.closeConnection(con);
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
-  }
+    
     
   
 }

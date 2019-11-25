@@ -19,21 +19,7 @@ import project.LOGIC.Airport;
  * @author Lenovo
  */
 public class DBAirport {
-     public static void createTables() throws DBException {
-    try {
-    
-      Connection con = DBConnection.getConnection();
-      Statement stmt = con.createStatement();
-      String sql = "CREATE TABLE db2019_18.airport ("
-     + "airportCode VARCHAR(45) NOT NULL, "
-     + "airportName VARCHAR(45) NULL, "
-     + "PRIMARY KEY (airportCode)" + ")";
-     stmt.executeUpdate(sql);
-      DBConnection.closeConnection(con);
-    } catch (SQLException e) {
-     e.printStackTrace();
-    }
-  }
+     
      // retourneert 1 airport
      public static Airport getAirport(String airportCode) throws DBException{
          Connection con = null;
@@ -132,7 +118,8 @@ public class DBAirport {
   public static void main(String[] args) throws DBException {
       
       try {
-      DBAirport.save(new Airport("BRU" , "Zaventem"));
+         Airport test = new Airport("BRU" , "test");
+      DBAirport.save(test);
     } catch (DBException ex) {
       Logger.getLogger(DBAirport.class.getName()).log(Level.SEVERE, null, ex);
     }

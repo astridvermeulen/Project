@@ -17,30 +17,7 @@ import project.LOGIC.FlightLeg;
  * @author Lenovo
  */
 public class DBFlightLeg {
-    public static void createTables() throws DBException {
-    try {
-   
-      Connection con = DBConnection.getConnection();
-      Statement stmt = con.createStatement();
-      String sql = "CREATE TABLE db2019_18.flightLeg("              
-    + "legNumber VARCHAR(45) NOT NULL,"  
-    +"PRIMARY KEY (legNumber, flightNumber, departureDate)," 
-    +"FOREIGN KEY (flightNumber, departureDate) "
-    +"REFERENCES db2019_18.flight (flightNumber, departureDate) " 
-    +"ON DELETE CASCADE "
-    +"ON UPDATE CASCADE,"          
-    +"FOREIGN KEY (airportCode) "
-    +"REFERENCES db2019_18.airport (airportCode) "          
-    +"ON DELETE CASCADE " 
-    +"ON UPDATE CASCADE" + ")";
-      
-      stmt.executeUpdate(sql);
-      DBConnection.closeConnection(con);
-    }
-    catch (SQLException e) {
-      e.printStackTrace();
-    }
-}    
+     
     private static FlightLeg getFlightLeg(String legNumber, String flightNumber, Date departureDate) throws DBException {
         Connection con = null;
     try {
