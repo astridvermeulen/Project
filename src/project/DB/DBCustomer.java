@@ -7,9 +7,12 @@ package project.DB;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import static project.DB.DBAirport.getAirport;
+import project.LOGIC.Airport;
 import project.LOGIC.Customer;
 
 /**
@@ -25,9 +28,9 @@ public class DBCustomer {
       con = DBConnection.getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
-      String sql = "SELECT firstName, lastName, PassportNumber, homeCounrty "
+      String sql = "SELECT firstName, lastName, PassportNumber, homeCountry "
         + "FROM db2019_18.customer "
-	+ "WHERE passportNumber = " + passportNumber;
+	+ "WHERE passportNumber = '" + passportNumber + "'";
 
       ResultSet srs = stmt.executeQuery(sql);
 
@@ -67,7 +70,7 @@ public class DBCustomer {
       ResultSet srs = stmt.executeQuery(sql);
       ArrayList<Customer> klanten = new ArrayList<>();
       while (srs.next())
-        klanten.add(getCustomer(srs.getString("bookingNumber")));
+        klanten.add(getCustomer(srs.getString("passportNumber")));
       DBConnection.closeConnection(con);
       return klanten;
     } catch (DBException dbe) {
@@ -145,5 +148,26 @@ public class DBCustomer {
       throw new DBException(ex);
     }
   }
+     
+    
+    public static void main(String[] args) throws DBException {
+        try{
+    String number = "test1207";
+    String naam1 = "Klaas";
+    String naam2 = "Janssens nieuw";
+    String homeCountry = "België";
+    Customer test = null; 
+    test = new Customer(number, naam1, naam2, homeCountry);
+    deleteCustomer(test);
+    
     }
+    catch (DBException ex) {
+      Logger.getLogger(DBAirport.class.getName()).log(Level.SEVERE, null, ex);
+    }
+  
+  }
+}
+   
+
+  
 

@@ -29,7 +29,7 @@ public class DBAirport {
       
       String sql = "SELECT airportCode, airportName "
         + "FROM db2019_18.airport "
-	+ "WHERE airportCode = " + airportCode;
+	+ "WHERE airportCode = '" + airportCode + "'";
 
       ResultSet srs = stmt.executeQuery(sql);
 
@@ -146,9 +146,12 @@ public class DBAirport {
   //test
   public static void main(String[] args) throws DBException {
       
+    String code = "JFK";
       try {
-          Airport test = new Airport("CRL" , "Brussels South Charleroi Airport");
-      DBAirport.saveAirport(test);
+      Airport test = null;
+      test = getAirport(code);
+      String naam = test.getAirportName();
+      System.out.println(naam);
     } catch (DBException ex) {
       Logger.getLogger(DBAirport.class.getName()).log(Level.SEVERE, null, ex);
     }

@@ -146,7 +146,7 @@ public class DBAirline {
       int getal = 220;
       try {
       Airline test = null;
-      test = getAirline(getal);
+      test = getAirline(160);
       String naam = test.getAirlineName();
       System.out.println(naam);
     } catch (DBException ex) {
