@@ -65,7 +65,7 @@ public class DBAirport {
       String sql = "SELECT airportCode "
               + "FROM db2019_18.airport";
       ResultSet srs = stmt.executeQuery(sql);
-      ArrayList<Airport> luchthavens = new ArrayList<>();
+      ArrayList<Airport> luchthavens = new ArrayList<Airport>();
       while (srs.next())
         luchthavens.add(getAirport(srs.getString("airportCode")));
       DBConnection.closeConnection(con);
