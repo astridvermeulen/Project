@@ -22,7 +22,7 @@ public class ProjectApplication extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         dc = new DomainController();
-        Parent root = FXMLLoader.load(getClass().getResource("/project/GUI/searchFlight.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/project/GUI/startWindow.fxml"));
         
         Scene scene = new Scene(root);
         
