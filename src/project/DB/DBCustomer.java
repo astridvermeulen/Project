@@ -80,7 +80,7 @@ public class DBCustomer {
       throw new DBException(ex);
     }
   }
-     public static void save(Customer s) throws DBException {
+     public static void saveCustomer(Customer s) throws DBException {
     Connection con = null;
     try {
       con = DBConnection.getConnection();
@@ -112,6 +112,34 @@ public class DBCustomer {
       }
       DBConnection.closeConnection(con);
     } catch (Exception ex) {
+      ex.printStackTrace();
+      DBConnection.closeConnection(con);
+      throw new DBException(ex);
+    }
+  }
+     public static void deleteCustomer(Customer s) throws DBException {
+    Connection con = null;
+    try {
+      con = DBConnection.getConnection();
+      Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+      
+      String sql = "SELECT passportNumber "
+              + "FROM customer "
+              + "WHERE passportNumber = '" + s.getPassportNumber() + "'";
+      ResultSet srs = stmt.executeQuery(sql);
+      if (srs.next()) {
+        // DELETE
+	sql = "DELETE FROM customer "
+                + "WHERE PassportNumber = '" + s.getPassportNumber() + "'";
+        stmt.executeUpdate(sql);
+        DBConnection.closeConnection(con);
+    
+      } else {
+	// DOORGEGEVEN CUSTOMER ZAT NIET IN DATABASE
+        DBConnection.closeConnection(con);
+    
+	      }
+      } catch (Exception ex) {
       ex.printStackTrace();
       DBConnection.closeConnection(con);
       throw new DBException(ex);

@@ -80,7 +80,7 @@ public class DBAirport {
       throw new DBException(ex);
     }
   }
-   public static void save(Airport s) throws DBException {
+   public static void saveAirport(Airport s) throws DBException {
     Connection con = null;
     try {
       con = DBConnection.getConnection();
@@ -125,13 +125,14 @@ public class DBAirport {
               + "WHERE airportCode = '" + s.getAirportCode() + "'";
       ResultSet srs = stmt.executeQuery(sql);
       if (srs.next()) {
-        // UPDATE
+        // DELETE
 	sql = "DELETE FROM airport "
                 + "WHERE airportCode = '" + s.getAirportCode() + "'";
 		
         stmt.executeUpdate(sql);
         DBConnection.closeConnection(con);
-      } else {
+      } else{
+          //DOORGEGEVEN AIRLINE ZAT NIET IN DATABASE
         DBConnection.closeConnection(con);	
       }
       
@@ -146,7 +147,8 @@ public class DBAirport {
   public static void main(String[] args) throws DBException {
       
       try {
-      DBAirport.deleteAirport(new Airport("CRL" , "Brussels South Charleroi Airport"));
+          Airport test = new Airport("CRL" , "Brussels South Charleroi Airport");
+      DBAirport.save(test);
     } catch (DBException ex) {
       Logger.getLogger(DBAirport.class.getName()).log(Level.SEVERE, null, ex);
     }

@@ -80,7 +80,7 @@ public class DBAirline {
       throw new DBException(ex);
     }
   }
-   public static void save(Airline s) throws DBException {
+   public static void saveAirline(Airline s) throws DBException {
     Connection con = null;
     try {
       con = DBConnection.getConnection();
@@ -112,6 +112,34 @@ public class DBAirline {
       throw new DBException(ex);
     }
   }
+   public static void deleteAirline(Airline s) throws DBException {
+    Connection con = null;
+    try {
+      con = DBConnection.getConnection();
+      Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+      
+      String sql = "SELECT airlineCode "
+              + "FROM airline "
+              + "WHERE airlineCode = '" + s.getAirlineCode() + "'";
+      ResultSet srs = stmt.executeQuery(sql);
+      if (srs.next()) {
+        // DELETE
+	sql = "DELETE FROM airline "
+                + "WHERE airlineCode = '" + s.getAirlineCode() + "'";
+		stmt.executeUpdate(sql);
+                DBConnection.closeConnection(con);
+      } else {
+	// DOORGEGEVEN AIRLINE ZAT NIET IN DATABASE
+        DBConnection.closeConnection(con);
+	}
+      
+    } catch (Exception ex) {
+      ex.printStackTrace();
+      DBConnection.closeConnection(con);
+      throw new DBException(ex);
+    }
+  }
+   
 
     
 }

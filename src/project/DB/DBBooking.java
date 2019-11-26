@@ -86,7 +86,7 @@ public class DBBooking {
       throw new DBException(ex);
     }
   }
-      public static void save(Booking s) throws DBException {
+      public static void saveBooking(Booking s) throws DBException {
     Connection con = null;
     try {
       con = DBConnection.getConnection();
@@ -120,6 +120,34 @@ public class DBBooking {
       }
       DBConnection.closeConnection(con);
     } catch (Exception ex) {
+      ex.printStackTrace();
+      DBConnection.closeConnection(con);
+      throw new DBException(ex);
+    }
+  }
+      public static void deleteBooking(Booking s) throws DBException {
+    Connection con = null;
+    try {
+      con = DBConnection.getConnection();
+      Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+      
+      String sql = "SELECT bookingNumber "
+              + "FROM booking "
+              + "WHERE bookingNumber = " + s.getBookingNumber();
+      ResultSet srs = stmt.executeQuery(sql);
+      if (srs.next()) {
+        // DELETE
+	sql = "DELETE FROM booking "
+                + "WHERE bookingNummer = " + s.getBookingNumber();
+        stmt.executeUpdate(sql);
+        DBConnection.closeConnection(con);
+    
+      } else {
+	// DOORGEGEVEN BOOKING ZAT NIET IN DATABASE 
+	DBConnection.closeConnection(con);
+    
+      }
+      } catch (Exception ex) {
       ex.printStackTrace();
       DBConnection.closeConnection(con);
       throw new DBException(ex);
