@@ -143,10 +143,12 @@ public class DBAirline {
     }
   }
    public static void main(String[] args) throws DBException {
-      int getal = 123;
+      int getal = 220;
       try {
-          Airline test = new Airline(getal , "DB Airways");
-      DBAirline.deleteAirline(test);
+      Airline test = null;
+      test = getAirline(getal);
+      String naam = test.getAirlineName();
+      System.out.println(naam);
     } catch (DBException ex) {
       Logger.getLogger(DBAirport.class.getName()).log(Level.SEVERE, null, ex);
     }
