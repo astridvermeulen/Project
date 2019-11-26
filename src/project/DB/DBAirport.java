@@ -148,7 +148,7 @@ public class DBAirport {
       
       try {
           Airport test = new Airport("CRL" , "Brussels South Charleroi Airport");
-      DBAirport.save(test);
+      DBAirport.saveAirport(test);
     } catch (DBException ex) {
       Logger.getLogger(DBAirport.class.getName()).log(Level.SEVERE, null, ex);
     }
