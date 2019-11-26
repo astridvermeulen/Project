@@ -11,7 +11,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import project.LOGIC.Airline;;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import project.LOGIC.Airline;import project.LOGIC.Airport;
+;
 
 /**
  *
@@ -138,6 +141,16 @@ public class DBAirline {
       DBConnection.closeConnection(con);
       throw new DBException(ex);
     }
+  }
+   public static void main(String[] args) throws DBException {
+      int getal = 123;
+      try {
+          Airline test = new Airline(getal , "DB Airways");
+      DBAirline.deleteAirline(test);
+    } catch (DBException ex) {
+      Logger.getLogger(DBAirport.class.getName()).log(Level.SEVERE, null, ex);
+    }
+  
   }
    
 
