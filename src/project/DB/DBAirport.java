@@ -114,12 +114,39 @@ public class DBAirport {
     }
   }
    
+   public static void deleteAirport(Airport s) throws DBException {
+    Connection con = null;
+    try {
+      con = DBConnection.getConnection();
+      Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+      
+      String sql = "SELECT airportCode "
+              + "FROM airport "
+              + "WHERE airportCode = '" + s.getAirportCode() + "'";
+      ResultSet srs = stmt.executeQuery(sql);
+      if (srs.next()) {
+        // UPDATE
+	sql = "DELETE FROM airport "
+                + "WHERE airportCode = '" + s.getAirportCode() + "'";
+		
+        stmt.executeUpdate(sql);
+        DBConnection.closeConnection(con);
+      } else {
+        DBConnection.closeConnection(con);	
+      }
+      
+    } catch (Exception ex) {
+      ex.printStackTrace();
+      DBConnection.closeConnection(con);
+      throw new DBException(ex);
+    }
+  }
+   
   //test
   public static void main(String[] args) throws DBException {
       
       try {
-         Airport test = new Airport("BRU" , "test");
-      DBAirport.save(test);
+      DBAirport.deleteAirport(new Airport("CRL" , "Brussels South Charleroi Airport"));
     } catch (DBException ex) {
       Logger.getLogger(DBAirport.class.getName()).log(Level.SEVERE, null, ex);
     }
