@@ -75,7 +75,7 @@ public class Customer {
     }
 
     //Method to delete a customer
-    public void deleteCustomer(String passportNumber) {
+    public void deleteCustomer(String passportNumber) throws DBException {
         DBCustomer.deleteCustomer(passportNumber);//DataBoys nog dataType aanpassen 
     }
 
