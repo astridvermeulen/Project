@@ -151,21 +151,22 @@ public class DBCustomer {
      
     
     public static void main(String[] args) throws DBException {
-        try{
-    String number = "test1207";
-    String naam1 = "Klaas";
-    String naam2 = "Janssens nieuw";
-    String homeCountry = "België";
-    Customer test = null; 
-    test = new Customer(number, naam1, naam2, homeCountry);
-    deleteCustomer(test);
+      
+    ArrayList<Customer> test = new ArrayList<>();
     
-    }
-    catch (DBException ex) {
+      try {
+          test = getCustomers();
+          int size = test.size();
+          for(int position = 0; position < size; position++)
+              System.out.println(test.get(position).getFirstName() + " " + test.get(position).getLastName() );
+    
+;
+    } catch (DBException ex) {
       Logger.getLogger(DBAirport.class.getName()).log(Level.SEVERE, null, ex);
     }
   
   }
+  
 }
    
 
