@@ -7,10 +7,12 @@ package project.GUI;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,10 +21,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import project.DB.DBAirport;
+import static project.DB.DBAirport.getAirports;
 import project.DB.DBException;
+import project.LOGIC.Airport;
 import project.LOGIC.DomeinController;
 import static project.LOGIC.DomeinController.domeinController;
 
@@ -34,7 +37,6 @@ import static project.LOGIC.DomeinController.domeinController;
 public class startWindowController implements Initializable {
     
     private DomeinController model; // elke controller moet een link hebben naar de businesslaag via de instantievariabele model (domeinController is een singleton klasse). 
-    
     
     
     @FXML
@@ -84,21 +86,41 @@ public class startWindowController implements Initializable {
     @FXML
     private Label numberOfPassengerslbl;
     
+    
+    /*String originAirport = originCitychoice.getValue().toString();
+    String destinationAirport = destinationCitychoice.getValue().toString();
+    String departureDay = departureDaychoice.getValue().toString();
+    String departureMonth = departureMonthchoice.getValue().toString();
+    String departureYear = departureYearchoice.getValue().toString();
+    int amountOfPassengers = (Integer) amountOfPassengerschoice.getValue();
+    String sortBy = sortBychoice.getValue().toString();
+    boolean intermediateStopsAllowed = intermediateStopsAllowedcheck.isSelected();
+    boolean intermediateStopsNotAllowed = intermediateStopsNotAllowedcheck.isSelected();*/
+    
+    @FXML
+    private void handleYesCheckBox(){
+        if(intermediateStopsAllowedcheck.isSelected()){
+            intermediateStopsNotAllowedcheck.setSelected(false);
+            
+        }
+    }
+    @FXML
+    private void handleNoCheckBox(){
+        if(intermediateStopsNotAllowedcheck.isSelected()){
+            intermediateStopsAllowedcheck.setSelected(false);
+        }
+    }
+    
+    
     // dit initaliseerd de controller class
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         model=domeinController.getInstance();
         
-        try {
-            originCitychoice.getItems().setAll(DBAirport.getAirports());
-            originCitychoice.getItems().addAll("Zaventem");
-            originCitychoice.setValue("Zaventem");
-        } catch (DBException ex) {
-            Logger.getLogger(startWindowController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        addDataToChoiceBox();      
         
-        
-    }     
+    }
+    
 
     // de volgende methodes updaten telkens een nieuwe panel zodat we naar een volgend "blad" gaan. 
     @FXML
@@ -187,9 +209,28 @@ public class startWindowController implements Initializable {
         loadOverviewFlights(event);
     }
 
-    @FXML
-    private void showValues(MouseEvent event) {
-       
+    
+    ObservableList list1 = FXCollections.observableArrayList();
+    // voor elke choicebox moet een lijst geïmporteerd worden. 
+    
+    private void addDataToChoiceBox(){
+      ArrayList<Airport> test = new ArrayList<>();
+    
+      try {
+          test = getAirports();
+          int size = test.size();
+          for(int position = 0; position < size; position++)
+              list1.add(test.get(position).getAirportName());
+    
+;
+            } catch (DBException ex) {
+        Logger.getLogger(DBAirport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        originCitychoice.getItems().addAll(list1);
+        destinationCitychoice.getItems().addAll(list1);
     }
     
   
