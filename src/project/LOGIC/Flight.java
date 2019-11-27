@@ -91,8 +91,8 @@ public class Flight {
     }
     
     public double calculateEmission(){
-        double em =0;
-       // em = duration* waarde opzoeken co2 per uur;
+        double em = 0;
+        //DBFlight.getEmission(); //dataBoys moeten dit nog schrijven, dan gelijk zetten aan em 
         return em;
     }
 }

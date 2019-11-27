@@ -10,9 +10,12 @@ package project.LOGIC;
  * @author klaas
  */
 import java.util.*;
+import project.DB.DBBooking;
+import project.DB.DBCustomer;
+import project.DB.DBException;
 
 public class Booking {
-
+    
     private int bookingNumber;
     private double bookingDate;
     private double serviceFee; // final hoe buiten klasse etc OOP final static? 
@@ -62,13 +65,18 @@ public class Booking {
     }
 
     //Method to delete a booking 
-    public void cancelBooking() {
+    public void deleteBooking(int bookingNumber) {
+        DBBooking.deleteBooking(bookingNumber);// dataBoys type nog aanpassen 
+    }
+    
+    public static void saveBooking(Booking b) throws DBException {
+        DBBooking.saveBooking(b);
     }
 
     //Method to calculate the net price of a flight 
     public double calculateNetPrice() {
         double netPrice = 0.0;
-        //netPrice = this.serviceFee + originele prijs vliegtuig - promotion;
+        netPrice = this.serviceFee - this.promotion; //+ originele prijs vliegtuig - promotion;
         return netPrice;
     }
 }

@@ -12,7 +12,7 @@ import project.DB.DBFlight;
 //dit is een tesst 
 
 public class Customer {
-
+    
     private String passportNumber;
     private String firstName;
     private String lastName;
@@ -39,6 +39,14 @@ public class Customer {
     //Getter instance variable "lastName"
     public String getLastName() {
         return lastName;
+    }
+
+    public String getHomeCountry() {
+        return homeCountry;
+    }
+    
+    public static void saveCustomer(Customer s) throws DBException {
+        DBCustomer.saveCustomer(s);
     }
 
     //Getter instance variable "homeCountry"
@@ -68,7 +76,7 @@ public class Customer {
 
     //Method to delete a customer
     public void deleteCustomer(String passportNumber) {
-        DBCustomer.deleteCustomer(passportNumber);
+        DBCustomer.deleteCustomer(passportNumber);//DataBoys nog dataType aanpassen 
     }
 
     //Method to get an overview of all the flights booked by a customer 
@@ -81,12 +89,7 @@ public class Customer {
             }
         }*/
         return flightsOfCustomer;
-
+        
     }
-
-    public ArrayList<Customer> customersOverview() throws DBException {
-        ArrayList<Customer> customersAll = DBCustomer.getCustomers();
-        return customersAll;
-    }
-
+    
 }

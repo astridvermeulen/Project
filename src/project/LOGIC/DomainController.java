@@ -6,6 +6,7 @@
 package project.LOGIC;
 
 import java.util.ArrayList;
+import project.DB.DBCustomer;
 import project.DB.DBException;
 import project.DB.DBFlight;
 
@@ -45,6 +46,11 @@ public class DomainController {
             }
         }
         return flightsFiltered;
+    }
+    
+    public ArrayList<Customer> customersOverview() throws DBException {
+        ArrayList<Customer> customersAll = DBCustomer.getCustomers();
+        return customersAll;
     }
 
 }
