@@ -143,17 +143,22 @@ public class DBAirline {
     }
   }
    public static void main(String[] args) throws DBException {
-      int getal = 220;
+      
+    ArrayList<Airline> test = new ArrayList<>();
+    
       try {
-      Airline test = null;
-      test = getAirline(160);
-      String naam = test.getAirlineName();
-      System.out.println(naam);
+          test = getAirlines();
+          int size = test.size();
+          for(int position = 0; position < size; position++)
+              System.out.println(test.get(position).getAirlineName());
+    
+;
     } catch (DBException ex) {
       Logger.getLogger(DBAirport.class.getName()).log(Level.SEVERE, null, ex);
     }
   
   }
+  
    
 
     

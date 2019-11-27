@@ -146,16 +146,20 @@ public class DBAirport {
   //test
   public static void main(String[] args) throws DBException {
       
-    String code = "JFK";
+    ArrayList<Airport> test = new ArrayList<>();
+    
       try {
-      Airport test = null;
-      test = getAirport(code);
-      String naam = test.getAirportName();
-      System.out.println(naam);
+          test = getAirports();
+          int size = test.size();
+          for(int position = 0; position < size; position++)
+              System.out.println(test.get(position).getAirportName());
+    
+;
     } catch (DBException ex) {
       Logger.getLogger(DBAirport.class.getName()).log(Level.SEVERE, null, ex);
     }
   
   }
+  
    
 }
