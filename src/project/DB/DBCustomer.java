@@ -28,7 +28,7 @@ public class DBCustomer {
       con = DBConnection.getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
-      String sql = "SELECT firstName, lastName, PassportNumber, homeCountry "
+      String sql = "SELECT firstName, lastName, PassportNumber "
         + "FROM db2019_18.customer "
 	+ "WHERE passportNumber = '" + passportNumber + "'";
 
@@ -40,14 +40,14 @@ public class DBCustomer {
           passportNumber = srs.getString("passportNumber");
           firstName = srs.getString("firstName");
           lastName = srs.getString("lastName");
-          homeCountry = srs.getString("homeCountry");
-	} 
+          
+      } 
       else {// we verwachten slechts 1 rij...
 	DBConnection.closeConnection(con);
 	return null;
       }
       
-      Customer klant = new Customer(passportNumber, firstName, lastName, homeCountry);
+      Customer klant = new Customer(passportNumber, firstName, lastName);
               DBConnection.closeConnection(con);
       return klant;
     }
