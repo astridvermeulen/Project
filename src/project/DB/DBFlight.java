@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import project.LOGIC.Booking;
 import project.LOGIC.Flight;
 
 /**
@@ -67,7 +68,7 @@ public class DBFlight {
     }
     }
     
-private static Flight getFlightForBooking(int s) throws DBException {
+private static Flight getFlightForBooking(ArrayList<Booking> s) throws DBException {
         Connection con = null;
     try {
       con = DBConnection.getConnection();
