@@ -88,7 +88,7 @@ private static Flight getFlightForBooking(String passportNumber) throws DBExcept
       String sql = "SELECT * " + 
         "FROM flight AS f " + 
         "INNER JOIN booking AS b " +
-        "ON (b.flightNumber = f.flightNumber AND b.departureDate = f.departureDate) AND b.bookingNumber = " + nm;
+        "ON (b.flightNumber = f.flightNumber AND b.departureDate = f.departureDate) AND b.bookingNumber IN (" + nm + ")";
        
       ResultSet srs = stmt.executeQuery(sql);
      
