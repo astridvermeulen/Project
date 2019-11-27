@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import project.LOGIC.DomainController;
 
 /**
  * FXML Controller class
@@ -18,6 +19,7 @@ import javafx.scene.control.Label;
  * @author eliseverschelde
  */
 public class DataCustomerController implements Initializable {
+private DomainController model;
 
     @FXML
     private Label enterPersonalDatalbl;
@@ -33,6 +35,10 @@ public class DataCustomerController implements Initializable {
     private TextField lastNametxtfield;
     @FXML
     private TextField passportIDtxtfield;
+    
+    String firstName = firstNametxtfield.getText();
+    String lastName = lastNametxtfield.getText();
+    String passportID = passportIDtxtfield.getText();
     
 
     /**

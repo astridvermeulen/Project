@@ -11,6 +11,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import project.LOGIC.DomainController;
+import static project.LOGIC.DomainController.domainController;
 
 /**
  * FXML Controller class
@@ -18,6 +20,8 @@ import javafx.scene.control.TableColumn;
  * @author eliseverschelde
  */
 public class OverviewFlightsController implements Initializable {
+    
+    private DomainController model;
 
     @FXML
     private TableColumn<?, ?> airlinecolumn;
@@ -43,7 +47,7 @@ public class OverviewFlightsController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        model=domainController.getInstance(); 
     }    
     
 }

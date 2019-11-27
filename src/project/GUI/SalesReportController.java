@@ -8,6 +8,8 @@ package project.GUI;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
+import project.LOGIC.DomainController;
+import static project.LOGIC.DomainController.domainController;
 
 /**
  * FXML Controller class
@@ -15,13 +17,13 @@ import javafx.fxml.Initializable;
  * @author eliseverschelde
  */
 public class SalesReportController implements Initializable {
-
+private DomainController model;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        model=domainController.getInstance(); 
     }    
     
 }

@@ -8,6 +8,7 @@ package project.GUI;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
+import project.LOGIC.DomainController;
 
 /**
  * FXML Controller class
@@ -15,7 +16,7 @@ import javafx.fxml.Initializable;
  * @author eliseverschelde
  */
 public class CustomerReportController implements Initializable {
-
+private DomainController model;
     /**
      * Initializes the controller class.
      */

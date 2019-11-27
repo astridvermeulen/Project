@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
+import project.LOGIC.DomainController;
 
 /**
  * FXML Controller class
@@ -17,7 +18,7 @@ import javafx.scene.control.TableColumn;
  * @author eliseverschelde
  */
 public class OverviewCustomersController implements Initializable {
-
+private DomainController model;
     @FXML
     private TableColumn<?, ?> firstNamecolumn;
     @FXML
