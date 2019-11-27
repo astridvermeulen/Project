@@ -37,22 +37,20 @@ import static project.LOGIC.DomainController.domainController;
 public class startWindowController implements Initializable {
     
     private DomainController model; // elke controller moet een link hebben naar de businesslaag via de instantievariabele model (domeinController is een singleton klasse). 
-    
-    
-    @FXML
-    private Button startWindowBtn;
-    @FXML
-    private Button overviewFlightsbtn;
     @FXML
     private AnchorPane panelToUpdate;
     @FXML
-    private Button DataCustomerbtn;
+    private Button searchFlightBtn;
     @FXML
-    private Button overviewCustomersbtn;
+    private Button overviewFlightsBtn;
     @FXML
-    private Button customerReportbtn;
+    private Button DataCustomerBtn;
     @FXML
-    private Button salesReportbtn;
+    private Button overviewCustomersBtn;
+    @FXML
+    private Button customerReportBtn;
+    @FXML
+    private Button salesReportBtn;
     
     
     // dit initaliseerd de controller class
@@ -63,8 +61,9 @@ public class startWindowController implements Initializable {
     
 
     // de volgende methodes updaten telkens een nieuwe panel zodat we naar een volgend "blad" gaan. 
+
     @FXML
-    private void loadStartWindow(ActionEvent event) {
+    private void loadSearchFlight(ActionEvent event) {
         try {
       
       
@@ -74,9 +73,9 @@ public class startWindowController implements Initializable {
       
         } catch (IOException ex) {
         Logger.getLogger(startWindowController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    }
-
+        
     @FXML
     private void loadOverviewFlights(ActionEvent event) {
         try {

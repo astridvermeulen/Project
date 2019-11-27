@@ -20,13 +20,13 @@ import project.LOGIC.DomainController;
 public class OverviewCustomersController implements Initializable {
 private DomainController model;
     @FXML
-    private TableColumn<?, ?> firstNamecolumn;
+    private TableColumn<?, ?> firstNameColumn;
     @FXML
-    private TableColumn<?, ?> lastNamecolumn;
+    private TableColumn<?, ?> lastNameColumn;
     @FXML
-    private TableColumn<?, ?> passportNumbercolumn;
+    private TableColumn<?, ?> passportNumberColumn;
     @FXML
-    private TableColumn<?, ?> homeCountrycolumn;
+    private TableColumn<?, ?> homeCountryColumn;
 
     /**
      * Initializes the controller class.

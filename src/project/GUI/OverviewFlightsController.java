@@ -24,23 +24,25 @@ public class OverviewFlightsController implements Initializable {
     private DomainController model;
 
     @FXML
-    private TableColumn<?, ?> airlinecolumn;
+    private TableColumn<?, ?> airlineColumn;
     @FXML
-    private TableColumn<?, ?> originAirportcolumn;
+    private TableColumn<?, ?> flightNumberColumn;
     @FXML
-    private TableColumn<?, ?> destinationAirportcolumn;
+    private TableColumn<?, ?> priceColumn;
     @FXML
-    private TableColumn<?, ?> departureTimecolumn;
+    private TableColumn<?, ?> emissionColumn;
     @FXML
-    private TableColumn<?, ?> destinationTimecolumn;
+    private TableColumn<?, ?> flightLegColumn;
     @FXML
-    private TableColumn<?, ?> durationcolumn;
+    private TableColumn<?, ?> originAirportColumn;
     @FXML
-    private TableColumn<?, ?> flightNumbercolumn;
+    private TableColumn<?, ?> destinationAirportColumn;
     @FXML
-    private TableColumn<?, ?> pricecolumn;
+    private TableColumn<?, ?> departureTimeColumn;
     @FXML
-    private TableColumn<?, ?> co2Emissioncolumn;
+    private TableColumn<?, ?> destinationTimeColumn;
+    @FXML
+    private TableColumn<?, ?> durationColumn;
 
     /**
      * Initializes the controller class.
