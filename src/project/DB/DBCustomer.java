@@ -120,7 +120,7 @@ public class DBCustomer {
       throw new DBException(ex);
     }
   }
-     public static void deleteCustomer(Customer s) throws DBException {
+     public static void deleteCustomer(String s) throws DBException {
     Connection con = null;
     try {
       con = DBConnection.getConnection();
@@ -128,12 +128,12 @@ public class DBCustomer {
       
       String sql = "SELECT passportNumber "
               + "FROM customer "
-              + "WHERE passportNumber = '" + s.getPassportNumber() + "'";
+              + "WHERE passportNumber = '" + s + "'";
       ResultSet srs = stmt.executeQuery(sql);
       if (srs.next()) {
         // DELETE
 	sql = "DELETE FROM customer "
-                + "WHERE PassportNumber = '" + s.getPassportNumber() + "'";
+                + "WHERE PassportNumber = '" + s + "'";
         stmt.executeUpdate(sql);
         DBConnection.closeConnection(con);
     

@@ -54,10 +54,10 @@ public class DBFlight {
 	return null;
       }
       //aantal flightlegs moet er ook nog bij? 
-      Flight vlucht = new Flight(destination, origin, flightNumber, price, departureDate, arrivalDate, departureTime, arrivalTime);
+     // Flight vlucht = new Flight(destination, origin, flightNumber, price, departureDate, arrivalDate, departureTime, arrivalTime);
       DBConnection.closeConnection(con);
-      return vlucht;
-      
+     // return vlucht;
+      return null; 
     }
     
     catch (Exception ex) {
@@ -67,6 +67,46 @@ public class DBFlight {
     }
     }
     
+private static Flight getFlightForBooking(int s) throws DBException {
+        Connection con = null;
+    try {
+      con = DBConnection.getConnection();
+      Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+      
+      String sql = "SELECT flightNumber, departureDate "
+	+ "FROM db2019_18.booking "
+	+ "WHERE bookingNumber = " + s;
+        
+      ResultSet srs = stmt.executeQuery(sql);
+     
+      //werken let LocalDate en LocalTime? zie slide 20 tips project database!!
+      String flightNumber;
+      int departureDate;
+      
+      int arrivalDate, arrivalTime, departureTime;
+       
+      
+      if (srs.next()) {
+          flightNumber = srs.getString("flightNumber");
+          departureDate = srs.getInt("departureDate");
+                    
+	} else {// we verwachten slechts 1 rij...
+	DBConnection.closeConnection(con);
+	return null;
+      }
+      //aantal flightlegs moet er ook nog bij? 
+     // Flight vlucht = new Flight(destination, origin, flightNumber, price, departureDate, arrivalDate, departureTime, arrivalTime);
+      DBConnection.closeConnection(con);
+     // return vlucht;
+      return null; 
+    }
+    
+    catch (Exception ex) {
+      ex.printStackTrace();
+      DBConnection.closeConnection(con);
+      throw new DBException(ex);
+    }
+    }
      
      // retourneert een arraylist van alle vluchten
     public static ArrayList<Flight> getFlights() throws DBException {

@@ -62,6 +62,8 @@ public class DBBooking {
     
          
      }
+ 
+ 
  public static ArrayList<Booking> getBookings() throws DBException {
     Connection con = null;
     try {
