@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import static project.DB.DBExecution.getBookingsPerCustomer;
 import project.LOGIC.Booking;
 import project.LOGIC.Flight;
 
@@ -68,21 +69,33 @@ public class DBFlight {
     }
     }
     
-private static Flight getFlightForBooking(ArrayList<Booking> s) throws DBException {
+private static Flight getFlightForBooking(String passportNumber) throws DBException {
         Connection con = null;
+        ArrayList<Booking> vl = new ArrayList<>();
+        int[] nm = new int[50];
+        
+        vl = getBookingsPerCustomer(passportNumber);
+        for(int i = 0; i < vl.size();i++){
+            nm[0] = vl.get(i).getBookingNumber();
+        }          
+            
+               
+        
     try {
       con = DBConnection.getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
-      String sql = "SELECT flightNumber, departureDate "
-	+ "FROM db2019_18.booking "
-	+ "WHERE bookingNumber = " + s;
-        
+      String sql = "SELECT * " + 
+        "FROM flight AS f " + 
+        "INNER JOIN booking AS b " +
+        "ON (b.flightNumber = f.flightNumber AND b.departureDate = f.departureDate) AND b.bookingNumber = " + nm;
+       
       ResultSet srs = stmt.executeQuery(sql);
      
       //werken let LocalDate en LocalTime? zie slide 20 tips project database!!
-      String flightNumber;
+      String flightNumber, origin, destination, airlineCode;
       int departureDate;
+      double price;
       
       int arrivalDate, arrivalTime, departureTime;
        
@@ -90,11 +103,26 @@ private static Flight getFlightForBooking(ArrayList<Booking> s) throws DBExcepti
       if (srs.next()) {
           flightNumber = srs.getString("flightNumber");
           departureDate = srs.getInt("departureDate");
+          departureTime = srs.getInt("departureTime");
+          arrivalDate = srs.getInt("arrivalDate");
+          arrivalTime = srs.getInt("arrivalTime");
+          price = srs.getDouble("price");
+          origin = srs.getString("origin");
+          destination = srs.getString("destination");
+          airlineCode = srs.getString("airlineCode");
+          
                     
-	} else {// we verwachten slechts 1 rij...
+	}
+      else {// we verwachten slechts 1 rij...
 	DBConnection.closeConnection(con);
 	return null;
       }
+    }
+    catch (Exception ex) {
+      ex.printStackTrace();
+      DBConnection.closeConnection(con);
+      throw new DBException(ex);
+    } 
       //aantal flightlegs moet er ook nog bij? 
      // Flight vlucht = new Flight(destination, origin, flightNumber, price, departureDate, arrivalDate, departureTime, arrivalTime);
       DBConnection.closeConnection(con);
@@ -102,15 +130,14 @@ private static Flight getFlightForBooking(ArrayList<Booking> s) throws DBExcepti
       return null; 
     }
     
-    catch (Exception ex) {
-      ex.printStackTrace();
-      DBConnection.closeConnection(con);
-      throw new DBException(ex);
-    }
-    }
+   
+
+
+    
      
      // retourneert een arraylist van alle vluchten
-    public static ArrayList<Flight> getFlights() throws DBException {
+   
+public static ArrayList<Flight> getFlights() throws DBException {
     Connection con = null;
     try {
       con = DBConnection.getConnection();
