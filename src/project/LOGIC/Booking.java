@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package project.LOGIC;
 
-/**
- *
- * @author klaas
- */
 import java.util.*;
 import project.DB.DBBooking;
 import project.DB.DBCustomer;
@@ -26,12 +17,6 @@ public class Booking {
     public Booking(int bookingNumber) {
         this.bookingNumber = bookingNumber;
         this.bookingDate = System.currentTimeMillis();
-        /**
-         * uitgedrukt als het aantal milliseconden na de UNIX epoch (als Java
-         * long). Deze waarde is een delta van een UTC-tijd-punt, en is
-         * onafhankelijk van de lokale tijdzone … in de veronderstelling dat de
-         * systeem klok correct is ingesteld.
-         */
         this.serviceFee = serviceFee;
         this.promotion = calculatePromotion(); // vast dus moet niet meegegeven worden bij constructor 
     }
