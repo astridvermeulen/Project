@@ -6,6 +6,9 @@
 package project.LOGIC;
 
 import java.util.ArrayList;
+import project.DB.DBCustomer;
+import project.DB.DBException;
+import project.DB.DBFlight;
 //dit is een tesst 
 
 public class Customer {
@@ -16,11 +19,11 @@ public class Customer {
     private String homeCountry;
 
     //Constructor 
-    public Customer(String passportNumber, String firstName, String lastName, String homeCountry) {
+    public Customer(String passportNumber, String firstName, String lastName) {
         this.passportNumber = passportNumber;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.homeCountry = homeCountry; // halen uit passportName??
+        this.homeCountry = this.calculateHomeCountry(); // halen uit passportName??
     }
 
     //Getter instance variable "passportNumber"
@@ -39,24 +42,51 @@ public class Customer {
     }
 
     //Getter instance variable "homeCountry"
-    public String getHomeCountry() {
+    public String calculateHomeCountry() {
+        String passportNumber = this.getPassportNumber();
+        String homeCountry = "";
+        for (int i = 0; i < passportNumber.length(); i++) {
+            String s = String.valueOf(homeCountry.charAt(i));
+            if (!isInteger(s)) {
+                homeCountry = homeCountry + homeCountry.charAt(i);
+            }
+        }
         return homeCountry;
     }
 
+    //Helping method to determine if a String is an Integer
+    private static boolean isInteger(String s) {
+        try {
+            Integer.parseInt(s);
+        } catch (NumberFormatException e) {
+            return false;
+        } catch (NullPointerException e) {
+            return false;
+        }
+        return true;
+    }
+
     //Method to delete a customer
-    public void deleteCustomer() {
+    public void deleteCustomer(String passportNumber) {
+        DBCustomer.deleteCustomer(passportNumber);
     }
 
     //Method to get an overview of all the flights booked by a customer 
-    public ArrayList<Flight> flightOverview() {
-        ArrayList<Flight> flightsAll = new ArrayList<>(); //call naar databoys om een arraylist van alle vluchten te krijgen 
+    public ArrayList<Flight> flightOverview() throws DBException {
+        ArrayList<Flight> flightsAll = DBFlight.getFlights();
         ArrayList<Flight> flightsOfCustomer = new ArrayList<>();
-        for (Flight vlucht : flightsAll) {
+        /*for (Flight vlucht : flightsAll) {
             if (!(vlucht.getFlightLegs().size() > 1)) {
                 flightsOfCustomer.add(vlucht);
             }
-        }
+        }*/
         return flightsOfCustomer;
 
     }
+
+    public ArrayList<Customer> customersOverview() throws DBException {
+        ArrayList<Customer> customersAll = DBCustomer.getCustomers();
+        return customersAll;
+    }
+
 }

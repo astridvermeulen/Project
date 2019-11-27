@@ -25,7 +25,7 @@ public class DomainController {
     }
 
     //Method to filter the flights, returns the filtered flights 
-    public ArrayList<Flight> vluchtenFilteren(Boolean legs, String filter) throws DBException  {
+    public ArrayList<Flight> searchFlight(Boolean legs, String filter) throws DBException  {
         ArrayList<Flight> flightsAll = DBFlight.getFlights();
         ArrayList<Flight> flightsFilteredOnLegs = this.fliterOnLegs(legs, flightsAll);
         MergeSort.sort(flightsFilteredOnLegs, filter);
