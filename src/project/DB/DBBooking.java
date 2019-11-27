@@ -127,7 +127,7 @@ public class DBBooking {
       throw new DBException(ex);
     }
   }
-      public static void deleteBooking(Booking s) throws DBException {
+      public static void deleteBooking(int s) throws DBException {
     Connection con = null;
     try {
       con = DBConnection.getConnection();
@@ -135,12 +135,12 @@ public class DBBooking {
       
       String sql = "SELECT bookingNumber "
               + "FROM booking "
-              + "WHERE bookingNumber = " + s.getBookingNumber();
+              + "WHERE bookingNumber = " + s;
       ResultSet srs = stmt.executeQuery(sql);
       if (srs.next()) {
         // DELETE
 	sql = "DELETE FROM booking "
-                + "WHERE bookingNummer = " + s.getBookingNumber();
+                + "WHERE bookingNummer = " + s;
         stmt.executeUpdate(sql);
         DBConnection.closeConnection(con);
     
