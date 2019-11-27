@@ -1,23 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="799.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.GUI.OverviewFlightsController">
+<AnchorPane id="AnchorPane" prefHeight="450.0" prefWidth="676.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.GUI.OverviewFlightsController">
    <children>
-      <TableView prefHeight="400.0" prefWidth="799.0">
-        <columns>
-          <TableColumn fx:id="airlinecolumn" prefWidth="49.0" text="Airline" />
-          <TableColumn fx:id="originAirportcolumn" prefWidth="95.0" text="Origin airport" />
-            <TableColumn fx:id="destinationAirportcolumn" prefWidth="121.0" text="Destination airport" />
-            <TableColumn fx:id="departureTimecolumn" prefWidth="108.0" text="Departure time" />
-            <TableColumn fx:id="destinationTimecolumn" prefWidth="111.0" text="Destination time" />
-            <TableColumn fx:id="durationcolumn" prefWidth="68.0" text="Duration" />
-            <TableColumn fx:id="flightNumbercolumn" prefWidth="97.0" text="Flight number" />
-            <TableColumn fx:id="pricecolumn" prefWidth="53.0" text="Price" />
-            <TableColumn fx:id="co2Emissioncolumn" prefWidth="98.0" text="CO2 emission" />
-        </columns>
-      </TableView>
+      <ScrollPane prefHeight="450.0" prefWidth="676.0">
+         <content>
+            <TableView prefHeight="450.0" prefWidth="676.0">
+              <columns>
+                <TableColumn fx:id="airlineColumn" prefWidth="222.0" text="Airline" />
+                  <TableColumn fx:id="flightNumberColumn" prefWidth="97.2962646484375" text="Flight number" />
+                  <TableColumn fx:id="priceColumn" prefWidth="65.0186767578125" text="Price (€)" />
+                  <TableColumn fx:id="emissionColumn" prefWidth="79.9813232421875" text="Emission" />
+                  <TableColumn fx:id="flightLegColumn" prefWidth="75.0" text="Flight leg" />
+                <TableColumn fx:id="originAirportColumn" minWidth="0.0" prefWidth="395.54254150390625" text="Origin airport" />
+                  <TableColumn fx:id="destinationAirportColumn" prefWidth="397.45745849609375" text="Destination airport" />
+                  <TableColumn fx:id="departureTimeColumn" prefWidth="155.1177978515625" text="Departure time" />
+                  <TableColumn fx:id="destinationTimeColumn" prefWidth="137.431884765625" text="Destination time" />
+                  <TableColumn fx:id="durationColumn" prefWidth="121.6864013671875" text="Duration" />
+              </columns>
+            </TableView>
+         </content>
+      </ScrollPane>
    </children>
 </AnchorPane>

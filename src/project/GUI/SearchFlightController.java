@@ -39,38 +39,47 @@ public class SearchFlightController implements Initializable {
 
     @FXML
     private AnchorPane panelToUpdate;
-    @FXML
-    private Label fromlbl;
-    @FXML
-    private Label tolbl;
-    @FXML
-    private Label chooseDepartureDatelbl;
-    @FXML
-    private Label numberOfPassengerslbl;
-    @FXML
-    private Label intermediateStopsAllowedlbl;
-    @FXML
-    private Label sortBylbl;
-    @FXML
     private ChoiceBox originCitychoice;
-    @FXML
     private ChoiceBox destinationCitychoice;
-    @FXML
     private ChoiceBox departureDaychoice;
-    @FXML
     private ChoiceBox departureMonthchoice;
-    @FXML
     private ChoiceBox departureYearchoice;
-    @FXML
     private ChoiceBox amountOfPassengerschoice;
-    @FXML
     private ChoiceBox sortBychoice;
-    @FXML
-    private Button searchFlightsbtn;
-    @FXML
     private CheckBox intermediateStopsAllowedcheck;
-    @FXML
     private CheckBox intermediateStopsNotAllowedcheck;
+    @FXML
+    private Label fromLbl;
+    @FXML
+    private Label toLbl;
+    @FXML
+    private Label chooseDepartureDateLbl;
+    @FXML
+    private Label numberOfPassengersLbl;
+    @FXML
+    private Label intermediateStopsAllowedLbl;
+    @FXML
+    private Label sortByLbl;
+    @FXML
+    private ChoiceBox<?> originCityChoice;
+    @FXML
+    private ChoiceBox<?> destinationCityChoice;
+    @FXML
+    private ChoiceBox<?> departureDayChoice;
+    @FXML
+    private ChoiceBox<?> departureMonthChoice;
+    @FXML
+    private ChoiceBox<?> departureYearChoice;
+    @FXML
+    private ChoiceBox<?> amountOfPassengersChoice;
+    @FXML
+    private ChoiceBox<?> sortByChoice;
+    @FXML
+    private Button searchFlightMethode;
+    @FXML
+    private CheckBox intermediateStopsAllowedCheck;
+    @FXML
+    private CheckBox intermediateStopsNotAllowedCheck;
 
     /**
      * Initializes the controller class.
