@@ -65,7 +65,7 @@ public class Booking {
     }
 
     //Method to delete a booking 
-    public void deleteBooking(int bookingNumber) {
+    public void deleteBooking(int bookingNumber) throws DBException {
         DBBooking.deleteBooking(bookingNumber);// dataBoys type nog aanpassen 
     }
     
