@@ -27,7 +27,7 @@ public class DBFlight {
       
       String sql = "SELECT flightNumber, departureDate, departureTime, arrivalDate, arrivalTime, price, origin, destination, airlineCode "
 	+ "FROM db2019_18.flight "
-	+ "WHERE flightNumber = " + flightNumber
+	+ "WHERE flightNumber = '" + flightNumber + "'"
         + " AND departureDate = " + departureDate;
 
       ResultSet srs = stmt.executeQuery(sql);
@@ -133,6 +133,39 @@ private static Flight getFlightForBooking(int s) throws DBException {
       throw new DBException(ex);
     }
   }
+    public static double getEmission(String flightNumber, int departureDate) throws DBException{
+         Connection con = null;
+         double CO2 = 0.0;
+    try {
+      con = DBConnection.getConnection();
+      Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+      
+      String sql = "SELECT CO2 "
+        + "FROM db2019_18.flight "
+	+ "WHERE flightNumber = '" + flightNumber + "'"
+        + " AND departureDate = " + departureDate;
+
+      ResultSet srs = stmt.executeQuery(sql);
+
+      if (srs.next()) {
+           CO2 = srs.getDouble("C02");
+	}
+      
+      else {// we verwachten slechts 1 rij...
+	DBConnection.closeConnection(con);
+	return CO2;
+      }
+      DBConnection.closeConnection(con);
+      return CO2;
+    }
+    
+    catch (Exception ex) {
+      ex.printStackTrace();
+      DBConnection.closeConnection(con);
+      throw new DBException(ex);
+    }
+    
+    }
 
     
 }
