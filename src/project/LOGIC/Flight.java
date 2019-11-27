@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class Flight {
 
-    private ArrayList<FlightLeg> flightLegs = new ArrayList<>();
+    private ArrayList<FlightLeg> flightLegs;
     private String destination;
     private String origin;
     private String flightNumber;
@@ -25,7 +25,8 @@ public class Flight {
     private int arrivalTime;
     private int duration;
 
-    public Flight(String destination, String origin, String flightNumber, double price, int departureDate, int arrivalDate, int departureTime, int arrivalTime) {
+    public Flight(ArrayList<FlightLeg> flightLegs, String destination, String origin, String flightNumber, double price, int departureDate, int arrivalDate, int departureTime, int arrivalTime) {
+        this.flightLegs = flightLegs;
         this.destination = destination;
         this.origin = origin;
         this.flightNumber = flightNumber;
@@ -38,6 +39,8 @@ public class Flight {
         this.duration = this.calculateDuration();
     }
 
+   
+    
     public ArrayList<FlightLeg> getFlightLegs() {
         return flightLegs;
     }

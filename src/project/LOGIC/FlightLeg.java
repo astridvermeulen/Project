@@ -10,5 +10,15 @@ package project.LOGIC;
  * @author klaas
  */
 public class FlightLeg {
-    private int numberOfLegs;
+
+    private int legNumber;
+    private String legOrigin;
+    private String legDestination;
+
+    public FlightLeg(int legNumber, String legOrigin, String legDestination) {
+        this.legNumber = legNumber;
+        this.legOrigin = legOrigin;
+        this.legDestination = legDestination;
+    }
+
 }
