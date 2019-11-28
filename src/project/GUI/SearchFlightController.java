@@ -38,17 +38,8 @@ public class SearchFlightController implements Initializable {
     private DomainController model;
 
     @FXML
-    private AnchorPane panelToUpdate;
-    private ChoiceBox originCitychoice;
-    private ChoiceBox destinationCitychoice;
-    private ChoiceBox departureDaychoice;
-    private ChoiceBox departureMonthchoice;
-    private ChoiceBox departureYearchoice;
-    private ChoiceBox amountOfPassengerschoice;
-    private ChoiceBox sortBychoice;
-    private CheckBox intermediateStopsAllowedcheck;
-    private CheckBox intermediateStopsNotAllowedcheck;
-    @FXML
+    
+   
     private Label fromLbl;
     @FXML
     private Label toLbl;
@@ -80,47 +71,50 @@ public class SearchFlightController implements Initializable {
     private CheckBox intermediateStopsAllowedCheck;
     @FXML
     private CheckBox intermediateStopsNotAllowedCheck;
+    @FXML
+    private AnchorPane panelToUpdate;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        System.out.println("test");
         model=domainController.getInstance();
         addDataToChoiceBox();  
     }    
 
     @FXML
     private void handleYesCheckBox(){
-        if(intermediateStopsAllowedcheck.isSelected()){
-            intermediateStopsNotAllowedcheck.setSelected(false);
+        if(intermediateStopsAllowedCheck.isSelected()){
+            intermediateStopsNotAllowedCheck.setSelected(false);
             
         }
     }
     @FXML
     private void handleNoCheckBox(){
-        if(intermediateStopsNotAllowedcheck.isSelected()){
-            intermediateStopsAllowedcheck.setSelected(false);
+        if(intermediateStopsNotAllowedCheck.isSelected()){
+            intermediateStopsAllowedCheck.setSelected(false);
         }
     }
     
     
     @FXML
     private void searchFlight(ActionEvent event) {
-        String originAirport = originCitychoice.getValue().toString();
-        String destinationAirport = destinationCitychoice.getValue().toString();
-        String departureDay = departureDaychoice.getValue().toString();
-        String departureMonth = departureMonthchoice.getValue().toString();
-        String departureYear = departureYearchoice.getValue().toString();
-        int amountOfPassengers = (Integer) amountOfPassengerschoice.getValue();
-        String sortBy = sortBychoice.getValue().toString();
-        boolean intermediateStopsAllowed = intermediateStopsAllowedcheck.isSelected();
-        boolean intermediateStopsNotAllowed = intermediateStopsNotAllowedcheck.isSelected();
+        String originAirport = originCityChoice.getValue().toString();
+        String destinationAirport = destinationCityChoice.getValue().toString();
+        String departureDay = departureDayChoice.getValue().toString();
+        String departureMonth = departureMonthChoice.getValue().toString();
+        String departureYear = departureYearChoice.getValue().toString();
+        int amountOfPassengers = (Integer) amountOfPassengersChoice.getValue();
+        String sortBy = sortByChoice.getValue().toString();
+        boolean intermediateStopsAllowed = intermediateStopsAllowedCheck.isSelected();
+        boolean intermediateStopsNotAllowed = intermediateStopsNotAllowedCheck.isSelected();
         
      
         boolean toegestaan = false;
-        if(intermediateStopsAllowedcheck.isSelected()) toegestaan = true;
-        else if(intermediateStopsNotAllowedcheck.isSelected()) toegestaan = false;
+        if(intermediateStopsAllowedCheck.isSelected()) toegestaan = true;
+        else if(intermediateStopsNotAllowedCheck.isSelected()) toegestaan = false;
             
         
         try {
@@ -153,9 +147,16 @@ public class SearchFlightController implements Initializable {
     
     private void addDataToChoiceBox(){
       ArrayList<Airport> test = new ArrayList<>();
+      ObservableList list1 = FXCollections.observableArrayList(new ArrayList<String>());
+    ObservableList list2 = FXCollections.observableArrayList();
+    ObservableList list3 = FXCollections.observableArrayList();
+    ObservableList list4 = FXCollections.observableArrayList();
+    ObservableList list5 = FXCollections.observableArrayList();
+    ObservableList list6 = FXCollections.observableArrayList();
     
       try {
           test = getAirports();
+          System.out.println(test.size());
           int size = test.size();
           for(int position = 0; position < size; position++)
               list1.add(test.get(position).getAirportName());
@@ -179,13 +180,13 @@ public class SearchFlightController implements Initializable {
       }
       list6.addAll("Duration", "Price", "Emission");
       
-        originCitychoice.getItems().addAll(list1);
-        destinationCitychoice.getItems().addAll(list1);
-        departureDaychoice.getItems().addAll(list2);
-        departureMonthchoice.getItems().addAll(list3);
-        departureYearchoice.getItems().addAll(list4);
-        amountOfPassengerschoice.getItems().addAll(list5);
-        sortBychoice.getItems().addAll(list6);
+        originCityChoice.getItems().addAll(list1);
+        destinationCityChoice.getItems().addAll(list1);
+        departureDayChoice.getItems().addAll(list2);
+        departureMonthChoice.getItems().addAll(list3);
+        departureYearChoice.getItems().addAll(list4);
+        amountOfPassengersChoice.getItems().addAll(list5);
+        sortByChoice.getItems().addAll(list6);
         
         
     }

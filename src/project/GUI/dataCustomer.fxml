@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.gluonhq.charm.glisten.control.TextField?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -20,9 +20,8 @@
             </VBox>
             <VBox prefHeight="285.0" prefWidth="337.0" spacing="8.0">
                <children>
-                  <TextField fx:id="firstNameTxtfield" />
-                  <TextField fx:id="lastNameTxtfield" />
-                  <TextField fx:id="passportIDTxtfield" />
+                  <Label fx:id="test" text="Label" />
+                  <TextArea prefHeight="200.0" prefWidth="200.0" />
                </children>
             </VBox>
          </children>
