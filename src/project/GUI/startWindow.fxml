@@ -4,18 +4,18 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="409.0" prefWidth="676.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.GUI.startWindowController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="676.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.GUI.startWindowController">
    <children>
-      <SplitPane dividerPositions="0.06388206388206388" orientation="VERTICAL" prefHeight="409.0" prefWidth="676.0">
+      <SplitPane dividerPositions="0.06388206388206388" orientation="VERTICAL" prefHeight="450.0" prefWidth="676.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <Button fx:id="startWindowBtn" layoutY="-2.0" mnemonicParsing="false" onAction="#loadStartWindow" text="Start window" />
-                  <Button fx:id="overviewFlightsbtn" layoutX="94.0" layoutY="-2.0" mnemonicParsing="false" onAction="#loadOverviewFlights" text="Overview flights" />
-                  <Button fx:id="DataCustomerbtn" layoutX="212.0" layoutY="-2.0" mnemonicParsing="false" onAction="#loadDataCustomer" text="Data customer" />
-                  <Button fx:id="overviewCustomersbtn" layoutX="317.0" layoutY="-2.0" mnemonicParsing="false" onAction="#loadOverviewCustomers" text="Overview customers" />
-                  <Button fx:id="customerReportbtn" layoutX="461.0" layoutY="-2.0" mnemonicParsing="false" onAction="#loadCustomerReport" text="Customer report" />
-                  <Button fx:id="salesReportbtn" layoutX="581.0" layoutY="-2.0" mnemonicParsing="false" onAction="#loadSalesReport" text="Sales report" />
+                  <Button fx:id="searchFlightBtn" layoutY="-2.0" mnemonicParsing="false" onAction="#loadSearchFlight" text="Search flight" />
+                  <Button fx:id="overviewFlightsBtn" layoutX="94.0" layoutY="-2.0" mnemonicParsing="false" onAction="#loadOverviewFlights" text="Overview flights" />
+                  <Button fx:id="DataCustomerBtn" layoutX="212.0" layoutY="-2.0" mnemonicParsing="false" onAction="#loadDataCustomer" text="Data customer" />
+                  <Button fx:id="overviewCustomersBtn" layoutX="317.0" layoutY="-2.0" mnemonicParsing="false" onAction="#loadOverviewCustomers" text="Overview customers" />
+                  <Button fx:id="customerReportBtn" layoutX="461.0" layoutY="-2.0" mnemonicParsing="false" onAction="#loadCustomerReport" text="Customer report" />
+                  <Button fx:id="salesReportBtn" layoutX="581.0" layoutY="-2.0" mnemonicParsing="false" onAction="#loadSalesReport" text="Sales report" />
                </children>
             </AnchorPane>
           <AnchorPane fx:id="panelToUpdate" minHeight="0.0" minWidth="0.0" prefHeight="377.0" prefWidth="674.0" />

@@ -4,15 +4,14 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="project.GUI.OverviewCustomersController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.GUI.OverviewCustomersController">
    <children>
-      <TableView prefHeight="400.0" prefWidth="600.0">
+      <TableView prefHeight="450.0" prefWidth="676.0">
         <columns>
-          <TableColumn fx:id="firstNamecolumn" prefWidth="121.0" text="First name" />
-          <TableColumn fx:id="lastNamecolumn" prefWidth="168.0" text="Last name" />
-            <TableColumn fx:id="passportNumbercolumn" prefWidth="174.0" text="Passport number" />
-            <TableColumn fx:id="homeCountrycolumn" prefWidth="136.0" text="Home country" />
+          <TableColumn fx:id="firstNameColumn" prefWidth="173.0" text="First name" />
+          <TableColumn fx:id="lastNameColumn" prefWidth="270.0" text="Last name" />
+            <TableColumn fx:id="passportNumberColumn" prefWidth="118.0" text="Passport number" />
+            <TableColumn fx:id="homeCountryColumn" prefWidth="114.0" text="Home country" />
         </columns>
       </TableView>
    </children>

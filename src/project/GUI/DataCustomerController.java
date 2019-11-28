@@ -21,24 +21,25 @@ import project.LOGIC.DomainController;
 public class DataCustomerController implements Initializable {
 private DomainController model;
 
-    @FXML
-    private Label enterPersonalDatalbl;
-    @FXML
-    private Label firstNamelbl;
-    @FXML
-    private Label lastNamelbl;
-    @FXML
-    private Label passportIDlbl;
-    @FXML
-    private TextField firstNametxtfield;
-    @FXML
-    private TextField lastNametxtfield;
-    @FXML
-    private TextField passportIDtxtfield;
+@FXML
+    private TextField firstNameTxtfield;
+@FXML
+    private TextField lastNameTxtfield;
+@FXML
+    private TextField passportIDTxtfield;
     
-    String firstName = firstNametxtfield.getText();
-    String lastName = lastNametxtfield.getText();
-    String passportID = passportIDtxtfield.getText();
+    String firstName = firstNameTxtfield.getText();
+    String lastName = lastNameTxtfield.getText();
+    String passportID = passportIDTxtfield.getText();
+    
+    @FXML
+    private Label enterPersonalDataLbl;
+    @FXML
+    private Label firstNameLbl;
+    @FXML
+    private Label lastNameLbl;
+    @FXML
+    private Label passportIDLbl;
     
 
     /**
