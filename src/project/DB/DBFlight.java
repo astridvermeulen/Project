@@ -21,7 +21,7 @@ import project.LOGIC.FlightLeg;
 public class DBFlight {
     
      // retourneert 1 vlucht
-     private static Flight getFlight(String flightNumber, int departureDate) throws DBException {
+     public static Flight getFlight(String flightNumber, int departureDate) throws DBException {
         Connection con = null;
     try {
       con = DBConnection.getConnection();
@@ -74,7 +74,7 @@ public class DBFlight {
     }
      
     
-private static ArrayList <Flight> getFlightsPerCustomer(String passportNumber) throws DBException { //PER CUSTOMER ALLE GEBOEKTE VLUCHTEN RETOURNERE?
+public static ArrayList <Flight> getFlightsPerCustomer(String passportNumber) throws DBException { //PER CUSTOMER ALLE GEBOEKTE VLUCHTEN RETOURNERE?
         Connection con = null;
         ArrayList<Flight> vlucht = new ArrayList<>();               
                           
@@ -129,7 +129,7 @@ private static ArrayList <Flight> getFlightsPerCustomer(String passportNumber) t
     return vlucht; 
          
     }
-private static Flight getFlightsForBooking(int bookingNumber) throws DBException { //RETURNS A FLIGHT GIVEN A BOOKINGNUMBER
+public static Flight getFlightsForBooking(int bookingNumber) throws DBException { //RETURNS A FLIGHT GIVEN A BOOKINGNUMBER
        Connection con = null;
                       
                           
