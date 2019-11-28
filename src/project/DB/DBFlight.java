@@ -75,7 +75,7 @@ public class DBFlight {
     }
     }
     
-private static ArrayList <Flight> getFlightsPerCustomer(String passportNumber) throws DBException { //per customer alle geboekte vluchten weergeven 
+private static ArrayList <Flight> getFlightsPerCustomer(String passportNumber) throws DBException { //PER CUSTOMER ALLE GEBOEKTE VLUCHTEN RETOURNERE?
         Connection con = null;
         ArrayList<Flight> vlucht = new ArrayList<>();               
                           
