@@ -35,6 +35,7 @@ import project.LOGIC.Flight;
  */
 public class SearchFlightController implements Initializable {
     private DomainController model;
+    private ArrayList<Flight> filterdFlights;
 
     @FXML
     private Label fromLbl;
@@ -71,12 +72,37 @@ public class SearchFlightController implements Initializable {
     @FXML
     private AnchorPane panelToUpdate;
 
-    /**
-     * Initializes the controller class.
-     */
+    
+    public String getOriginAirport(){
+        return originCityChoice.getValue().toString();
+    }
+    public String getDestinationAirport(){
+        return destinationCityChoice.getValue().toString();
+    }
+    public String getDepartureDay(){
+        return departureDayChoice.getValue().toString();
+    }
+    public String getDepartureMonth(){
+        return departureMonthChoice.getValue().toString();
+    }
+    public String getDepartureYear(){
+        return departureYearChoice.getValue().toString();
+    }
+    public int getAmountOfPassengers(){
+        return (Integer) amountOfPassengersChoice.getValue();
+    }
+    public String getSortBy(){
+        return sortByChoice.getValue().toString();
+    }
+    public boolean getIntermediateStopsAllowed(){
+        return intermediateStopsAllowedCheck.isSelected();
+    }
+    
+    
+    
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        System.out.println("test");
         model=domainController.getInstance();
         addDataToChoiceBox();  
     }    
@@ -94,27 +120,7 @@ public class SearchFlightController implements Initializable {
             intermediateStopsAllowedCheck.setSelected(false);
         }
     }
-    // deze instantievariabelen moet je in methodes zetten (zie twee vb hieronder)
-    String originAirport = originCityChoice.getValue().toString();
-    String destinationAirport = destinationCityChoice.getValue().toString();
-        String departureDay = departureDayChoice.getValue().toString();
-        String departureMonth = departureMonthChoice.getValue().toString();
-        String departureYear = departureYearChoice.getValue().toString();
-        int amountOfPassengers = (Integer) amountOfPassengersChoice.getValue();
-        String sortBy = sortByChoice.getValue().toString();
-        boolean intermediateStopsAllowed = intermediateStopsAllowedCheck.isSelected();
-        boolean intermediateStopsNotAllowed = intermediateStopsNotAllowedCheck.isSelected();
-    
-    public boolean getIntermediateStopsAllowed(){
-        return intermediateStopsAllowedCheck.isSelected();
-    }
-    
-    public String getSortBy(){
-        return sortByChoice.getValue().toString();
-    }
-    
-    
-    private ArrayList<Flight> filterdFlights;
+
 
     public ArrayList<Flight> getFilterdFlights() {
         return filterdFlights;
