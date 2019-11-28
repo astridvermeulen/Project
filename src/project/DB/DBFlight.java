@@ -10,9 +10,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import static project.DB.DBExecution.getBookingsPerCustomer;
 import project.LOGIC.Booking;
 import project.LOGIC.Flight;
+import project.LOGIC.FlightLeg;
 
 /**
  *
@@ -55,11 +58,15 @@ public class DBFlight {
 	DBConnection.closeConnection(con);
 	return null;
       }
+      ArrayList<FlightLeg> legs = new ArrayList<>();
+      legs = null;
+      
+      
       //aantal flightlegs moet er ook nog bij? 
-     // Flight vlucht = new Flight(destination, origin, flightNumber, price, departureDate, arrivalDate, departureTime, arrivalTime);
+     Flight vlucht = new Flight(legs, destination, origin, flightNumber, price, departureDate, arrivalDate, departureTime, arrivalTime);
       DBConnection.closeConnection(con);
-     // return vlucht;
-      return null; 
+      return vlucht;
+       
     }
     
     catch (Exception ex) {
@@ -69,8 +76,9 @@ public class DBFlight {
     }
     }
     
-private static Flight getFlightForBooking(String passportNumber) throws DBException {
+private static ArrayList <Flight> getFlightsForBooking(String passportNumber) throws DBException { //per customer alle geboekte vluchten weergeven 
         Connection con = null;
+        ArrayList<Flight> vlucht = new ArrayList<>();
         ArrayList<Booking> vl = new ArrayList<>();
         int[] nm = new int[50];
         
@@ -98,9 +106,9 @@ private static Flight getFlightForBooking(String passportNumber) throws DBExcept
       double price;
       
       int arrivalDate, arrivalTime, departureTime;
-       
+         
       
-      if (srs.next()) {
+      while (srs.next()) {
           flightNumber = srs.getString("flightNumber");
           departureDate = srs.getInt("departureDate");
           departureTime = srs.getInt("departureTime");
@@ -110,34 +118,31 @@ private static Flight getFlightForBooking(String passportNumber) throws DBExcept
           origin = srs.getString("origin");
           destination = srs.getString("destination");
           airlineCode = srs.getString("airlineCode");
+          ArrayList<FlightLeg> legs = new ArrayList<>();
+          legs = null;
           
-                    
+    
+         int i = 0;
+         Flight test = new Flight(legs, destination, origin, flightNumber, price, departureDate, arrivalDate, departureTime, arrivalTime);
+         vlucht.add(i, test);
+         i++;              
+         DBConnection.closeConnection(con);      
+         
 	}
-      else {// we verwachten slechts 1 rij...
-	DBConnection.closeConnection(con);
-	return null;
-      }
+      
     }
     catch (Exception ex) {
       ex.printStackTrace();
       DBConnection.closeConnection(con);
       throw new DBException(ex);
-    } 
-      //aantal flightlegs moet er ook nog bij? 
-     // Flight vlucht = new Flight(destination, origin, flightNumber, price, departureDate, arrivalDate, departureTime, arrivalTime);
-      DBConnection.closeConnection(con);
-     // return vlucht;
-      return null; 
     }
-    
-   
-
-
-    
+    return vlucht; 
+         
+    }
      
-     // retourneert een arraylist van alle vluchten
+    
+public static ArrayList<Flight> getFlights() throws DBException {  // retourneert een arraylist van alle vluchten
    
-public static ArrayList<Flight> getFlights() throws DBException {
     Connection con = null;
     try {
       con = DBConnection.getConnection();
@@ -194,6 +199,23 @@ public static ArrayList<Flight> getFlights() throws DBException {
     }
     
     }
+    
+    public static void main(String[] args) throws DBException{
+        String x = "BE1207";
+        ArrayList<Flight> test = new ArrayList<>();
+        
+        try {
+            test = getFlightsForBooking(x);
+            int size = test.size();
+          for(int position = 0; position < size; position++)
+              System.out.println(test.get(position).getFlightNumber());
+    
+;
+    } catch (DBException ex) {
+      Logger.getLogger(DBAirport.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    }
+}
 
     
-}
+
