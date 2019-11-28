@@ -12,7 +12,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static project.DB.DBExecution.getBookingsPerCustomer;
 import project.LOGIC.Booking;
 import project.LOGIC.Flight;
 import project.LOGIC.FlightLeg;
@@ -76,7 +75,7 @@ public class DBFlight {
     }
     }
     
-private static ArrayList <Flight> getFlightsForBooking(String passportNumber) throws DBException { //per customer alle geboekte vluchten weergeven 
+private static ArrayList <Flight> getFlightsPerCustomer(String passportNumber) throws DBException { //per customer alle geboekte vluchten weergeven 
         Connection con = null;
         ArrayList<Flight> vlucht = new ArrayList<>();
         ArrayList<Booking> vl = new ArrayList<>();
@@ -96,7 +95,8 @@ private static ArrayList <Flight> getFlightsForBooking(String passportNumber) th
       String sql = "SELECT * " + 
         "FROM flight AS f " + 
         "INNER JOIN booking AS b " +
-        "ON (b.flightNumber = f.flightNumber AND b.departureDate = f.departureDate) AND b.bookingNumber IN (" + nm + ")";
+        "ON (b.flightNumber = f.flightNumber AND b.departureDate = f.departureDate) AND b.bookingNumber IN ( " +   
+              "SELECT bookingNumber FROM execution WHERE passportnumber = '" + passportNumber + "')";
        
       ResultSet srs = stmt.executeQuery(sql);
      
@@ -205,7 +205,7 @@ public static ArrayList<Flight> getFlights() throws DBException {  // retourneer
         ArrayList<Flight> test = new ArrayList<>();
         
         try {
-            test = getFlightsForBooking(x);
+            test = getFlightsPerCustomer(x);
             int size = test.size();
           for(int position = 0; position < size; position++)
               System.out.println(test.get(position).getFlightNumber());
