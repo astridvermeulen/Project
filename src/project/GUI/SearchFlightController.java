@@ -5,7 +5,6 @@
  */
 package project.GUI;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -15,7 +14,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -28,6 +26,7 @@ import project.DB.DBException;
 import project.LOGIC.Airport;
 import project.LOGIC.DomainController;
 import static project.LOGIC.DomainController.domainController;
+import project.LOGIC.Flight;
 
 /**
  * FXML Controller class
@@ -38,8 +37,6 @@ public class SearchFlightController implements Initializable {
     private DomainController model;
 
     @FXML
-    
-   
     private Label fromLbl;
     @FXML
     private Label toLbl;
@@ -97,12 +94,9 @@ public class SearchFlightController implements Initializable {
             intermediateStopsAllowedCheck.setSelected(false);
         }
     }
-    
-    
-    @FXML
-    private void searchFlight(ActionEvent event) {
-        String originAirport = originCityChoice.getValue().toString();
-        String destinationAirport = destinationCityChoice.getValue().toString();
+    // deze instantievariabelen moet je in methodes zetten (zie twee vb hieronder)
+    String originAirport = originCityChoice.getValue().toString();
+    String destinationAirport = destinationCityChoice.getValue().toString();
         String departureDay = departureDayChoice.getValue().toString();
         String departureMonth = departureMonthChoice.getValue().toString();
         String departureYear = departureYearChoice.getValue().toString();
@@ -110,32 +104,37 @@ public class SearchFlightController implements Initializable {
         String sortBy = sortByChoice.getValue().toString();
         boolean intermediateStopsAllowed = intermediateStopsAllowedCheck.isSelected();
         boolean intermediateStopsNotAllowed = intermediateStopsNotAllowedCheck.isSelected();
-        
-     
-        boolean toegestaan = false;
-        if(intermediateStopsAllowedCheck.isSelected()) toegestaan = true;
-        else if(intermediateStopsNotAllowedCheck.isSelected()) toegestaan = false;
-            
-        
-        try {
-            model.searchFlight(toegestaan, sortBy);
-        } catch (DBException ex) {
-            Logger.getLogger(SearchFlightController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        try {
-      
-      
-            AnchorPane pane = (AnchorPane) FXMLLoader.load(getClass().getResource("overviewFlights.fxml"));
-            panelToUpdate.getChildren().setAll(pane);
-      
-      
-        } catch (IOException ex) {
-        Logger.getLogger(startWindowController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    
+    public boolean getIntermediateStopsAllowed(){
+        return intermediateStopsAllowedCheck.isSelected();
+    }
+    
+    public String getSortBy(){
+        return sortByChoice.getValue().toString();
     }
     
     
+    private ArrayList<Flight> filterdFlights;
+
+    public ArrayList<Flight> getFilterdFlights() {
+        return filterdFlights;
+    }
+    
+    @FXML
+    private void searchFlight(ActionEvent event) {
+
+        try {
+            filterdFlights = model.searchFlight(getIntermediateStopsAllowed(), getSortBy());
+        } catch (DBException ex) {
+            Logger.getLogger(SearchFlightController.class.getName()).log(Level.SEVERE, null, ex);
+        }   
+    }
+
+    
+    // voor elke choicebox moet een lijst geïmporteerd worden. 
+    
+    private void addDataToChoiceBox(){
+        
     ObservableList list1 = FXCollections.observableArrayList();
     ObservableList list2 = FXCollections.observableArrayList();
     ObservableList list3 = FXCollections.observableArrayList();
@@ -143,16 +142,7 @@ public class SearchFlightController implements Initializable {
     ObservableList list5 = FXCollections.observableArrayList();
     ObservableList list6 = FXCollections.observableArrayList();
     
-    // voor elke choicebox moet een lijst geïmporteerd worden. 
-    
-    private void addDataToChoiceBox(){
-      ArrayList<Airport> test = new ArrayList<>();
-      ObservableList list1 = FXCollections.observableArrayList(new ArrayList<String>());
-    ObservableList list2 = FXCollections.observableArrayList();
-    ObservableList list3 = FXCollections.observableArrayList();
-    ObservableList list4 = FXCollections.observableArrayList();
-    ObservableList list5 = FXCollections.observableArrayList();
-    ObservableList list6 = FXCollections.observableArrayList();
+    ArrayList<Airport> test = new ArrayList<>();
     
       try {
           test = getAirports();
