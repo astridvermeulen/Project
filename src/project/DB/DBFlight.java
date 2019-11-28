@@ -7,12 +7,10 @@ package project.DB;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import project.LOGIC.Booking;
 import project.LOGIC.Flight;
 import project.LOGIC.FlightLeg;
 
