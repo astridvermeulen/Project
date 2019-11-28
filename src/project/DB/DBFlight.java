@@ -72,6 +72,7 @@ public class DBFlight {
       throw new DBException(ex);
     }
     }
+     
     
 private static ArrayList <Flight> getFlightsPerCustomer(String passportNumber) throws DBException { //PER CUSTOMER ALLE GEBOEKTE VLUCHTEN RETOURNERE?
         Connection con = null;
@@ -128,8 +129,61 @@ private static ArrayList <Flight> getFlightsPerCustomer(String passportNumber) t
     return vlucht; 
          
     }
+private static Flight getFlightsForBooking(int bookingNumber) throws DBException { //RETURNS A FLIGHT GIVEN A BOOKINGNUMBER
+       Connection con = null;
+                      
+                          
+      try {
+      con = DBConnection.getConnection();
+      Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+      
+      String sql = "SELECT * FROM flight AS f " + 
+                   "INNER JOIN booking AS b " +
+                   "WHERE b.flightNumber = f.flightNumber AND b.departureDate = f.departureDate " +
+                   "AND b.bookingNumber = " + bookingNumber;
+      
+      ResultSet srs = stmt.executeQuery(sql);
      
-    
+      //werken let LocalDate en LocalTime? zie slide 20 tips project database!!
+      String flightNumber, origin, destination, airlineCode;
+      int departureDate;
+      double price;      
+      int arrivalDate, arrivalTime, departureTime;  
+      ArrayList<FlightLeg> legs = new ArrayList<>();
+          
+      
+      if(srs.next()) {
+          flightNumber = srs.getString("flightNumber");
+          departureDate = srs.getInt("departureDate");
+          departureTime = srs.getInt("departureTime");
+          arrivalDate = srs.getInt("arrivalDate");
+          arrivalTime = srs.getInt("arrivalTime");
+          price = srs.getDouble("price");
+          origin = srs.getString("origin");
+          destination = srs.getString("destination");
+          airlineCode = srs.getString("airlineCode");
+          legs = null;
+          
+	}
+       else {// we verwachten slechts 1 rij...
+	DBConnection.closeConnection(con);
+	return null;
+      }
+     
+      Flight vlucht = new Flight(legs, destination, origin, flightNumber, price, departureDate, arrivalDate, departureTime, arrivalTime);
+      DBConnection.closeConnection(con);      
+      return vlucht;
+      
+    }
+    catch (Exception ex) {
+      ex.printStackTrace();
+      DBConnection.closeConnection(con);
+      throw new DBException(ex);
+    }
+}
+     
+
+
 public static ArrayList<Flight> getFlights() throws DBException {  // retourneert een arraylist van alle vluchten
    
     Connection con = null;
