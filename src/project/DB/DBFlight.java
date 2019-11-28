@@ -7,12 +7,10 @@ package project.DB;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import project.LOGIC.Booking;
 import project.LOGIC.Flight;
 import project.LOGIC.FlightLeg;
 
@@ -75,20 +73,11 @@ public class DBFlight {
     }
     }
     
-private static ArrayList <Flight> getFlightsPerCustomer(String passportNumber) throws DBException { //per customer alle geboekte vluchten weergeven 
+private static ArrayList <Flight> getFlightsPerCustomer(String passportNumber) throws DBException { //PER CUSTOMER ALLE GEBOEKTE VLUCHTEN RETOURNERE?
         Connection con = null;
-        ArrayList<Flight> vlucht = new ArrayList<>();
-        ArrayList<Booking> vl = new ArrayList<>();
-        int[] nm = new int[50];
-        
-        vl = getBookingsPerCustomer(passportNumber);
-        for(int i = 0; i < vl.size();i++){
-            nm[0] = vl.get(i).getBookingNumber();
-        }          
-            
-               
-        
-    try {
+        ArrayList<Flight> vlucht = new ArrayList<>();               
+                          
+      try {
       con = DBConnection.getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
