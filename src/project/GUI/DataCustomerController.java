@@ -20,18 +20,6 @@ import project.LOGIC.DomainController;
  */
 public class DataCustomerController implements Initializable {
 private DomainController model;
-
-@FXML
-    private TextField firstNameTxtfield;
-@FXML
-    private TextField lastNameTxtfield;
-@FXML
-    private TextField passportIDTxtfield;
-    
-    String firstName = firstNameTxtfield.getText();
-    String lastName = lastNameTxtfield.getText();
-    String passportID = passportIDTxtfield.getText();
-    
     @FXML
     private Label enterPersonalDataLbl;
     @FXML
@@ -40,6 +28,14 @@ private DomainController model;
     private Label lastNameLbl;
     @FXML
     private Label passportIDLbl;
+    @FXML
+    private Label test;
+
+
+    
+   
+    
+
     
 
     /**
@@ -47,7 +43,7 @@ private DomainController model;
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
     }    
     
 }
