@@ -76,20 +76,13 @@ public class Customer {
 
     //Method to delete a customer
     public void deleteCustomer(String passportNumber) throws DBException {
-        DBCustomer.deleteCustomer(passportNumber);//DataBoys nog dataType aanpassen 
+        DBCustomer.deleteCustomer(passportNumber);
     }
 
     //Method to get an overview of all the flights booked by a customer 
     public ArrayList<Flight> flightOverview() throws DBException {
-        ArrayList<Flight> flightsAll = DBFlight.getFlights();
-        ArrayList<Flight> flightsOfCustomer = new ArrayList<>();
-        /*for (Flight vlucht : flightsAll) {
-            if (!(vlucht.getFlightLegs().size() > 1)) {
-                flightsOfCustomer.add(vlucht);
-            }
-        }*/
-        return flightsOfCustomer;
-        
+        ArrayList<Flight> flightsOfCustomer = DBFlight.getFlightsPerCustomer(this.passportNumber);
+        return flightsOfCustomer;  
     }
     
 }
