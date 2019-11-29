@@ -6,6 +6,9 @@
 package project.LOGIC;
 
 import java.util.ArrayList;
+import project.DB.DBException;
+import project.DB.DBFlight;
+import project.DB.DBFlightLeg;
 
 /**
  *
@@ -25,7 +28,7 @@ public class Flight {
     private int arrivalTime;
     private int duration;
 
-    public Flight(ArrayList<FlightLeg> flightLegs, String destination, String origin, String flightNumber, double price, int departureDate, int arrivalDate, int departureTime, int arrivalTime) {
+    public Flight(ArrayList<FlightLeg> flightLegs, String destination, String origin, String flightNumber, double price, int departureDate, int arrivalDate, int departureTime, int arrivalTime) throws DBException {
         this.flightLegs = flightLegs;
         this.destination = destination;
         this.origin = origin;
@@ -90,9 +93,13 @@ public class Flight {
         return dur;
     }
     
-    public double calculateEmission(){
-        double em = 0;
-        //DBFlight.getEmission(); //dataBoys moeten dit nog schrijven, dan gelijk zetten aan em 
+    public double calculateEmission() throws DBException{
+        double em = DBFlight.getEmission(this.flightNumber, this.departureDate);//dataBoys moeten dit nog schrijven, dan gelijk zetten aan em 
         return em;
     }
+    
+    /*public ArrayList<FlightLeg> void flightLegs(){
+        ArrayList<FlightLeg> flightLegs;
+                return flightLegs;
+    }*/
 }

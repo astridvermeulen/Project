@@ -6,13 +6,21 @@
 package project.GUI;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import project.DB.DBException;
 import project.LOGIC.DomainController;
 import static project.LOGIC.DomainController.domainController;
+import project.LOGIC.Flight;
+import project.LOGIC.FlightLeg;
 
 /**
  * FXML Controller class
@@ -43,6 +51,8 @@ public class OverviewFlightsController implements Initializable {
     private TableColumn<?, ?> destinationTimeColumn;
     @FXML
     private TableColumn<?, ?> durationColumn;
+    
+    private TableView<Flight> flightsTableView;
 
     /**
      * Initializes the controller class.
@@ -50,6 +60,24 @@ public class OverviewFlightsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         model=domainController.getInstance(); 
+        //flightsTableView.setItems(getFlights());
+        //we zetten allemaal flights in ons programma door de methode searchFlight op de roepen en nu halen we de waarden eruit
+        
+        
     }    
+    
+    SearchFlightController zoekVlucht = new SearchFlightController();
+    
+    public ObservableList<Flight> getFlights(){
+        ObservableList<Flight> flights = FXCollections.observableArrayList();
+        
+        for(Flight f: zoekVlucht.getFilterdFlights()){
+                flights.add(f);
+            }
+        
+        return flights;
+    }
+    
+    
     
 }

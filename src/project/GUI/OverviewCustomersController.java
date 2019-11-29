@@ -18,6 +18,8 @@ import project.LOGIC.DomainController;
  * @author eliseverschelde
  */
 public class OverviewCustomersController implements Initializable {
+    
+    // bekijk: https://www.youtube.com/watch?v=uz2sWCnTq6E
 private DomainController model;
     @FXML
     private TableColumn<?, ?> firstNameColumn;
