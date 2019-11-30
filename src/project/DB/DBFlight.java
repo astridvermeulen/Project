@@ -96,12 +96,7 @@ public static ArrayList <Flight> getFlightsPerCustomer(String passportNumber) th
      
       //werken let LocalDate en LocalTime? zie slide 20 tips project database!!
       String flightNumber, origin, destination, airlineName,departureDate, arrivalDate, arrivalTime, departureTime;
-      
       double price;
-      
-
-         
-      
       while (srs.next()) {
           flightNumber = srs.getString("flightNumber");
           departureDate = srs.getString("departureDate");
@@ -151,8 +146,6 @@ public static Flight getFlightsForBooking(int bookingNumber) throws DBException 
       //werken let LocalDate en LocalTime? zie slide 20 tips project database!!
     String flightNumber, origin, destination, airlineName,departureDate, arrivalDate, arrivalTime, departureTime;
     double price;
-      ArrayList<FlightLeg> legs = new ArrayList<>();
-          
       
       if(srs.next()) {
           flightNumber = srs.getString("flightNumber");
@@ -164,18 +157,17 @@ public static Flight getFlightsForBooking(int bookingNumber) throws DBException 
           origin = srs.getString("origin");
           destination = srs.getString("destination");
           airlineName = srs.getString("airlineName");
-          legs = null;
-          
+                   
 	}
        else {// we verwachten slechts 1 rij...
 	DBConnection.closeConnection(con);
 	return null;
       }
      
-      //Flight vlucht = new Flight(legs, destination, origin, flightNumber, price, departureDate, arrivalDate, departureTime, arrivalTime);
+      Flight vlucht = new Flight(airlineName, origin, destination, departureDate, departureTime, arrivalDate, arrivalTime, flightNumber, price);
       DBConnection.closeConnection(con);      
-      //return vlucht;
-      return null;
+      return vlucht;
+      
     }
     catch (Exception ex) {
       ex.printStackTrace();
