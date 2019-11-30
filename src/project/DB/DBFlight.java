@@ -249,6 +249,7 @@ public static ArrayList<Flight> getFlights() throws DBException {  // retourneer
 
     
     }
+}
 
 
     

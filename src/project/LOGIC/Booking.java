@@ -21,7 +21,7 @@ public class Booking {
     public Booking(int bookingNumber) throws DBException {
         this.bookingNumber = bookingNumber;
         this.bookingDate = LocalDate.now();
-        this.serviceFee = serviceFeeProcent * DBFlight.getFlightsForBooking(bookingNumber).getPrice();
+        this.serviceFee = serviceFeeProcent * DBFlight.getFlightForBooking(bookingNumber).getPrice();
         this.promotion = calculatePromotion(); // 
     }
 
@@ -49,9 +49,9 @@ public class Booking {
     public double calculatePromotion() throws DBException {
         double promotion = 0.0;
         Duration verschil;
-        verschil = Duration.between(DBFlight.getFlightsForBooking(bookingNumber).getDepartureDate(), this.bookingDate);
+        verschil = Duration.between(DBFlight.getFlightForBooking(bookingNumber).getDepartureDate(), this.bookingDate);
         if (verschil.toDays() > 180 || verschil.toDays() < 20) {
-            promotion = DBFlight.getFlightsForBooking(bookingNumber).getPrice() * 0.10;
+            promotion = DBFlight.getFlightForBooking(bookingNumber).getPrice() * 0.10;
         }
         return promotion;
     }
@@ -68,7 +68,7 @@ public class Booking {
     //Method to calculate the net price of a flight 
     public double calculateNetPrice() throws DBException {
         double netPrice = 0.0;
-        netPrice = this.serviceFee - this.promotion + DBFlight.getFlightsForBooking(bookingNumber).getPrice();
+        netPrice = this.serviceFee - this.promotion + DBFlight.getFlightForBooking(bookingNumber).getPrice();
         return netPrice;
     }
 }
