@@ -21,11 +21,7 @@ import project.LOGIC.FlightLeg;
  */
 public class DBFlight {
     
-
-     // retourneert 1 vlucht
-
      // retourneert 1 vlucht, getest en goedgekeurd.
-
      public static Flight getFlight(String flightNumber, String departureDate) throws DBException, SQLException {
         Connection con = null;
     try {
@@ -127,10 +123,7 @@ public static ArrayList <Flight> getFlightsPerCustomer(String passportNumber) th
      
          
     }
-
-public static Flight getFlightsForBooking(int bookingNumber) throws DBException { //RETURNS A FLIGHT GIVEN A BOOKINGNUMBER
-
-
+public static Flight getFlightForBooking(int bookingNumber) throws DBException { //RETURNS A FLIGHT GIVEN A BOOKINGNUMBER getest en goedgekeurd.
        Connection con = null;                   
                           
       try {
@@ -241,28 +234,17 @@ public static ArrayList<Flight> getFlights() throws DBException {  // retourneer
     }
     
     public static void main(String[] args) throws DBException, SQLException{
-
-     String num, date;
-     num = "LU0945";
-     date = "2019-01-19";
-     
-     Flight test;
-     test = getFlight(num, date);
-     System.out.println(test);
-     
-
-    //ArrayList<Flight> test = new ArrayList<>();
+    ArrayList<Flight> test = new ArrayList<>();
     String x = "BE1207";
     
-        //try {
-            //test = getFlightsPerCustomer(x);
-            //int size = test.size();
-          //for(int position = 0; position < size; position++)
-              //System.out.println(test.get(position).getFlightNumber() + " " + test.get(position).getDepartureDate() + " " + test.get(position).getArrivalDate());
-    //} catch (DBException ex) {
-      //Logger.getLogger(DBAirport.class.getName()).log(Level.SEVERE, null, ex);
+        try {
+            test = getFlightsPerCustomer(x);
+            int size = test.size();
+          for(int position = 0; position < size; position++)
+              System.out.println(test.get(position).getFlightNumber() + " " + test.get(position).getDepartureDate() + " " + test.get(position).getArrivalDate());
+    } catch (DBException ex) {
+      Logger.getLogger(DBAirport.class.getName()).log(Level.SEVERE, null, ex);
     }
-
 
 
     
