@@ -5,6 +5,9 @@
  */
 package project.LOGIC;
 
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import project.DB.DBException;
 import project.DB.DBFlight;
@@ -16,34 +19,34 @@ import project.DB.DBFlightLeg;
  */
 public class Flight {
 
-    private ArrayList<FlightLeg> flightLegs;
-    private String destination;
+    private String airline;
     private String origin;
+    private String destination;
+    private LocalDate departureDate;
+    private LocalTime departureTime;
+    private LocalDate arrivalDate;
+    private LocalTime arrivalTime;
     private String flightNumber;
-    private double emission;
     private double price;
-    private int departureDate;
-    private int arrivalDate;
-    private int departureTime;
-    private int arrivalTime;
-    private int duration;
+    private ArrayList<FlightLeg> flightLegs;
+    private double emission;
+    private Duration duration;
 
-    public Flight(ArrayList<FlightLeg> flightLegs, String destination, String origin, String flightNumber, double price, int departureDate, int arrivalDate, int departureTime, int arrivalTime) throws DBException {
-        this.flightLegs = flightLegs;
-        this.destination = destination;
+    public Flight(String airline, String origin, String destination, LocalDate departureDate, LocalTime departureTime, LocalDate arrivalDate, LocalTime arrivalTime, String flightNumber, double price) throws DBException {
+        // this.airline = DBFlight.airportPerFlight;// databoyst moeten deze nog maken 
         this.origin = origin;
-        this.flightNumber = flightNumber;
-        this.emission = this.calculateEmission();
-        this.price = price;
+        this.destination = destination;
         this.departureDate = departureDate;
-        this.arrivalDate = arrivalDate;
         this.departureTime = departureTime;
+        this.arrivalDate = arrivalDate;
         this.arrivalTime = arrivalTime;
+        this.flightNumber = flightNumber;
+        this.price = price;
+        // this.flightLegs = this.getFlightLegsDB();// databoyst moeten deze nog maken 
+        this.emission = this.calculateEmission();
         this.duration = this.calculateDuration();
     }
 
-   
-    
     public ArrayList<FlightLeg> getFlightLegs() {
         return flightLegs;
     }
@@ -68,37 +71,42 @@ public class Flight {
         return price;
     }
 
-    public int getDepartureDate() {
+    public LocalDate getDepartureDate() {
         return departureDate;
     }
 
-    public int getArrivalDate() {
+    public LocalDate getArrivalDate() {
         return arrivalDate;
     }
 
-    public int getDepartureTime() {
+    public LocalTime getDepartureTime() {
         return departureTime;
     }
 
-    public int getArrivalTime() {
+    public LocalTime getArrivalTime() {
         return arrivalTime;
     }
 
-    public int getDuration() {
+    public Duration getDuration() {
         return duration;
     }
-    
-    public int calculateDuration(){
-        int dur = arrivalTime - departureTime;
+
+    public Duration calculateDuration() {
+        Duration dur = Duration.between(departureTime, arrivalTime);
         return dur;
     }
-    
-    public double calculateEmission() throws DBException{
-        double em = DBFlight.getEmission(this.flightNumber, this.departureDate);//dataBoys moeten dit nog schrijven, dan gelijk zetten aan em 
+
+    public double calculateEmission() throws DBException {
+        double em = DBFlight.getEmission(this.flightNumber, this.departureDate);//dataBoys moeten int veranderen naar varchar 
         return em;
     }
-    
-    /*public ArrayList<FlightLeg> void flightLegs(){
+
+    public int numberOfLegs() {
+        int numberOfLegs = this.flightLegs.size();
+        return numberOfLegs;
+    }
+
+    /*public ArrayList<FlightLeg> void getFlightLegsDB()(){
         ArrayList<FlightLeg> flightLegs;
                 return flightLegs;
     }*/

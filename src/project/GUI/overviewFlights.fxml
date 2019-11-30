@@ -5,11 +5,11 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="450.0" prefWidth="676.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.GUI.OverviewFlightsController">
+<AnchorPane id="AnchorPane" prefHeight="450.0" prefWidth="2000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.GUI.OverviewFlightsController">
    <children>
-      <ScrollPane prefHeight="450.0" prefWidth="676.0">
+      <ScrollPane prefHeight="450.0" prefWidth="700.0">
          <content>
-            <TableView prefHeight="450.0" prefWidth="676.0">
+            <TableView prefHeight="450.0" prefWidth="2000.0">
               <columns>
                 <TableColumn fx:id="airlineColumn" prefWidth="222.0" text="Airline" />
                   <TableColumn fx:id="flightNumberColumn" prefWidth="97.2962646484375" text="Flight number" />

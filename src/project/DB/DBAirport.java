@@ -154,7 +154,7 @@ public class DBAirport {
           for(int position = 0; position < size; position++)
               System.out.println(test.get(position).getAirportName());
     
-;
+
     } catch (DBException ex) {
       Logger.getLogger(DBAirport.class.getName()).log(Level.SEVERE, null, ex);
     }

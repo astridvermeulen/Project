@@ -5,6 +5,8 @@
  */
 package project.LOGIC;
 
+import project.DB.DBAirport;
+
 /**
  *
  * @author klaas
@@ -28,6 +30,9 @@ public class Airport {
     public String getAirportName() {
         return airportName;
     }
+    
+
+}
 
     // geen setters want je mag ze beiden niet meer kunnenn aanpassen?
-}
+

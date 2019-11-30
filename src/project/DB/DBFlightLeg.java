@@ -20,7 +20,7 @@ import project.LOGIC.FlightLeg;
  */
 public class DBFlightLeg {
      
-    private static FlightLeg getFlightLeg(String legNumber, String flightNumber, Date departureDate) throws DBException {
+    private static FlightLeg getFlightLeg(String legNumber, String flightNumber, String departureDate) throws DBException {
         Connection con = null;
     try {
       con = DBConnection.getConnection();
@@ -35,20 +35,21 @@ public class DBFlightLeg {
       ResultSet srs = stmt.executeQuery(sql);
      
       
-      String airportCode;
+      String originAirportCode, destinationAirportCode;
       
       if (srs.next()) {
           legNumber = srs.getString("legNumber");
           flightNumber = srs.getString("flightNumber");
-          departureDate = srs.getDate("departureDate");
-          airportCode = srs.getString("airportCode");
+          departureDate = srs.getString("departureDate");
+          originAirportCode = srs.getString("originAirportCode");
+          destinationAirportCode = srs.getString("destinationAirportCode");
 
 	} else {
 	DBConnection.closeConnection(con);
 	return null;
       }
       
-     // FlightLeg tussenvlucht = new FlightLeg(legNumber, flightNumber, departureDate, airportCode);
+     //FlightLeg tussenvlucht = new FlightLeg(legNumber, flightNumber, departureDate, originAirportCode,destinationAirportCode);
       DBConnection.closeConnection(con);
       //return tussenvlucht;
       return null;
@@ -61,7 +62,7 @@ public class DBFlightLeg {
     }
     }
     
-   /* public static ArrayList<FlightLeg> getFlightLegs(String flightNumber, int departureDate) throws SQLException, DBException{
+   /* public static ArrayList<FlightLeg> getFlightLegs(String flightNumber, String departureDate) throws SQLException, DBException{
         Connection con = null;
         ArrayList<FlightLeg> vluchtdeel = new ArrayList<>();               
         
@@ -75,14 +76,14 @@ public class DBFlightLeg {
       ResultSet srs = stmt.executeQuery(sql);
      
        int legNumber;
-       String airportCode1,airportCode2;
+       String originAirportCode, destinationAirportCode;
        
        while(srs.next()) {
           legNumber = srs.getInt("legNumber");
           flightNumber = srs.getString("flightNumber");
-          departureDate = srs.getInt("departureDate");
-          airportCode1 = srs.getString("airportCodeOrigin");
-          airportCode2 = srs.getString("airportCodeDestination");
+          departureDate = srs.getString("departureDate");
+          originAirportCode = srs.getString("originAirportCode");
+          destinationAirportCode = srs.getString("destinationAirportCode");
           
          int i = 0;
          FlightLeg test = new FlightLeg(legNumber, airportCode1, airportCode2 , departureDate);
