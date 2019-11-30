@@ -59,7 +59,7 @@ public class startWindowController implements Initializable {
         model=domainController.getInstance();    
     }
     
-
+//
     // de volgende methodes updaten telkens een nieuwe panel zodat we naar een volgend "blad" gaan. 
 
     @FXML

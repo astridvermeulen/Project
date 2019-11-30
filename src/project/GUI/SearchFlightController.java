@@ -35,7 +35,7 @@ import project.LOGIC.Flight;
  */
 public class SearchFlightController implements Initializable {
     private DomainController model;
-    private ArrayList<Flight> filterdFlights;
+    private ArrayList<Flight> filteredFlights;
 
     @FXML
     private Label fromLbl;
@@ -122,15 +122,15 @@ public class SearchFlightController implements Initializable {
     }
 
 
-    public ArrayList<Flight> getFilterdFlights() {
-        return filterdFlights;
+    public ArrayList<Flight> getFilteredFlights() {
+        return filteredFlights;
     }
     
     @FXML
     private void searchFlight(ActionEvent event) {
 
         try {
-            filterdFlights = model.searchFlight(getIntermediateStopsAllowed(), getSortBy());
+            filteredFlights = model.searchFlight(getIntermediateStopsAllowed(), getSortBy());
         } catch (DBException ex) {
             Logger.getLogger(SearchFlightController.class.getName()).log(Level.SEVERE, null, ex);
         }   

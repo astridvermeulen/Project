@@ -71,7 +71,7 @@ public class OverviewFlightsController implements Initializable {
     public ObservableList<Flight> getFlights(){
         ObservableList<Flight> flights = FXCollections.observableArrayList();
         
-        for(Flight f: zoekVlucht.getFilterdFlights()){
+        for(Flight f: zoekVlucht.getFilteredFlights()){
                 flights.add(f);
             }
         
