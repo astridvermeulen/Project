@@ -38,21 +38,23 @@ public class OverviewFlightsController implements Initializable {
     @FXML
     private TableColumn<?, ?> priceColumn;
     @FXML
-    private TableColumn<?, ?> emissionColumn;
-    @FXML
-    private TableColumn<?, ?> flightLegColumn;
-    @FXML
     private TableColumn<?, ?> originAirportColumn;
     @FXML
     private TableColumn<?, ?> destinationAirportColumn;
     @FXML
     private TableColumn<?, ?> departureTimeColumn;
     @FXML
-    private TableColumn<?, ?> destinationTimeColumn;
-    @FXML
     private TableColumn<?, ?> durationColumn;
     
     private TableView<Flight> flightsTableView;
+    @FXML
+    private TableColumn<?, ?> departureDayColumn;
+    @FXML
+    private TableColumn<?, ?> arrivalDayColumn;
+    @FXML
+    private TableColumn<?, ?> arrivalTimeColumn;
+    @FXML
+    private TableColumn<?, ?> numberOfFlightLegsColumn;
 
     /**
      * Initializes the controller class.
