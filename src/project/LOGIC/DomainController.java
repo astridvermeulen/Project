@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package project.LOGIC;
 
 import java.util.ArrayList;
@@ -12,10 +7,6 @@ import project.DB.DBCustomer;
 import project.DB.DBException;
 import project.DB.DBFlight;
 
-/**
- *
- * @author klaas
- */
 public class DomainController {
 
     public DomainController() {
@@ -55,11 +46,6 @@ public class DomainController {
         return customersAll;
     }
 
-    public String airportNames() throws DBException {
-        String airportName = "";
-        return airportName;
-    }
-    
     public ArrayList<String> airportsAlphabetic() throws DBException{
         ArrayList<Airport> airportsAll = DBAirport.getAirports();
         ArrayList<String> airportNames = new ArrayList();
