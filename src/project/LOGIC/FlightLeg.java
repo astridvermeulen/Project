@@ -5,6 +5,10 @@
  */
 package project.LOGIC;
 
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 /**
  *
  * @author klaas
@@ -14,20 +18,20 @@ public class FlightLeg {
     private int legNumber;
     private String legOrigin;
     private String legDestination;
-    private int departureDate;
-    private int arrivalDate;
-    private int departureTime;
-    private int arrivalTime;
-    private int duration;
+    private LocalDate departureDate;
+    private LocalDate arrivalDate;
+    private LocalTime departureTime;
+    private LocalTime arrivalTime;
+    private Duration duration;
 
-    public FlightLeg(int legNumber, String legOrigin, String legDestination, int departureDate, int arrivalDate, int departureTime, int arrivalTime) {
+    public FlightLeg(int legNumber, String legOrigin, String legDestination, String departureDate, String arrivalDate, String departureTime, String arrivalTime) {
         this.legNumber = legNumber;
         this.legOrigin = legOrigin;
         this.legDestination = legDestination;
-        this.departureDate = departureDate;
-        this.arrivalDate = arrivalDate;
-        this.departureTime = departureTime;
-        this.arrivalTime = arrivalTime;
+        this.departureDate = LocalDate.parse(departureDate);
+        this.arrivalDate = LocalDate.parse(arrivalDate);
+        this.departureTime = LocalTime.parse(departureTime);
+        this.arrivalTime = LocalTime.parse(arrivalTime);
         this.duration = this.calculateDuration();
     }
 
@@ -43,28 +47,28 @@ public class FlightLeg {
         return legDestination;
     }
 
-    public int getDepartureDate() {
+    public LocalDate getDepartureDate() {
         return departureDate;
     }
 
-    public int getArrivalDate() {
+    public LocalDate getArrivalDate() {
         return arrivalDate;
     }
 
-    public int getDepartureTime() {
+    public LocalTime getDepartureTime() {
         return departureTime;
     }
 
-    public int getArrivalTime() {
+    public LocalTime getArrivalTime() {
         return arrivalTime;
     }
 
-    public int getDuration() {
+    public Duration getDuration() {
         return duration;
     }
     
-    public int calculateDuration() {
-        int dur = arrivalTime - departureTime;
+    public Duration calculateDuration() {
+        Duration dur = Duration.between(departureTime, arrivalTime);
         return dur;
     }
 
