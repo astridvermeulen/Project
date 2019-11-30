@@ -7,6 +7,7 @@ package project.DB;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -21,7 +22,7 @@ import project.LOGIC.FlightLeg;
 public class DBFlight {
     
      // retourneert 1 vlucht
-     public static Flight getFlight(String flightNumber, String departureDate) throws DBException {
+     public static Flight getFlight(String flightNumber, String departureDate) throws DBException, SQLException {
         Connection con = null;
     try {
       con = DBConnection.getConnection();
@@ -30,12 +31,12 @@ public class DBFlight {
       String sql = "SELECT flightNumber, departureDate, departureTime, arrivalDate, arrivalTime, price, origin, destination, airlineCode "
 	+ "FROM db2019_18.flight "
 	+ "WHERE flightNumber = '" + flightNumber + "'"
-        + " AND departureDate = " + departureDate;
+        + " AND departureDate = '" + departureDate + "'";
 
       ResultSet srs = stmt.executeQuery(sql);
      
       //werken let LocalDate en LocalTime? zie slide 20 tips project database!!
-      String origin, destination, airlineCode, arrivalDate, arrivalTime, departureTime;
+      String origin, destination, airlineCode, arrivalDate, arrivalTime, departureTime, airlineName;
       double price;
        
       
@@ -49,20 +50,46 @@ public class DBFlight {
           origin = srs.getString("origin");
           destination = srs.getString("destination");
           airlineCode = srs.getString("airlineCode");
-                    
-	} else {// we verwachten slechts 1 rij...
+          
+          try {
+      con = DBConnection.getConnection();
+      Statement stmt2 = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+      
+      String sql2 = "SELECT airlineName "
+	+ "FROM db2019_18.airline "
+	+ "WHERE airlineCode = '" + airlineCode + "'";       
+
+      ResultSet srs2 = stmt.executeQuery(sql2);   
+      
+      if(srs2.next()){
+          airlineName = srs.getString("airlineName");
+      }
+      else{
+          DBConnection.closeConnection(con);
+          return null;
+      
+      }
+          
+      }    
+	          
+        catch (Exception ex) {
+      ex.printStackTrace();
+      DBConnection.closeConnection(con);
+      throw new DBException(ex);
+    }
+      }
+          
+    else {// we verwachten slechts 1 rij...
 	DBConnection.closeConnection(con);
 	return null;
       }
-      ArrayList<FlightLeg> legs = new ArrayList<>();
-      legs = null;
       
       
       //aantal flightlegs moet er ook nog bij? 
-     Flight vlucht = new Flight(legs, destination, origin, flightNumber, price, departureDate, arrivalDate, departureTime, arrivalTime);
+     //Flight vlucht = new Flight(airlineName, origin, destination, departureDate, departureTime, arrivalDate, arrivalTime, flightNumber, price);
       DBConnection.closeConnection(con);
-      return vlucht;
-       
+      //return vlucht;
+      return null; 
     }
     
     catch (Exception ex) {
@@ -107,13 +134,11 @@ public static ArrayList <Flight> getFlightsPerCustomer(String passportNumber) th
           origin = srs.getString("origin");
           destination = srs.getString("destination");
           airlineCode = srs.getString("airlineCode");
-          ArrayList<FlightLeg> legs = new ArrayList<>();
-          legs = null;
           
     
          int i = 0;
-         Flight test = new Flight(legs, destination, origin, flightNumber, price, departureDate, arrivalDate, departureTime, arrivalTime);
-         vlucht.add(i, test);
+         //Flight test = new Flight(airlineName, origin, destination, departureDate, departureTime, arrivalDate, arrivalTime, flightNumber, price);
+         //vlucht.add(i, test);
          i++;              
          DBConnection.closeConnection(con);      
          
@@ -167,10 +192,10 @@ public static Flight getFlightsForBooking(int bookingNumber) throws DBException 
 	return null;
       }
      
-      Flight vlucht = new Flight(legs, destination, origin, flightNumber, price, departureDate, arrivalDate, departureTime, arrivalTime);
+      //Flight vlucht = new Flight(legs, destination, origin, flightNumber, price, departureDate, arrivalDate, departureTime, arrivalTime);
       DBConnection.closeConnection(con);      
-      return vlucht;
-      
+      //return vlucht;
+      return null;
     }
     catch (Exception ex) {
       ex.printStackTrace();
