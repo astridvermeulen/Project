@@ -93,7 +93,6 @@ public class Flight {
     public double calculateEmission() throws DBException {
         double em = DBFlight.getEmission(this.flightNumber, this.departureDate.toString());
         //dataBoys moeten int veranderen naar varchar 
-        double em = DBFlight.getEmission(this.flightNumber, this.departureDate);//dataBoys moeten int veranderen naar varchar 
         return em;
     }
 
