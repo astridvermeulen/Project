@@ -18,21 +18,21 @@ public class FlightLeg {
     private int legNumber;
     private String legOrigin;
     private String legDestination;
-    private LocalDate departureDate;
-    private LocalDate arrivalDate;
-    private LocalTime departureTime;
-    private LocalTime arrivalTime;
-    private Duration duration;
+    private LocalDate legDepartureDate;
+    private LocalDate legArrivalDate;
+    private LocalTime legDepartureTime;
+    private LocalTime legArrivalTime;
+    private Duration legDuration;
 
     public FlightLeg(int legNumber, String legOrigin, String legDestination, String departureDate, String arrivalDate, String departureTime, String arrivalTime) {
         this.legNumber = legNumber;
         this.legOrigin = legOrigin;
         this.legDestination = legDestination;
-        this.departureDate = LocalDate.parse(departureDate);
-        this.arrivalDate = LocalDate.parse(arrivalDate);
-        this.departureTime = LocalTime.parse(departureTime);
-        this.arrivalTime = LocalTime.parse(arrivalTime);
-        this.duration = this.calculateDuration();
+        this.legDepartureDate = LocalDate.parse(departureDate);
+        this.legArrivalDate = LocalDate.parse(arrivalDate);
+        this.legDepartureTime = LocalTime.parse(departureTime);
+        this.legArrivalTime = LocalTime.parse(arrivalTime);
+        this.legDuration = this.calculateDuration();
     }
 
     public int getLegNumber() {
@@ -48,27 +48,27 @@ public class FlightLeg {
     }
 
     public LocalDate getDepartureDate() {
-        return departureDate;
+        return legDepartureDate;
     }
 
     public LocalDate getArrivalDate() {
-        return arrivalDate;
+        return legArrivalDate;
     }
 
     public LocalTime getDepartureTime() {
-        return departureTime;
+        return legDepartureTime;
     }
 
     public LocalTime getArrivalTime() {
-        return arrivalTime;
+        return legArrivalTime;
     }
 
     public Duration getDuration() {
-        return duration;
+        return legDuration;
     }
     
     public Duration calculateDuration() {
-        Duration dur = Duration.between(departureTime, arrivalTime);
+        Duration dur = Duration.between(legDepartureTime, legArrivalTime);
         return dur;
     }
 
