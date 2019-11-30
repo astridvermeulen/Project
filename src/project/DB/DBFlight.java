@@ -38,8 +38,7 @@ public class DBFlight {
 
       ResultSet srs = stmt.executeQuery(sql);
      
-      //werken let LocalDate en LocalTime? zie slide 20 tips project database!!
-      String origin, destination, airlineCode, arrivalDate, arrivalTime, departureTime, airlineName;
+      String origin, destination, arrivalDate, arrivalTime, departureTime, airlineName;
       double price;
        
       
@@ -59,9 +58,6 @@ public class DBFlight {
 	DBConnection.closeConnection(con);
 	return null;
       }
-      
-      
-      //aantal flightlegs moet er ook nog bij? 
      Flight vlucht = new Flight(airlineName, origin, destination, departureDate, departureTime, arrivalDate, arrivalTime, flightNumber, price);
       DBConnection.closeConnection(con);
       return vlucht;
@@ -127,8 +123,7 @@ public static ArrayList <Flight> getFlightsPerCustomer(String passportNumber) th
          
     }
 public static Flight getFlightsForBooking(int bookingNumber) throws DBException { //RETURNS A FLIGHT GIVEN A BOOKINGNUMBER
-       Connection con = null;
-                      
+       Connection con = null;                   
                           
       try {
       con = DBConnection.getConnection();
@@ -237,20 +232,16 @@ public static ArrayList<Flight> getFlights() throws DBException {  // retourneer
     
     }
     
-    public static void main(String[] args) throws DBException{
-        String x = "BE1207";
-        ArrayList<Flight> test = new ArrayList<>();
-        
-        try {
-            test = getFlightsPerCustomer(x);
-            int size = test.size();
-          for(int position = 0; position < size; position++)
-              System.out.println(test.get(position).getFlightNumber());
+    public static void main(String[] args) throws DBException, SQLException{
+     String num, date;
+     num = "LU0945";
+     date = "2019-01-19";
+     
+     Flight test;
+     test = getFlight(num, date);
+     System.out.println(test);
+     
     
-;
-    } catch (DBException ex) {
-      Logger.getLogger(DBAirport.class.getName()).log(Level.SEVERE, null, ex);
-    }
     }
 }
 
