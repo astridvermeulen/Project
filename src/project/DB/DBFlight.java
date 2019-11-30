@@ -21,7 +21,11 @@ import project.LOGIC.FlightLeg;
  */
 public class DBFlight {
     
+
      // retourneert 1 vlucht
+
+     // retourneert 1 vlucht, getest en goedgekeurd.
+
      public static Flight getFlight(String flightNumber, String departureDate) throws DBException, SQLException {
         Connection con = null;
     try {
@@ -72,7 +76,7 @@ public class DBFlight {
     }
      
     
-public static ArrayList <Flight> getFlightsPerCustomer(String passportNumber) throws DBException { //PER CUSTOMER ALLE GEBOEKTE VLUCHTEN RETOURNERE?
+public static ArrayList <Flight> getFlightsPerCustomer(String passportNumber) throws DBException { //PER CUSTOMER ALLE GEBOEKTE VLUCHTEN RETOURNEREN getest en goedgekeurd.
         Connection con = null;
         ArrayList<Flight> vlucht = new ArrayList<>();               
                           
@@ -109,20 +113,24 @@ public static ArrayList <Flight> getFlightsPerCustomer(String passportNumber) th
          Flight test = new Flight(airlineName, origin, destination, departureDate, departureTime, arrivalDate, arrivalTime, flightNumber, price);
          vlucht.add(i, test);
          i++;              
-         DBConnection.closeConnection(con);      
          
 	}
       
+      DBConnection.closeConnection(con);
+      return vlucht;
     }
     catch (Exception ex) {
       ex.printStackTrace();
       DBConnection.closeConnection(con);
       throw new DBException(ex);
     }
-    return vlucht; 
+     
          
     }
+
 public static Flight getFlightsForBooking(int bookingNumber) throws DBException { //RETURNS A FLIGHT GIVEN A BOOKINGNUMBER
+
+
        Connection con = null;                   
                           
       try {
@@ -173,7 +181,7 @@ public static Flight getFlightsForBooking(int bookingNumber) throws DBException 
      
 
 
-public static ArrayList<Flight> getFlights() throws DBException {  // retourneert een arraylist van alle vluchten
+public static ArrayList<Flight> getFlights() throws DBException {  // retourneert een arraylist van alle vluchten getest en goedgekeurd.
    
     Connection con = null;
     try {
@@ -233,6 +241,7 @@ public static ArrayList<Flight> getFlights() throws DBException {  // retourneer
     }
     
     public static void main(String[] args) throws DBException, SQLException{
+
      String num, date;
      num = "LU0945";
      date = "2019-01-19";
@@ -241,9 +250,24 @@ public static ArrayList<Flight> getFlights() throws DBException {  // retourneer
      test = getFlight(num, date);
      System.out.println(test);
      
+
+    //ArrayList<Flight> test = new ArrayList<>();
+    String x = "BE1207";
+    
+        //try {
+            //test = getFlightsPerCustomer(x);
+            //int size = test.size();
+          //for(int position = 0; position < size; position++)
+              //System.out.println(test.get(position).getFlightNumber() + " " + test.get(position).getDepartureDate() + " " + test.get(position).getArrivalDate());
+    //} catch (DBException ex) {
+      //Logger.getLogger(DBAirport.class.getName()).log(Level.SEVERE, null, ex);
+    }
+
+
+
     
     }
-}
+
 
     
 
