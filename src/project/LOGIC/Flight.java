@@ -29,7 +29,7 @@ public class Flight {
         // this.airline = DBFlight.airportPerFlight;// databoyst moeten deze nog maken 
         this.origin = origin;
         this.destination = destination;
-        this.duration = this.calculateDuration();
+        //this.duration = this.calculateDuration();
         this.departureDate = LocalDate.parse(departureDate);
         this.departureTime = LocalTime.parse(departureTime);
         this.arrivalDate = LocalDate.parse(arrivalDate);
