@@ -239,7 +239,7 @@ public static ArrayList<Flight> getFlights() throws DBException {  // retourneer
      
      Flight test;
      test = getFlight(num, date);
-     System.out.println(test);
+     System.out.println(test.getPrice());
      
     
     }
