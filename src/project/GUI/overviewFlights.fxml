@@ -5,14 +5,14 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="450.0" prefWidth="2000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.GUI.OverviewFlightsController">
-   <children>
-      <ScrollPane prefHeight="450.0" prefWidth="700.0">
-         <content>
-            <TableView prefHeight="450.0" prefWidth="2000.0">
-              <columns>
-                <TableColumn fx:id="airlineColumn" prefWidth="222.0" text="Airline" />
-                <TableColumn fx:id="originAirportColumn" minWidth="0.0" prefWidth="395.54254150390625" text="Origin airport" />
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.GUI.OverviewFlightsController">
+  <content>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="402.0" prefWidth="605.0">
+         <children>
+            <TableView prefHeight="450.0" prefWidth="2000.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <columns>
+                  <TableColumn fx:id="airlineColumn" prefWidth="222.0" text="Airline" />
+                  <TableColumn fx:id="originAirportColumn" minWidth="0.0" prefWidth="395.54254150390625" text="Origin airport" />
                   <TableColumn fx:id="destinationAirportColumn" prefWidth="397.45745849609375" text="Destination airport" />
                   <TableColumn fx:id="durationColumn" prefWidth="121.6864013671875" text="Duration" />
                   <TableColumn fx:id="departureDayColumn" prefWidth="75.0" text="Departure day" />
@@ -22,9 +22,8 @@
                   <TableColumn fx:id="flightNumberColumn" prefWidth="97.2962646484375" text="Flight number" />
                   <TableColumn fx:id="priceColumn" prefWidth="65.0186767578125" text="Price (€)" />
                   <TableColumn fx:id="numberOfFlightLegsColumn" prefWidth="75.0" text="Number of flight legs" />
-              </columns>
+               </columns>
             </TableView>
-         </content>
-      </ScrollPane>
-   </children>
-</AnchorPane>
+         </children></AnchorPane>
+  </content>
+</ScrollPane>

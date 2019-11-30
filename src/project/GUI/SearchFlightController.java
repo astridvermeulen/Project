@@ -36,6 +36,11 @@ import project.LOGIC.Flight;
 public class SearchFlightController implements Initializable {
     private DomainController model;
     private ArrayList<Flight> filteredFlights;
+    public String Emission;
+
+    public String getEmission() {
+        return Emission;
+    }
 
     @FXML
     private Label fromLbl;
@@ -121,7 +126,7 @@ public class SearchFlightController implements Initializable {
         }
     }
 
-
+    
     public ArrayList<Flight> getFilteredFlights() {
         return filteredFlights;
     }
@@ -184,7 +189,14 @@ public class SearchFlightController implements Initializable {
         amountOfPassengersChoice.getItems().addAll(list5);
         sortByChoice.getItems().addAll(list6);
         
+    }
+    public static void main(String[] args) throws DBException {
+       // ArrayList<Flight> list = new ArrayList<>();
         
+       // SearchFlightController object = new SearchFlightController();
+       // list = object.model.searchFlight(Boolean.TRUE, object.getEmission());
+        
+        //System.out.println(list);
     }
     
     
