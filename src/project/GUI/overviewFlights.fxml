@@ -12,15 +12,16 @@
             <TableView prefHeight="450.0" prefWidth="676.0">
               <columns>
                 <TableColumn fx:id="airlineColumn" prefWidth="222.0" text="Airline" />
-                  <TableColumn fx:id="flightNumberColumn" prefWidth="97.2962646484375" text="Flight number" />
-                  <TableColumn fx:id="priceColumn" prefWidth="65.0186767578125" text="Price (€)" />
-                  <TableColumn fx:id="emissionColumn" prefWidth="79.9813232421875" text="Emission" />
-                  <TableColumn fx:id="flightLegColumn" prefWidth="75.0" text="Flight leg" />
                 <TableColumn fx:id="originAirportColumn" minWidth="0.0" prefWidth="395.54254150390625" text="Origin airport" />
                   <TableColumn fx:id="destinationAirportColumn" prefWidth="397.45745849609375" text="Destination airport" />
-                  <TableColumn fx:id="departureTimeColumn" prefWidth="155.1177978515625" text="Departure time" />
-                  <TableColumn fx:id="destinationTimeColumn" prefWidth="137.431884765625" text="Destination time" />
                   <TableColumn fx:id="durationColumn" prefWidth="121.6864013671875" text="Duration" />
+                  <TableColumn fx:id="departureDayColumn" prefWidth="75.0" text="Departure day" />
+                  <TableColumn fx:id="departureTimeColumn" prefWidth="155.1177978515625" text="Departure time" />
+                  <TableColumn fx:id="arrivalDayColumn" prefWidth="75.0" text="Arrival day" />
+                  <TableColumn fx:id="arrivalTimeColumn" prefWidth="137.431884765625" text="Arrival time" />
+                  <TableColumn fx:id="flightNumberColumn" prefWidth="97.2962646484375" text="Flight number" />
+                  <TableColumn fx:id="priceColumn" prefWidth="65.0186767578125" text="Price (€)" />
+                  <TableColumn fx:id="numberOfFlightLegsColumn" prefWidth="75.0" text="Number of flight legs" />
               </columns>
             </TableView>
          </content>
