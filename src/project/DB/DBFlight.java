@@ -21,7 +21,7 @@ import project.LOGIC.FlightLeg;
 public class DBFlight {
     
      // retourneert 1 vlucht
-     public static Flight getFlight(String flightNumber, int departureDate) throws DBException {
+     public static Flight getFlight(String flightNumber, String departureDate) throws DBException {
         Connection con = null;
     try {
       con = DBConnection.getConnection();
@@ -35,17 +35,16 @@ public class DBFlight {
       ResultSet srs = stmt.executeQuery(sql);
      
       //werken let LocalDate en LocalTime? zie slide 20 tips project database!!
-      String origin, destination, airlineCode;
+      String origin, destination, airlineCode, arrivalDate, arrivalTime, departureTime;
       double price;
-      int arrivalDate, arrivalTime, departureTime;
        
       
       if (srs.next()) {
           flightNumber = srs.getString("flightNumber");
-          departureDate = srs.getInt("departureDate");
-          departureTime = srs.getInt("departureTime");
-          arrivalDate = srs.getInt("arrivalDate");
-          arrivalTime = srs.getInt("arrivalTime");
+          departureDate = srs.getString("departureDate");
+          departureTime = srs.getString("departureTime");
+          arrivalDate = srs.getString("arrivalDate");
+          arrivalTime = srs.getString("arrivalTime");
           price = srs.getDouble("price");
           origin = srs.getString("origin");
           destination = srs.getString("destination");
@@ -91,19 +90,19 @@ public static ArrayList <Flight> getFlightsPerCustomer(String passportNumber) th
       ResultSet srs = stmt.executeQuery(sql);
      
       //werken let LocalDate en LocalTime? zie slide 20 tips project database!!
-      String flightNumber, origin, destination, airlineCode;
-      int departureDate;
+      String flightNumber, origin, destination, airlineCode,departureDate, arrivalDate, arrivalTime, departureTime;
+      
       double price;
       
-      int arrivalDate, arrivalTime, departureTime;
+
          
       
       while (srs.next()) {
           flightNumber = srs.getString("flightNumber");
-          departureDate = srs.getInt("departureDate");
-          departureTime = srs.getInt("departureTime");
-          arrivalDate = srs.getInt("arrivalDate");
-          arrivalTime = srs.getInt("arrivalTime");
+          departureDate = srs.getString("departureDate");
+          departureTime = srs.getString("departureTime");
+          arrivalDate = srs.getString("arrivalDate");
+          arrivalTime = srs.getString("arrivalTime");
           price = srs.getDouble("price");
           origin = srs.getString("origin");
           destination = srs.getString("destination");
@@ -145,19 +144,17 @@ public static Flight getFlightsForBooking(int bookingNumber) throws DBException 
       ResultSet srs = stmt.executeQuery(sql);
      
       //werken let LocalDate en LocalTime? zie slide 20 tips project database!!
-      String flightNumber, origin, destination, airlineCode;
-      int departureDate;
-      double price;      
-      int arrivalDate, arrivalTime, departureTime;  
+    String flightNumber, origin, destination, airlineCode,departureDate, arrivalDate, arrivalTime, departureTime;
+    double price;
       ArrayList<FlightLeg> legs = new ArrayList<>();
           
       
       if(srs.next()) {
           flightNumber = srs.getString("flightNumber");
-          departureDate = srs.getInt("departureDate");
-          departureTime = srs.getInt("departureTime");
-          arrivalDate = srs.getInt("arrivalDate");
-          arrivalTime = srs.getInt("arrivalTime");
+          departureDate = srs.getString("departureDate");
+          departureTime = srs.getString("departureTime");
+          arrivalDate = srs.getString("arrivalDate");
+          arrivalTime = srs.getString("arrivalTime");
           price = srs.getDouble("price");
           origin = srs.getString("origin");
           destination = srs.getString("destination");
@@ -196,7 +193,7 @@ public static ArrayList<Flight> getFlights() throws DBException {  // retourneer
       ResultSet srs = stmt.executeQuery(sql);
       ArrayList<Flight> vluchten = new ArrayList<>();
       while (srs.next())
-        vluchten.add(getFlight(srs.getString("flightNumber"), srs.getInt("departureDate")));
+        vluchten.add(getFlight(srs.getString("flightNumber"), srs.getString("departureDate")));
       DBConnection.closeConnection(con);
       return vluchten;
     } catch (DBException dbe) {
@@ -209,14 +206,14 @@ public static ArrayList<Flight> getFlights() throws DBException {  // retourneer
       throw new DBException(ex);
     }
   }
-    public static double getEmission(String flightNumber, int departureDate) throws DBException{
+    public static double getEmission(String flightNumber, String departureDate) throws DBException{
          Connection con = null;
-         double CO2 = 0.0;
+         double co2 = 0.0;
     try {
       con = DBConnection.getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
-      String sql = "SELECT CO2 "
+      String sql = "SELECT co2 "
         + "FROM db2019_18.flight "
 	+ "WHERE flightNumber = '" + flightNumber + "'"
         + " AND departureDate = " + departureDate;
@@ -224,15 +221,15 @@ public static ArrayList<Flight> getFlights() throws DBException {  // retourneer
       ResultSet srs = stmt.executeQuery(sql);
 
       if (srs.next()) {
-           CO2 = srs.getDouble("C02");
+           co2 = srs.getDouble("co2");
 	}
       
       else {// we verwachten slechts 1 rij...
 	DBConnection.closeConnection(con);
-	return CO2;
+	return co2;
       }
       DBConnection.closeConnection(con);
-      return CO2;
+      return co2;
     }
     
     catch (Exception ex) {
