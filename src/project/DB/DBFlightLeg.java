@@ -29,7 +29,7 @@ public class DBFlightLeg {
       con = DBConnection.getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
-      String sql =  "SELECT fl.legNumber, fl.originAirportCode, fl.destinationAirportCode, fl.departureDate, f.arrivalDate, f.departureTime, f.arrivalTime " + 
+      String sql =  "SELECT fl.legNumber, fl.originAirportCode, fl.destinationAirportCode, fl.departureDate, fl.arrivalDate, fl.departureTime, fl.arrivalTime " + 
                     "FROM flight as f INNER JOIN flightleg AS fl " + 
                     "WHERE fl.legNumber = " + legNumber + " AND f.flightNumber = '" + flightNumber + "' " + 
                     "AND f.departureDate = '" + departureDate + "' " + 
@@ -66,7 +66,7 @@ public class DBFlightLeg {
       throw new DBException(ex);
     }
     }
-  
+  //getest en goedgekeurd!!! 
   public static ArrayList<FlightLeg> getFlightLegs(String flightNumber, String departureDate) throws SQLException, DBException{
         Connection con = null;
         ArrayList<FlightLeg> vluchtdeel = new ArrayList<>();               
@@ -77,7 +77,7 @@ public class DBFlightLeg {
       
       String sql =  "SELECT fl.legNumber, fl.originAirportCode, fl.destinationAirportCode, fl.departureDate, fl.arrivalDate, fl.departureTime, fl.arrivalTime " + 
                     "FROM flight as f INNER JOIN flightleg AS fl " + 
-                    "WHERE fl.departureDate = '" + departureDate + "' " + "AND fl.flightNumber = '" + flightNumber + "'";
+                    "WHERE f.departureDate = '" + departureDate + "' " + "AND f.flightNumber = '" + flightNumber + "'";
       ResultSet srs = stmt.executeQuery(sql);
      
        int legNumber;
@@ -120,7 +120,7 @@ public class DBFlightLeg {
             test = getFlightLegs(num, date);
             int size = test.size();
           for(int position = 0; position < size; position++)
-              System.out.println(test.get(position).getLegDestination());
+              System.out.println(test.get(position).getLegNumber() + test.get(position).getLegDestination());
     } catch (DBException ex) {
       Logger.getLogger(DBAirport.class.getName()).log(Level.SEVERE, null, ex);
     }
