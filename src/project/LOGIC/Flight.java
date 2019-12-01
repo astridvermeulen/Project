@@ -36,7 +36,7 @@ public class Flight {
         this.arrivalTime = LocalTime.parse(arrivalTime);
         this.flightNumber = flightNumber;
         this.price = price;
-        // this.flightLegs = this.getFlightLegsDB();// databoyst moeten deze nog maken 
+        this.flightLegs = this.getFlightLegs();// databoyst moeten deze nog maken 
         this.emission = this.calculateEmission();
     }
 
