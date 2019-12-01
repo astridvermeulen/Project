@@ -66,7 +66,7 @@ public class DBFlightLeg {
       throw new DBException(ex);
     }
     }
-  //niet goedgekeurd!!! 
+  
   public static ArrayList<FlightLeg> getFlightLegs(String flightNumber, String departureDate) throws SQLException, DBException{
         Connection con = null;
         ArrayList<FlightLeg> vluchtdeel = new ArrayList<>();               
@@ -75,7 +75,7 @@ public class DBFlightLeg {
       con = DBConnection.getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
-      String sql =  "SELECT fl.legNumber, fl.originAirportCode, fl.destinationAirportCode, fl.departureDate, f.arrivalDate, f.departureTime, f.arrivalTime " + 
+      String sql =  "SELECT fl.legNumber, fl.originAirportCode, fl.destinationAirportCode, fl.departureDate, fl.arrivalDate, fl.departureTime, fl.arrivalTime " + 
                     "FROM flight as f INNER JOIN flightleg AS fl " + 
                     "WHERE fl.departureDate = '" + departureDate + "' " + "AND fl.flightNumber = '" + flightNumber + "'";
       ResultSet srs = stmt.executeQuery(sql);
