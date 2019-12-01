@@ -1,34 +1,50 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package project.LOGIC;
 
-/**
- *
- * @author klaas
- */
+import java.util.ArrayList;
+import java.util.Collections;
+import project.DB.DBAirline;
+import project.DB.DBAirport;
+import project.DB.DBException;
+
 public class Airline {
 
-    private int airlineCode; // final hoe zat dat, buiten uw klasse defineren etc 
-    private String airlineName;
+    //Instance variables 
+    private final int airlineCode;
+    private final String airlineName;
 
+    //Constructor 
     public Airline(int airlineCode, String airlineName) {
         this.airlineCode = airlineCode;
         this.airlineName = airlineName;
     }
 
-    //Getter instance variable "airlineCode"
+    //Getters
     public int getAirlineCode() {
         return airlineCode;
     }
-    
-    //Getter instance variable "airlineName"
+
     public String getAirlineName() {
         return airlineName;
     }
 
-    // geen setters want je mag ze beiden niet meer kunnenn aanpassen?
+    //Method to save an airline
+    public static void saveAirline(Airline airline) throws DBException {
+        DBAirline.saveAirline(airline);
+    }
 
+    //Method to delete an airline
+    public static void deleteAirline(Airline airline) throws DBException {
+        DBAirline.deleteAirline(airline);
+    }
+
+    //Method to order the airports on alpabetic order 
+    public static ArrayList<String> airportsAlphabetic() throws DBException {
+        ArrayList<Airport> airportsAll = DBAirport.getAirports();
+        ArrayList<String> airportNames = new ArrayList();
+        for (int i = 0; i < airportsAll.size(); i++) {
+            airportNames.set(i, airportsAll.get(i).getAirportName());
+        }
+        Collections.sort(airportNames);
+        return airportNames;
+    }
 }
