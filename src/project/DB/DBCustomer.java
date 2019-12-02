@@ -195,15 +195,10 @@ public class DBCustomer {
     
     public static void main(String[] args) throws DBException {
       
-    ArrayList<Customer> test = new ArrayList<>();
+    Customer djanno = new Customer("DJ1208", "Djanno", "tje");
     
       try {
-          test = getCustomers();
-          int size = test.size();
-          for(int position = 0; position < size; position++)
-              System.out.println(test.get(position).getFirstName() + " " + test.get(position).getLastName() );
-    
-;
+saveCustomer(djanno);
     } catch (DBException ex) {
       Logger.getLogger(DBAirport.class.getName()).log(Level.SEVERE, null, ex);
     }

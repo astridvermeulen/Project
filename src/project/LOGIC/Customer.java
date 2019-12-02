@@ -18,7 +18,7 @@ public class Customer {
         this.passportNumber = passportNumber;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.homeCountry = this.calculateHomeCountry(); // halen uit passportName??
+        this.homeCountry = this.calculateHomeCountry(passportNumber); // halen uit passportName??
     }
 
     //Getters
@@ -49,13 +49,13 @@ public class Customer {
     }
 
     //Helping method to get the home country out of a passportnumber
-    private String calculateHomeCountry() {
-        String passportNumb = this.getPassportNumber();
+    private static String calculateHomeCountry(String passportNumb) {
+        
         String homeCount = "";
         for (int i = 0; i < passportNumb.length(); i++) {
-            String s = String.valueOf(homeCount.charAt(i));
+            String s = String.valueOf(passportNumb.charAt(i));
             if (!isInteger(s)) {
-                homeCount = homeCount + homeCount.charAt(i);
+                homeCount = homeCount + s;
             }
         }
         return homeCount;
@@ -81,5 +81,11 @@ public class Customer {
     public static ArrayList<Customer> customersOverview() throws DBException {
         ArrayList<Customer> customersAll = DBCustomer.getCustomers();
         return customersAll;
+    }
+    
+    public static void main(String[] args) {
+       String pass = "BE1207";
+        System.out.println(calculateHomeCountry(pass));
+        
     }
 }
