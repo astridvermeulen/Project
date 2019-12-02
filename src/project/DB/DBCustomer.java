@@ -149,49 +149,7 @@ public class DBCustomer {
     }
   }
      
-     /* public static ArrayList<CustomerOverview> getAllFlightsPerCustomer() throws DBException {
-        Connection con = null;     
-        ArrayList<CustomerOverview> test = new ArrayList<>();
-                          
-      try {
-      con = DBConnection.getConnection();
-      Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
-      
-      String sql =   "SELECT c.firstName, c.lastName, c.passportNumber, f.flightNumber, f.departureDate, f.origin, f.destination " + 
-                     "FROM customer AS c INNER JOIN booking AS b INNER JOIN execution AS e INNER JOIN flight as f " +
-                     "WHERE e.bookingNumber = b.bookingNumber AND e.passportNumber = c.passportNumber " + 
-                     "AND f.flightNumber = b.flightNumber AND f.departureDate = b.departureDate";
-
-      ResultSet srs = stmt.executeQuery(sql);
-     
-    String firstName, lastName, passportNumber, flightNumber, departureDate, origin, destination;
-      while(srs.next()) {
-          firstName = srs.getString("firstName");
-          lastName = srs.getString("lastName");
-          passportNumber = srs.getString("passportNumber");
-          flightNumber = srs.getString("flightNumber");
-          departureDate = srs.getString("departureDate");
-          origin = srs.getString("origin");
-          destination = srs.getString("destination");
-          
-         int i = 0;
-         CustomerOverview bla = new CustomerOverview(firstName, lastName, passportNumber, flightNumber, departureDate, origin, destination);
-         test.add(i, bla);
-         i++;
-	}
-       
-     
-      DBConnection.closeConnection(con);      
-      return test;
-      
-    }
-    catch (Exception ex) {
-      ex.printStackTrace();
-      DBConnection.closeConnection(con);
-      throw new DBException(ex);
-    }
-    }*/
-     
+    
     
     public static void main(String[] args) throws DBException {
       
