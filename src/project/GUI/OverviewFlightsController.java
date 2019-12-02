@@ -35,6 +35,7 @@ import project.LOGIC.FlightLeg;
 public class OverviewFlightsController implements Initializable {
     
     private DomainController model;
+    private SearchFlightController searchFlight;
 
     @FXML
     private TableColumn<Flight, String> airlineColumn;
@@ -81,8 +82,8 @@ public class OverviewFlightsController implements Initializable {
         priceColumn.setCellValueFactory(new PropertyValueFactory<Flight,Double>("price"));
         numberOfFlightLegsColumn.setCellValueFactory(new PropertyValueFactory<Flight,Integer>("getFlightLegs()"));
         
-        
         tableView.setItems(getFlights());
+        
         
         
     }    
@@ -91,9 +92,7 @@ public class OverviewFlightsController implements Initializable {
     
     public ObservableList<Flight> getFlights(){
         
-        SearchFlightController object = new SearchFlightController();
-        
-        ObservableList<Flight> flights = FXCollections.observableArrayList(object.getFilteredFlights());
+        ObservableList<Flight> flights = FXCollections.observableArrayList(searchFlight.getFilteredFlights());
         return flights;
         
         

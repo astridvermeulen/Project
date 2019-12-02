@@ -41,9 +41,6 @@ public class SearchFlightController implements Initializable {
     @FXML
     private DatePicker datePicker;
 
-    public SearchFlightController(){
-        this.filteredFlights = getFilteredFlights();
-    }
     public String getEmission() {
         return Emission;
     }

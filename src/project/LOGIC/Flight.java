@@ -39,6 +39,7 @@ public class Flight {
         this.price = price;
         this.flightLegs = DBFlightLeg.getFlightLegs(flightNumber, departureDate);
         this.emission = this.calculateEmission();
+        
     }
 
     //Getters
