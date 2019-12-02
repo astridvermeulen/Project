@@ -87,7 +87,7 @@ public class OverviewFlightsController implements Initializable {
         
     }    
     
-    SearchFlightController zoekVlucht = new SearchFlightController();
+    
     
     public ObservableList<Flight> getFlights(){
         

@@ -38,8 +38,8 @@ public class DBBooking {
       
       if (srs.next()) {
           bookingNumber = srs.getInt("bookingNumber");
-          //serviceFee = srs.getDouble("serviceFee");
-          //promotion = srs.getDouble("promotion");
+          serviceFee = srs.getDouble("serviceFee");
+          promotion = srs.getDouble("promotion");
           //flightNumber = srs.getString("flightNumber");
           //departureDate = srs.getDate("departureDate");
 	} 

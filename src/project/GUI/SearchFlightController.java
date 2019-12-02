@@ -188,7 +188,7 @@ public class SearchFlightController implements Initializable {
         
     }
     public static void main(String[] args) throws DBException {
-       ArrayList<Flight> list = new ArrayList<>();
+       
         
        SearchFlightController object = new SearchFlightController();
         System.out.println(object.model.searchFlight(Boolean.TRUE, "Emission", "Amsterdam-Schiphol", "" , "2019-01-19"));

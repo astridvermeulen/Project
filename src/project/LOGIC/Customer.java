@@ -84,7 +84,7 @@ public class Customer {
     }
     
     public static void main(String[] args) {
-       String pass = "BE1207";
+       String pass = "S1478";
         System.out.println(calculateHomeCountry(pass));
         
     }
