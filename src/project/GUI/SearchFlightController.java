@@ -191,7 +191,7 @@ public class SearchFlightController implements Initializable {
        ArrayList<Flight> list = new ArrayList<>();
         
        SearchFlightController object = new SearchFlightController();
-        System.out.println(object.model.searchFlight(Boolean.TRUE, "Emission", "Amsterdam-Schiphol", "Zaventem" , "2019-12-19"));
+        System.out.println(object.model.searchFlight(Boolean.TRUE, "Emission", "Amsterdam-Schiphol", "" , "2019-01-19"));
        
     }
     

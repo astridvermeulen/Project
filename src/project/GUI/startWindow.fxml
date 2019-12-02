@@ -6,7 +6,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="676.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.GUI.startWindowController">
    <children>
-      <SplitPane dividerPositions="0.06388206388206388" orientation="VERTICAL" prefHeight="450.0" prefWidth="676.0">
+      <SplitPane dividerPositions="0.06388206388206388" orientation="VERTICAL" prefHeight="450.0" prefWidth="676.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
@@ -18,7 +18,7 @@
                   <Button fx:id="salesReportBtn" layoutX="581.0" layoutY="-2.0" mnemonicParsing="false" onAction="#loadSalesReport" text="Sales report" />
                </children>
             </AnchorPane>
-          <AnchorPane fx:id="panelToUpdate" minHeight="0.0" minWidth="0.0" prefHeight="377.0" prefWidth="674.0" />
+          <AnchorPane fx:id="panelToUpdate" minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="674.0" />
         </items>
       </SplitPane>
    </children>

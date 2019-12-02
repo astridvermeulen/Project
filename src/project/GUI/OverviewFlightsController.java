@@ -17,6 +17,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -57,6 +58,10 @@ public class OverviewFlightsController implements Initializable {
     private TableColumn<Flight, LocalTime> arrivalTimeColumn;
     @FXML
     private TableColumn<Flight, Integer> numberOfFlightLegsColumn;
+    @FXML
+    private ScrollPane scrollPane;
+    @FXML
+    private TableView<Flight> tableView;
 
     /**
      * Initializes the controller class.
@@ -76,22 +81,23 @@ public class OverviewFlightsController implements Initializable {
         priceColumn.setCellValueFactory(new PropertyValueFactory<Flight,Double>("price"));
         numberOfFlightLegsColumn.setCellValueFactory(new PropertyValueFactory<Flight,Integer>("getFlightLegs()"));
         
-        //flightsTableView.setItems(model.);
+        
+        tableView.setItems(getFlights());
         
         
     }    
     
     SearchFlightController zoekVlucht = new SearchFlightController();
     
-    //public ObservableList<Flight> getFlights(){
+    public ObservableList<Flight> getFlights(){
         
-        //SearchFlightController object = new SearchFlightController();
-        //return object.getFilteredFlights();
-        //ObservableList<Flight> flights = FXCollections.observableArrayList(object.getFilteredFlights());
-        //return flights;
+        SearchFlightController object = new SearchFlightController();
+        
+        ObservableList<Flight> flights = FXCollections.observableArrayList(object.getFilteredFlights());
+        return flights;
         
         
-    //}
+    }
 
     /**
      *
