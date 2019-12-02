@@ -50,7 +50,7 @@ public class DBFlight {
           origin = srs.getString("origin");
           destination = srs.getString("destination");
           
-          Flight vlucht = new Flight(origin, destination, departureDate, departureTime, arrivalDate, arrivalTime, flightNumber, price);
+          Flight vlucht = new Flight(origin,destination,departureDate,departureTime,arrivalDate,arrivalTime,flightNumber, price);
           DBConnection.closeConnection(con);
           return vlucht;
      
@@ -78,18 +78,16 @@ public static ArrayList <Flight> getFlightsPerCustomer(String passportNumber) th
       con = DBConnection.getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
-      String sql = "SELECT f.flightNumber, f.departureDate, f.departureTime, f.arrivalDate, f.arrivalTime, " + 
-                    "f.price, f.origin, f.destination, a.airlineName " + 
-        "FROM flight AS f " + 
-        "INNER JOIN booking AS b INNER JOIN airline as a " +
-        "ON (b.flightNumber = f.flightNumber AND b.departureDate = f.departureDate) AND b.bookingNumber IN ( " +   
-              "SELECT bookingNumber FROM execution WHERE passportnumber = '" + passportNumber + "')" + 
-              " AND a.airlineCode = f.airlineCode";
-       
+      String sql =  "SELECT f.flightNumber, f.departureDate,f.departureTime, f.arrivalDate, f.arrivalTime, " +
+                    "f.price, f.origin, f.destination, f.airlineCode " + 
+                    "FROM flight AS f " + 
+                    "INNER JOIN booking AS b " +
+                    "ON (b.flightNumber = f.flightNumber AND b.departureDate = f.departureDate) AND b.bookingNumber IN ( " +   
+                    "SELECT bookingNumber FROM execution WHERE passportnumber = '" + passportNumber + "')";
+              
       ResultSet srs = stmt.executeQuery(sql);
      
-      //werken let LocalDate en LocalTime? zie slide 20 tips project database!!
-      String flightNumber, origin, destination, airlineName,departureDate, arrivalDate, arrivalTime, departureTime;
+      String flightNumber, origin, destination, departureDate, arrivalDate, arrivalTime, departureTime;
       double price;
       while (srs.next()) {
           flightNumber = srs.getString("flightNumber");
@@ -100,7 +98,6 @@ public static ArrayList <Flight> getFlightsPerCustomer(String passportNumber) th
           price = srs.getDouble("price");
           origin = srs.getString("origin");
           destination = srs.getString("destination");
-          airlineName = srs.getString("airlineName");
           
     
          int i = 0;
@@ -129,16 +126,15 @@ public static Flight getFlightForBooking(int bookingNumber) throws DBException {
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
       String sql = "SELECT f.flightNumber, f.departureDate, f.departureTime, f.arrivalDate, f.arrivalTime, " + 
-                    "f.price, f.origin, f.destination, a.airlineName FROM flight AS f " + 
-                   "INNER JOIN booking AS b INNER JOIN airline as a " +
+                    "f.price, f.origin, f.destination FROM flight AS f " + 
+                   "INNER JOIN booking AS b " +
                    "WHERE b.flightNumber = f.flightNumber AND b.departureDate = f.departureDate " +
-                   "AND b.bookingNumber = " + bookingNumber + 
-                   " AND a.airlineCode = f.airlineCode";
-      
+                   "AND b.bookingNumber = " + bookingNumber;
+                   
       ResultSet srs = stmt.executeQuery(sql);
      
       //werken let LocalDate en LocalTime? zie slide 20 tips project database!!
-    String flightNumber, origin, destination, airlineName,departureDate, arrivalDate, arrivalTime, departureTime;
+    String flightNumber, origin, destination,departureDate, arrivalDate, arrivalTime, departureTime;
     double price;
       
       if(srs.next()) {
@@ -150,7 +146,6 @@ public static Flight getFlightForBooking(int bookingNumber) throws DBException {
           price = srs.getDouble("price");
           origin = srs.getString("origin");
           destination = srs.getString("destination");
-          airlineName = srs.getString("airlineName");
                    
 	}
        else {// we verwachten slechts 1 rij...
