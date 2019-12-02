@@ -52,6 +52,14 @@ public class Booking {
         return netPrice;
     }
 
+    public Flight getFlight() {
+        return flight;
+    }
+
+    public ArrayList<Customer> getCustomers() {
+        return customers;
+    }
+    
     //Method to safe a booking 
     public static void saveBooking(Booking b) throws DBException {
         DBBooking.saveBooking(b);
