@@ -119,7 +119,9 @@ public class Flight {
 
     //Method to get the airline of the flight
     private String getAirlineOfFlight() throws DBException {
-        String airl = DBAirline.getAirlineForFlight(this.flightNumber, this.destination);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+        String formattedString = departureDate.format(formatter);
+        String airl = DBAirline.getAirlineForFlight(this.flightNumber, formattedString);
         return airl;
 
     }
