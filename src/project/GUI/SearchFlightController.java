@@ -18,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import project.DB.DBAirport;
@@ -37,7 +38,12 @@ public class SearchFlightController implements Initializable {
     private DomainController model;
     private ArrayList<Flight> filteredFlights;
     public String Emission;
+    @FXML
+    private DatePicker datePicker;
 
+    public SearchFlightController(){
+        this.filteredFlights = getFilteredFlights();
+    }
     public String getEmission() {
         return Emission;
     }
@@ -59,12 +65,6 @@ public class SearchFlightController implements Initializable {
     @FXML
     private ChoiceBox<?> destinationCityChoice;
     @FXML
-    private ChoiceBox<?> departureDayChoice;
-    @FXML
-    private ChoiceBox<?> departureMonthChoice;
-    @FXML
-    private ChoiceBox<?> departureYearChoice;
-    @FXML
     private ChoiceBox<?> amountOfPassengersChoice;
     @FXML
     private ChoiceBox<?> sortByChoice;
@@ -77,6 +77,10 @@ public class SearchFlightController implements Initializable {
     @FXML
     private AnchorPane panelToUpdate;
 
+    public DatePicker getDatePicker() {
+        return datePicker;
+    }
+
     
     public String getOriginAirport(){
         return originCityChoice.getValue().toString();
@@ -84,15 +88,8 @@ public class SearchFlightController implements Initializable {
     public String getDestinationAirport(){
         return destinationCityChoice.getValue().toString();
     }
-    public String getDepartureDay(){
-        return departureDayChoice.getValue().toString();
-    }
-    public String getDepartureMonth(){
-        return departureMonthChoice.getValue().toString();
-    }
-    public String getDepartureYear(){
-        return departureYearChoice.getValue().toString();
-    }
+    
+    
     public int getAmountOfPassengers(){
         return (Integer) amountOfPassengersChoice.getValue();
     }
@@ -135,7 +132,7 @@ public class SearchFlightController implements Initializable {
     private void searchFlight(ActionEvent event) {
 
         try {
-            filteredFlights = model.searchFlight(getIntermediateStopsAllowed(), getSortBy());
+            filteredFlights = model.searchFlight(getIntermediateStopsAllowed(), getSortBy(), getOriginAirport(), getDestinationAirport(), getDatePicker().toString() );
         } catch (DBException ex) {
             Logger.getLogger(SearchFlightController.class.getName()).log(Level.SEVERE, null, ex);
         }   
@@ -183,20 +180,19 @@ public class SearchFlightController implements Initializable {
       
         originCityChoice.getItems().addAll(list1);
         destinationCityChoice.getItems().addAll(list1);
-        departureDayChoice.getItems().addAll(list2);
-        departureMonthChoice.getItems().addAll(list3);
-        departureYearChoice.getItems().addAll(list4);
+        //departureDayChoice.getItems().addAll(list2);
+        //departureMonthChoice.getItems().addAll(list3);
+        //departureYearChoice.getItems().addAll(list4);
         amountOfPassengersChoice.getItems().addAll(list5);
         sortByChoice.getItems().addAll(list6);
         
     }
     public static void main(String[] args) throws DBException {
-       // ArrayList<Flight> list = new ArrayList<>();
+       ArrayList<Flight> list = new ArrayList<>();
         
-       // SearchFlightController object = new SearchFlightController();
-       // list = object.model.searchFlight(Boolean.TRUE, object.getEmission());
-        
-        //System.out.println(list);
+       SearchFlightController object = new SearchFlightController();
+        System.out.println(object.model.searchFlight(Boolean.TRUE, "Emission", "Amsterdam-Schiphol", "Zaventem" , "2019-12-19"));
+       
     }
     
     
