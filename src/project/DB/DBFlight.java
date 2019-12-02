@@ -205,9 +205,9 @@ public static ArrayList<Flight> getFlights() throws DBException {  // retourneer
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
       String sql = "SELECT co2 "
-        + "FROM db2019_18.flight "
+        + "FROM flight "
 	+ "WHERE flightNumber = '" + flightNumber + "'"
-        + " AND departureDate = " + departureDate;
+        + " AND departureDate = '" + departureDate + "'";
 
       ResultSet srs = stmt.executeQuery(sql);
 
