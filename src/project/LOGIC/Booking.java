@@ -2,58 +2,54 @@ package project.LOGIC;
 
 import java.time.Duration;
 import java.time.LocalDate;
-import java.util.*;
 import project.DB.DBBooking;
-import project.DB.DBCustomer;
 import project.DB.DBException;
 import project.DB.DBFlight;
 
 public class Booking {
 
-    private int bookingNumber;
-    private LocalDate bookingDate;
-    private double serviceFeeProcent = 0.05;
-    private double serviceFee; // final hoe buiten klasse etc OOP final static? 
-    private double promotion; // was dit  nu een procent of niet?  vadt procent dan buiten de klasse definieren?
-    // en promotie 
+    //Instance variables 
+    private final int bookingNumber;
+    private final LocalDate bookingDate;
+    private static final double SERVICEFEEPROCENT = 0.05;
+    private final double serviceFee;
+    private static final double PROMOTIONPROCENT = 0.10;
+    private final double promotion;
+    double netPrice;
 
     //Constructor 
     public Booking(int bookingNumber) throws DBException {
         this.bookingNumber = bookingNumber;
         this.bookingDate = LocalDate.now();
-        this.serviceFee = serviceFeeProcent * DBFlight.getFlightForBooking(bookingNumber).getPrice();
-        this.promotion = calculatePromotion(); // 
+        this.serviceFee = SERVICEFEEPROCENT * DBFlight.getFlightForBooking(bookingNumber).getPrice();
+        this.promotion = calculatePromotion();
+        this.netPrice = calculateNetPrice();
     }
 
-    //Getter instance variable "bookingNumber"
+    //Getters
     public int getBookingNumber() {
         return bookingNumber;
     }
 
-    //Getter instance variable "bookingDate"
     public LocalDate getBookingDate() {
         return bookingDate;
     }
 
-    //Getter instance variable "serviceFee"
     public double getServiceFee() {
         return serviceFee;
     }
 
-    //Getter instance variable "promotion"
     public double getPromotion() {
         return promotion;
     }
 
-    //Method to calculate the promotion 
-    public double calculatePromotion() throws DBException {
-        double promotion = 0.0;
-        Duration verschil;
-        verschil = Duration.between(DBFlight.getFlightForBooking(bookingNumber).getDepartureDate(), this.bookingDate);
-        if (verschil.toDays() > 180 || verschil.toDays() < 20) {
-            promotion = DBFlight.getFlightForBooking(bookingNumber).getPrice() * 0.10;
-        }
-        return promotion;
+    public double getNetPrice() {
+        return netPrice;
+    }
+    
+    //Method to safe a booking 
+    public static void saveBooking(Booking b) throws DBException {
+        DBBooking.saveBooking(b);
     }
 
     //Method to delete a booking 
@@ -61,14 +57,21 @@ public class Booking {
         DBBooking.deleteBooking(bookingNumber);// dataBoys type nog aanpassen 
     }
 
-    public static void saveBooking(Booking b) throws DBException {
-        DBBooking.saveBooking(b);
+    //Helping method to calculate the promotion 
+    private double calculatePromotion() throws DBException {
+        double prom = 0.0;
+        Duration verschil;
+        verschil = Duration.between(DBFlight.getFlightForBooking(bookingNumber).getDepartureDate(), this.bookingDate);
+        if (verschil.toDays() > 180 || verschil.toDays() < 20) {
+            prom = DBFlight.getFlightForBooking(bookingNumber).getPrice() * PROMOTIONPROCENT;
+        }
+        return prom;
     }
 
-    //Method to calculate the net price of a flight 
-    public double calculateNetPrice() throws DBException {
-        double netPrice = 0.0;
-        netPrice = this.serviceFee - this.promotion + DBFlight.getFlightForBooking(bookingNumber).getPrice();
-        return netPrice;
+    //Helping method to calculate the net price of a flight 
+    private double calculateNetPrice() throws DBException {
+        double netPr;
+        netPr = this.serviceFee - this.promotion + DBFlight.getFlightForBooking(bookingNumber).getPrice();
+        return netPr;
     }
 }

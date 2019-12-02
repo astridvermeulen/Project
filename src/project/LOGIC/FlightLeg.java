@@ -14,16 +14,18 @@ import java.time.LocalTime;
  * @author klaas
  */
 public class FlightLeg {
+    
+    //Instance variables 
+    private final int legNumber;
+    private final String legOrigin;
+    private final String legDestination;
+    private final LocalDate legDepartureDate;
+    private final LocalDate legArrivalDate;
+    private final LocalTime legDepartureTime;
+    private final LocalTime legArrivalTime;
+    private final Duration legDuration;
 
-    private int legNumber;
-    private String legOrigin;
-    private String legDestination;
-    private LocalDate legDepartureDate;
-    private LocalDate legArrivalDate;
-    private LocalTime legDepartureTime;
-    private LocalTime legArrivalTime;
-    private Duration legDuration;
-
+    //Constructor
     public FlightLeg(int legNumber, String legOrigin, String legDestination, String departureDate, String arrivalDate, String departureTime, String arrivalTime) {
         this.legNumber = legNumber;
         this.legOrigin = legOrigin;
@@ -35,6 +37,7 @@ public class FlightLeg {
         this.legDuration = this.calculateDuration();
     }
 
+    //Getters
     public int getLegNumber() {
         return legNumber;
     }
@@ -47,27 +50,28 @@ public class FlightLeg {
         return legDestination;
     }
 
-    public LocalDate getDepartureDate() {
+    public LocalDate getLegDepartureDate() {
         return legDepartureDate;
     }
 
-    public LocalDate getArrivalDate() {
+    public LocalDate getLegArrivalDate() {
         return legArrivalDate;
     }
 
-    public LocalTime getDepartureTime() {
+    public LocalTime getLegDepartureTime() {
         return legDepartureTime;
     }
 
-    public LocalTime getArrivalTime() {
+    public LocalTime getLegArrivalTime() {
         return legArrivalTime;
     }
 
-    public Duration getDuration() {
+    public Duration getLegDuration() {
         return legDuration;
     }
-    
-    public Duration calculateDuration() {
+   
+    //Helping method to calculate the duration of a flight 
+    private Duration calculateDuration() {
         Duration dur = Duration.between(legDepartureTime, legArrivalTime);
         return dur;
     }

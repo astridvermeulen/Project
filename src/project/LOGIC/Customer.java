@@ -1,22 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package project.LOGIC;
 
 import java.util.ArrayList;
 import project.DB.DBCustomer;
 import project.DB.DBException;
 import project.DB.DBFlight;
-//dit is een tesst 
 
 public class Customer {
-    
-    private String passportNumber;
-    private String firstName;
-    private String lastName;
-    private String homeCountry;
+
+    //Instance variables 
+    private final String passportNumber;
+    private final String firstName;
+    private final String lastName;
+    private final String homeCountry;
 
     //Constructor 
     public Customer(String passportNumber, String firstName, String lastName) {
@@ -26,17 +21,15 @@ public class Customer {
         this.homeCountry = this.calculateHomeCountry(); // halen uit passportName??
     }
 
-    //Getter instance variable "passportNumber"
+    //Getters
     public String getPassportNumber() {
         return passportNumber;
     }
 
-    //Getter instance variable "firstName"
     public String getFirstName() {
         return firstName;
     }
 
-    //Getter instance variable "lastName"
     public String getLastName() {
         return lastName;
     }
@@ -44,34 +37,10 @@ public class Customer {
     public String getHomeCountry() {
         return homeCountry;
     }
-    
+
+    //Method to safe a customer 
     public static void saveCustomer(Customer s) throws DBException {
         DBCustomer.saveCustomer(s);
-    }
-
-    //Getter instance variable "homeCountry"
-    public String calculateHomeCountry() {
-        String passportNumber = this.getPassportNumber();
-        String homeCountry = "";
-        for (int i = 0; i < passportNumber.length(); i++) {
-            String s = String.valueOf(homeCountry.charAt(i));
-            if (!isInteger(s)) {
-                homeCountry = homeCountry + homeCountry.charAt(i);
-            }
-        }
-        return homeCountry;
-    }
-
-    //Helping method to determine if a String is an Integer
-    private static boolean isInteger(String s) {
-        try {
-            Integer.parseInt(s);
-        } catch (NumberFormatException e) {
-            return false;
-        } catch (NullPointerException e) {
-            return false;
-        }
-        return true;
     }
 
     //Method to delete a customer
@@ -79,10 +48,38 @@ public class Customer {
         DBCustomer.deleteCustomer(passportNumber);
     }
 
+    //Helping method to get the home country out of a passportnumber
+    private String calculateHomeCountry() {
+        String passportNumb = this.getPassportNumber();
+        String homeCount = "";
+        for (int i = 0; i < passportNumb.length(); i++) {
+            String s = String.valueOf(homeCount.charAt(i));
+            if (!isInteger(s)) {
+                homeCount = homeCount + homeCount.charAt(i);
+            }
+        }
+        return homeCount;
+    }
+
+    //Helping method used in the method calculateHomeCountry: to determine if a String is an Integer
+    private static boolean isInteger(String s) {
+        try {
+            Integer.parseInt(s);
+        } catch (NumberFormatException | NullPointerException e) {
+            return false;
+        }
+        return true;
+    }
+
     //Method to get an overview of all the flights booked by a customer 
     public ArrayList<Flight> flightOverview() throws DBException {
         ArrayList<Flight> flightsOfCustomer = DBFlight.getFlightsPerCustomer(this.passportNumber);
-        return flightsOfCustomer;  
+        return flightsOfCustomer;
     }
-    
+
+    //Method to get an overview of al the customers in the database
+    public static ArrayList<Customer> customersOverview() throws DBException {
+        ArrayList<Customer> customersAll = DBCustomer.getCustomers();
+        return customersAll;
+    }
 }

@@ -1,38 +1,36 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package project.LOGIC;
 
 import project.DB.DBAirport;
+import project.DB.DBException;
 
-/**
- *
- * @author klaas
- */
 public class Airport {
 
-    private String airportCode; // final hoe zat da opzoeken 
-    private String airportName; // final ook of niet
+    //Instance variables 
+    private final String airportCode; // final hoe zat da opzoeken 
+    private final String airportName; // final ook of niet
 
+    //Constructor 
     public Airport(String airportCode, String airportName) {
         this.airportCode = airportCode;
         this.airportName = airportName;
     }
 
-    //Getter instance variable "airportCode"
+    //Getters
     public String getAirportCode() {
         return airportCode;
     }
 
-    //Getter instance variable "airportName"
     public String getAirportName() {
         return airportName;
     }
-    
 
+    //Method to save an airport
+    public static void saveAirport(Airport airport) throws DBException {
+        DBAirport.saveAirport(airport);
+    }
+
+    //Method to delete an airport
+    public static void deleteAirport(Airport airport) throws DBException {
+        DBAirport.deleteAirport(airport);
+    }
 }
-
-    // geen setters want je mag ze beiden niet meer kunnenn aanpassen?
-
