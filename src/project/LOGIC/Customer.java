@@ -50,7 +50,7 @@ public class Customer {
 
     //Helping method to get the home country out of a passportnumber
     private static String calculateHomeCountry(String passportNumb) {
-        
+
         String homeCount = "";
         for (int i = 0; i < passportNumb.length(); i++) {
             String s = String.valueOf(passportNumb.charAt(i));
@@ -82,9 +82,9 @@ public class Customer {
         ArrayList<Customer> customersAll = DBCustomer.getCustomers();
         return customersAll;
     }
-    
+
     public static void main(String[] args) {
-       String pass = "S1478";
-        System.out.println(calculateHomeCountry(pass));     
+        String pass = "S1478";
+        System.out.println(calculateHomeCountry(pass));
     }
 }

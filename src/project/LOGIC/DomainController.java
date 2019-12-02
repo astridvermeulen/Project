@@ -68,8 +68,7 @@ public class DomainController {
     //To test the methods in this class
     public static void main(String[] args) throws DBException, SQLException {
         DomainController dc = new DomainController();
-
-        Flight vlucht1 = new Flight("airline", "origin", "destination", "departureDate", "departureTime", "arrivalDate", "arrivalTime", "flightNumber", 100.0);
-        Flight vlucht2 = new Flight("airline", "origin", "destination", "departureDate", "departureTime", "arrivalDate", "arrivalTime", "flightNumber", 100.0);
+        //System.out.println(DBFlight.getFlight("EM0645", "12/2/2021").getDuration());
+       dc.searchFlight(Boolean.TRUE, "price", "Amsterdam-Schiphol", "Dubai International Airport", "12/2/2021");
     }
 }

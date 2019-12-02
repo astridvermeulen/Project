@@ -22,7 +22,7 @@ public class Booking {
 
     //Constructor 
     public Booking(Flight flight, ArrayList<Customer> customer) throws DBException {
-        this.bookingNumber = calculateBookingNumber();
+        this.bookingNumber = -1;
         this.bookingDate = LocalDate.now();
         this.serviceFee = SERVICEFEEPROCENT * DBFlight.getFlightForBooking(bookingNumber).getPrice();
         this.promotion = calculatePromotion();
@@ -86,11 +86,5 @@ public class Booking {
         double netPr;
         netPr = this.serviceFee - this.promotion + DBFlight.getFlightForBooking(bookingNumber).getPrice();
         return netPr;
-    }
-
-    //Helping method to calculate the booking number
-    private int calculateBookingNumber() {
-        int bookingnr = 0;
-        return bookingnr;
     }
 }

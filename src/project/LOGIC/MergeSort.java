@@ -30,7 +30,7 @@ public class MergeSort {
         int firstHalfIndex = 0, lastHalfIndex = 0, aIndex = 0;
         while ((firstHalfIndex < firstHalf.size()) && (lastHalfIndex < lastHalf.size())) {
             if (filter.equalsIgnoreCase("Duration")) {
-                if (firstHalf.get(firstHalfIndex).getDuration().compareTo(lastHalf.get(lastHalfIndex).getDuration()) < 0) {
+                if (firstHalf.get(firstHalfIndex).getDuration() < lastHalf.get(lastHalfIndex).getDuration()) {
                     flightsFilteredOnLegs.set(aIndex, firstHalf.get(firstHalfIndex));
                     firstHalfIndex++;
 
