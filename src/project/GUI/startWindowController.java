@@ -93,12 +93,12 @@ public class startWindowController implements Initializable {
     @FXML
     private void loadDataCustomer(ActionEvent event) {
         try {
-            System.out.println("test");
-      
-            AnchorPane pane = (AnchorPane) FXMLLoader.load(getClass().getResource("/project/GUI/dataCustomer.fxml"));
+            
+            
+            AnchorPane pane = (AnchorPane) FXMLLoader.load(getClass().getResource("dataCustomer.fxml"));
             panelToUpdate.getChildren().setAll(pane);
-      
-      
+            
+            
         } catch (IOException ex) {
         Logger.getLogger(startWindowController.class.getName()).log(Level.SEVERE, null, ex);
     }
