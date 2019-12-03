@@ -125,6 +125,7 @@ public class DataCustomerController implements Initializable {
 
     @FXML
     private void saveCustomer1(ActionEvent event) {
+        System.out.println("test");
         Customer klant = new Customer(passportIDC1TxtField.getText(), firstNameC1TxtField.getText(), lastNameC1TxtField.getText());
 
         try {
