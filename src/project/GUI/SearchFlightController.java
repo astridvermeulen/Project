@@ -41,9 +41,7 @@ public class SearchFlightController implements Initializable {
     @FXML
     private DatePicker datePicker;
 
-    public SearchFlightController(){
-        this.filteredFlights = getFilteredFlights();
-    }
+    
     public String getEmission() {
         return Emission;
     }
@@ -105,7 +103,7 @@ public class SearchFlightController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        model=domainController.getInstance();
+        model=DomainController.getInstance();
         addDataToChoiceBox();  
     }    
 
@@ -159,7 +157,7 @@ public class SearchFlightController implements Initializable {
           for(int position = 0; position < size; position++)
               list1.add(test.get(position).getAirportName());
     
-;
+
             } catch (DBException ex) {
         Logger.getLogger(DBAirport.class.getName()).log(Level.SEVERE, null, ex);
         }
