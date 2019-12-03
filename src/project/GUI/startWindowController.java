@@ -92,6 +92,7 @@ public class startWindowController implements Initializable {
 
     @FXML
     private void loadDataCustomer(ActionEvent event) {
+        System.out.println("test");
         try {
             
             
