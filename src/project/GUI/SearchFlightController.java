@@ -5,6 +5,7 @@
  */
 package project.GUI;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -14,6 +15,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -38,13 +40,17 @@ public class SearchFlightController implements Initializable {
     private DomainController model;
     private ArrayList<Flight> filteredFlights;
     public String Emission;
-    @FXML
-    private DatePicker datePicker;
 
+    public SearchFlightController() {
+    }
+
+    
     public String getEmission() {
         return Emission;
     }
-
+    
+    @FXML
+    private DatePicker datePicker;
     @FXML
     private Label fromLbl;
     @FXML
@@ -102,7 +108,7 @@ public class SearchFlightController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        model=domainController.getInstance();
+        model=DomainController.getInstance();
         addDataToChoiceBox();  
     }    
 
@@ -132,7 +138,17 @@ public class SearchFlightController implements Initializable {
             filteredFlights = model.searchFlight(getIntermediateStopsAllowed(), getSortBy(), getOriginAirport(), getDestinationAirport(), getDatePicker().toString() );
         } catch (DBException ex) {
             Logger.getLogger(SearchFlightController.class.getName()).log(Level.SEVERE, null, ex);
-        }   
+        }  
+        
+        try {
+      
+            AnchorPane pane = (AnchorPane) FXMLLoader.load(getClass().getResource("dataCustomer.fxml"));
+            panelToUpdate.getChildren().setAll(pane);
+      
+      
+        } catch (IOException ex) {
+        Logger.getLogger(startWindowController.class.getName()).log(Level.SEVERE, null, ex);
+    }
     }
 
     
@@ -156,7 +172,7 @@ public class SearchFlightController implements Initializable {
           for(int position = 0; position < size; position++)
               list1.add(test.get(position).getAirportName());
     
-;
+
             } catch (DBException ex) {
         Logger.getLogger(DBAirport.class.getName()).log(Level.SEVERE, null, ex);
         }

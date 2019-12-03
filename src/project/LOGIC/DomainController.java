@@ -2,7 +2,11 @@ package project.LOGIC;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 import project.DB.DBException;
 import project.DB.DBFlight;
 
@@ -23,8 +27,9 @@ public class DomainController {
         ArrayList<Flight> flightsOriginDestination = this.fliterOnOriginDestination(origin, destination, flightsAll);
         ArrayList<Flight> flightsDate = this.filterOnDate(departureDate, flightsOriginDestination);
         ArrayList<Flight> flightsFilteredOnLegs = this.fliterOnLegs(legs, flightsDate);
-        MergeSort.sort(flightsFilteredOnLegs, filter);
-        return flightsFilteredOnLegs;
+//if maken voor filters
+        ArrayList<Flight> output = new ArrayList<Flight>(flightsFilteredOnLegs.stream().sorted(Comparator.comparing(Flight::getDuration)).collect(Collectors.toList()));
+        return output;
     }
 
     //Helping method to filter the flights: orignin and destination 
@@ -41,7 +46,7 @@ public class DomainController {
     //Helping method to filter the flights: date
     private ArrayList<Flight> filterOnDate(String departureDate, ArrayList<Flight> flightsOriginDestination) {
         ArrayList<Flight> flightsDate = new ArrayList<>();
-        LocalDate departureD = LocalDate.parse(departureDate);
+        LocalDate departureD = LocalDate.parse(departureDate, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         for (Flight vlucht : flightsOriginDestination) {
             if (vlucht.getDepartureDate().equals(departureD)) {
                 flightsDate.add(vlucht);
@@ -49,7 +54,7 @@ public class DomainController {
         }
         return flightsDate;
     }
-    
+
     //Helping method to filter the flights: stopover possible or not
     private ArrayList<Flight> fliterOnLegs(Boolean legs, ArrayList<Flight> flightsAll) {
         ArrayList<Flight> flightsFiltered = new ArrayList<>();
@@ -68,8 +73,12 @@ public class DomainController {
     //To test the methods in this class
     public static void main(String[] args) throws DBException, SQLException {
         DomainController dc = new DomainController();
-
-        Flight vlucht1 = new Flight("airline", "origin", "destination", "departureDate", "departureTime", "arrivalDate", "arrivalTime", "flightNumber", 100.0);
-        Flight vlucht2 = new Flight("airline", "origin", "destination", "departureDate", "departureTime", "arrivalDate", "arrivalTime", "flightNumber", 100.0);
+        //System.out.println(DBFlight.getFlight("EM0645", "12/02/2021").getDuration());
+        for (Flight f : dc.searchFlight(Boolean.TRUE, "duration", "Amsterdam-Schiphol", "Dubai International Airport", "12/02/2021")) {
+            System.out.println(f.getDuration());
+            System.out.println("----");
+        }
+        
+        
     }
 }

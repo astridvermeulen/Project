@@ -28,17 +28,15 @@ public class DBFlight {
       con = DBConnection.getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
-      String sql =  "SELECT f.flightNumber, f.departureDate, f.departureTime, f.arrivalDate, f.arrivalTime, " + 
-                    "f.price, f.origin, f.destination, a.airlineName " + 
-                    "FROM db2019_18.flight AS f INNER JOIN db2019_18.airline AS a " + 
-                    "WHERE flightNumber = '" + flightNumber + "'" + 
-                    " AND departureDate = '" + departureDate + "'" + 
-                    " AND f.airlineCode = a.airlineCode" ;
-
+      String sql =  "SELECT origin, destination, departureDate, departureTime, arrivalDate, arrivalTime, flightNumber, price " + 
+                    "FROM flight " + 
+                    "WHERE flightNumber = '" + flightNumber + "' " + 
+                    "AND departureDate = '" + departureDate + "'";
+                    
 
       ResultSet srs = stmt.executeQuery(sql);
      
-      String origin, destination, arrivalDate, arrivalTime, departureTime, airlineName;
+      String origin, destination, arrivalDate, arrivalTime, departureTime;
       double price;
        
       
@@ -51,16 +49,16 @@ public class DBFlight {
           price = srs.getDouble("price");
           origin = srs.getString("origin");
           destination = srs.getString("destination");
-          airlineName = srs.getString("airlineName");
           
+          Flight vlucht = new Flight(origin,destination,departureDate,departureTime,arrivalDate,arrivalTime,flightNumber, price);
+          DBConnection.closeConnection(con);
+          return vlucht;
+     
       }     
     else {// we verwachten slechts 1 rij...
 	DBConnection.closeConnection(con);
 	return null;
       }
-     Flight vlucht = new Flight(airlineName, origin, destination, departureDate, departureTime, arrivalDate, arrivalTime, flightNumber, price);
-      DBConnection.closeConnection(con);
-      return vlucht;
        
     }
     
@@ -80,18 +78,16 @@ public static ArrayList <Flight> getFlightsPerCustomer(String passportNumber) th
       con = DBConnection.getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
-      String sql = "SELECT f.flightNumber, f.departureDate, f.departureTime, f.arrivalDate, f.arrivalTime, " + 
-                    "f.price, f.origin, f.destination, a.airlineName " + 
-        "FROM flight AS f " + 
-        "INNER JOIN booking AS b INNER JOIN airline as a " +
-        "ON (b.flightNumber = f.flightNumber AND b.departureDate = f.departureDate) AND b.bookingNumber IN ( " +   
-              "SELECT bookingNumber FROM execution WHERE passportnumber = '" + passportNumber + "')" + 
-              " AND a.airlineCode = f.airlineCode";
-       
+      String sql =  "SELECT f.flightNumber, f.departureDate,f.departureTime, f.arrivalDate, f.arrivalTime, " +
+                    "f.price, f.origin, f.destination, f.airlineCode " + 
+                    "FROM flight AS f " + 
+                    "INNER JOIN booking AS b " +
+                    "ON (b.flightNumber = f.flightNumber AND b.departureDate = f.departureDate) AND b.bookingNumber IN ( " +   
+                    "SELECT bookingNumber FROM execution WHERE passportnumber = '" + passportNumber + "')";
+              
       ResultSet srs = stmt.executeQuery(sql);
      
-      //werken let LocalDate en LocalTime? zie slide 20 tips project database!!
-      String flightNumber, origin, destination, airlineName,departureDate, arrivalDate, arrivalTime, departureTime;
+      String flightNumber, origin, destination, departureDate, arrivalDate, arrivalTime, departureTime;
       double price;
       while (srs.next()) {
           flightNumber = srs.getString("flightNumber");
@@ -102,11 +98,10 @@ public static ArrayList <Flight> getFlightsPerCustomer(String passportNumber) th
           price = srs.getDouble("price");
           origin = srs.getString("origin");
           destination = srs.getString("destination");
-          airlineName = srs.getString("airlineName");
           
     
          int i = 0;
-         Flight test = new Flight(airlineName, origin, destination, departureDate, departureTime, arrivalDate, arrivalTime, flightNumber, price);
+         Flight test = new Flight(origin, destination, departureDate, departureTime, arrivalDate, arrivalTime, flightNumber, price);
          vlucht.add(i, test);
          i++;              
          
@@ -131,16 +126,15 @@ public static Flight getFlightForBooking(int bookingNumber) throws DBException {
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
       String sql = "SELECT f.flightNumber, f.departureDate, f.departureTime, f.arrivalDate, f.arrivalTime, " + 
-                    "f.price, f.origin, f.destination, a.airlineName FROM flight AS f " + 
-                   "INNER JOIN booking AS b INNER JOIN airline as a " +
+                    "f.price, f.origin, f.destination FROM flight AS f " + 
+                   "INNER JOIN booking AS b " +
                    "WHERE b.flightNumber = f.flightNumber AND b.departureDate = f.departureDate " +
-                   "AND b.bookingNumber = " + bookingNumber + 
-                   " AND a.airlineCode = f.airlineCode";
-      
+                   "AND b.bookingNumber = " + bookingNumber;
+                   
       ResultSet srs = stmt.executeQuery(sql);
      
       //werken let LocalDate en LocalTime? zie slide 20 tips project database!!
-    String flightNumber, origin, destination, airlineName,departureDate, arrivalDate, arrivalTime, departureTime;
+    String flightNumber, origin, destination,departureDate, arrivalDate, arrivalTime, departureTime;
     double price;
       
       if(srs.next()) {
@@ -152,7 +146,6 @@ public static Flight getFlightForBooking(int bookingNumber) throws DBException {
           price = srs.getDouble("price");
           origin = srs.getString("origin");
           destination = srs.getString("destination");
-          airlineName = srs.getString("airlineName");
                    
 	}
        else {// we verwachten slechts 1 rij...
@@ -160,7 +153,7 @@ public static Flight getFlightForBooking(int bookingNumber) throws DBException {
 	return null;
       }
      
-      Flight vlucht = new Flight(airlineName, origin, destination, departureDate, departureTime, arrivalDate, arrivalTime, flightNumber, price);
+      Flight vlucht = new Flight(origin, destination, departureDate, departureTime, arrivalDate, arrivalTime, flightNumber, price);
       DBConnection.closeConnection(con);      
       return vlucht;
       
@@ -207,9 +200,9 @@ public static ArrayList<Flight> getFlights() throws DBException {  // retourneer
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
       String sql = "SELECT co2 "
-        + "FROM db2019_18.flight "
+        + "FROM flight "
 	+ "WHERE flightNumber = '" + flightNumber + "'"
-        + " AND departureDate = " + departureDate;
+        + " AND departureDate = '" + departureDate + "'";
 
       ResultSet srs = stmt.executeQuery(sql);
 
@@ -234,18 +227,12 @@ public static ArrayList<Flight> getFlights() throws DBException {  // retourneer
     }
     
     public static void main(String[] args) throws DBException, SQLException{
-    ArrayList<Flight> test = new ArrayList<>();
-    String x = "BE1207";
+    String x = "EM0645";
+    String y = "12/02/2021";
     
-        try {
-            test = getFlightsPerCustomer(x);
-            int size = test.size();
-          for(int position = 0; position < size; position++)
-              System.out.println(test.get(position).getFlightNumber() + " " + test.get(position).getDepartureDate() + " " + test.get(position).getArrivalDate());
-    } catch (DBException ex) {
-      Logger.getLogger(DBAirport.class.getName()).log(Level.SEVERE, null, ex);
-    }
-
+    Flight z = getFlight(x, y);
+    System.out.println(z.getArrivalDate() + z.getDestination());
+    
 
     
     }

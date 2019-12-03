@@ -2,6 +2,7 @@ package project.LOGIC;
 
 import java.time.Duration;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import project.DB.DBBooking;
 import project.DB.DBException;
 import project.DB.DBFlight;
@@ -15,15 +16,19 @@ public class Booking {
     private final double serviceFee;
     private static final double PROMOTIONPROCENT = 0.10;
     private final double promotion;
-    double netPrice;
+    private final double netPrice;
+    private final Flight flight;
+    private final ArrayList<Customer> customers;
 
     //Constructor 
-    public Booking(int bookingNumber) throws DBException {
-        this.bookingNumber = bookingNumber;
+    public Booking(Flight flight, ArrayList<Customer> customer) throws DBException {
+        this.bookingNumber = -1;
         this.bookingDate = LocalDate.now();
         this.serviceFee = SERVICEFEEPROCENT * DBFlight.getFlightForBooking(bookingNumber).getPrice();
         this.promotion = calculatePromotion();
         this.netPrice = calculateNetPrice();
+        this.flight = flight;
+        this.customers = customer;
     }
 
     //Getters
@@ -45,6 +50,14 @@ public class Booking {
 
     public double getNetPrice() {
         return netPrice;
+    }
+
+    public Flight getFlight() {
+        return flight;
+    }
+
+    public ArrayList<Customer> getCustomers() {
+        return customers;
     }
     
     //Method to safe a booking 

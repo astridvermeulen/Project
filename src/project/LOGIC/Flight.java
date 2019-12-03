@@ -1,10 +1,13 @@
 package project.LOGIC;
 
 import java.sql.SQLException;
-import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import project.DB.DBAirline;
 import project.DB.DBException;
 import project.DB.DBFlight;
 import project.DB.DBFlightLeg;
@@ -12,34 +15,44 @@ import project.DB.DBFlightLeg;
 public class Flight {
 
     //Instance variables 
-    private String airline;
+    private final String airline;
     private final String origin;
     private final String destination;
+    private final LocalDateTime departureDateTime;
     private final LocalDate departureDate;
     private final LocalTime departureTime;
+    private final LocalDateTime arrivalDateTime;
     private final LocalDate arrivalDate;
     private final LocalTime arrivalTime;
     private final String flightNumber;
     private final double price;
     private final ArrayList<FlightLeg> flightLegs;
     private final double emission;
-    private final Duration duration;
+    private int duration;
 
-    //Constructor AIRLINE NOG INISTIALIZERN 
-    public Flight(String airline, String origin, String destination, String departureDate, String departureTime, String arrivalDate, String arrivalTime, String flightNumber, double price) throws DBException, SQLException {
-        // this.airline = DBFlight.airportPerFlight;// databoyst moeten deze nog maken 
+    //Constructor
+    public Flight(String origin, String destination, String departureDate, String departureTime, String arrivalDate, String arrivalTime, String flightNumber, double price) throws DBException, SQLException {
+        this.airline = DBAirline.getAirlineForFlight(flightNumber,departureDate);
         this.origin = origin;
         this.destination = destination;
-        this.duration = this.calculateDuration();
-        this.departureDate = LocalDate.parse(departureDate);
-        this.departureTime = LocalTime.parse(departureTime);
-        this.arrivalDate = LocalDate.parse(arrivalDate);
-        this.arrivalTime = LocalTime.parse(arrivalTime);
+        this.duration = 0;
+        
+       
+
+        this.departureDate = LocalDate.parse(departureDate, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        this.departureTime = LocalTime.parse(departureTime, DateTimeFormatter.ofPattern("HH:mm:ss"));
+        
+        this.arrivalDate = LocalDate.parse(arrivalDate, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        this.arrivalTime = LocalTime.parse(arrivalTime, DateTimeFormatter.ofPattern("HH:mm:ss"));
+        
         this.flightNumber = flightNumber;
         this.price = price;
         this.flightLegs = DBFlightLeg.getFlightLegs(flightNumber, departureDate);
         this.emission = this.calculateEmission();
-        
+       
+        this.departureDateTime = LocalDateTime.of(this.departureDate, this.departureTime);
+        this.arrivalDateTime = LocalDateTime.of(this.arrivalDate, this.arrivalTime);
+        this.setDuration(); //Zo blijft de volgorde behouden van de GUI kolommen 
     }
 
     //Getters
@@ -87,13 +100,18 @@ public class Flight {
         return emission;
     }
 
-    public Duration getDuration() {
+    public int getDuration() {
         return duration;
     }
-
+    
+    //Setter duration
+    public void setDuration() {
+        this.duration = this.calculateDuration();
+    }
+    
     //Helping method to calculate the duration of a flight 
-    private Duration calculateDuration() {
-        Duration dur = Duration.between(departureTime, arrivalTime);
+    private int calculateDuration() {
+        int dur = Math.toIntExact(ChronoUnit.HOURS.between(departureDateTime, arrivalDateTime));
         return dur;
     }
 
@@ -103,9 +121,16 @@ public class Flight {
         return em;
     }
 
-    //Method to calculate the number of legs from a flight 
-    public int numberOfLegs() {
+    //Method to calculate the stopovers from a flight, 1 flight leg = 0 stopovers 
+    public int numberOfStopovers() {
         int numberOfLegs = this.flightLegs.size();
         return numberOfLegs;
     }
+     public static ArrayList<Flight> flightsOverview() throws DBException {
+        ArrayList<Flight> flightsAll = DBFlight.getFlights();
+        return flightsAll;
+    }
+
+
+    
 }

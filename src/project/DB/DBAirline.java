@@ -157,7 +157,7 @@ public static String getAirlineForFlight(String flightNumber, String departureDa
             String sql =    "SELECT airlineName FROM airline " +
                             "WHERE airlineCode = " +
                             "(SELECT airlineCode FROM flight WHERE departureDate = '" + departureDate + "'" + 
-                            " AND flightNumber = '" + flightNumber + "'";
+                            " AND flightNumber = '" + flightNumber + "')";
             
             ResultSet srs = stmt.executeQuery(sql);
             String airlineName;
@@ -185,19 +185,12 @@ public static String getAirlineForFlight(String flightNumber, String departureDa
    
    public static void main(String[] args) throws DBException {
       
-    ArrayList<Airline> test = new ArrayList<>();
+    String x = "EM0645";
+    String y = "12/02/2021";
     
-      try {
-          test = getAirlines();
-          int size = test.size();
-          for(int position = 0; position < size; position++)
-              System.out.println(test.get(position).getAirlineName());
+    String z = getAirlineForFlight(x, y);
+    System.out.println(z);
     
-;
-    } catch (DBException ex) {
-      Logger.getLogger(DBAirport.class.getName()).log(Level.SEVERE, null, ex);
-    }
-  
   }
   
    

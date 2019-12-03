@@ -7,13 +7,19 @@ package project.GUI;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import project.DB.DBException;
+import project.LOGIC.Customer;
+import static project.LOGIC.Customer.saveCustomer;
+import project.LOGIC.DomainController;
 
 /**
  * FXML Controller class
@@ -21,12 +27,14 @@ import javafx.scene.paint.Color;
  * @author Lars
  */
 public class DataCustomerController implements Initializable {
+    private DomainController model;
 
     
+   
+    @FXML
+    private HBox C1Pane; 
     @FXML
     private Button nextPassenger1Btn;
-    @FXML
-    private HBox C1Pane;
     @FXML
     private HBox C2Pane;
     @FXML
@@ -42,37 +50,57 @@ public class DataCustomerController implements Initializable {
     @FXML
     private HBox C5Pane;
     @FXML
-    private Button nextPassenger5Btn;
-    @FXML
-    private HBox C6Pane;
-    @FXML
-    private Button nextPassenger6Btn;
-    @FXML
-    private HBox C7Pane;
-    @FXML
-    private Button nextPassenger7Btn;
-    @FXML
-    private HBox C8Pane;
-    @FXML
-    private Button nextPassenger8Btn;
-    @FXML
-    private HBox C9Pane;
-    @FXML
     private Button submitC1Btn;
+    @FXML
+    private TextField firstNameC1TxtField;
+    @FXML
+    private TextField lastNameC1TxtField;
+    @FXML
+    private TextField passportIDC1TxtField;
+    @FXML
+    private TextField firstNameC2TxtField;
+    @FXML
+    private TextField lastNameC2TxtField;
+    @FXML
+    private TextField passportIDC2TxtField;
+    @FXML
+    private Button submitC2Btn;
+    @FXML
+    private TextField firstNameC3TxtField;
+    @FXML
+    private TextField lastNameC3TxtField;
+    @FXML
+    private TextField passportIDC3TxtField;
+    @FXML
+    private Button submitC3Btn;
+    @FXML
+    private TextField firstNameC4TxtField;
+    @FXML
+    private TextField lastNameC4TxtField;
+    @FXML
+    private TextField passportIDC4TxtField;
+    @FXML
+    private Button submitC4Btn;
+    @FXML
+    private TextField firstNameC5TxtField;
+    @FXML
+    private TextField lastNameC5TxtField;
+    @FXML
+    private TextField passportIDC5TxtField;
+    @FXML
+    private Button submitC5Btn;
+
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        model = DomainController.getInstance();
         C2Pane.setVisible(false);
         C3Pane.setVisible(false);
         C4Pane.setVisible(false);
         C5Pane.setVisible(false);
-        C6Pane.setVisible(false);
-        C7Pane.setVisible(false);
-        C8Pane.setVisible(false);
-        C9Pane.setVisible(false);
     }   
 
     @FXML
@@ -96,32 +124,57 @@ public class DataCustomerController implements Initializable {
     }
 
     @FXML
-    private void showC6Pane(ActionEvent event) {
-        C6Pane.setVisible(true);
+    private void saveCustomer1(ActionEvent event) {
+        Customer klant = new Customer(passportIDC1TxtField.getText(), firstNameC1TxtField.getText(), lastNameC1TxtField.getText());
+
+        try {
+            saveCustomer(klant);
+        } catch (DBException ex) {
+            Logger.getLogger(DataCustomerController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
-    private void showC7Pane(ActionEvent event) {
-        C7Pane.setVisible(true);
-    }
+    private void saveCustomer2(ActionEvent event) {
+        Customer klant = new Customer(passportIDC2TxtField.getText(), firstNameC2TxtField.getText(), lastNameC2TxtField.getText());
+        try {
+            saveCustomer(klant);
+        } catch (DBException ex) {
+            Logger.getLogger(DataCustomerController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
 
     @FXML
-    private void showC8Pane(ActionEvent event) {
-        C8Pane.setVisible(true);
-    
-    }
+    private void saveCustomer3(ActionEvent event) {
+        Customer klant = new Customer(passportIDC3TxtField.getText(), firstNameC3TxtField.getText(), lastNameC3TxtField.getText());
+        try {
+            saveCustomer(klant);
+        } catch (DBException ex) {
+            Logger.getLogger(DataCustomerController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
 
     @FXML
-    private void showC9Pane(ActionEvent event) {
-        C9Pane.setVisible(true);
-    }
+    private void saveCustomer4(ActionEvent event) {
+        Customer klant = new Customer(passportIDC4TxtField.getText(), firstNameC4TxtField.getText(), lastNameC4TxtField.getText());
+        try {
+            saveCustomer(klant);
+        } catch (DBException ex) {
+            Logger.getLogger(DataCustomerController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         }
 
     @FXML
-    private void submitC1(ActionEvent event) {
-        submitC1Btn.setTextFill(Color.GREEN);
-    }
+    private void saveCustomer5(ActionEvent event) {
+        Customer klant = new Customer(passportIDC5TxtField.getText(), firstNameC5TxtField.getText(), lastNameC5TxtField.getText());
+        try {
+            saveCustomer(klant);
+        } catch (DBException ex) {
+            Logger.getLogger(DataCustomerController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          }
 
-    
-    
+
      
 }
+         

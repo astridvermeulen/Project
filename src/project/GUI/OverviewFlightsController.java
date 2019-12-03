@@ -25,6 +25,7 @@ import project.DB.DBException;
 import project.LOGIC.DomainController;
 import static project.LOGIC.DomainController.domainController;
 import project.LOGIC.Flight;
+import static project.LOGIC.Flight.flightsOverview;
 import project.LOGIC.FlightLeg;
 
 /**
@@ -35,8 +36,12 @@ import project.LOGIC.FlightLeg;
 public class OverviewFlightsController implements Initializable {
     
     private DomainController model;
-    private SearchFlightController searchFlight;
+    private SearchFlightController searchFlightController;
 
+    public OverviewFlightsController() {
+        searchFlightController = new SearchFlightController();
+    }
+    
     @FXML
     private TableColumn<Flight, String> airlineColumn;
     @FXML
@@ -63,13 +68,14 @@ public class OverviewFlightsController implements Initializable {
     private ScrollPane scrollPane;
     @FXML
     private TableView<Flight> tableView;
+    
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        model=domainController.getInstance(); 
+        model=DomainController.getInstance(); 
         airlineColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("airline"));
         originAirportColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("origin"));
         destinationAirportColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("destination"));
@@ -81,32 +87,21 @@ public class OverviewFlightsController implements Initializable {
         flightNumberColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("flightNumber"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<Flight,Double>("price"));
         numberOfFlightLegsColumn.setCellValueFactory(new PropertyValueFactory<Flight,Integer>("getFlightLegs()"));
-        
+     
         tableView.setItems(getFlights());
-        
-        
-        
+
     }    
-    
     
     
     public ObservableList<Flight> getFlights(){
         
-        ObservableList<Flight> flights = FXCollections.observableArrayList(searchFlight.getFilteredFlights());
+        ObservableList<Flight> flights = FXCollections.observableArrayList();
+        
+        for(Flight f: searchFlightController.getFilteredFlights()){
+            flights.add(f);
+        }
+        
         return flights;
-        
-        
-    }
-
-    /**
-     *
-     * @param args
-     */
-    public static void main(String[] args) {
-        System.out.println("hallo ");
-        SearchFlightController object = new SearchFlightController();
-        System.out.println(object.getFilteredFlights());
-        System.out.println("hallo");
     }
     
     

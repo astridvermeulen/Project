@@ -11,7 +11,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
+import static project.DB.DBCustomer.getCustomers;
 import project.LOGIC.Booking;
+import project.LOGIC.Customer;
 /**
  *
  * @author Lenovo
@@ -48,9 +50,15 @@ public class DBBooking {
 	return null;
       }
       
-      Booking boeking = new Booking(bookingNumber);
+      ArrayList<Customer> bla = new ArrayList<>();
+      bla = getCustomers();
+      
+      
+      
+      
+      /*Booking boeking = new Booking(bookingNumber);
               DBConnection.closeConnection(con);
-      return boeking;
+      return boeking;*/
       
     }
     
@@ -59,9 +67,8 @@ public class DBBooking {
       DBConnection.closeConnection(con);
       throw new DBException(ex);
     }
-    
-         
-     }
+    return null;
+ }
  
  
  public static ArrayList<Booking> getBookings() throws DBException {
