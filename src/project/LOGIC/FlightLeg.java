@@ -35,15 +35,20 @@ public class FlightLeg {
         this.legNumber = legNumber;
         this.legOrigin = legOrigin;
         this.legDestination = legDestination;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-        this.legDepartureDate = LocalDate.parse(departureDate, formatter);
-        this.legArrivalDate = LocalDate.parse(arrivalDate, formatter);
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm");
-        this.legDepartureTime = LocalTime.parse(departureTime, dtf);
-        this.legArrivalTime = LocalTime.parse(arrivalTime, dtf);
-        this.legDuration = this.calculateDuration();
+        
+        this.legDepartureDate = LocalDate.parse(departureDate, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        this.legDepartureTime = LocalTime.parse(departureTime, DateTimeFormatter.ofPattern("HH:mm:ss"));
+        
+        this.legArrivalDate = LocalDate.parse(arrivalDate, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        this.legArrivalTime = LocalTime.parse(arrivalTime, DateTimeFormatter.ofPattern("HH:mm:ss"));
+        
+       
+        
+        
         this.legDepartureDateTime = LocalDateTime.of(this.legDepartureDate, this.legDepartureTime);
         this.legArrivalDateTime = LocalDateTime.of(this.legArrivalDate, this.legArrivalTime);
+                this.legDuration = this.calculateDuration();
+
     }
 
     //Getters

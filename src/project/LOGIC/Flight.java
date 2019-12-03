@@ -28,26 +28,31 @@ public class Flight {
     private final double price;
     private final ArrayList<FlightLeg> flightLegs;
     private final double emission;
-    private final int duration;
+    private int duration;
 
     //Constructor
     public Flight(String origin, String destination, String departureDate, String departureTime, String arrivalDate, String arrivalTime, String flightNumber, double price) throws DBException, SQLException {
-        this.airline = this.getAirlineOfFlight();
+        this.airline = DBAirline.getAirlineForFlight(flightNumber,departureDate);
         this.origin = origin;
         this.destination = destination;
-        this.duration = this.calculateDuration();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-        this.departureDate = LocalDate.parse(departureDate, formatter);
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm");
-        this.departureTime = LocalTime.parse(departureTime, dtf);
-        this.arrivalDate = LocalDate.parse(arrivalDate, formatter);
-        this.arrivalTime = LocalTime.parse(arrivalTime, dtf);
+        this.duration = 0;
+        
+       
+
+        this.departureDate = LocalDate.parse(departureDate, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        this.departureTime = LocalTime.parse(departureTime, DateTimeFormatter.ofPattern("HH:mm:ss"));
+        
+        this.arrivalDate = LocalDate.parse(arrivalDate, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        this.arrivalTime = LocalTime.parse(arrivalTime, DateTimeFormatter.ofPattern("HH:mm:ss"));
+        
         this.flightNumber = flightNumber;
         this.price = price;
         this.flightLegs = DBFlightLeg.getFlightLegs(flightNumber, departureDate);
         this.emission = this.calculateEmission();
+       
         this.departureDateTime = LocalDateTime.of(this.departureDate, this.departureTime);
         this.arrivalDateTime = LocalDateTime.of(this.arrivalDate, this.arrivalTime);
+        this.setDuration(); //Zo blijft de volgorde behouden van de GUI kolommen 
     }
 
     //Getters
@@ -98,7 +103,12 @@ public class Flight {
     public int getDuration() {
         return duration;
     }
-
+    
+    //Setter duration
+    public void setDuration() {
+        this.duration = this.calculateDuration();
+    }
+    
     //Helping method to calculate the duration of a flight 
     private int calculateDuration() {
         int dur = Math.toIntExact(ChronoUnit.HOURS.between(departureDateTime, arrivalDateTime));
@@ -117,12 +127,5 @@ public class Flight {
         return numberOfLegs;
     }
 
-    //Method to get the airline of the flight
-    private String getAirlineOfFlight() throws DBException {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-        String formattedString = departureDate.format(formatter);
-        String airl = DBAirline.getAirlineForFlight(this.flightNumber, formattedString);
-        return airl;
-
-    }
+    
 }
