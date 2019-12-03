@@ -114,7 +114,7 @@ public class DBFlightLeg {
     public static void main(String[] args) throws DBException, SQLException{
         ArrayList<FlightLeg> test = new ArrayList<>();
         String num = "LU0945";
-        String date = "2019-01-19";
+        String date = "19/01/2019";
         
         try {
             test = getFlightLegs(num, date);

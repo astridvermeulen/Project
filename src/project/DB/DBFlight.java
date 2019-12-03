@@ -228,7 +228,7 @@ public static ArrayList<Flight> getFlights() throws DBException {  // retourneer
     
     public static void main(String[] args) throws DBException, SQLException{
     String x = "EM0645";
-    String y = "12/2/2021";
+    String y = "12/02/2021";
     
     Flight z = getFlight(x, y);
     System.out.println(z.getArrivalDate() + z.getDestination());

@@ -186,7 +186,7 @@ public static String getAirlineForFlight(String flightNumber, String departureDa
    public static void main(String[] args) throws DBException {
       
     String x = "EM0645";
-    String y = "12/2/2021";
+    String y = "12/02/2021";
     
     String z = getAirlineForFlight(x, y);
     System.out.println(z);
