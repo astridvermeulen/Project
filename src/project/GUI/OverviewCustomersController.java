@@ -20,6 +20,7 @@ import project.DB.DBException;
 import project.LOGIC.Customer;
 import static project.LOGIC.Customer.customersOverview;
 import project.LOGIC.DomainController;
+import static project.LOGIC.DomainController.domainController;
 
 /**
  * FXML Controller class
@@ -46,7 +47,8 @@ private DomainController model;
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        passportNumberColumn.setCellValueFactory(new PropertyValueFactory<Customer, String>("passportID"));
+        model=DomainController.getInstance();
+        passportNumberColumn.setCellValueFactory(new PropertyValueFactory<Customer, String>("passportNumber"));
         firstNameColumn.setCellValueFactory(new PropertyValueFactory<Customer, String>("firstName"));
         lastNameColumn.setCellValueFactory(new PropertyValueFactory<Customer, String>("lastName"));
         homeCountryColumn.setCellValueFactory(new PropertyValueFactory<Customer, String>("homeCountry"));

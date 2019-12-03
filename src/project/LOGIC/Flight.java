@@ -126,6 +126,11 @@ public class Flight {
         int numberOfLegs = this.flightLegs.size();
         return numberOfLegs;
     }
+     public static ArrayList<Flight> flightsOverview() throws DBException {
+        ArrayList<Flight> flightsAll = DBFlight.getFlights();
+        return flightsAll;
+    }
+
 
     
 }

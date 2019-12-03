@@ -25,6 +25,7 @@ import project.DB.DBException;
 import project.LOGIC.DomainController;
 import static project.LOGIC.DomainController.domainController;
 import project.LOGIC.Flight;
+import static project.LOGIC.Flight.flightsOverview;
 import project.LOGIC.FlightLeg;
 
 /**
@@ -68,7 +69,7 @@ public class OverviewFlightsController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        model=domainController.getInstance(); 
+        model=DomainController.getInstance(); 
         airlineColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("airline"));
         originAirportColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("origin"));
         destinationAirportColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("destination"));
@@ -91,9 +92,14 @@ public class OverviewFlightsController implements Initializable {
     
     public ObservableList<Flight> getFlights(){
         
-        SearchFlightController object = new SearchFlightController();
-        
-        ObservableList<Flight> flights = FXCollections.observableArrayList(object.getFilteredFlights());
+        ObservableList<Flight> flights = FXCollections.observableArrayList();
+        try {
+            for(Flight f: flightsOverview()){
+            flights.add(f);
+        }
+        } catch (DBException ex) {
+            Logger.getLogger(OverviewFlightsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return flights;
         
         
