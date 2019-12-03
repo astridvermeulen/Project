@@ -80,7 +80,6 @@ public class startWindowController implements Initializable {
     private void loadOverviewFlights(ActionEvent event) {
         try {
       
-      
             AnchorPane pane = (AnchorPane) FXMLLoader.load(getClass().getResource("overviewFlights.fxml"));
             panelToUpdate.getChildren().setAll(pane);
       
@@ -92,14 +91,12 @@ public class startWindowController implements Initializable {
 
     @FXML
     private void loadDataCustomer(ActionEvent event) {
-        System.out.println("test");
         try {
-            
-            
+      
             AnchorPane pane = (AnchorPane) FXMLLoader.load(getClass().getResource("dataCustomer.fxml"));
             panelToUpdate.getChildren().setAll(pane);
-            
-            
+      
+      
         } catch (IOException ex) {
         Logger.getLogger(startWindowController.class.getName()).log(Level.SEVERE, null, ex);
     }

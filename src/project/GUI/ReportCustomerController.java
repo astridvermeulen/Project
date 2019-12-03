@@ -10,24 +10,23 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import project.LOGIC.DomainController;
-import static project.LOGIC.DomainController.domainController;
 
 /**
  * FXML Controller class
  *
  * @author eliseverschelde
  */
-public class SalesReportController implements Initializable {
-private DomainController model;
+public class ReportCustomerController implements Initializable {
+
     @FXML
-    private Label heyLbl;
+    private Label halloLbl;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        model=domainController.getInstance(); 
+        // TODO
     }    
     
 }
