@@ -21,7 +21,7 @@ public class DBConnection {
     public static Connection getConnection() throws DBException {
         Connection con = null;
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
 
             String protocol = "jdbc";
             String subProtocol = "mysql";

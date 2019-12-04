@@ -11,16 +11,20 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import project.DB.DBException;
 import project.LOGIC.Customer;
 import static project.LOGIC.Customer.customersOverview;
+import static project.LOGIC.Customer.deleteCustomer;
+import static project.LOGIC.Customer.saveCustomer;
 import project.LOGIC.DomainController;
-import static project.LOGIC.DomainController.domainController;
 
 /**
  * FXML Controller class
@@ -41,6 +45,18 @@ private DomainController model;
     private TableColumn<Customer, String> homeCountryColumn;
     @FXML
     private TableView<Customer> tableViewCustomers;
+    @FXML
+    private TextField firstNameTxtField;
+    @FXML
+    private TextField lastNameTxtField;
+    @FXML
+    private TextField passportIDTxtField;
+    @FXML
+    private Button addBtn;
+    @FXML
+    private Button modifyBtn;
+    @FXML
+    private Button deleteBtn;
 
     /**
      * Initializes the controller class.
@@ -66,6 +82,34 @@ private DomainController model;
             Logger.getLogger(OverviewCustomersController.class.getName()).log(Level.SEVERE, null, ex);
         }
         return customers;
+        
+    }
+
+    @FXML
+    private void addBtnClicked(ActionEvent event) {
+        Customer customer = new Customer(passportIDTxtField.getText(), firstNameTxtField.getText(), lastNameTxtField.getText());
+        try {
+            saveCustomer(customer);
+        } catch (DBException ex) {
+            Logger.getLogger(OverviewCustomersController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        tableViewCustomers.getItems().add(customer);
+        passportIDTxtField.clear();
+        firstNameTxtField.clear();
+        lastNameTxtField.clear();
+    }
+
+
+    @FXML
+    private void deleteBtnClicked(ActionEvent event) {
+        ObservableList<Customer> customerSelected;
+        customerSelected = tableViewCustomers.getSelectionModel().getSelectedItems();
+        try {
+            deleteCustomer(customerSelected.get(0).getPassportNumber());
+        } catch (DBException ex) {
+            Logger.getLogger(OverviewCustomersController.class.getName()).log(Level.SEVERE, null, ex);
+    }
+        
         
     }
     

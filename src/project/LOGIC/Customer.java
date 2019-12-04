@@ -44,7 +44,7 @@ public class Customer {
     }
 
     //Method to delete a customer
-    public void deleteCustomer(String passportNumber) throws DBException {
+    public static void deleteCustomer(String passportNumber) throws DBException {
         DBCustomer.deleteCustomer(passportNumber);
     }
 

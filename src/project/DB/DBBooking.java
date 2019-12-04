@@ -27,38 +27,28 @@ public class DBBooking {
       con = DBConnection.getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
-      String sql = "SELECT bookingNumber "
-        //+ ", promotion, serviceFee, flightNumber, departureDate "
-        + "FROM db2019_18.booking "
+      String sql = "SELECT * "
+        + "FROM booking "
 	+ "WHERE bookingNumber = " + bookingNumber;
 
       ResultSet srs = stmt.executeQuery(sql);
 
-      double serviceFee, promotion;
-      String flightNumber;
-      Date departureDate;
+      double serviceFee;
+      String bookingDate;
       
       if (srs.next()) {
-          bookingNumber = srs.getInt("bookingNumber");
+          bookingDate = srs.getString("bookingDate");
           serviceFee = srs.getDouble("serviceFee");
-          promotion = srs.getDouble("promotion");
-          //flightNumber = srs.getString("flightNumber");
-          //departureDate = srs.getDate("departureDate");
+          
 	} 
       else {// we verwachten slechts 1 rij...
 	DBConnection.closeConnection(con);
 	return null;
       }
       
-      ArrayList<Customer> bla = new ArrayList<>();
-      bla = getCustomers();
-      
-      
-      
-      
-      /*Booking boeking = new Booking(bookingNumber);
+      Booking boeking = new Booking(bookingDate, serviceFee);
               DBConnection.closeConnection(con);
-      return boeking;*/
+      return boeking;
       
     }
     
@@ -67,7 +57,7 @@ public class DBBooking {
       DBConnection.closeConnection(con);
       throw new DBException(ex);
     }
-    return null;
+    
  }
  
  
@@ -95,40 +85,31 @@ public class DBBooking {
       throw new DBException(ex);
     }
   }
-      public static void saveBooking(Booking s) throws DBException {
+    public static void saveBooking(String bookingDate, double promotion, double serviceFee, String flightNumber, String departureDate, String passportNumber) throws DBException, SQLException {
     Connection con = null;
     try {
       con = DBConnection.getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
-      String sql = "SELECT bookingNumber "
-              + "FROM booking "
-              + "WHERE bookingNumber = " + s.getBookingNumber();
-      ResultSet srs = stmt.executeQuery(sql);
-      if (srs.next()) {
-        // UPDATE
-	sql = "UPDATE booking "
-                + "SET bookingNummer = " + s.getBookingNumber()
-		+ ", promotion = " + s.getPromotion()
-		+ ", serviceFee = " + s.getServiceFee()
-		// + ", flightNumber = '" + s.getFlightNumber() + "'"
-               // + ", departureDate = " + s.getdepartureDate()
-                + " WHERE bookingNumber = '" + s.getBookingNumber() + "'";
-        stmt.executeUpdate(sql);
-      } else {
-	// INSERT
-	sql = "INSERT into booking "
-                + "(bookingNumber, promotion, serviceFee) "
-		+ "VALUES (" + s.getBookingNumber() 
-                + ", " + s.getPromotion() 
-		+ ", " + s.getServiceFee()
-             // + ", '" + s.getFlightNumber() + "'"
-             // + ", " + s.getdepartureDate()                
+      String sql = "INSERT into booking "
+		+ "VALUES (null"
+                + ", '" + bookingDate + "'"
+                + ", " + promotion
+                + ", " + serviceFee
+                + ", '" + flightNumber + "'"
+                + ", '" + departureDate + "'"            
                 + ")";
-        stmt.executeUpdate(sql);
-      }
+      stmt.executeUpdate(sql);      
+      
+      String sql2 = "INSERT INTO execution "
+                  + "SELECT max(bookingNumber), '" + passportNumber + "'"
+                  + "FROM booking";
+      stmt.executeUpdate(sql2);      
+                    
       DBConnection.closeConnection(con);
-    } catch (Exception ex) {
+      }
+      
+      catch (Exception ex) {
       ex.printStackTrace();
       DBConnection.closeConnection(con);
       throw new DBException(ex);
@@ -162,6 +143,19 @@ public class DBBooking {
       throw new DBException(ex);
     }
   }
-      
+ public static void main(String[] args) throws DBException, SQLException{
+     String bookingDate, flightNumber, departureDate, passportNumber;
+     double promotion, serviceFee;
+     bookingDate = "11/02/2021";
+     departureDate = "12/02/2021";
+     passportNumber = "BE1207";
+     flightNumber = "TA0645";
+     promotion = 40.0;
+     serviceFee = 20.0;
+     saveBooking(bookingDate, promotion, serviceFee, flightNumber, departureDate, passportNumber);
+     
+     
+   
+ }    
       
 }
