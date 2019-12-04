@@ -28,21 +28,17 @@ public class DBBooking {
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
       String sql = "SELECT * "
-        + "FROM db2019_18.booking "
+        + "FROM booking "
 	+ "WHERE bookingNumber = " + bookingNumber;
 
       ResultSet srs = stmt.executeQuery(sql);
 
-      double serviceFee, promotion;
-      String flightNumber;
-      Date departureDate;
+      double serviceFee;
+      String bookingDate;
       
       if (srs.next()) {
-          bookingNumber = srs.getInt("bookingNumber");
+          bookingDate = srs.getString("bookingDate");
           serviceFee = srs.getDouble("serviceFee");
-          promotion = srs.getDouble("promotion");
-          flightNumber = srs.getString("flightNumber");
-          departureDate = srs.getDate("departureDate");
           
 	} 
       else {// we verwachten slechts 1 rij...
@@ -50,15 +46,9 @@ public class DBBooking {
 	return null;
       }
       
-      ArrayList<Customer> bla = new ArrayList<>();
-      bla = getCustomers();
-      
-      
-      
-      
-      /*Booking boeking = new Booking(bookingNumber);
+      Booking boeking = new Booking(bookingDate, serviceFee);
               DBConnection.closeConnection(con);
-      return boeking;*/
+      return boeking;
       
     }
     
@@ -67,7 +57,7 @@ public class DBBooking {
       DBConnection.closeConnection(con);
       throw new DBException(ex);
     }
-    return null;
+    
  }
  
  
