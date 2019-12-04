@@ -33,6 +33,17 @@ public class Booking {
         this.customers = customer;
     }
 
+    //Constructor needed for the database 
+    public Booking(String bookingDate, double serviceFee) throws DBException {
+        this.bookingNumber = -1;
+        this.bookingDate = LocalDate.parse(bookingDate, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        this.serviceFee = serviceFee;
+        this.promotion = calculatePromotion();
+        this.netPrice = calculateNetPrice();
+        this.flight = null;
+        this.customers = null;
+    }
+    
     //Getters
     public int getBookingNumber() {
         return bookingNumber;
@@ -96,20 +107,28 @@ public class Booking {
     }
 
     //Method to calculate the revenue of a month
-    public static double calculateRevenuePerMonth(String month) throws DBException {
+    public static double calculateRevenuePerMonth(String monthSlashYear) throws DBException {
         double revenuePerMonth = 0.0;
         ArrayList<Booking> allBookings = DBBooking.getBookings();
         for (Booking booking : allBookings) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            String maand = booking.bookingDate.format(formatter).substring(3, 4);
-            if(maand.equals(month)){
-                revenuePerMonth = revenuePerMonth + booking.calculateNetPrice();
+            String maandJaar = booking.bookingDate.format(formatter).substring(3);
+            if(maandJaar.equals(monthSlashYear)){
+                revenuePerMonth = revenuePerMonth + booking.getServiceFee();
             }
         }
         return revenuePerMonth;
     }
+    
+    
 
-    public static void main(String[] args) throws DBException {
-        System.out.println(Booking.calculateRevenuePerMonth("01"));
+    public static void main(String[] args) throws DBException, SQLException {
+        //System.out.println(Booking.calculateRevenuePerMonth("01"));
+        Flight vlucht = new Flight("origin", "destination", "12/02/2021", "14:20:00", "12/02/2021", "15:20:00", "flightNumber", 100.0);
+        Customer persoon = new Customer("passportNumber", "firstName", "lastName");
+        ArrayList<Customer> lijst = new ArrayList<>();
+        lijst.add(persoon);
+        Booking booking = new Booking(vlucht, lijst);
+        System.out.println(booking.calculateNetPrice());
     }
 }
