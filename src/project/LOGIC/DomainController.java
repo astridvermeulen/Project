@@ -27,8 +27,14 @@ public class DomainController {
         ArrayList<Flight> flightsOriginDestination = this.fliterOnOriginDestination(origin, destination, flightsAll);
         ArrayList<Flight> flightsDate = this.filterOnDate(departureDate, flightsOriginDestination);
         ArrayList<Flight> flightsFilteredOnLegs = this.fliterOnLegs(legs, flightsDate);
-//if maken voor filters
-        ArrayList<Flight> output = new ArrayList<Flight>(flightsFilteredOnLegs.stream().sorted(Comparator.comparing(Flight::getDuration)).collect(Collectors.toList()));
+        ArrayList<Flight> output;
+        if (filter.equalsIgnoreCase("price")) {
+            output = new ArrayList<>(flightsFilteredOnLegs.stream().sorted(Comparator.comparing(Flight::getPrice)).collect(Collectors.toList()));
+        } else if (filter.equalsIgnoreCase("duration")) {
+            output = new ArrayList<>(flightsFilteredOnLegs.stream().sorted(Comparator.comparing(Flight::getDuration)).collect(Collectors.toList()));
+        } else {
+            output = new ArrayList<>(flightsFilteredOnLegs.stream().sorted(Comparator.comparing(Flight::getEmission)).collect(Collectors.toList()));
+        }
         return output;
     }
 
@@ -78,7 +84,6 @@ public class DomainController {
             System.out.println(f.getDuration());
             System.out.println("----");
         }
-        
-        
+
     }
 }
