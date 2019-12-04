@@ -103,7 +103,7 @@ public class DBBooking {
       
       String sql = "INSERT into booking "
 		+ "VALUES (null"
-                + ", " + bookingDate
+                + ", '" + bookingDate + "'"
                 + ", " + promotion
                 + ", " + serviceFee
                 + ", '" + flightNumber + "'"
@@ -153,6 +153,19 @@ public class DBBooking {
       throw new DBException(ex);
     }
   }
-      
+ public static void main(String[] args) throws DBException, SQLException{
+     String bookingDate, flightNumber, departureDate, passportNumber;
+     double promotion, serviceFee;
+     bookingDate = "11/02/2021";
+     departureDate = "12/02/2021";
+     passportNumber = "BE1207";
+     flightNumber = "TA0645";
+     promotion = 40.0;
+     serviceFee = 20.0;
+     saveBooking(bookingDate, promotion, serviceFee, flightNumber, departureDate, passportNumber);
+     
+     
+   
+ }    
       
 }
