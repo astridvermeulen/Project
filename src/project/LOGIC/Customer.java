@@ -48,7 +48,7 @@ public class Customer {
         DBCustomer.deleteCustomer(passportNumber);
     }
 
-    //Helping method to get the home country out of a passportnumber
+    //Helping method to get the home country out of a passportnumber: tested V
     private static String calculateHomeCountry(String passportNumb) {
 
         String homeCount = "";
@@ -61,7 +61,7 @@ public class Customer {
         return homeCount;
     }
 
-    //Helping method used in the method calculateHomeCountry: to determine if a String is an Integer
+    //Helping method used in the method calculateHomeCountry: to determine if a String is an Integer: tested V
     private static boolean isInteger(String s) {
         try {
             Integer.parseInt(s);
@@ -83,8 +83,4 @@ public class Customer {
         return customersAll;
     }
 
-    public static void main(String[] args) {
-        String pass = "S1478";
-        System.out.println(calculateHomeCountry(pass));
-    }
 }
