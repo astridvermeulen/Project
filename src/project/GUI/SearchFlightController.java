@@ -7,6 +7,7 @@ package project.GUI;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -22,6 +23,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.layout.AnchorPane;
 import project.DB.DBAirport;
 import static project.DB.DBAirport.getAirports;
@@ -40,6 +42,28 @@ public class SearchFlightController implements Initializable {
     private DomainController model;
     private ArrayList<Flight> filteredFlights;
     public String Emission;
+    @FXML
+    private TableColumn<?, ?> airlineColumn;
+    @FXML
+    private TableColumn<?, ?> originAirportColumn;
+    @FXML
+    private TableColumn<?, ?> destinationAirportColumn;
+    @FXML
+    private TableColumn<?, ?> durationColumn;
+    @FXML
+    private TableColumn<?, ?> departureDayColumn;
+    @FXML
+    private TableColumn<?, ?> departureTimeColumn;
+    @FXML
+    private TableColumn<?, ?> arrivalDayColumn;
+    @FXML
+    private TableColumn<?, ?> arrivalTimeColumn;
+    @FXML
+    private TableColumn<?, ?> flightNumberColumn;
+    @FXML
+    private TableColumn<?, ?> priceColumn;
+    @FXML
+    private TableColumn<?, ?> numberOfFlightLegsColumn;
 
     public SearchFlightController() {
     }
@@ -80,8 +104,8 @@ public class SearchFlightController implements Initializable {
     @FXML
     private AnchorPane panelToUpdate;
 
-    public DatePicker getDatePicker() {
-        return datePicker;
+    public String getDatePicker() {
+        return datePicker.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 
     
@@ -135,8 +159,8 @@ public class SearchFlightController implements Initializable {
     private void searchFlight(ActionEvent event) {
 
         try {
-            filteredFlights = model.searchFlight(getIntermediateStopsAllowed(), getSortBy(), getOriginAirport(), getDestinationAirport(), getDatePicker().toString() );
-        } catch (DBException ex) {
+            filteredFlights = model.searchFlight(getIntermediateStopsAllowed(), getSortBy(), getOriginAirport(), getDestinationAirport(), getDatePicker());
+        }  catch (DBException ex) {
             Logger.getLogger(SearchFlightController.class.getName()).log(Level.SEVERE, null, ex);
         }  
         
@@ -148,7 +172,7 @@ public class SearchFlightController implements Initializable {
       
         } catch (IOException ex) {
         Logger.getLogger(startWindowController.class.getName()).log(Level.SEVERE, null, ex);
-    }
+        }
     }
 
     
@@ -159,9 +183,6 @@ public class SearchFlightController implements Initializable {
     ObservableList list1 = FXCollections.observableArrayList();
     ObservableList list2 = FXCollections.observableArrayList();
     ObservableList list3 = FXCollections.observableArrayList();
-    ObservableList list4 = FXCollections.observableArrayList();
-    ObservableList list5 = FXCollections.observableArrayList();
-    ObservableList list6 = FXCollections.observableArrayList();
     
     ArrayList<Airport> test = new ArrayList<>();
     
@@ -177,27 +198,19 @@ public class SearchFlightController implements Initializable {
         Logger.getLogger(DBAirport.class.getName()).log(Level.SEVERE, null, ex);
         }
       
-      for(int i=1; i<32; i++){
+      for(int i=1; i<5; i++){
           list2.add(i);
       }
       for(int i=1; i<13; i++){
           list3.add(i);
       }
-      for(int i=2019; i<2023; i++){
-          list4.add(i);
-      }
-      for(int i=1; i<10; i++){
-          list5.add(i);
-      }
-      list6.addAll("Duration", "Price", "Emission");
+      
+      list3.addAll("Duration", "Price", "Emission");
       
         originCityChoice.getItems().addAll(list1);
         destinationCityChoice.getItems().addAll(list1);
-        //departureDayChoice.getItems().addAll(list2);
-        //departureMonthChoice.getItems().addAll(list3);
-        //departureYearChoice.getItems().addAll(list4);
-        amountOfPassengersChoice.getItems().addAll(list5);
-        sortByChoice.getItems().addAll(list6);
+        amountOfPassengersChoice.getItems().addAll(list2);
+        sortByChoice.getItems().addAll(list3);
         
     }
     public static void main(String[] args) throws DBException {
