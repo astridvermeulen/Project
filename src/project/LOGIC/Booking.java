@@ -1,7 +1,9 @@
 package project.LOGIC;
 
+import java.sql.SQLException;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import project.DB.DBBooking;
 import project.DB.DBException;
@@ -59,10 +61,15 @@ public class Booking {
     public ArrayList<Customer> getCustomers() {
         return customers;
     }
-    
-    //Method to safe a booking 
-    public static void saveBooking(Booking b) throws DBException {
-        DBBooking.saveBooking(b);
+
+    //Helping method to safe a booking: one customer per booking 
+    public void saveBooking(Booking b) throws DBException, SQLException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String bookingDateInString = b.bookingDate.format(formatter);
+        String departureDateInString = b.flight.getDepartureDate().format(formatter);
+        for (int i = 0; i < b.customers.size(); i++) {
+            DBBooking.saveBooking(bookingDateInString, b.promotion, b.serviceFee, b.flight.getFlightNumber(), departureDateInString, b.customers.get(i).getPassportNumber());
+        }
     }
 
     //Method to delete a booking 
@@ -86,5 +93,23 @@ public class Booking {
         double netPr;
         netPr = this.serviceFee - this.promotion + DBFlight.getFlightForBooking(bookingNumber).getPrice();
         return netPr;
+    }
+
+    //Method to calculate the revenue of a month
+    public static double calculateRevenuePerMonth(String month) throws DBException {
+        double revenuePerMonth = 0.0;
+        ArrayList<Booking> allBookings = DBBooking.getBookings();
+        for (Booking booking : allBookings) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            String maand = booking.bookingDate.format(formatter).substring(3, 4);
+            if(maand.equals(month)){
+                revenuePerMonth = revenuePerMonth + booking.calculateNetPrice();
+            }
+        }
+        return revenuePerMonth;
+    }
+
+    public static void main(String[] args) throws DBException {
+        System.out.println(Booking.calculateRevenuePerMonth("01"));
     }
 }

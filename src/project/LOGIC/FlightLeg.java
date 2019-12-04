@@ -22,9 +22,8 @@ public class FlightLeg {
     private final String legOrigin;
     private final String legDestination;
     private final LocalDate legDepartureDate;
-        private final LocalDateTime legDepartureDateTime;
-        private final LocalDateTime legArrivalDateTime;
-
+    private final LocalDateTime legDepartureDateTime;
+    private final LocalDateTime legArrivalDateTime;
     private final LocalDate legArrivalDate;
     private final LocalTime legDepartureTime;
     private final LocalTime legArrivalTime;
@@ -35,20 +34,13 @@ public class FlightLeg {
         this.legNumber = legNumber;
         this.legOrigin = legOrigin;
         this.legDestination = legDestination;
-        
         this.legDepartureDate = LocalDate.parse(departureDate, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         this.legDepartureTime = LocalTime.parse(departureTime, DateTimeFormatter.ofPattern("HH:mm:ss"));
-        
         this.legArrivalDate = LocalDate.parse(arrivalDate, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         this.legArrivalTime = LocalTime.parse(arrivalTime, DateTimeFormatter.ofPattern("HH:mm:ss"));
-        
-       
-        
-        
         this.legDepartureDateTime = LocalDateTime.of(this.legDepartureDate, this.legDepartureTime);
         this.legArrivalDateTime = LocalDateTime.of(this.legArrivalDate, this.legArrivalTime);
-                this.legDuration = this.calculateDuration();
-
+        this.legDuration = this.calculateDuration();
     }
 
     //Getters
