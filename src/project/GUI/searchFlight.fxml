@@ -5,28 +5,63 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="676.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.GUI.SearchFlightController">
    <children>
-      <AnchorPane fx:id="panelToUpdate" layoutX="10.0" layoutY="10.0" minHeight="0.0" minWidth="0.0" prefHeight="409.0" prefWidth="676.0">
-         <children>
-            <Label layoutX="282.0" layoutY="14.0" text="CleanFlight" textFill="RED" />
-            <Label fx:id="fromLbl" layoutX="33.0" layoutY="53.0" text="From" />
-            <Label fx:id="toLbl" layoutX="371.0" layoutY="53.0" text="To" />
-            <Label fx:id="chooseDepartureDateLbl" layoutX="33.0" layoutY="117.0" text="Choose departure date" />
-            <Label fx:id="numberOfPassengersLbl" layoutX="371.0" layoutY="117.0" text="Number of passengers" />
-            <Label fx:id="intermediateStopsAllowedLbl" layoutX="33.0" layoutY="180.0" text="Indermediate stops allowed?" />
-            <Label fx:id="sortByLbl" layoutX="33.0" layoutY="241.0" text="Sort by" />
-            <ChoiceBox fx:id="originCityChoice" layoutX="87.0" layoutY="48.0" prefWidth="150.0" />
-            <ChoiceBox fx:id="destinationCityChoice" layoutX="405.0" layoutY="48.0" prefWidth="150.0" />
-            <ChoiceBox fx:id="amountOfPassengersChoice" layoutX="371.0" layoutY="142.0" prefWidth="150.0" />
-            <ChoiceBox fx:id="sortByChoice" layoutX="100.0" layoutY="236.0" prefWidth="150.0" />
-            <Button fx:id="searchFlightMethode" layoutX="436.0" layoutY="312.0" mnemonicParsing="false" onAction="#searchFlight" prefHeight="27.0" prefWidth="110.0" text="Search your flight" />
-            <CheckBox fx:id="intermediateStopsAllowedCheck" layoutX="225.0" layoutY="180.0" mnemonicParsing="false" onAction="#handleYesCheckBox" prefHeight="18.0" prefWidth="59.0" text="Yes" />
-            <CheckBox fx:id="intermediateStopsNotAllowedCheck" layoutX="294.0" layoutY="180.0" mnemonicParsing="false" onAction="#handleNoCheckBox" prefHeight="19.0" prefWidth="53.0" text="No" />
-            <DatePicker fx:id="datePicker" layoutX="33.0" layoutY="142.0" />
-         </children>
-      </AnchorPane>
+      <SplitPane dividerPositions="0.008928571428571428" orientation="VERTICAL" prefHeight="450.0" prefWidth="676.0">
+        <items>
+            <AnchorPane fx:id="panelToUpdate" minHeight="0.0" minWidth="0.0" prefHeight="450.0" prefWidth="676.0">
+               <children>
+                  <Label layoutX="282.0" layoutY="14.0" text="CleanFlight" textFill="RED" />
+                  <Label fx:id="fromLbl" layoutX="33.0" layoutY="53.0" text="From" />
+                  <Label fx:id="toLbl" layoutX="371.0" layoutY="53.0" text="To" />
+                  <Label fx:id="chooseDepartureDateLbl" layoutX="33.0" layoutY="117.0" text="Choose departure date" />
+                  <Label fx:id="numberOfPassengersLbl" layoutX="371.0" layoutY="117.0" text="Number of passengers" />
+                  <Label fx:id="intermediateStopsAllowedLbl" layoutX="33.0" layoutY="180.0" text="Indermediate stops allowed?" />
+                  <Label fx:id="sortByLbl" layoutX="33.0" layoutY="241.0" text="Sort by" />
+                  <ChoiceBox fx:id="originCityChoice" layoutX="87.0" layoutY="48.0" prefWidth="150.0" />
+                  <ChoiceBox fx:id="destinationCityChoice" layoutX="405.0" layoutY="48.0" prefWidth="150.0" />
+                  <ChoiceBox fx:id="amountOfPassengersChoice" layoutX="371.0" layoutY="142.0" prefWidth="150.0" />
+                  <ChoiceBox fx:id="sortByChoice" layoutX="100.0" layoutY="236.0" prefWidth="150.0" />
+                  <Button fx:id="searchFlightMethode" layoutX="425.0" layoutY="236.0" mnemonicParsing="false" onAction="#searchFlight" prefHeight="27.0" prefWidth="150.0" text="Search your flight" />
+                  <CheckBox fx:id="intermediateStopsAllowedCheck" layoutX="225.0" layoutY="180.0" mnemonicParsing="false" onAction="#handleYesCheckBox" prefHeight="18.0" prefWidth="59.0" text="Yes" />
+                  <CheckBox fx:id="intermediateStopsNotAllowedCheck" layoutX="294.0" layoutY="180.0" mnemonicParsing="false" onAction="#handleNoCheckBox" prefHeight="19.0" prefWidth="53.0" text="No" />
+                  <DatePicker fx:id="datePicker" layoutX="33.0" layoutY="142.0" />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <ScrollPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="439.0" prefWidth="678.0">
+                           <children>
+                              <TableView layoutX="-3.0" prefHeight="440.0" prefWidth="1823.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.rightAnchor="-1146.0">
+                                <columns>
+                                    <TableColumn fx:id="airlineColumn" prefWidth="222.0" text="Airline" />
+                                    <TableColumn fx:id="originAirportColumn" minWidth="0.0" prefWidth="216.0" text="Origin airport" />
+                                    <TableColumn fx:id="destinationAirportColumn" prefWidth="578.0" text="Destination airport" />
+                                    <TableColumn fx:id="durationColumn" prefWidth="121.6864013671875" text="Duration" />
+                                    <TableColumn fx:id="departureDayColumn" prefWidth="75.0" text="Departure day" />
+                                    <TableColumn fx:id="departureTimeColumn" prefWidth="155.1177978515625" text="Departure time" />
+                                    <TableColumn fx:id="arrivalDayColumn" prefWidth="75.0" text="Arrival day" />
+                                    <TableColumn fx:id="arrivalTimeColumn" prefWidth="137.431884765625" text="Arrival time" />
+                                    <TableColumn fx:id="flightNumberColumn" prefWidth="97.2962646484375" text="Flight number" />
+                                    <TableColumn fx:id="priceColumn" prefWidth="65.0186767578125" text="Price (€)" />
+                                    <TableColumn fx:id="numberOfFlightLegsColumn" prefWidth="75.0" text="Number of flight legs" />
+                                </columns>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
    </children>
 </AnchorPane>

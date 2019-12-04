@@ -39,7 +39,6 @@ public class OverviewFlightsController implements Initializable {
     private SearchFlightController searchFlightController;
 
     public OverviewFlightsController() {
-        searchFlightController = new SearchFlightController();
     }
     
     @FXML

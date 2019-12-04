@@ -6,6 +6,7 @@
 package project.GUI;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -88,12 +89,29 @@ private DomainController model;
     @FXML
     private void addBtnClicked(ActionEvent event) {
         Customer customer = new Customer(passportIDTxtField.getText(), firstNameTxtField.getText(), lastNameTxtField.getText());
+        
+        //in onze overview moeten we de oude customer nog verwijderen
+        ObservableList<Customer> allCustomers = tableViewCustomers.getItems();
+        ObservableList<Customer> listCustomersToDelete=null;
+
+        for(Customer c: allCustomers){
+            if (c.getPassportNumber().equals(passportIDTxtField.getText())){
+                    listCustomersToDelete.add(c);
+            }
+        }
+        
+        listCustomersToDelete.forEach(allCustomers::remove);
+        
+        //customer toevoegen of aanpassen indien ze al bestaat, in datalaag wordt de oude customer dan onmiddellijk verwijderd
         try {
             saveCustomer(customer);
         } catch (DBException ex) {
             Logger.getLogger(OverviewCustomersController.class.getName()).log(Level.SEVERE, null, ex);
         }
         tableViewCustomers.getItems().add(customer);
+
+        
+        //tekstvakjes leeg maken
         passportIDTxtField.clear();
         firstNameTxtField.clear();
         lastNameTxtField.clear();
@@ -102,15 +120,15 @@ private DomainController model;
 
     @FXML
     private void deleteBtnClicked(ActionEvent event) {
-        ObservableList<Customer> customerSelected;
+        ObservableList<Customer> customerSelected, allCustomers;
+        allCustomers = tableViewCustomers.getItems();
         customerSelected = tableViewCustomers.getSelectionModel().getSelectedItems();
         try {
             deleteCustomer(customerSelected.get(0).getPassportNumber());
         } catch (DBException ex) {
             Logger.getLogger(OverviewCustomersController.class.getName()).log(Level.SEVERE, null, ex);
-    }
-        
-        
+        }
+        customerSelected.forEach(allCustomers::remove);
     }
     
 }

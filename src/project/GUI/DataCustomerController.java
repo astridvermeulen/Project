@@ -6,6 +6,7 @@
 package project.GUI;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,7 +16,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
 import project.DB.DBException;
 import project.LOGIC.Customer;
 import static project.LOGIC.Customer.saveCustomer;
@@ -123,6 +123,7 @@ public class DataCustomerController implements Initializable {
         C5Pane.setVisible(true);
     }
 
+    private ArrayList<Customer> customersLinkedToBooking;
     @FXML
     private void saveCustomer1(ActionEvent event) {
         System.out.println("test");
@@ -133,6 +134,7 @@ public class DataCustomerController implements Initializable {
         } catch (DBException ex) {
             Logger.getLogger(DataCustomerController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        customersLinkedToBooking.add(klant);
     }
 
     @FXML
@@ -143,7 +145,9 @@ public class DataCustomerController implements Initializable {
         } catch (DBException ex) {
             Logger.getLogger(DataCustomerController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        customersLinkedToBooking.add(klant);
         }
+    
 
     @FXML
     private void saveCustomer3(ActionEvent event) {
@@ -153,7 +157,8 @@ public class DataCustomerController implements Initializable {
         } catch (DBException ex) {
             Logger.getLogger(DataCustomerController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        }
+        customersLinkedToBooking.add(klant);
+    }
 
     @FXML
     private void saveCustomer4(ActionEvent event) {
@@ -163,7 +168,8 @@ public class DataCustomerController implements Initializable {
         } catch (DBException ex) {
             Logger.getLogger(DataCustomerController.class.getName()).log(Level.SEVERE, null, ex);
         }
-         }
+        customersLinkedToBooking.add(klant);
+    }
 
     @FXML
     private void saveCustomer5(ActionEvent event) {
@@ -173,7 +179,8 @@ public class DataCustomerController implements Initializable {
         } catch (DBException ex) {
             Logger.getLogger(DataCustomerController.class.getName()).log(Level.SEVERE, null, ex);
         }
-          }
+        customersLinkedToBooking.add(klant);
+    }
 
 
      
