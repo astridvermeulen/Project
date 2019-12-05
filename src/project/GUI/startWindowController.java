@@ -80,7 +80,7 @@ public class startWindowController implements Initializable {
     private void loadOverviewFlights(ActionEvent event) {
         try {
       
-            AnchorPane pane = (AnchorPane) FXMLLoader.load(getClass().getResource("overviewFlights.fxml"));
+            AnchorPane pane = (AnchorPane) FXMLLoader.load(getClass().getResource("project/GUI/overviewFlights.fxml"));
             panelToUpdate.getChildren().setAll(pane);
       
       

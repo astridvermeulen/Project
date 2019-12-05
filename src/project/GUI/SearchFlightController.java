@@ -7,6 +7,9 @@ package project.GUI;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -23,7 +26,10 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import project.DB.DBAirport;
 import static project.DB.DBAirport.getAirports;
@@ -41,37 +47,35 @@ import project.LOGIC.Flight;
 public class SearchFlightController implements Initializable {
     private DomainController model;
     private ArrayList<Flight> filteredFlights;
-    public String Emission;
+    
+    
+    // Overview of flights matching the criteria
     @FXML
-    private TableColumn<?, ?> airlineColumn;
+    private TableColumn<Flight, String> airlineColumn;
     @FXML
-    private TableColumn<?, ?> originAirportColumn;
+    private TableColumn<Flight, String> flightNumberColumn;
     @FXML
-    private TableColumn<?, ?> destinationAirportColumn;
+    private TableColumn<Flight, Double> priceColumn;
     @FXML
-    private TableColumn<?, ?> durationColumn;
+    private TableColumn<Flight, String> originAirportColumn;
     @FXML
-    private TableColumn<?, ?> departureDayColumn;
+    private TableColumn<Flight, String> destinationAirportColumn;
     @FXML
-    private TableColumn<?, ?> departureTimeColumn;
+    private TableColumn<Flight, LocalTime> departureTimeColumn;
     @FXML
-    private TableColumn<?, ?> arrivalDayColumn;
+    private TableColumn<Flight, Duration> durationColumn;
     @FXML
-    private TableColumn<?, ?> arrivalTimeColumn;
+    private TableColumn<Flight, LocalDate> departureDayColumn;
     @FXML
-    private TableColumn<?, ?> flightNumberColumn;
+    private TableColumn<Flight, LocalDate> arrivalDayColumn;
     @FXML
-    private TableColumn<?, ?> priceColumn;
+    private TableColumn<Flight, LocalTime> arrivalTimeColumn;
     @FXML
-    private TableColumn<?, ?> numberOfFlightLegsColumn;
-
-    public SearchFlightController() {
-    }
+    private TableColumn<Flight, Integer> numberOfFlightLegsColumn;
+    @FXML
+    private TableView<Flight> tableView;
 
     
-    public String getEmission() {
-        return Emission;
-    }
     
     @FXML
     private DatePicker datePicker;
@@ -103,20 +107,23 @@ public class SearchFlightController implements Initializable {
     private CheckBox intermediateStopsNotAllowedCheck;
     @FXML
     private AnchorPane panelToUpdate;
+    @FXML
+    private ScrollPane scrollPane;
+    
+    
+    //Getters
+    public SearchFlightController() {
+    }
 
     public String getDatePicker() {
         return datePicker.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
-
-    
     public String getOriginAirport(){
         return originCityChoice.getValue().toString();
     }
     public String getDestinationAirport(){
         return destinationCityChoice.getValue().toString();
     }
-    
-    
     public int getAmountOfPassengers(){
         return (Integer) amountOfPassengersChoice.getValue();
     }
@@ -126,14 +133,30 @@ public class SearchFlightController implements Initializable {
     public boolean getIntermediateStopsAllowed(){
         return intermediateStopsAllowedCheck.isSelected();
     }
-    
+    public ArrayList<Flight> getFilteredFlights() {
+        return filteredFlights;
+    }
     
     
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         model=DomainController.getInstance();
-        addDataToChoiceBox();  
+        addDataToChoiceBox();
+        
+        airlineColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("airline"));
+        originAirportColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("origin"));
+        destinationAirportColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("destination"));
+        durationColumn.setCellValueFactory(new PropertyValueFactory<Flight,Duration>("duration"));
+        departureDayColumn.setCellValueFactory(new PropertyValueFactory<Flight,LocalDate>("departureDate"));
+        departureTimeColumn.setCellValueFactory(new PropertyValueFactory<Flight,LocalTime>("departureTime"));
+        arrivalDayColumn.setCellValueFactory(new PropertyValueFactory<Flight,LocalDate>("arrivalDate"));
+        arrivalTimeColumn.setCellValueFactory(new PropertyValueFactory<Flight,LocalTime>("arrivalTime"));
+        flightNumberColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("flightNumber"));
+        priceColumn.setCellValueFactory(new PropertyValueFactory<Flight,Double>("price"));
+        numberOfFlightLegsColumn.setCellValueFactory(new PropertyValueFactory<Flight,Integer>("getFlightLegs()"));
+     
+        
     }    
 
     @FXML
@@ -151,10 +174,7 @@ public class SearchFlightController implements Initializable {
     }
 
     
-    public ArrayList<Flight> getFilteredFlights() {
-        return filteredFlights;
-    }
-    
+    //Search flights
     @FXML
     private void searchFlight(ActionEvent event) {
 
@@ -163,22 +183,23 @@ public class SearchFlightController implements Initializable {
         }  catch (DBException ex) {
             Logger.getLogger(SearchFlightController.class.getName()).log(Level.SEVERE, null, ex);
         }  
+        tableView.setItems(getFlights());
         
-        try {
-      
-            AnchorPane pane = (AnchorPane) FXMLLoader.load(getClass().getResource("dataCustomer.fxml"));
-            panelToUpdate.getChildren().setAll(pane);
-      
-      
-        } catch (IOException ex) {
-        Logger.getLogger(startWindowController.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    public ObservableList<Flight> getFlights(){
+        
+        ObservableList<Flight> flights = FXCollections.observableArrayList();
+        
+        for(Flight f: getFilteredFlights()){
+            flights.add(f);
         }
+        
+        return flights;
     }
 
     
     // voor elke choicebox moet een lijst geïmporteerd worden. 
-    
-    private void addDataToChoiceBox(){
+     private void addDataToChoiceBox(){
         
     ObservableList list1 = FXCollections.observableArrayList();
     ObservableList list2 = FXCollections.observableArrayList();
@@ -217,7 +238,7 @@ public class SearchFlightController implements Initializable {
        
         
        SearchFlightController object = new SearchFlightController();
-        System.out.println(object.model.searchFlight(Boolean.TRUE, "Emission", "Amsterdam-Schiphol", "" , "2019-01-19"));
+        
        
     }
     
