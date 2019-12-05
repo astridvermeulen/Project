@@ -208,14 +208,15 @@ public static ArrayList<Flight> getFlights() throws DBException {  // retourneer
 
       if (srs.next()) {
            co2 = srs.getDouble("co2");
+           DBConnection.closeConnection(con);
+           return co2;
 	}
       
       else {// we verwachten slechts 1 rij...
 	DBConnection.closeConnection(con);
 	return co2;
       }
-      DBConnection.closeConnection(con);
-      return co2;
+
     }
     
     catch (Exception ex) {
@@ -226,14 +227,59 @@ public static ArrayList<Flight> getFlights() throws DBException {  // retourneer
     
     }
     
-    public static void main(String[] args) throws DBException, SQLException{
-    String x = "EM0645";
-    String y = "12/02/2021";
-    
-    Flight z = getFlight(x, y);
-    System.out.println(z.getArrivalDate() + z.getDestination());
-    
+    public static void getAllBookedFlights() throws DBException{
+    //public static ArrayList<Flight> getAllBookedFlights(){
+         Connection con = null;
+         //ArrayList<Flight> vlucht = new ArrayList<>();               
+        
+         
+    try {
+      con = DBConnection.getConnection();
+      Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+      
+      String sql = "SELECT distinct f.origin, f.destination, count(*) AS aantal FROM booking as b "
+                + "INNER JOIN flight AS f "
+                + "WHERE f.departureDate = b.departureDate AND "
+                + "f.flightNumber = b.flightNumber "
+                + "GROUP BY f.origin, f.destination ";
 
+      ResultSet srs = stmt.executeQuery(sql);
+      String origin, destination;
+      int aantal;
+
+      while (srs.next()) {
+          origin = srs.getString("origin");
+          destination = srs.getString("destination");
+          aantal = srs.getInt("aantal");
+          System.out.println(origin + " " + destination + " " + aantal);
+        //int i = 0;
+        // Flight test = new Flight(origin, destination,aantal);
+         //vlucht.add(i, test);
+         //i++;  
+         // return test;
+         
+          
+        
+	}
+      DBConnection.closeConnection(con);
+         
+     }
+    
+    catch (Exception ex) {
+      ex.printStackTrace();
+      DBConnection.closeConnection(con);
+      throw new DBException(ex);
+    }
+    //return null;
+            }
+        
+        
+    
+    
+    public static void main(String[] args) throws DBException, SQLException{
+    getAllBookedFlights();
+    
+    
     
     }
 }
