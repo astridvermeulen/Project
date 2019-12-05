@@ -241,7 +241,8 @@ public static ArrayList<Flight> getFlights() throws DBException {  // retourneer
                 + "INNER JOIN flight AS f "
                 + "WHERE f.departureDate = b.departureDate AND "
                 + "f.flightNumber = b.flightNumber "
-                + "GROUP BY f.origin, f.destination ";
+                + "GROUP BY f.origin, f.destination "
+                + "ORDER BY aantal DESC";
 
       ResultSet srs = stmt.executeQuery(sql);
       String origin, destination;
