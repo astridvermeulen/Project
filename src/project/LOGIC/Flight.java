@@ -27,7 +27,7 @@ public class Flight {
     private final String flightNumber;
     private final double price;
     private final ArrayList<FlightLeg> flightLegs;
-    private final double emission;
+    private final Double emission;
     private int duration;
 
     //Constructor
@@ -94,7 +94,7 @@ public class Flight {
         return flightLegs;
     }
 
-    public double getEmission() {
+    public Double getEmission() {
         return emission;
     }
 
@@ -114,8 +114,8 @@ public class Flight {
     }
 
     //Helping method to calculate the emission of a flight 
-    private double calculateEmission() throws DBException {
-        double em = DBFlight.getEmission(this.flightNumber, this.departureDate.toString());
+    private Double calculateEmission() throws DBException {
+        Double em = DBFlight.getEmission(this.flightNumber, this.departureDate.toString());
         return em;
     }
 

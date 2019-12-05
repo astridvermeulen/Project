@@ -192,9 +192,9 @@ public static ArrayList<Flight> getFlights() throws DBException {  // retourneer
       throw new DBException(ex);
     }
   }
-    public static double getEmission(String flightNumber, String departureDate) throws DBException{
+    public static Double getEmission(String flightNumber, String departureDate) throws DBException{
          Connection con = null;
-         double co2 = 0.0;
+         Double co2 = 0.0;
     try {
       con = DBConnection.getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
