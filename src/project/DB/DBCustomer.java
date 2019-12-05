@@ -21,7 +21,7 @@ import project.LOGIC.Customer;
  */
 public class DBCustomer {  
    
-      // retourneert 1 airport
+      // retourneert 1 klant 
      public static Customer getCustomer(String passportNumber) throws DBException{
          Connection con = null;
     try {
@@ -59,6 +59,8 @@ public class DBCustomer {
     }
          
      }
+     
+     //retourneert alle klanten 
      public static ArrayList<Customer> getCustomers() throws DBException {
     Connection con = null;
     try {
@@ -83,6 +85,7 @@ public class DBCustomer {
       throw new DBException(ex);
     }
   }
+     //customer toevoegen aan de database of bestaande aanpassen 
      public static void saveCustomer(Customer s) throws DBException {
     Connection con = null;
     try {
@@ -120,6 +123,7 @@ public class DBCustomer {
       throw new DBException(ex);
     }
   }
+     // customer verwijderen uit de database 
      public static void deleteCustomer(String s) throws DBException {
     Connection con = null;
     try {

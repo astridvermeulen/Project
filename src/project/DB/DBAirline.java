@@ -20,7 +20,7 @@ import project.LOGIC.Airline;
  */
 public class DBAirline {
     
-    
+    //retourneert een airline
    public static Airline getAirline(int airlineCode) throws DBException{
     Connection con = null;
         try {
@@ -57,6 +57,7 @@ public class DBAirline {
          
     }
    
+   //retourneert alle airlines
   public static ArrayList<Airline> getAirlines() throws DBException {
     Connection con = null;
         try {
@@ -88,6 +89,7 @@ public class DBAirline {
         }
     }
   
+   //nieuwe airline opslaan in de database, of bestaande airline aanpassen
    public static void saveAirline(Airline s) throws DBException {
     Connection con = null;
     try {
@@ -120,6 +122,8 @@ public class DBAirline {
       throw new DBException(ex);
     }
   }
+   
+   //airline verwijderen uit de database
    public static void deleteAirline(Airline s) throws DBException {
     Connection con = null;
     try {
@@ -147,7 +151,8 @@ public class DBAirline {
       throw new DBException(ex);
     }
   }
-   
+ 
+   //retourneert met welke airline er gevlogen werd voor een specifieke vlucht
 public static String getAirlineForFlight(String flightNumber, String departureDate) throws DBException{
     Connection con = null;
         try {

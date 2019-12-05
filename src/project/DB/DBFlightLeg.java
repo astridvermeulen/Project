@@ -22,7 +22,7 @@ import project.LOGIC.FlightLeg;
  */
 public class DBFlightLeg {
      
-    //getest en goedgekeurd.
+    //retourneert 1 flightleg 
     public static FlightLeg getFlightLeg(int legNumber, String flightNumber, String departureDate) throws DBException {
         Connection con = null;
     try {
@@ -66,8 +66,8 @@ public class DBFlightLeg {
       throw new DBException(ex);
     }
     }
-  //getest en goedgekeurd!!! 
-  public static ArrayList<FlightLeg> getFlightLegs(String flightNumber, String departureDate) throws SQLException, DBException{
+  //retourneert alle flightlegs voor een gegeven vlucht 
+    public static ArrayList<FlightLeg> getFlightLegs(String flightNumber, String departureDate) throws SQLException, DBException{
         Connection con = null;
         ArrayList<FlightLeg> vluchtdeel = new ArrayList<>();               
         

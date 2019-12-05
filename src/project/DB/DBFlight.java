@@ -21,7 +21,7 @@ import project.LOGIC.FlightLeg;
  */
 public class DBFlight {
     
-     // retourneert 1 vlucht, getest en goedgekeurd.
+     // retourneert 1 vlucht
      public static Flight getFlight(String flightNumber, String departureDate) throws DBException, SQLException {
         Connection con = null;
     try {
@@ -69,8 +69,8 @@ public class DBFlight {
     }
     }
      
-    
-public static ArrayList <Flight> getFlightsPerCustomer(String passportNumber) throws DBException { //PER CUSTOMER ALLE GEBOEKTE VLUCHTEN RETOURNEREN getest en goedgekeurd.
+//PER CUSTOMER ALLE GEBOEKTE VLUCHTEN RETOURNEREN   
+public static ArrayList <Flight> getFlightsPerCustomer(String passportNumber) throws DBException {  
         Connection con = null;
         ArrayList<Flight> vlucht = new ArrayList<>();               
                           
@@ -118,7 +118,9 @@ public static ArrayList <Flight> getFlightsPerCustomer(String passportNumber) th
      
          
     }
-public static Flight getFlightForBooking(int bookingNumber) throws DBException { //RETURNS A FLIGHT GIVEN A BOOKINGNUMBER getest en goedgekeurd.
+
+//Vlucht retourneren dat bij een booking hoort
+public static Flight getFlightForBooking(int bookingNumber) throws DBException {
        Connection con = null;                   
                           
       try {
@@ -166,8 +168,8 @@ public static Flight getFlightForBooking(int bookingNumber) throws DBException {
 }
      
 
-
-public static ArrayList<Flight> getFlights() throws DBException {  // retourneert een arraylist van alle vluchten getest en goedgekeurd.
+// retourneert een arraylist van alle vluchten
+public static ArrayList<Flight> getFlights() throws DBException {  
    
     Connection con = null;
     try {
@@ -192,6 +194,7 @@ public static ArrayList<Flight> getFlights() throws DBException {  // retourneer
       throw new DBException(ex);
     }
   }
+//geeft de CO2 uitstoot van een bepaalde vlucht 
     public static double getEmission(String flightNumber, String departureDate) throws DBException{
          Connection con = null;
          double co2 = 0.0;
@@ -227,6 +230,7 @@ public static ArrayList<Flight> getFlights() throws DBException {  // retourneer
     
     }
     
+    //toont alle verschillende geboekte trips en hoe vaak deze geboekt zijn
     public static void getAllBookedFlights() throws DBException{
     //public static ArrayList<Flight> getAllBookedFlights(){
          Connection con = null;

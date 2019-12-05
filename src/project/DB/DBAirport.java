@@ -56,6 +56,8 @@ public class DBAirport {
     }
          
      }
+     
+     //retourneert alle airports
      public static ArrayList<Airport> getAirports() throws DBException {
     Connection con = null;
     try {
@@ -80,7 +82,11 @@ public class DBAirport {
       throw new DBException(ex);
     }
   }
-   public static void saveAirport(Airport s) throws DBException {
+     
+   
+   
+    //nieuwe airport opslaan in de database, of bestaande aanpassen
+    public static void saveAirport(Airport s) throws DBException {
     Connection con = null;
     try {
       con = DBConnection.getConnection();
@@ -114,6 +120,7 @@ public class DBAirport {
     }
   }
    
+     //airport verwijderen uit de database
    public static void deleteAirport(Airport s) throws DBException {
     Connection con = null;
     try {
@@ -143,6 +150,7 @@ public class DBAirport {
     }
   }
    
+   // toont op welke airport er allemaal vertrokken/geland is en hoe vaak 
    public static void getPopularAirport() throws DBException{
        //public static ArrayList<Airport> getPopularAirport(){
          Connection con = null;
