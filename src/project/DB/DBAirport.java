@@ -143,23 +143,64 @@ public class DBAirport {
     }
   }
    
+   public static void getPopularAirport() throws DBException{
+       //public static ArrayList<Airport> getPopularAirport(){
+         Connection con = null;
+         //ArrayList<Airport> haven = new ArrayList<>();               
+        
+         
+    try {
+      con = DBConnection.getConnection();
+      Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+      
+      String sql = "SELECT distinct f.origin AS airport, count(*) AS aantal FROM booking as b " 
+                    + "INNER JOIN flight AS f "
+                    + "WHERE f.departureDate = b.departureDate AND "
+                    + "f.flightNumber = b.flightNumber "
+                    + "GROUP BY f.origin "
+                    + "UNION "
+                    + "SELECT distinct f.destination AS airport, count(*) AS aantal FROM booking as b "
+                    + "INNER JOIN flight AS f "
+                    + "WHERE f.departureDate = b.departureDate AND "
+                    + "f.flightNumber = b.flightNumber "
+                    + "GROUP BY f.destination "
+                    + "ORDER BY aantal DESC ";
+      
+      ResultSet srs = stmt.executeQuery(sql);
+      String airport;
+      int aantal;
+
+      while (srs.next()) {
+          airport = srs.getString("airport");
+          aantal = srs.getInt("aantal");
+          System.out.println(airport + " " + aantal);
+        //int i = 0;
+        // Airport test = new Airport(airport, aantal);
+         //haven.add(i, test);
+         //i++;  
+         // return test;
+         
+          
+        
+	}
+      DBConnection.closeConnection(con);
+         
+     }
+    
+    catch (Exception ex) {
+      ex.printStackTrace();
+      DBConnection.closeConnection(con);
+      throw new DBException(ex);
+    }
+    //return null;
+            }
+
+   
   //test
   public static void main(String[] args) throws DBException {
       
-    ArrayList<Airport> test = new ArrayList<>();
-    
-      try {
-          test = getAirports();
-          int size = test.size();
-          for(int position = 0; position < size; position++)
-              System.out.println(test.get(position).getAirportName());
-    
-
-    } catch (DBException ex) {
-      Logger.getLogger(DBAirport.class.getName()).log(Level.SEVERE, null, ex);
-    }
-  
-  }
+    getPopularAirport();
   
    
+}
 }
