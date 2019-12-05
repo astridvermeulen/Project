@@ -48,7 +48,7 @@ public class Airline {
         Collections.sort(airportNames);
         return airportNames;
     }
-    
+
     //Main method to test the methods 
     public static void main(String[] args) throws DBException {
         System.out.println(Airline.airportsAlphabetic());

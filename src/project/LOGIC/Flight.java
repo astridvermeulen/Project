@@ -1,12 +1,10 @@
 package project.LOGIC;
 
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import project.DB.DBAirline;
 import project.DB.DBException;
 import project.DB.DBFlight;
@@ -18,38 +16,30 @@ public class Flight {
     private final String airline;
     private final String origin;
     private final String destination;
-    private final LocalDateTime departureDateTime;
-    private final LocalDate departureDate;
-    private final LocalTime departureTime;
-    private final LocalDateTime arrivalDateTime;
-    private final LocalDate arrivalDate;
-    private final LocalTime arrivalTime;
+    private final String departureDate;
+    private final String departureTime;
+    private final String arrivalDate;
+    private final String arrivalTime;
     private final String flightNumber;
     private final double price;
     private final ArrayList<FlightLeg> flightLegs;
     private final double emission;
-    private int duration;
+    private double duration;
 
     //Constructor
-    public Flight(String origin, String destination, String departureDate, String departureTime, String arrivalDate, String arrivalTime, String flightNumber, double price) throws DBException, SQLException {
+    public Flight(String origin, String destination, String departureDate, String departureTime, String arrivalDate, String arrivalTime, String flightNumber, double price) throws DBException, SQLException, ParseException {
         this.airline = DBAirline.getAirlineForFlight(flightNumber, departureDate);
         this.origin = origin;
         this.destination = destination;
-        this.duration = 0;
-
-        this.departureDate = LocalDate.parse(departureDate, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        this.departureTime = LocalTime.parse(departureTime, DateTimeFormatter.ofPattern("HH:mm:ss"));
-
-        this.arrivalDate = LocalDate.parse(arrivalDate, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        this.arrivalTime = LocalTime.parse(arrivalTime, DateTimeFormatter.ofPattern("HH:mm:ss"));
-
+        this.duration = 0.0;
+        this.departureDate = departureDate;
+        this.departureTime = departureTime;
+        this.arrivalDate = arrivalDate;
+        this.arrivalTime = arrivalTime;
         this.flightNumber = flightNumber;
         this.price = price;
         this.flightLegs = DBFlightLeg.getFlightLegs(flightNumber, departureDate);
         this.emission = this.calculateEmission();
-
-        this.departureDateTime = LocalDateTime.of(this.departureDate, this.departureTime);
-        this.arrivalDateTime = LocalDateTime.of(this.arrivalDate, this.arrivalTime);
         this.setDuration(); //Zo blijft de volgorde behouden van de GUI kolommen 
     }
 
@@ -66,19 +56,19 @@ public class Flight {
         return destination;
     }
 
-    public LocalDate getDepartureDate() {
+    public String getDepartureDate() {
         return departureDate;
     }
 
-    public LocalTime getDepartureTime() {
+    public String getDepartureTime() {
         return departureTime;
     }
 
-    public LocalDate getArrivalDate() {
+    public String getArrivalDate() {
         return arrivalDate;
     }
 
-    public LocalTime getArrivalTime() {
+    public String getArrivalTime() {
         return arrivalTime;
     }
 
@@ -98,24 +88,51 @@ public class Flight {
         return emission;
     }
 
-    public int getDuration() {
+    public double getDuration() {
         return duration;
     }
 
     //Setter duration
-    public void setDuration() {
+    public void setDuration() throws ParseException {
         this.duration = this.calculateDuration();
     }
 
-    //Helping method to calculate the duration of a flight 
-    private int calculateDuration() {
-        int dur = Math.toIntExact(ChronoUnit.HOURS.between(departureDateTime, arrivalDateTime));
+    //Helping method to calculate the duration of a flight: tested V
+    public double calculateDuration() throws ParseException { //methode nog terug naar private 
+        String dateStart = departureDate + " " + departureTime;
+        String dateStop = arrivalDate + " " + arrivalTime;
+        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+        Date d1;
+        Date d2;
+        d1 = format.parse(dateStart);
+        d2 = format.parse(dateStop);
+        long diff = d2.getTime() - d1.getTime();
+        long diffMinutes = diff / (60 * 1000) % 60;
+        long diffHours = diff / (60 * 60 * 1000) % 24;
+        String dur = Long.toString(diffHours) + "." + Long.toString(diffMinutes);
+        double output = Double.valueOf(dur);
+        return output;
+    }
+
+    //Method to display the duration in hour:minutes: tested V
+    public String presentDuration() throws ParseException { //methode nog terug naar private 
+        String dateStart = departureDate + " " + departureTime;
+        String dateStop = arrivalDate + " " + arrivalTime;
+        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+        Date d1;
+        Date d2;
+        d1 = format.parse(dateStart);
+        d2 = format.parse(dateStop);
+        long diff = d2.getTime() - d1.getTime();
+        long diffMinutes = diff / (60 * 1000) % 60;
+        long diffHours = diff / (60 * 60 * 1000) % 24;
+        String dur = Long.toString(diffHours) + ":" + Long.toString(diffMinutes);
         return dur;
     }
 
     //Helping method to calculate the emission of a flight 
     private double calculateEmission() throws DBException {
-        double em = DBFlight.getEmission(this.flightNumber, this.departureDate.toString());
+        double em = DBFlight.getEmission(this.flightNumber, this.departureDate);
         return em;
     }
 
