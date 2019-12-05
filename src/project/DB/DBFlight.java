@@ -252,7 +252,7 @@ public static ArrayList<Flight> getFlights() throws DBException {  // retourneer
           origin = srs.getString("origin");
           destination = srs.getString("destination");
           aantal = srs.getInt("aantal");
-          System.out.println(origin + " " + destination + " " + aantal);
+          System.out.println(origin + " " + destination + " :  " + aantal);
         //int i = 0;
         // Flight test = new Flight(origin, destination,aantal);
          //vlucht.add(i, test);

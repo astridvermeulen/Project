@@ -173,7 +173,7 @@ public class DBAirport {
       while (srs.next()) {
           airport = srs.getString("airport");
           aantal = srs.getInt("aantal");
-          System.out.println(airport + " " + aantal);
+          System.out.println(airport + " : " + aantal);
         //int i = 0;
         // Airport test = new Airport(airport, aantal);
          //haven.add(i, test);
