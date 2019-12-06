@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import static java.util.Collections.reverse;
 import project.LOGIC.Flight;
 
 /**
@@ -256,7 +257,8 @@ public static ArrayList<Flight> getFlights() throws DBException {
          
 	}
       DBConnection.closeConnection(con);
-       return vlucht;
+      reverse(vlucht);
+      return vlucht;
         
          
      }
