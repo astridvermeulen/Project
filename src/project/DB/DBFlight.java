@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package project.DB;
 
 import java.sql.Connection;
@@ -10,18 +6,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import project.LOGIC.Flight;
-import project.LOGIC.FlightLeg;
 
 /**
  *
- * @author klaas
+ * @author TEAM DB
  */
 public class DBFlight {
     
-     // retourneert 1 vlucht, getest en goedgekeurd.
+     // retourneert 1 vlucht
      public static Flight getFlight(String flightNumber, String departureDate) throws DBException, SQLException {
         Connection con = null;
     try {
@@ -69,8 +62,8 @@ public class DBFlight {
     }
     }
      
-    
-public static ArrayList <Flight> getFlightsPerCustomer(String passportNumber) throws DBException { //PER CUSTOMER ALLE GEBOEKTE VLUCHTEN RETOURNEREN getest en goedgekeurd.
+//PER CUSTOMER ALLE GEBOEKTE VLUCHTEN RETOURNEREN   
+public static ArrayList <Flight> getFlightsPerCustomer(String passportNumber) throws DBException {  
         Connection con = null;
         ArrayList<Flight> vlucht = new ArrayList<>();               
                           
@@ -118,7 +111,9 @@ public static ArrayList <Flight> getFlightsPerCustomer(String passportNumber) th
      
          
     }
-public static Flight getFlightForBooking(int bookingNumber) throws DBException { //RETURNS A FLIGHT GIVEN A BOOKINGNUMBER getest en goedgekeurd.
+
+//Vlucht retourneren dat bij een booking hoort
+public static Flight getFlightForBooking(int bookingNumber) throws DBException {
        Connection con = null;                   
                           
       try {
@@ -166,8 +161,8 @@ public static Flight getFlightForBooking(int bookingNumber) throws DBException {
 }
      
 
-
-public static ArrayList<Flight> getFlights() throws DBException {  // retourneert een arraylist van alle vluchten getest en goedgekeurd.
+// retourneert een arraylist van alle vluchten
+public static ArrayList<Flight> getFlights() throws DBException {  
    
     Connection con = null;
     try {
@@ -192,7 +187,8 @@ public static ArrayList<Flight> getFlights() throws DBException {  // retourneer
       throw new DBException(ex);
     }
   }
-    public static Double getEmission(String flightNumber, String departureDate) throws DBException{
+
+    public static double getEmission(String flightNumber, String departureDate) throws DBException{
          Connection con = null;
          Double co2 = 0.0;
     try {
@@ -208,14 +204,15 @@ public static ArrayList<Flight> getFlights() throws DBException {  // retourneer
 
       if (srs.next()) {
            co2 = srs.getDouble("co2");
+           DBConnection.closeConnection(con);
+           return co2;
 	}
       
       else {// we verwachten slechts 1 rij...
 	DBConnection.closeConnection(con);
 	return co2;
       }
-      DBConnection.closeConnection(con);
-      return co2;
+
     }
     
     catch (Exception ex) {
@@ -226,14 +223,61 @@ public static ArrayList<Flight> getFlights() throws DBException {  // retourneer
     
     }
     
-    public static void main(String[] args) throws DBException, SQLException{
-    String x = "EM0645";
-    String y = "12/02/2021";
-    
-    Flight z = getFlight(x, y);
-    System.out.println(z.getArrivalDate() + z.getDestination());
-    
+    //toont alle verschillende geboekte trips en hoe vaak deze geboekt zijn
+    public static void getAllBookedFlights() throws DBException{
+    //public static ArrayList<Flight> getAllBookedFlights(){
+         Connection con = null;
+         //ArrayList<Flight> vlucht = new ArrayList<>();               
+        
+         
+    try {
+      con = DBConnection.getConnection();
+      Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+      
+      String sql = "SELECT distinct f.origin, f.destination, count(*) AS aantal FROM booking as b "
+                + "INNER JOIN flight AS f "
+                + "WHERE f.departureDate = b.departureDate AND "
+                + "f.flightNumber = b.flightNumber "
+                + "GROUP BY f.origin, f.destination "
+                + "ORDER BY aantal DESC";
 
+      ResultSet srs = stmt.executeQuery(sql);
+      String origin, destination;
+      int aantal;
+
+      while (srs.next()) {
+          origin = srs.getString("origin");
+          destination = srs.getString("destination");
+          aantal = srs.getInt("aantal");
+          System.out.println(origin + " " + destination + " :  " + aantal);
+        //int i = 0;
+        // Flight test = new Flight(origin, destination,aantal);
+         //vlucht.add(i, test);
+         //i++;  
+         // return test;
+         
+          
+        
+	}
+      DBConnection.closeConnection(con);
+         
+     }
+    
+    catch (Exception ex) {
+      ex.printStackTrace();
+      DBConnection.closeConnection(con);
+      throw new DBException(ex);
+    }
+    //return null;
+            }
+        
+        
+    
+    
+    public static void main(String[] args) throws DBException, SQLException{
+    getAllBookedFlights();
+    
+    
     
     }
 }

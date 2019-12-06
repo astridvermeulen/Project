@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package project.DB;
 
 import java.sql.Connection;
@@ -10,17 +5,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
-import static project.DB.DBCustomer.getCustomers;
 import project.LOGIC.Booking;
-import project.LOGIC.Customer;
 /**
  *
- * @author Lenovo
+ * @author TEAM DB
  */
+
 public class DBBooking {
   
-
+//retourneert een boeking 
  public static Booking getBooking(int bookingNumber) throws DBException{
          Connection con = null;
     try {
@@ -60,7 +53,7 @@ public class DBBooking {
     
  }
  
- 
+ //retourneert alle bookings 
  public static ArrayList<Booking> getBookings() throws DBException {
     Connection con = null;
     try {
@@ -85,6 +78,8 @@ public class DBBooking {
       throw new DBException(ex);
     }
   }
+ 
+    //booking opslaan in de database en deze koppelen aan een customer
     public static void saveBooking(String bookingDate, double promotion, double serviceFee, String flightNumber, String departureDate, String passportNumber) throws DBException, SQLException {
     Connection con = null;
     try {
@@ -115,6 +110,7 @@ public class DBBooking {
       throw new DBException(ex);
     }
   }
+    //booking verwijderen uit de database
       public static void deleteBooking(int s) throws DBException {
     Connection con = null;
     try {

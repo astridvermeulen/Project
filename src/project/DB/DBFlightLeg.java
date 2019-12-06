@@ -1,28 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package project.DB;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import project.LOGIC.Flight;
 import project.LOGIC.FlightLeg;
 
 /**
  *
- * @author Lenovo
+ * @author TEAM DB
  */
 public class DBFlightLeg {
      
-    //getest en goedgekeurd.
+    //retourneert 1 flightleg 
     public static FlightLeg getFlightLeg(int legNumber, String flightNumber, String departureDate) throws DBException {
         Connection con = null;
     try {
@@ -66,8 +60,8 @@ public class DBFlightLeg {
       throw new DBException(ex);
     }
     }
-  //getest en goedgekeurd!!! 
-  public static ArrayList<FlightLeg> getFlightLegs(String flightNumber, String departureDate) throws SQLException, DBException{
+  //retourneert alle flightlegs voor een gegeven vlucht 
+    public static ArrayList<FlightLeg> getFlightLegs(String flightNumber, String departureDate) throws SQLException, DBException{
         Connection con = null;
         ArrayList<FlightLeg> vluchtdeel = new ArrayList<>();               
         

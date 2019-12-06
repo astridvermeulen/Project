@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package project.DB;
 
 import java.sql.Connection;
@@ -11,17 +6,15 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static project.DB.DBAirport.getAirport;
-import project.LOGIC.Airport;
 import project.LOGIC.Customer;
 
 /**
  *
- * @author klaas
+ * @author TEAM DB
  */
 public class DBCustomer {  
    
-      // retourneert 1 airport
+      // retourneert 1 klant 
      public static Customer getCustomer(String passportNumber) throws DBException{
          Connection con = null;
     try {
@@ -59,6 +52,8 @@ public class DBCustomer {
     }
          
      }
+     
+     //retourneert alle klanten 
      public static ArrayList<Customer> getCustomers() throws DBException {
     Connection con = null;
     try {
@@ -83,6 +78,7 @@ public class DBCustomer {
       throw new DBException(ex);
     }
   }
+     //customer toevoegen aan de database of bestaande aanpassen 
      public static void saveCustomer(Customer s) throws DBException {
     Connection con = null;
     try {
@@ -120,6 +116,7 @@ public class DBCustomer {
       throw new DBException(ex);
     }
   }
+     // customer verwijderen uit de database 
      public static void deleteCustomer(String s) throws DBException {
     Connection con = null;
     try {

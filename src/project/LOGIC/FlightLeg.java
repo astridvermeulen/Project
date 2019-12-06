@@ -1,45 +1,30 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package project.LOGIC;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-/**
- *
- * @author klaas
- */
 public class FlightLeg {
 
     //Instance variables 
     private final int legNumber;
     private final String legOrigin;
     private final String legDestination;
-    private final LocalDate legDepartureDate;
-    private final LocalDateTime legDepartureDateTime;
-    private final LocalDateTime legArrivalDateTime;
-    private final LocalDate legArrivalDate;
-    private final LocalTime legDepartureTime;
-    private final LocalTime legArrivalTime;
-    private final int legDuration;
+    private final String legDepartureDate;
+    private final String legArrivalDate;
+    private final String legDepartureTime;
+    private final String legArrivalTime;
+    private final double legDuration;
 
     //Constructor
-    public FlightLeg(int legNumber, String legOrigin, String legDestination, String departureDate, String arrivalDate, String departureTime, String arrivalTime) {
+    public FlightLeg(int legNumber, String legOrigin, String legDestination, String departureDate, String arrivalDate, String departureTime, String arrivalTime) throws ParseException {
         this.legNumber = legNumber;
         this.legOrigin = legOrigin;
         this.legDestination = legDestination;
-        this.legDepartureDate = LocalDate.parse(departureDate, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        this.legDepartureTime = LocalTime.parse(departureTime, DateTimeFormatter.ofPattern("HH:mm:ss"));
-        this.legArrivalDate = LocalDate.parse(arrivalDate, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        this.legArrivalTime = LocalTime.parse(arrivalTime, DateTimeFormatter.ofPattern("HH:mm:ss"));
-        this.legDepartureDateTime = LocalDateTime.of(this.legDepartureDate, this.legDepartureTime);
-        this.legArrivalDateTime = LocalDateTime.of(this.legArrivalDate, this.legArrivalTime);
+        this.legDepartureDate = departureDate;
+        this.legDepartureTime = departureTime;
+        this.legArrivalDate = arrivalDate;
+        this.legArrivalTime = arrivalTime;
         this.legDuration = this.calculateDuration();
     }
 
@@ -56,30 +41,41 @@ public class FlightLeg {
         return legDestination;
     }
 
-    public LocalDate getLegDepartureDate() {
+    public String getLegDepartureDate() {
         return legDepartureDate;
     }
 
-    public LocalDate getLegArrivalDate() {
+    public String getLegArrivalDate() {
         return legArrivalDate;
     }
 
-    public LocalTime getLegDepartureTime() {
+    public String getLegDepartureTime() {
         return legDepartureTime;
     }
 
-    public LocalTime getLegArrivalTime() {
+    public String getLegArrivalTime() {
         return legArrivalTime;
     }
 
-    public int getLegDuration() {
+    public double getLegDuration() {
         return legDuration;
     }
 
-    //Helping method to calculate the duration of a flight 
-    private int calculateDuration() {
-        int dur = Math.toIntExact(ChronoUnit.HOURS.between(legDepartureDateTime, legArrivalDateTime));
-        return dur;
+    //Helping method to calculate the duration of a flight in hours:minutes: tested V
+    private double calculateDuration() throws ParseException {
+        String dateStart = legDepartureDate + " " + legDepartureTime;
+        String dateStop = legArrivalDate + " " + legArrivalTime;
+        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+        Date d1;
+        Date d2;
+        d1 = format.parse(dateStart);
+        d2 = format.parse(dateStop);
+        long diff = d2.getTime() - d1.getTime();
+        long diffMinutes = diff / (60 * 1000) % 60;
+        long diffHours = diff / (60 * 60 * 1000) % 24;
+        String dur = Long.toString(diffHours) + "." + Long.toString(diffMinutes);
+        double output = Double.valueOf(dur);
+        return output;
     }
 
 }
