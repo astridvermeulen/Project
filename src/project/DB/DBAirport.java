@@ -166,7 +166,8 @@ public class DBAirport {
                     + "WHERE f.departureDate = b.departureDate AND "
                     + "f.flightNumber = b.flightNumber "
                     + "GROUP BY f.destination "
-                    + "ORDER BY aantal DESC ";
+                    + "ORDER BY aantal DESC "
+                    + "LIMIT 10";
       
       ResultSet srs = stmt.executeQuery(sql);
       String airport;
