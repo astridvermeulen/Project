@@ -223,65 +223,11 @@ public static ArrayList<Flight> getFlights() throws DBException {
     
     }
     
-    //toont alle verschillende geboekte trips en hoe vaak deze geboekt zijn
-    public static void getAllBookedTrips() throws DBException{
-    //public static ArrayList<Flight> getAllBookedFlights(){
-         Connection con = null;
-         //ArrayList<Flight> vlucht = new ArrayList<>();               
-        
-         
-    try {
-      con = DBConnection.getConnection();
-      Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
-      
-      String sql = "SELECT distinct f.origin, f.destination, count(*) AS aantal FROM booking as b "
-                + "INNER JOIN flight AS f "
-                + "WHERE f.departureDate = b.departureDate AND "
-                + "f.flightNumber = b.flightNumber "
-                + "GROUP BY f.origin, f.destination "
-                + "ORDER BY aantal DESC "
-                + "LIMIT 10";
-
-      ResultSet srs = stmt.executeQuery(sql);
-      String origin, destination;
-      int aantal;
-
-      while (srs.next()) {
-          origin = srs.getString("origin");
-          destination = srs.getString("destination");
-          aantal = srs.getInt("aantal");
-          System.out.println(origin + " -->  " + destination + " :  " + aantal);
-        //int i = 0;
-        // Flight test = new Flight(origin, destination,aantal);
-         //vlucht.add(i, test);
-         //i++;  
-         // return test;
-         
-          
-        
-	}
-      DBConnection.closeConnection(con);
-         
-     }
-    
-    catch (Exception ex) {
-      ex.printStackTrace();
-      DBConnection.closeConnection(con);
-      throw new DBException(ex);
-    }
-    //return null;
-            }
+                }
         
         
     
     
-    public static void main(String[] args) throws DBException, SQLException{
-    getAllBookedTrips();
-    
-    
-    
-    }
-}
 
 
     

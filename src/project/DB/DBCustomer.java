@@ -21,18 +21,19 @@ public class DBCustomer {
       con = DBConnection.getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
-      String sql = "SELECT firstName, lastName, PassportNumber "
+      String sql = "SELECT firstName, lastName, PassportNumber, birtDate "
         + "FROM db2019_18.customer "
 	+ "WHERE passportNumber = '" + passportNumber + "'";
 
       ResultSet srs = stmt.executeQuery(sql);
 
-      String firstName, lastName, homeCountry;
+      String firstName, lastName, birthDate;
       
       if (srs.next()) {
           passportNumber = srs.getString("passportNumber");
           firstName = srs.getString("firstName");
           lastName = srs.getString("lastName");
+          birthDate = srs.getString("birtDate");
           
       } 
       else {// we verwachten slechts 1 rij...
@@ -40,7 +41,7 @@ public class DBCustomer {
 	return null;
       }
       
-      Customer klant = new Customer(passportNumber, firstName, lastName);
+      Customer klant = new Customer(passportNumber, firstName, lastName, birthDate);
               DBConnection.closeConnection(con);
       return klant;
     }
@@ -96,6 +97,7 @@ public class DBCustomer {
 		+ ", lastname = '" + s.getLastName() + "'"
 		+ ", PassportNumber = '" + s.getPassportNumber() + "'"
 		+ ", homeCountry = '" + s.getHomeCountry() + "'"
+                + ", birtDate = '" + s.getBirthDate() + "'"
                 + " WHERE passportNumber = '" + s.getPassportNumber() + "'";
         stmt.executeUpdate(sql);
       } else {
@@ -106,6 +108,7 @@ public class DBCustomer {
 		+ ", '" + s.getLastName() + "'"
 		+ ", '" + s.getPassportNumber() + "'"
                 + ", '" + s.getHomeCountry() + "'"
+                + ", '" + s.getBirthDate() + "'"
 		+ ")";
         stmt.executeUpdate(sql);
       }
@@ -148,9 +151,9 @@ public class DBCustomer {
      
     
     
-    public static void main(String[] args) throws DBException {
+   /* public static void main(String[] args) throws DBException {
       
-    Customer djanno = new Customer("DJ1208", "Djanno", "tje");
+    //Customer djanno = new Customer("DJ1208", "Djanno", "tje");
     
       try {
 saveCustomer(djanno);
@@ -158,7 +161,7 @@ saveCustomer(djanno);
       Logger.getLogger(DBAirport.class.getName()).log(Level.SEVERE, null, ex);
     }
   
-  }
+  }*/
   
 }
    

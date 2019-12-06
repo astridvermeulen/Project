@@ -1,9 +1,5 @@
 package project.LOGIC;
 
-import java.sql.SQLException;
-import java.text.ParseException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.stream.Collectors;
@@ -32,9 +28,9 @@ public class DomainController {
             output = new ArrayList<>(flightsFilteredOnLegs.stream().sorted(Comparator.comparing(Flight::getPrice)).collect(Collectors.toList()));
         } else if (filter.equalsIgnoreCase("duration")) {
             output = new ArrayList<>(flightsFilteredOnLegs.stream().sorted(Comparator.comparing(Flight::getDuration)).collect(Collectors.toList()));
-        } else if (filter.equalsIgnoreCase("emission")){
+        } else if (filter.equalsIgnoreCase("emission")) {
             output = new ArrayList<>(flightsFilteredOnLegs.stream().sorted(Comparator.comparing(Flight::getEmission)).collect(Collectors.toList()));
-        } else{
+        } else {
             output = new ArrayList<>();
         }
         return output;
