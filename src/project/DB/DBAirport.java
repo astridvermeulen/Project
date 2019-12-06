@@ -145,10 +145,9 @@ public class DBAirport {
   }
    
    // toont op welke airport er allemaal vertrokken/geland is en hoe vaak, top10 
-   public static void getPopularAirport() throws DBException{
-       //public static ArrayList<Airport> getPopularAirport(){
+   public static ArrayList<Airport> getPopularAirport() throws DBException{
          Connection con = null;
-         //ArrayList<Airport> haven = new ArrayList<>();               
+         ArrayList<Airport> haven = new ArrayList<>();               
         
          
     try {
@@ -170,24 +169,20 @@ public class DBAirport {
                     + "LIMIT 10";
       
       ResultSet srs = stmt.executeQuery(sql);
-      String airport;
+      String airportName;
       int aantal;
 
       while (srs.next()) {
-          airport = srs.getString("airport");
+          airportName = srs.getString("airport");
           aantal = srs.getInt("aantal");
-          System.out.println(airport + " : " + aantal);
-        //int i = 0;
-        // Airport test = new Airport(airport, aantal);
-         //haven.add(i, test);
-         //i++;  
-         // return test;
-         
-          
-        
+          int i = 0;
+          Airport test = new Airport(airportName, aantal);
+          haven.add(i, test);
+          i++;  
 	}
+      
       DBConnection.closeConnection(con);
-         
+      return haven;
      }
     
     catch (Exception ex) {
@@ -195,15 +190,13 @@ public class DBAirport {
       DBConnection.closeConnection(con);
       throw new DBException(ex);
     }
-    //return null;
             }
 
    
   //test
   public static void main(String[] args) throws DBException {
       
-    getPopularAirport();
-  
+    
    
 }
 }

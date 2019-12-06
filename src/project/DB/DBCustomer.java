@@ -21,7 +21,7 @@ public class DBCustomer {
       con = DBConnection.getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
-      String sql = "SELECT firstName, lastName, PassportNumber, birtDate "
+      String sql = "SELECT firstName, lastName, PassportNumber, birthDate "
         + "FROM db2019_18.customer "
 	+ "WHERE passportNumber = '" + passportNumber + "'";
 
@@ -33,7 +33,7 @@ public class DBCustomer {
           passportNumber = srs.getString("passportNumber");
           firstName = srs.getString("firstName");
           lastName = srs.getString("lastName");
-          birthDate = srs.getString("birtDate");
+          birthDate = srs.getString("birthDate");
           
       } 
       else {// we verwachten slechts 1 rij...
@@ -97,7 +97,7 @@ public class DBCustomer {
 		+ ", lastname = '" + s.getLastName() + "'"
 		+ ", PassportNumber = '" + s.getPassportNumber() + "'"
 		+ ", homeCountry = '" + s.getHomeCountry() + "'"
-                + ", birtDate = '" + s.getBirthDate() + "'"
+                + ", birthDate = '" + s.getBirthDate() + "'"
                 + " WHERE passportNumber = '" + s.getPassportNumber() + "'";
         stmt.executeUpdate(sql);
       } else {
