@@ -84,8 +84,6 @@ public class SearchFlightController implements Initializable {
     @FXML
     private Label toLbl;
     @FXML
-    private Label chooseDepartureDateLbl;
-    @FXML
     private Label numberOfPassengersLbl;
     @FXML
     private Label intermediateStopsAllowedLbl;
