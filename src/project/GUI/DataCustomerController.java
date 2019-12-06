@@ -14,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import project.DB.DBException;
@@ -89,6 +90,16 @@ public class DataCustomerController implements Initializable {
     private TextField passportIDC5TxtField;
     @FXML
     private Button submitC5Btn;
+    @FXML
+    private Label firstNameLbl;
+    @FXML
+    private Label lastNameLbl;
+    @FXML
+    private Label passportIDLbl;
+    @FXML
+    private Label birthDateLbl;
+    @FXML
+    private TextField birthDateC1TxtField;
 
 
     /**
@@ -126,8 +137,7 @@ public class DataCustomerController implements Initializable {
     private ArrayList<Customer> customersLinkedToBooking;
     @FXML
     private void saveCustomer1(ActionEvent event) {
-        System.out.println("test");
-        Customer klant = new Customer(passportIDC1TxtField.getText(), firstNameC1TxtField.getText(), lastNameC1TxtField.getText());
+        Customer klant = new Customer(passportIDC1TxtField.getText(), firstNameC1TxtField.getText(), lastNameC1TxtField.getText(), birthDateC1TxtField.getText());
 
         try {
             saveCustomer(klant);
