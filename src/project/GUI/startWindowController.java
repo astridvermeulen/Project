@@ -42,8 +42,6 @@ public class startWindowController implements Initializable {
     @FXML
     private Button searchFlightBtn;
     @FXML
-    private Button overviewFlightsBtn;
-    @FXML
     private Button DataCustomerBtn;
     @FXML
     private Button overviewCustomersBtn;
@@ -76,7 +74,6 @@ public class startWindowController implements Initializable {
         }
     }
         
-    @FXML
     private void loadOverviewFlights(ActionEvent event) {
         try {
       
