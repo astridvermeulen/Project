@@ -65,7 +65,7 @@ public class FlightLeg {
     private double calculateDuration() throws ParseException {
         String dateStart = legDepartureDate + " " + legDepartureTime;
         String dateStop = legArrivalDate + " " + legArrivalTime;
-        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date d1;
         Date d2;
         d1 = format.parse(dateStart);

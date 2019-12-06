@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import static java.util.Collections.reverse;
 import project.LOGIC.Airport;
 
 /**
@@ -182,6 +183,7 @@ public class DBAirport {
 	}
       
       DBConnection.closeConnection(con);
+      reverse(haven);
       return haven;
      }
     
