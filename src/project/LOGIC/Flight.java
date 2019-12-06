@@ -84,7 +84,7 @@ public class Flight {
         return flightLegs;
     }
 
-    public double getEmission() {
+    public Double getEmission() {
         return emission;
     }
 

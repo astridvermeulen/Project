@@ -190,7 +190,7 @@ public static ArrayList<Flight> getFlights() throws DBException {
 //geeft de CO2 uitstoot van een bepaalde vlucht 
     public static double getEmission(String flightNumber, String departureDate) throws DBException{
          Connection con = null;
-         double co2 = 0.0;
+         Double co2 = 0.0;
     try {
       con = DBConnection.getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -224,7 +224,7 @@ public static ArrayList<Flight> getFlights() throws DBException {
     }
     
     //toont alle verschillende geboekte trips en hoe vaak deze geboekt zijn
-    public static void getAllBookedFlights() throws DBException{
+    public static void getAllBookedTrips() throws DBException{
     //public static ArrayList<Flight> getAllBookedFlights(){
          Connection con = null;
          //ArrayList<Flight> vlucht = new ArrayList<>();               
@@ -239,7 +239,8 @@ public static ArrayList<Flight> getFlights() throws DBException {
                 + "WHERE f.departureDate = b.departureDate AND "
                 + "f.flightNumber = b.flightNumber "
                 + "GROUP BY f.origin, f.destination "
-                + "ORDER BY aantal DESC";
+                + "ORDER BY aantal DESC "
+                + "LIMIT 10";
 
       ResultSet srs = stmt.executeQuery(sql);
       String origin, destination;
@@ -249,7 +250,7 @@ public static ArrayList<Flight> getFlights() throws DBException {
           origin = srs.getString("origin");
           destination = srs.getString("destination");
           aantal = srs.getInt("aantal");
-          System.out.println(origin + " " + destination + " :  " + aantal);
+          System.out.println(origin + " -->  " + destination + " :  " + aantal);
         //int i = 0;
         // Flight test = new Flight(origin, destination,aantal);
          //vlucht.add(i, test);
@@ -275,7 +276,7 @@ public static ArrayList<Flight> getFlights() throws DBException {
     
     
     public static void main(String[] args) throws DBException, SQLException{
-    getAllBookedFlights();
+    getAllBookedTrips();
     
     
     

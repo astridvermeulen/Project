@@ -50,7 +50,7 @@ public class DBAirline {
             throw new DBException(ex);
         }
          
-    }
+   }
    
    //retourneert alle airlines
   public static ArrayList<Airline> getAirlines() throws DBException {
