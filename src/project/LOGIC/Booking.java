@@ -106,8 +106,9 @@ public class Booking {
     }
 
     //Method to calculate the revenue of a month: tested V
-    public static double calculateRevenuePerMonth(String monthSlashYear) throws DBException {
+    public static double calculateRevenuePerMonth(String month, String year) throws DBException {
         double revenuePerMonth = 0.0;
+        String monthSlashYear = month +"/" +year; 
         ArrayList<Booking> allBookings = DBBooking.getBookings();
         for (Booking booking : allBookings) {
             String maandJaar = booking.bookingDate.substring(3);
@@ -122,6 +123,10 @@ public class Booking {
     private double calculateNetPrice() {
         double netPr = this.serviceFee - this.promotion + flight.getPrice();
         return netPr;
+    }
+    
+    public static void main(String[] args) throws DBException {
+        System.out.println(calculateRevenuePerMonth("01", "2019"));
     }
 
 }
