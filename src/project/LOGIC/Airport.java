@@ -3,7 +3,6 @@ package project.LOGIC;
 import java.util.ArrayList;
 import project.DB.DBAirport;
 import project.DB.DBException;
-import project.DB.DBFlight;
 
 public class Airport {
 
@@ -49,7 +48,7 @@ public class Airport {
     public static ArrayList<String> tenMostPopularAirports() throws DBException {
         ArrayList<Airport> populairAirports = DBAirport.getAirports();//DATaboys nog methode doorgeven hier 
         ArrayList<String> nameOfPopulairAirports = new ArrayList<>();
-        for(Airport airport:populairAirports){
+        for (Airport airport : populairAirports) {
             nameOfPopulairAirports.add(airport.getAirportName());
         }
         return nameOfPopulairAirports;

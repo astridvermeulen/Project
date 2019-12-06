@@ -19,7 +19,7 @@ public class Customer {
         this.passportNumber = passportNumber;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.homeCountry = calculateHomeCountry(passportNumber); 
+        this.homeCountry = calculateHomeCountry(passportNumber);
         this.birthDate = birthDate;
     }
 
@@ -43,7 +43,7 @@ public class Customer {
     public String getBirthDate() {
         return birthDate;
     }
-    
+
     //Method to safe a customer 
     public static void saveCustomer(Customer s) throws DBException {
         DBCustomer.saveCustomer(s);

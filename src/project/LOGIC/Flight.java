@@ -60,8 +60,6 @@ public class Flight {
         this.flightLegs = null;
         this.emission = 0.0;
     }
-    
-    
 
     //Getters
     public String getAirline() {
@@ -112,11 +110,15 @@ public class Flight {
         return duration;
     }
 
+    public int getTimesBooked() {
+        return timesBooked;
+    }
+
     //Setters
     public void setDuration() throws ParseException {
         this.duration = this.calculateDuration();
     }
-    
+
     //Helping method to calculate the duration of a flight: tested V
     public double calculateDuration() throws ParseException { //methode nog terug naar private 
         String dateStart = departureDate + " " + departureTime;
@@ -167,12 +169,11 @@ public class Flight {
         ArrayList<Flight> flightsAll = DBFlight.getFlights();
         return flightsAll;
     }
-    
+
     //Method to give an overview of the most populair booked flights 
-    public static ArrayList<Flight> mostPopulairOriginDestinations() throws DBException{
+    public static ArrayList<Flight> tripsOriginDestinations() throws DBException {
         ArrayList<Flight> populairFlights = DBFlight.getFlights();//DATaboys nog methode doorgeven hier
         return populairFlights;
     }
-    
-    
+
 }
