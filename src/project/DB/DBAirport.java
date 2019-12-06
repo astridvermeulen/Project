@@ -144,7 +144,7 @@ public class DBAirport {
     }
   }
    
-   // toont op welke airport er allemaal vertrokken/geland is en hoe vaak 
+   // toont op welke airport er allemaal vertrokken/geland is en hoe vaak, top10 
    public static void getPopularAirport() throws DBException{
        //public static ArrayList<Airport> getPopularAirport(){
          Connection con = null;
@@ -166,7 +166,8 @@ public class DBAirport {
                     + "WHERE f.departureDate = b.departureDate AND "
                     + "f.flightNumber = b.flightNumber "
                     + "GROUP BY f.destination "
-                    + "ORDER BY aantal DESC ";
+                    + "ORDER BY aantal DESC "
+                    + "LIMIT 10";
       
       ResultSet srs = stmt.executeQuery(sql);
       String airport;
