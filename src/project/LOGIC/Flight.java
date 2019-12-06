@@ -25,6 +25,7 @@ public class Flight {
     private final ArrayList<FlightLeg> flightLegs;
     private final double emission;
     private double duration;
+    private final int timesBooked;
 
     //Constructor
     public Flight(String origin, String destination, String departureDate, String departureTime, String arrivalDate, String arrivalTime, String flightNumber, double price) throws DBException, SQLException, ParseException {
@@ -41,7 +42,26 @@ public class Flight {
         this.flightLegs = DBFlightLeg.getFlightLegs(flightNumber, departureDate);
         this.emission = this.calculateEmission();
         this.setDuration(); //Zo blijft de volgorde behouden van de GUI kolommen 
+        this.timesBooked = -1;
     }
+
+    public Flight(String origin, String destination, int timesBooked) {
+        this.origin = origin;
+        this.destination = destination;
+        this.timesBooked = timesBooked;
+        this.airline = null;
+        this.duration = 0.0;
+        this.departureDate = null;
+        this.departureTime = null;
+        this.arrivalDate = null;
+        this.arrivalTime = null;
+        this.flightNumber = null;
+        this.price = 0.0;
+        this.flightLegs = null;
+        this.emission = 0.0;
+    }
+    
+    
 
     //Getters
     public String getAirline() {
@@ -92,11 +112,11 @@ public class Flight {
         return duration;
     }
 
-    //Setter duration
+    //Setters
     public void setDuration() throws ParseException {
         this.duration = this.calculateDuration();
     }
-
+    
     //Helping method to calculate the duration of a flight: tested V
     public double calculateDuration() throws ParseException { //methode nog terug naar private 
         String dateStart = departureDate + " " + departureTime;
@@ -147,4 +167,12 @@ public class Flight {
         ArrayList<Flight> flightsAll = DBFlight.getFlights();
         return flightsAll;
     }
+    
+    //Method to give an overview of the most populair booked flights 
+    public static ArrayList<Flight> mostPopulairOriginDestinations() throws DBException{
+        ArrayList<Flight> populairFlights = DBFlight.getFlights();//DATaboys nog methode doorgeven hier
+        return populairFlights;
+    }
+    
+    
 }

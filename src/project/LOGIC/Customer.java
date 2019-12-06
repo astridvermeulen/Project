@@ -12,13 +12,15 @@ public class Customer {
     private final String firstName;
     private final String lastName;
     private final String homeCountry;
+    private final String birthDate;
 
     //Constructor 
-    public Customer(String passportNumber, String firstName, String lastName) {
+    public Customer(String passportNumber, String firstName, String lastName, String birthDate) {
         this.passportNumber = passportNumber;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.homeCountry = this.calculateHomeCountry(passportNumber); // halen uit passportName??
+        this.homeCountry = calculateHomeCountry(passportNumber); 
+        this.birthDate = birthDate;
     }
 
     //Getters
@@ -38,6 +40,10 @@ public class Customer {
         return homeCountry;
     }
 
+    public String getBirthDate() {
+        return birthDate;
+    }
+    
     //Method to safe a customer 
     public static void saveCustomer(Customer s) throws DBException {
         DBCustomer.saveCustomer(s);

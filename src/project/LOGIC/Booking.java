@@ -20,7 +20,7 @@ public class Booking {
     private final ArrayList<Customer> customers;
     private final double serviceFee;
     private static final double PROMOTIONPROCENT = 0.10;
-    private double promotion;
+    private final double promotion;
     private final double netPrice;
 
     //Constructor 
