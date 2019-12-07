@@ -7,9 +7,18 @@ package project.GUI;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import project.DB.DBException;
+import project.LOGIC.Airport;
+import static project.LOGIC.Airport.tenMostPopularAirports;
 import project.LOGIC.DomainController;
 
 /**
@@ -20,7 +29,9 @@ import project.LOGIC.DomainController;
 public class OverviewMostPopularAirportsController implements Initializable {
     private DomainController model;
     @FXML
-    private TableView<?> tableViewMostPopularAirports;
+    private TableView<String> tableViewMostPopularAirports;
+    @FXML
+    private TableColumn<Airport, String> airportColumn;
 
     /**
      * Initializes the controller class.
@@ -28,6 +39,26 @@ public class OverviewMostPopularAirportsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         model=DomainController.getInstance();
-    }    
+        airportColumn.setCellValueFactory(new PropertyValueFactory<Airport, String>("airportName"));
+    
+        tableViewMostPopularAirports.setItems(getMostPopularAirports());
+        
+    } 
+    
+    public ObservableList<String> getMostPopularAirports(){
+        ObservableList<String> airports = FXCollections.observableArrayList();
+      
+        try {
+            for(String s: tenMostPopularAirports()){
+                airports.add(s);
+            }   
+        } catch (DBException ex) {
+            Logger.getLogger(OverviewMostPopularAirportsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return airports;
+    }
+    
+        
     
 }

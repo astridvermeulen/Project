@@ -5,17 +5,16 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="project.GUI.OverviewMostPopularAirportsController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.GUI.OverviewMostPopularAirportsController">
    <children>
-      <ScrollPane layoutX="200.0" layoutY="116.0" prefHeight="200.0" prefWidth="200.0">
+      <ScrollPane layoutX="200.0" layoutY="107.0" prefHeight="200.0" prefWidth="200.0">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
                <children>
                   <TableView fx:id="tableViewMostPopularAirports" prefHeight="200.0" prefWidth="200.0">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="C1" />
-                      <TableColumn prefWidth="75.0" text="C2" />
+                      <TableColumn fx:id="placeColumn" prefWidth="70.0" text="Place" />
+                      <TableColumn fx:id="airportColumn" prefWidth="150.0" text="Airport" />
                     </columns>
                   </TableView>
                </children>
