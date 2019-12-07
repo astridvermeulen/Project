@@ -6,6 +6,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
 <AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.GUI.DataCustomerController">
    <children>
@@ -22,18 +23,32 @@
                         </AnchorPane>
                      </children>
                   </HBox>
-                  <HBox fx:id="C1Pane" layoutY="50.0" prefHeight="150.0" prefWidth="614.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                  <HBox fx:id="C1Pane" layoutY="50.0" prefHeight="150.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                      <children>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                        <AnchorPane prefHeight="150.0" prefWidth="600.0">
                            <children>
-                              <TextField fx:id="firstNameC1TxtField" layoutX="307.0" layoutY="22.0" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="20.0" />
-                              <TextField fx:id="lastNameC1TxtField" layoutX="307.0" layoutY="63.0" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="60.0" />
-                              <TextField fx:id="passportIDC1TxtField" layoutX="307.0" layoutY="101.0" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="100.0" />
-                              <Label layoutX="67.0" layoutY="24.0" text="Firstname" AnchorPane.leftAnchor="60.0" />
-                              <Label layoutX="67.0" layoutY="64.0" text="LastName" AnchorPane.leftAnchor="60.0" />
-                              <Label layoutX="67.0" layoutY="104.0" text="Passport ID" AnchorPane.leftAnchor="60.0" />
-                              <Button fx:id="nextPassenger1Btn" layoutX="463.0" layoutY="60.0" mnemonicParsing="false" onAction="#showC2Pane" text="Next Passenger" AnchorPane.leftAnchor="460.0" />
-                              <Button fx:id="submitC1Btn" layoutX="460.0" layoutY="88.0" mnemonicParsing="false" onAction="#saveCustomer1" text="Submit" />
+                              <VBox layoutX="50.0" prefHeight="150.0" prefWidth="100.0" spacing="19.0">
+                                 <children>
+                                    <Label fx:id="firstNameLbl" text="Firstname" />
+                                    <Label fx:id="lastNameLbl" text="LastName" />
+                                    <Label fx:id="passportIDLbl" text="Passport ID" />
+                                    <Label fx:id="birthDateLbl" text="Birth date" />
+                                 </children>
+                              </VBox>
+                              <VBox layoutX="207.0" layoutY="2.0" prefHeight="150.0" prefWidth="200.0" spacing="6.0">
+                                 <children>
+                                    <TextField fx:id="firstNameC1TxtField" />
+                                    <TextField fx:id="lastNameC1TxtField" />
+                                    <TextField fx:id="passportIDC1TxtField" />
+                                    <TextField fx:id="birthDateC1TxtField" />
+                                 </children>
+                              </VBox>
+                              <VBox layoutX="433.0" layoutY="2.0" prefHeight="150.0" prefWidth="100.0" spacing="15.0">
+                                 <children>
+                                    <Button fx:id="nextPassenger1Btn" mnemonicParsing="false" onAction="#showC2Pane" text="Next Passenger" />
+                                    <Button fx:id="submitC1Btn" mnemonicParsing="false" onAction="#saveCustomer1" text="Submit" />
+                                 </children>
+                              </VBox>
                            </children>
                         </AnchorPane>
                      </children>

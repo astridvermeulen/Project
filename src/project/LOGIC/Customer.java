@@ -23,6 +23,10 @@ public class Customer {
         this.birthDate = birthDate;
     }
 
+    public Customer(String text, String text0, String text1) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     //Getters
     public String getPassportNumber() {
         return passportNumber;

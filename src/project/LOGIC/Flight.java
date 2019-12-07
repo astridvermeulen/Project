@@ -123,33 +123,39 @@ public class Flight {
     public double calculateDuration() throws ParseException { //methode nog terug naar private 
         String dateStart = departureDate + " " + departureTime;
         String dateStop = arrivalDate + " " + arrivalTime;
-        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date d1;
         Date d2;
         d1 = format.parse(dateStart);
         d2 = format.parse(dateStop);
         long diff = d2.getTime() - d1.getTime();
-        long diffMinutes = diff / (60 * 1000) % 60;
+        long diffMinutes = (diff / (60 * 1000) % 60);
+        double diffMinutesKomma = ((double) diffMinutes) / 100;
         long diffHours = diff / (60 * 60 * 1000) % 24;
-        String dur = Long.toString(diffHours) + "." + Long.toString(diffMinutes);
-        double output = Double.valueOf(dur);
+        long diffDays = diff / (24 * 60 * 60 * 1000);
+        long diffDaysInhours = diffDays * 24;
+        double output = diffHours + diffDaysInhours + diffMinutesKomma;
         return output;
     }
 
     //Method to display the duration in hour:minutes: tested V
     public String presentDuration() throws ParseException { //methode nog terug naar private 
+        System.out.println("start");
         String dateStart = departureDate + " " + departureTime;
         String dateStop = arrivalDate + " " + arrivalTime;
-        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date d1;
         Date d2;
         d1 = format.parse(dateStart);
         d2 = format.parse(dateStop);
         long diff = d2.getTime() - d1.getTime();
         long diffMinutes = diff / (60 * 1000) % 60;
+        double diffMinutesKomma = ((double) diffMinutes) / 100;
         long diffHours = diff / (60 * 60 * 1000) % 24;
-        String dur = Long.toString(diffHours) + ":" + Long.toString(diffMinutes);
-        return dur;
+        long diffDays = diff / (24 * 60 * 60 * 1000);
+        long diffDaysInhours = diffDays * 24;
+        double output = diffHours + diffDaysInhours + diffMinutesKomma;
+        return String.valueOf(output).replace(".", ":");
     }
 
     //Helping method to calculate the emission of a flight 
@@ -172,7 +178,7 @@ public class Flight {
 
     //Method to give an overview of the most populair booked flights 
     public static ArrayList<Flight> tripsOriginDestinations() throws DBException {
-        ArrayList<Flight> populairFlights = DBFlight.getFlights();//DATaboys nog methode doorgeven hier
+        ArrayList<Flight> populairFlights = DBFlight.topTenPopularTrips();//DATaboys nog methode doorgeven hier
         return populairFlights;
     }
 

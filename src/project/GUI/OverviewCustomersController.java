@@ -55,9 +55,11 @@ private DomainController model;
     @FXML
     private Button addBtn;
     @FXML
-    private Button modifyBtn;
-    @FXML
     private Button deleteBtn;
+    @FXML
+    private TableColumn<Customer, String> bithDayColumn;
+    @FXML
+    private TextField birthDateTxtField;
 
     /**
      * Initializes the controller class.
@@ -69,6 +71,7 @@ private DomainController model;
         firstNameColumn.setCellValueFactory(new PropertyValueFactory<Customer, String>("firstName"));
         lastNameColumn.setCellValueFactory(new PropertyValueFactory<Customer, String>("lastName"));
         homeCountryColumn.setCellValueFactory(new PropertyValueFactory<Customer, String>("homeCountry"));
+        bithDayColumn.setCellValueFactory(new PropertyValueFactory<Customer, String>("birthDate"));
     
         tableViewCustomers.setItems(getCustomers());
     } 
@@ -88,7 +91,7 @@ private DomainController model;
 
     @FXML
     private void addBtnClicked(ActionEvent event) {
-        Customer customer = new Customer(passportIDTxtField.getText(), firstNameTxtField.getText(), lastNameTxtField.getText());
+        Customer customer = new Customer(passportIDTxtField.getText(), firstNameTxtField.getText(), lastNameTxtField.getText(), birthDateTxtField.getText());
         System.out.println("customer object aangemaakt");
         
         //in onze overview moeten we de oude customer nog verwijderen
