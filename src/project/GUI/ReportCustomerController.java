@@ -109,7 +109,6 @@ public class ReportCustomerController implements Initializable {
         System.out.println(vlucht.get(0).getOrigin());
            
         return flights;
-     
     }
     
     
