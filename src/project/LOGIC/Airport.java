@@ -1,6 +1,7 @@
 package project.LOGIC;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import project.DB.DBAirport;
 import project.DB.DBException;
 
@@ -52,6 +53,18 @@ public class Airport {
             nameOfPopulairAirports.add(airport.getAirportName());
         }
         return nameOfPopulairAirports;
+    }
+    
+    //Method to order the airports in alpabetic order: tested V 
+    public static ArrayList<String> airportsAlphabetic() throws DBException {
+        ArrayList<Airport> airportsAll = DBAirport.getAirports();
+        ArrayList<String> airportNames = new ArrayList();
+        for (int i = 0; i < airportsAll.size(); i++) {
+            String naam = airportsAll.get(i).getAirportName();
+            airportNames.add(i, naam);
+        }
+        Collections.sort(airportNames);
+        return airportNames;
     }
 
 }
