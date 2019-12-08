@@ -29,9 +29,11 @@ import project.LOGIC.DomainController;
 public class OverviewMostPopularAirportsController implements Initializable {
     private DomainController model;
     @FXML
-    private TableView<String> tableViewMostPopularAirports;
+    private TableView<Airport> tableViewMostPopularAirports;
     @FXML
     private TableColumn<Airport, String> airportColumn;
+    
+    
 
     /**
      * Initializes the controller class.
@@ -45,16 +47,17 @@ public class OverviewMostPopularAirportsController implements Initializable {
         
     } 
     
-    public ObservableList<String> getMostPopularAirports(){
-        ObservableList<String> airports = FXCollections.observableArrayList();
+    public ObservableList<Airport> getMostPopularAirports(){
+        ObservableList<Airport> airports = FXCollections.observableArrayList();
       
         try {
-            for(String s: tenMostPopularAirports()){
-                airports.add(s);
+            for(Airport a: tenMostPopularAirports()){
+                airports.add(a);
             }   
         } catch (DBException ex) {
             Logger.getLogger(OverviewMostPopularAirportsController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        System.out.println("airports toegevoegd aan observableList");
         
         return airports;
     }

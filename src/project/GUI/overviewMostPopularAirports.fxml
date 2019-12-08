@@ -7,14 +7,13 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.GUI.OverviewMostPopularAirportsController">
    <children>
-      <ScrollPane layoutX="200.0" layoutY="107.0" prefHeight="200.0" prefWidth="200.0">
+      <ScrollPane layoutX="91.0" layoutY="63.0" prefHeight="300.0" prefWidth="400.0">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="400.0">
                <children>
-                  <TableView fx:id="tableViewMostPopularAirports" prefHeight="200.0" prefWidth="200.0">
+                  <TableView fx:id="tableViewMostPopularAirports" prefHeight="300.0" prefWidth="400.0">
                     <columns>
-                      <TableColumn fx:id="placeColumn" prefWidth="70.0" text="Place" />
-                      <TableColumn fx:id="airportColumn" prefWidth="150.0" text="Airport" />
+                      <TableColumn fx:id="airportColumn" prefWidth="310.0" text="Airport" />
                     </columns>
                   </TableView>
                </children>

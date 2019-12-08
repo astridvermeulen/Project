@@ -36,6 +36,7 @@ public class OverviewCustomersController implements Initializable {
     
     // bekijk: https://www.youtube.com/watch?v=uz2sWCnTq6E
 private DomainController model;
+
     @FXML
     private TableColumn<Customer, String> firstNameColumn;
     @FXML
@@ -70,8 +71,9 @@ private DomainController model;
         passportNumberColumn.setCellValueFactory(new PropertyValueFactory<Customer, String>("passportNumber"));
         firstNameColumn.setCellValueFactory(new PropertyValueFactory<Customer, String>("firstName"));
         lastNameColumn.setCellValueFactory(new PropertyValueFactory<Customer, String>("lastName"));
-        homeCountryColumn.setCellValueFactory(new PropertyValueFactory<Customer, String>("homeCountry"));
         bithDayColumn.setCellValueFactory(new PropertyValueFactory<Customer, String>("birthDate"));
+        homeCountryColumn.setCellValueFactory(new PropertyValueFactory<Customer, String>("homeCountry"));
+        
     
         tableViewCustomers.setItems(getCustomers());
     } 
@@ -91,24 +93,24 @@ private DomainController model;
 
     @FXML
     private void addBtnClicked(ActionEvent event) {
-        Customer customer = new Customer(passportIDTxtField.getText(), firstNameTxtField.getText(), lastNameTxtField.getText(), birthDateTxtField.getText());
-        System.out.println("customer object aangemaakt");
-        /*
-        //in onze overview moeten we de oude customer nog verwijderen
+        //Indien de customer met hetzelfde paspoort al bestaat, zullen we dit eerst verwijderen uit onze table, ze staat wel nog in de database. 
         ObservableList<Customer> allCustomers = tableViewCustomers.getItems();
         ObservableList<Customer> listCustomersToDelete=null;
 
-        
-            for(Customer c: allCustomers){
-                if (c.getPassportNumber().equals(passportIDTxtField.getText())){
-                    listCustomersToDelete.add(c);
-                }
+        for(Customer c: allCustomers){
+            if (c.getPassportNumber().equals(passportIDTxtField.getText())){
+                listCustomersToDelete.add(c);
             }
-        
+        }
         
         listCustomersToDelete.forEach(allCustomers::remove);
         System.out.println("customer uit tabel verwijderd");
-        */
+        
+        
+        Customer customer = new Customer(passportIDTxtField.getText(), firstNameTxtField.getText(), lastNameTxtField.getText(), birthDateTxtField.getText());
+        System.out.println("customer object aangemaakt");
+
+        
         //customer toevoegen of aanpassen indien ze al bestaat, in datalaag wordt de oude customer dan onmiddellijk verwijderd
         try {
             saveCustomer(customer);
