@@ -103,7 +103,7 @@ public class DBCustomer {
       } else {
 	// INSERT
 	sql = "INSERT into customer "
-                + "(firstName, lastName, passportNumber, homeCountry) "
+                + "(firstName, lastName, passportNumber, homeCountry, birthDate) "
 		+ "VALUES ('" + s.getFirstName() + "'"
 		+ ", '" + s.getLastName() + "'"
 		+ ", '" + s.getPassportNumber() + "'"
@@ -151,18 +151,17 @@ public class DBCustomer {
      
     
     
-   /* public static void main(String[] args) throws DBException {
+   public static void main(String[] args) throws DBException {
       
-    //Customer djanno = new Customer("DJ1208", "Djanno", "tje");
+    Customer djanno = new Customer("DJ12000", "Djanno", "tje2", "12/12/2000");
     
       try {
-saveCustomer(djanno);
+    saveCustomer(djanno);
     } catch (DBException ex) {
       Logger.getLogger(DBAirport.class.getName()).log(Level.SEVERE, null, ex);
     }
   
-  }*/
-  
+  }  
 }
    
 
