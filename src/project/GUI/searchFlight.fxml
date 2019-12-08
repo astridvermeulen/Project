@@ -14,7 +14,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.GUI.SearchFlightController">
    <children>
-      <SplitPane dividerPositions="0.99" orientation="VERTICAL" prefHeight="450.0" prefWidth="676.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <SplitPane dividerPositions="0.9933" orientation="VERTICAL" prefHeight="450.0" prefWidth="676.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <items>
             <AnchorPane fx:id="panelToUpdate" minHeight="0.0" minWidth="0.0" prefHeight="450.0" prefWidth="676.0">
                <children>
@@ -28,7 +28,7 @@
                   <Label fx:id="sortByLbl" layoutX="44.0" layoutY="274.0" text="Sort by" />
                   <ChoiceBox fx:id="originCityChoice" layoutX="110.0" layoutY="70.0" prefWidth="150.0" AnchorPane.leftAnchor="90.0" AnchorPane.topAnchor="70.0" />
                   <ChoiceBox fx:id="destinationCityChoice" layoutX="434.0" layoutY="70.0" prefHeight="25.0" prefWidth="150.0" AnchorPane.topAnchor="70.0" />
-                  <Button fx:id="searchFlightMethode" layoutX="264.0" layoutY="343.0" mnemonicParsing="false" onAction="#searchFlight" prefHeight="27.0" prefWidth="113.0" text="Search" AnchorPane.topAnchor="370.0">
+                  <Button fx:id="searchFlightMethode" layoutX="108.0" layoutY="371.0" mnemonicParsing="false" onAction="#searchFlight" prefHeight="27.0" prefWidth="115.0" text="Search" AnchorPane.leftAnchor="108.0" AnchorPane.topAnchor="371.0">
                      <font>
                         <Font size="14.0" />
                      </font></Button>
@@ -38,6 +38,8 @@
                   <CheckBox fx:id="intermediateStopsNotAllowedCheck" layoutX="509.0" layoutY="270.0" mnemonicParsing="false" onAction="#handleNoCheckBox" prefHeight="25.0" prefWidth="53.0" text="No" AnchorPane.topAnchor="270.0" />
                   <DatePicker fx:id="datePicker" layoutX="90.0" layoutY="149.0" prefWidth="150.0" promptText="Departure Date" AnchorPane.topAnchor="170.0" />
                   <Label fx:id="numberOfPassengersLbl" layoutX="304.0" layoutY="153.0" prefHeight="1.0" prefWidth="120.0" text="Number of passengers" AnchorPane.topAnchor="174.0" />
+                  <Button fx:id="displayFlightsBtn" layoutX="393.0" layoutY="374.0" mnemonicParsing="false" onAction="#displayFllights" prefWidth="115.0" text="Display" AnchorPane.leftAnchor="393.0" />
+                  <Button fx:id="clearFlightsBtn" layoutX="509.0" layoutY="374.0" mnemonicParsing="false" onAction="#clearFlights" prefWidth="115.0" text="Clear" AnchorPane.leftAnchor="509.0" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
@@ -46,7 +48,7 @@
                      <content>
                         <AnchorPane>
                            <children>
-                              <TableView fx:id="tableView" layoutX="-7.0" prefHeight="450.0" prefWidth="2007.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <TableView fx:id="tableView" layoutX="-7.0" onMouseClicked="#getFlightInfo" prefHeight="450.0" prefWidth="2007.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <columns>
                                     <TableColumn fx:id="airlineColumn" prefWidth="222.0" text="Airline" />
                                     <TableColumn fx:id="originAirportColumn" minWidth="0.0" prefWidth="395.54254150390625" text="Origin airport" />
