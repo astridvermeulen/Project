@@ -27,6 +27,8 @@ public class Customer {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    
+    
     //Getters
     public String getPassportNumber() {
         return passportNumber;
@@ -48,6 +50,7 @@ public class Customer {
         return birthDate;
     }
 
+    
     //Method to safe a customer 
     public static void saveCustomer(Customer s) throws DBException {
         DBCustomer.saveCustomer(s);
