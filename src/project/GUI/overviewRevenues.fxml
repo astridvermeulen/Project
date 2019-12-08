@@ -2,28 +2,39 @@
 
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.GUI.OverviewRevenuesController">
    <children>
-      <Label fx:id="chooseYearLbl" layoutX="109.0" layoutY="47.0" text="Choose the year from which you want to request the revenues" />
-      <ChoiceBox fx:id="yearChoiceBox" layoutX="225.0" layoutY="93.0" prefWidth="150.0" />
-      <ScrollPane layoutX="200.0" layoutY="160.0" prefHeight="200.0" prefWidth="198.0">
+      <Label fx:id="chooseYearLbl" layoutX="78.0" layoutY="72.0" prefHeight="17.0" prefWidth="207.0" text="Choose for which year you want " />
+      <ChoiceBox fx:id="yearChoiceBox" layoutX="78.0" layoutY="128.0" prefWidth="150.0" />
+      <ScrollPane layoutX="438.0" layoutY="72.0" prefHeight="314.0" prefWidth="139.0">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="314.0" prefWidth="160.0">
                <children>
-                  <TableView fx:id="tableViewRevenues" prefHeight="200.0" prefWidth="200.0">
-                    <columns>
-                      <TableColumn prefWidth="75.0" text="C1" />
-                      <TableColumn prefWidth="75.0" text="C2" />
-                    </columns>
-                  </TableView>
-               </children>
-            </AnchorPane>
+                  <ListView fx:id="listViewRevenues" prefHeight="314.0" prefWidth="200.0" />
+               </children></AnchorPane>
         </content>
       </ScrollPane>
+      <VBox layoutX="364.0" layoutY="72.0" prefHeight="314.0" prefWidth="74.0" spacing="8.0">
+         <children>
+            <Label fx:id="januaryLbl" text="January" />
+            <Label fx:id="februaryLbl" text="February" />
+            <Label fx:id="marchLbl" text="March" />
+            <Label fx:id="aprilLbl" text="April" />
+            <Label fx:id="mayLbl" text="May" />
+            <Label fx:id="juneLbl" text="June" />
+            <Label fx:id="julyLbl" text="July" />
+            <Label fx:id="augustLbl" text="August" />
+            <Label fx:id="septemberLbl" text="September" />
+            <Label fx:id="octoberLbl" text="October" />
+            <Label fx:id="novemberLbl" text="November" />
+            <Label fx:id="decemberLbl" text="December" />
+         </children>
+      </VBox>
+      <Label layoutX="78.0" layoutY="89.0" text="to request the revenues" />
    </children>
 </AnchorPane>

@@ -21,6 +21,7 @@ import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import project.DB.DBException;
 import project.LOGIC.Customer;
 import static project.LOGIC.Customer.customersOverview;
@@ -76,6 +77,11 @@ private DomainController model;
         bithDateColumn.setCellValueFactory(new PropertyValueFactory<Customer, String>("birthDate"));      
     
         tableViewCustomers.setItems(getCustomers());
+        tableViewCustomers.setEditable(true);
+        firstNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        lastNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        bithDateColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+                
     } 
     
     public ObservableList<Customer> getCustomers(){
@@ -94,7 +100,6 @@ private DomainController model;
     private void addBtnClicked(ActionEvent event) {
         
         Customer customer = new Customer(passportIDTxtField.getText(), firstNameTxtField.getText(), lastNameTxtField.getText(), birthDateTxtField.getText());
-        System.out.println("customer object aangemaakt");
         
         //customer toevoegen of aanpassen indien ze al bestaat, in datalaag wordt de oude customer dan onmiddellijk verwijderd
         try {
@@ -102,9 +107,8 @@ private DomainController model;
         } catch (DBException ex) {
             Logger.getLogger(OverviewCustomersController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("birthdate customer opgeslagen is: " + customer.getBirthDate());
         
-        //tableViewCustomers.getItems().add(customer);
+        tableViewCustomers.getItems().add(customer);
         
         //tekstvakjes leeg maken
         passportIDTxtField.clear();
@@ -114,9 +118,37 @@ private DomainController model;
         
     }
 
+@FXML
     public void changeFirstNameCellEvent(CellEditEvent editedCell){
         Customer customerSelected = tableViewCustomers.getSelectionModel().getSelectedItem();
-        customerSelected.setFirstName(editedCell.getNewValue());
+        customerSelected.setFirstName(editedCell.getNewValue().toString());
+        try {
+            saveCustomer(customerSelected);
+        } catch (DBException ex) {
+            Logger.getLogger(OverviewCustomersController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+@FXML
+    public void changeLastNameCellEvent(CellEditEvent editedCell){
+        Customer customerSelected = tableViewCustomers.getSelectionModel().getSelectedItem();
+        customerSelected.setLastName(editedCell.getNewValue().toString());
+        try {
+            saveCustomer(customerSelected);
+        } catch (DBException ex) {
+            Logger.getLogger(OverviewCustomersController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+@FXML
+    public void changeBirthDateCellEvent(CellEditEvent editedCell){
+        Customer customerSelected = tableViewCustomers.getSelectionModel().getSelectedItem();
+        customerSelected.setBirthDate(editedCell.getNewValue().toString());
+        try {
+            saveCustomer(customerSelected);
+        } catch (DBException ex) {
+            Logger.getLogger(OverviewCustomersController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     @FXML
@@ -131,20 +163,5 @@ private DomainController model;
         }
         customerSelected.forEach(allCustomers::remove);
     }
-    
-    /*//Indien de customer met hetzelfde paspoort al bestaat, zullen we dit eerst verwijderen uit onze table, ze staat wel nog in de database. 
-        ObservableList<Customer> allCustomers = tableViewCustomers.getItems();
-        ObservableList<Customer> listCustomersToDelete=null;
-
-        for(Customer c: allCustomers){
-            if (c.getPassportNumber().equals(passportIDTxtField.getText())){
-                listCustomersToDelete.add(c);
-            }
-        }
-        
-        listCustomersToDelete.forEach(allCustomers::remove);
-        System.out.println("customer uit tabel verwijderd");
-      */  
-        
     
 }

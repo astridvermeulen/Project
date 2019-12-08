@@ -45,12 +45,13 @@ public class Airport {
     }
 
     //Method to give an overview of the most populair airports 
-    public static ArrayList<Airport> tenMostPopularAirports() throws DBException {
+    public static ArrayList<String> tenMostPopularAirports() throws DBException {
         ArrayList<Airport> populairAirports = DBAirport.getPopularAirport();//DATaboys nog methode doorgeven hier 
-        //ArrayList<String> nameOfPopulairAirports = new ArrayList<>();
+        ArrayList<String> nameOfPopulairAirports = new ArrayList<>();
         for (Airport airport : populairAirports) {
-            populairAirports.add(airport);
+            nameOfPopulairAirports.add(airport.getAirportName());
         }
-        return populairAirports;
+        return nameOfPopulairAirports;
     }
+
 }

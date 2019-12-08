@@ -177,7 +177,7 @@ public class SearchFlightController implements Initializable {
     private void searchFlight(ActionEvent event) {
 
         try {
-            filteredFlights = model.searchFlight(getIntermediateStopsAllowed(), getSortBy(), getOriginAirport(), getDestinationAirport(), getDatePicker());
+            filteredFlights.addAll(model.searchFlight(getIntermediateStopsAllowed(), getSortBy(), getOriginAirport(), getDestinationAirport(), getDatePicker()));
         }  catch (DBException ex) {
             Logger.getLogger(SearchFlightController.class.getName()).log(Level.SEVERE, null, ex);
         }  
