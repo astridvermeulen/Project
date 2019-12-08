@@ -93,30 +93,29 @@ private DomainController model;
     private void addBtnClicked(ActionEvent event) {
         Customer customer = new Customer(passportIDTxtField.getText(), firstNameTxtField.getText(), lastNameTxtField.getText(), birthDateTxtField.getText());
         System.out.println("customer object aangemaakt");
-        
+        /*
         //in onze overview moeten we de oude customer nog verwijderen
         ObservableList<Customer> allCustomers = tableViewCustomers.getItems();
         ObservableList<Customer> listCustomersToDelete=null;
 
-        try {
-            for(Customer c: customersOverview()){
+        
+            for(Customer c: allCustomers){
                 if (c.getPassportNumber().equals(passportIDTxtField.getText())){
                     listCustomersToDelete.add(c);
                 }
             }
-        } catch (DBException ex) {
-        Logger.getLogger(OverviewCustomersController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
         
         listCustomersToDelete.forEach(allCustomers::remove);
         System.out.println("customer uit tabel verwijderd");
-        
+        */
         //customer toevoegen of aanpassen indien ze al bestaat, in datalaag wordt de oude customer dan onmiddellijk verwijderd
         try {
             saveCustomer(customer);
         } catch (DBException ex) {
             Logger.getLogger(OverviewCustomersController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        System.out.println("aangepast customer opgeslaan");
         tableViewCustomers.getItems().add(customer);
         System.out.println("aangepaste customer toegevoegd");
         
@@ -126,7 +125,7 @@ private DomainController model;
         lastNameTxtField.clear();
     }
 
-
+    
     @FXML
     private void deleteBtnClicked(ActionEvent event) {
         ObservableList<Customer> customerSelected, allCustomers;

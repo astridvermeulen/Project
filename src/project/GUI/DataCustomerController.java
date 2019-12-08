@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package project.GUI;
 
 import java.net.URL;
@@ -100,6 +96,14 @@ public class DataCustomerController implements Initializable {
     private Label birthDateLbl;
     @FXML
     private TextField birthDateC1TxtField;
+    @FXML
+    private TextField birthDateC2TxtField;
+    @FXML
+    private TextField birthDateC3TxtField;
+    @FXML
+    private TextField birthDateC4TxtField;
+    @FXML
+    private TextField birthDateC5TxtField;
 
 
     /**
@@ -149,7 +153,7 @@ public class DataCustomerController implements Initializable {
 
     @FXML
     private void saveCustomer2(ActionEvent event) {
-        Customer klant = new Customer(passportIDC2TxtField.getText(), firstNameC2TxtField.getText(), lastNameC2TxtField.getText());
+        Customer klant = new Customer(passportIDC2TxtField.getText(), firstNameC2TxtField.getText(), lastNameC2TxtField.getText(), birthDateC2TxtField.getText());
         try {
             saveCustomer(klant);
         } catch (DBException ex) {
@@ -161,7 +165,7 @@ public class DataCustomerController implements Initializable {
 
     @FXML
     private void saveCustomer3(ActionEvent event) {
-        Customer klant = new Customer(passportIDC3TxtField.getText(), firstNameC3TxtField.getText(), lastNameC3TxtField.getText());
+        Customer klant = new Customer(passportIDC3TxtField.getText(), firstNameC3TxtField.getText(), lastNameC3TxtField.getText(),birthDateC3TxtField.getText());
         try {
             saveCustomer(klant);
         } catch (DBException ex) {
@@ -172,7 +176,7 @@ public class DataCustomerController implements Initializable {
 
     @FXML
     private void saveCustomer4(ActionEvent event) {
-        Customer klant = new Customer(passportIDC4TxtField.getText(), firstNameC4TxtField.getText(), lastNameC4TxtField.getText());
+        Customer klant = new Customer(passportIDC4TxtField.getText(), firstNameC4TxtField.getText(), lastNameC4TxtField.getText(), birthDateC4TxtField.getText());
         try {
             saveCustomer(klant);
         } catch (DBException ex) {
@@ -183,7 +187,7 @@ public class DataCustomerController implements Initializable {
 
     @FXML
     private void saveCustomer5(ActionEvent event) {
-        Customer klant = new Customer(passportIDC5TxtField.getText(), firstNameC5TxtField.getText(), lastNameC5TxtField.getText());
+        Customer klant = new Customer(passportIDC5TxtField.getText(), firstNameC5TxtField.getText(), lastNameC5TxtField.getText(), birthDateC5TxtField.getText());
         try {
             saveCustomer(klant);
         } catch (DBException ex) {
