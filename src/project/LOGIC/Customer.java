@@ -1,6 +1,7 @@
 package project.LOGIC;
 
 import java.util.ArrayList;
+import javafx.beans.property.SimpleStringProperty;
 import project.DB.DBCustomer;
 import project.DB.DBException;
 import project.DB.DBFlight;
@@ -9,35 +10,49 @@ public class Customer {
 
     //Instance variables 
     private final String passportNumber;
-    private final String firstName;
-    private final String lastName;
+    private SimpleStringProperty firstName;
+    private SimpleStringProperty lastName;
     private final String homeCountry;
-    private final String birthDate;
+    private SimpleStringProperty birthDate;
 
     //Constructor 
     public Customer(String passportNumber, String firstName, String lastName, String birthDate) {
         this.passportNumber = passportNumber;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.firstName = new SimpleStringProperty(firstName);
+        this.lastName = new SimpleStringProperty(lastName);
         this.homeCountry = calculateHomeCountry(passportNumber);
-        this.birthDate = birthDate;
+        this.birthDate = new SimpleStringProperty(birthDate);
     }
 
     public Customer(String text, String text0, String text1) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    public void setFirstName(String firstName) {
+        this.firstName = new SimpleStringProperty(firstName);
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = new SimpleStringProperty(lastName);
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = new SimpleStringProperty(birthDate);
+    }
+
+    
+    
     //Getters
     public String getPassportNumber() {
         return passportNumber;
     }
 
     public String getFirstName() {
-        return firstName;
+        return firstName.get();
     }
 
     public String getLastName() {
-        return lastName;
+        return lastName.get();
     }
 
     public String getHomeCountry() {
@@ -45,9 +60,10 @@ public class Customer {
     }
 
     public String getBirthDate() {
-        return birthDate;
+        return birthDate.get();
     }
 
+    
     //Method to safe a customer 
     public static void saveCustomer(Customer s) throws DBException {
         DBCustomer.saveCustomer(s);

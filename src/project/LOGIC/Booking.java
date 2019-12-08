@@ -106,7 +106,7 @@ public class Booking {
     }
 
     //Method to calculate the revenue of a month: tested V
-    public static double calculateRevenuePerMonth(String month, String year) throws DBException {
+    public static Double calculateRevenuePerMonth(String month, String year) throws DBException {
         double revenuePerMonth = 0.0;
         String monthSlashYear = month + "/" + year;
         ArrayList<Booking> allBookings = DBBooking.getBookings();
