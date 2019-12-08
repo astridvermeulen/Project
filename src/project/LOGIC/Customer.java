@@ -40,8 +40,6 @@ public class Customer {
         this.birthDate = new SimpleStringProperty(birthDate);
     }
 
-    
-    
     //Getters
     public String getPassportNumber() {
         return passportNumber;
@@ -63,7 +61,6 @@ public class Customer {
         return birthDate.get();
     }
 
-    
     //Method to safe a customer 
     public static void saveCustomer(Customer s) throws DBException {
         DBCustomer.saveCustomer(s);
@@ -109,4 +106,13 @@ public class Customer {
         return customersAll;
     }
 
+    //Method to get the total emission of the booked flights of a customer
+    public double totalEmissionCustomer() throws DBException {
+        double emissionTot = 0.0;
+        ArrayList<Flight> flightsOfCustomer = DBFlight.getFlightsPerCustomer(this.passportNumber);
+        for (Flight vlucht : flightsOfCustomer) {
+            emissionTot = emissionTot + vlucht.getEmission();
+        }
+        return emissionTot;
+    }
 }
