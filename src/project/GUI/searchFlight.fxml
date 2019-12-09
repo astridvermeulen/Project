@@ -12,9 +12,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.GUI.SearchFlightController">
+<AnchorPane prefHeight="500.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.GUI.SearchFlightController">
    <children>
-      <SplitPane dividerPositions="0.9933" orientation="VERTICAL" prefHeight="450.0" prefWidth="676.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <SplitPane dividerPositions="0.9910714285714286" orientation="VERTICAL" prefHeight="450.0" prefWidth="676.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <items>
             <AnchorPane fx:id="panelToUpdate" minHeight="0.0" minWidth="0.0" prefHeight="450.0" prefWidth="676.0">
                <children>
@@ -44,6 +44,7 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
+                  <Button fx:id="bookSelectedFlightsBtn" layoutX="532.0" layoutY="8.0" mnemonicParsing="false" onAction="#bookSelectedFlights" prefHeight="37.0" prefWidth="145.0" text="Book selected flights" />
                   <ScrollPane fx:id="scrollPane" layoutY="32.0" prefHeight="391.0" prefWidth="654.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <content>
                         <AnchorPane>
