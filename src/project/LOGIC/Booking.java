@@ -13,10 +13,9 @@ import project.DB.DBException;
 public class Booking {
 
     //Instance variables 
-    private final int bookingNumber;
     private final String bookingDate;
     private static final double SERVICEFEEPROCENT = 0.05;
-    private final Flight flight;
+    private final ArrayList<Flight> flight;
     private final ArrayList<Customer> customers;
     private final double serviceFee;
     private static final double PROMOTIONPROCENT = 0.10;
@@ -24,32 +23,16 @@ public class Booking {
     private final double netPrice;
 
     //Constructor 
-    public Booking(Flight flight, ArrayList<Customer> customer) throws DBException, ParseException {
-        this.bookingNumber = -1;
+    public Booking(ArrayList<Flight> flight, ArrayList<Customer> customer) throws DBException, ParseException {
         this.bookingDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         this.flight = flight;
         this.customers = customer;
-        this.serviceFee = SERVICEFEEPROCENT * flight.getPrice();
+        this.serviceFee = calculateServiceFee();
         this.promotion = calculatePromotion();
         this.netPrice = calculateNetPrice();
     }
 
-    //Constructor needed for the database 
-    public Booking(String bookingDate, double serviceFee) throws DBException, ParseException {
-        this.bookingNumber = -1;
-        this.bookingDate = bookingDate;
-        this.serviceFee = serviceFee;
-        this.promotion = 0.0;
-        this.netPrice = 0.0;
-        this.flight = null;
-        this.customers = null;
-    }
-
     //Getters
-    public int getBookingNumber() {
-        return bookingNumber;
-    }
-
     public String getBookingDate() {
         return bookingDate;
     }
@@ -66,7 +49,7 @@ public class Booking {
         return netPrice;
     }
 
-    public Flight getFlight() {
+    public ArrayList<Flight> getFlight() {
         return flight;
     }
 
@@ -77,7 +60,7 @@ public class Booking {
     //Helping method to safe a booking: one customer per booking 
     public void saveBooking(Booking b) throws DBException, SQLException {
         for (int i = 0; i < b.customers.size(); i++) {
-            DBBooking.saveBooking(b.bookingDate, b.promotion, b.serviceFee, b.flight.getFlightNumber(), b.flight.getDepartureDate(), b.customers.get(i).getPassportNumber());
+            DBBooking.saveBooking(b.bookingDate, b.promotion, b.serviceFee, b.flight.get(i).getFlightNumber(), b.flight.get(i).getDepartureDate(), b.customers.get(i).getPassportNumber());
         }
     }
 
@@ -89,18 +72,20 @@ public class Booking {
     //Helping method to calculate the promotion: tested V
     private double calculatePromotion() throws DBException, ParseException {
         double prom = 0.0;
-        String dateStart = bookingDate + " 00:00:00";
-        String dateStop = this.flight.getDepartureDate() + " 00:00:00";
-        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-        Date d1;
-        Date d2;
-        d1 = format.parse(dateStart);
-        d2 = format.parse(dateStop);
-        long diff = d2.getTime() - d1.getTime();
-        long diffDays = diff / (24 * 60 * 60 * 1000);
-        int diffDaysDouble = (int) diffDays;
-        if (diffDaysDouble > 200 || diffDaysDouble < 20) {
-            prom = this.flight.getPrice() * PROMOTIONPROCENT;
+        for (Flight vlucht : this.flight) {
+            String dateStart = bookingDate + " 00:00:00";
+            String dateStop = vlucht.getDepartureDate() + " 00:00:00";
+            SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+            Date d1;
+            Date d2;
+            d1 = format.parse(dateStart);
+            d2 = format.parse(dateStop);
+            long diff = d2.getTime() - d1.getTime();
+            long diffDays = diff / (24 * 60 * 60 * 1000);
+            int diffDaysDouble = (int) diffDays;
+            if (diffDaysDouble > 200 || diffDaysDouble < 20) {
+                prom = prom + vlucht.getPrice() * PROMOTIONPROCENT;
+            }
         }
         return prom;
     }
@@ -181,13 +166,26 @@ public class Booking {
 
     //Helping method to calculate the net price of a booking: tested V
     private double calculateNetPrice() {
-        double netPr = this.serviceFee - this.promotion + flight.getPrice();
+        double totalPrice = 0.0;
+        for (Flight vlucht : this.flight) {
+            totalPrice = totalPrice + vlucht.getPrice();
+        }
+        double netPr = this.serviceFee - this.promotion + totalPrice;
         return netPr;
     }
 
+    //Method to calculate the service fee of the total booking
+    private double calculateServiceFee() {
+        double serviceFeeTotal = 0.0;
+        for (Flight vlucht : this.flight) {
+            serviceFeeTotal = serviceFeeTotal + (SERVICEFEEPROCENT * vlucht.getPrice());
+        }
+        return serviceFeeTotal;
+    }
+
     public static void main(String[] args) throws DBException, ParseException {
-        Booking b = new Booking("12/10/2019", SERVICEFEEPROCENT);
-        System.out.println(b.bookingDate.substring(3, 5));
+        //Booking b = new Booking("12/10/2019", SERVICEFEEPROCENT);
+        //System.out.println(b.bookingDate.substring(3, 5));
         System.out.println(calculateRevenuePerMonth("2021"));
     }
 

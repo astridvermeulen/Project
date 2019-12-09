@@ -37,7 +37,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import project.DB.DBAirport;
 import project.DB.DBException;
-import static project.LOGIC.Airline.airportsAlphabetic;
+
+import static project.LOGIC.Airport.airportsAlphabetic;
+
 import project.LOGIC.DomainController;
 import project.LOGIC.Flight;
 
@@ -115,12 +117,18 @@ public class SearchFlightController implements Initializable {
     private Button displayFlightsBtn;
     @FXML
     private Button clearFlightsBtn;
+
     
     private ObservableList<Flight> flightsSelected;
     private ArrayList<Flight> vluchtenGeselecteerd;    
     @FXML
     private Button bookBtn;
     
+
+    @FXML
+    private Button bookSelectedFlightsBtn;
+      
+
     //Getters
     public SearchFlightController() {
         /*flightsSelected = tableView.getSelectionModel().getSelectedItems();
@@ -309,18 +317,22 @@ public class SearchFlightController implements Initializable {
     }
 
     @FXML
+
     private void makeBooking(ActionEvent event) {
         
         
         try {
-      
             AnchorPane pane = (AnchorPane) FXMLLoader.load(getClass().getResource("dataCustomer.fxml"));
             panelToUpdate.getChildren().setAll(pane);
-      
-      
         } catch (IOException ex) {
-        Logger.getLogger(startWindowController.class.getName()).log(Level.SEVERE, null, ex);
-    }
+            Logger.getLogger(SearchFlightController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    
+        
+        
+
+
     }
 
     

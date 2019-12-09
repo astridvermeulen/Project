@@ -21,7 +21,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import project.DB.DBException;
 import project.LOGIC.DomainController;
 import project.LOGIC.Flight;
-import static project.LOGIC.Flight.tripsOriginDestinations;
+import static project.LOGIC.Flight.topPopularTrips;
 
 /**
  * FXML Controller class
@@ -34,7 +34,7 @@ public class OverviewTripsController implements Initializable {
     @FXML
     private TableView<Flight> tableViewTrips;
     @FXML
-    private ChoiceBox<?> yearChoiceBox;
+    private ChoiceBox<String> yearChoiceBox;
     @FXML
     private Label chooseLbl;
     @FXML
@@ -55,18 +55,32 @@ public class OverviewTripsController implements Initializable {
         timesBookedColumn.setCellValueFactory(new PropertyValueFactory<Flight, Integer>("timesBooked"));
     
         tableViewTrips.setItems(getTrips());
+        addDataToChoiceBox();
     } 
     
+    private void addDataToChoiceBox(){
+        
+        ObservableList<String> list = FXCollections.observableArrayList();
+    
+        for(Integer i=2019; i<2025; i++){
+          list.add(i.toString());
+        }
+        
+        yearChoiceBox.getItems().addAll(list);
+    }
+    
+    public String getYear(){
+        return yearChoiceBox.getValue();
+    }
     public ObservableList<Flight> getTrips(){
         ObservableList<Flight> trips = FXCollections.observableArrayList();
         
         try {
-            for(Flight f: tripsOriginDestinations()){
+            for(Flight f: topPopularTrips(getYear())){
                 trips.add(f);
                 
-                return trips;
-                
-            }   } catch (DBException ex) {
+            }   
+        } catch (DBException ex) {
             Logger.getLogger(OverviewTripsController.class.getName()).log(Level.SEVERE, null, ex);
         }
         

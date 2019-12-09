@@ -37,20 +37,8 @@ public class Airline {
         DBAirline.deleteAirline(airline);
     }
 
-    //Method to order the airports in alpabetic order: tested V 
-    public static ArrayList<String> airportsAlphabetic() throws DBException {
-        ArrayList<Airport> airportsAll = DBAirport.getAirports();
-        ArrayList<String> airportNames = new ArrayList();
-        for (int i = 0; i < airportsAll.size(); i++) {
-            String naam = airportsAll.get(i).getAirportName();
-            airportNames.add(i, naam);
-        }
-        Collections.sort(airportNames);
-        return airportNames;
-    }
 
     //Main method to test the methods 
     public static void main(String[] args) throws DBException {
-        System.out.println(Airline.airportsAlphabetic());
     }
 }
