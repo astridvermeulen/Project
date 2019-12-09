@@ -35,7 +35,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import project.DB.DBAirport;
 import project.DB.DBException;
-import static project.LOGIC.Airline.airportsAlphabetic;
+import static project.LOGIC.Airport.airportsAlphabetic;
 import project.LOGIC.DomainController;
 import project.LOGIC.Flight;
 
