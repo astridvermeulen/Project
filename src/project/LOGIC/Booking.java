@@ -13,10 +13,9 @@ import project.DB.DBException;
 public class Booking {
 
     //Instance variables 
-    private final int bookingNumber;
     private final String bookingDate;
     private static final double SERVICEFEEPROCENT = 0.05;
-    private final Flight flight;
+    private final ArrayList<Flight> flight;
     private final ArrayList<Customer> customers;
     private final double serviceFee;
     private static final double PROMOTIONPROCENT = 0.10;
@@ -24,8 +23,7 @@ public class Booking {
     private final double netPrice;
 
     //Constructor 
-    public Booking(Flight flight, ArrayList<Customer> customer) throws DBException, ParseException {
-        this.bookingNumber = -1;
+    public Booking(ArrayList<Flight> flight, ArrayList<Customer> customer) throws DBException, ParseException {
         this.bookingDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         this.flight = flight;
         this.customers = customer;
@@ -34,22 +32,7 @@ public class Booking {
         this.netPrice = calculateNetPrice();
     }
 
-    //Constructor needed for the database 
-    public Booking(String bookingDate, double serviceFee) throws DBException, ParseException {
-        this.bookingNumber = -1;
-        this.bookingDate = bookingDate;
-        this.serviceFee = serviceFee;
-        this.promotion = 0.0;
-        this.netPrice = 0.0;
-        this.flight = null;
-        this.customers = null;
-    }
-
     //Getters
-    public int getBookingNumber() {
-        return bookingNumber;
-    }
-
     public String getBookingDate() {
         return bookingDate;
     }
@@ -66,7 +49,7 @@ public class Booking {
         return netPrice;
     }
 
-    public Flight getFlight() {
+    public ArrayList<Flight> getFlight() {
         return flight;
     }
 
@@ -77,7 +60,7 @@ public class Booking {
     //Helping method to safe a booking: one customer per booking 
     public void saveBooking(Booking b) throws DBException, SQLException {
         for (int i = 0; i < b.customers.size(); i++) {
-            DBBooking.saveBooking(b.bookingDate, b.promotion, b.serviceFee, b.flight.getFlightNumber(), b.flight.getDepartureDate(), b.customers.get(i).getPassportNumber());
+            DBBooking.saveBooking(b.bookingDate, b.promotion, b.serviceFee, b.flight.get(i).getFlightNumber(), b.flight.get(i).getDepartureDate(), b.customers.get(i).getPassportNumber());
         }
     }
 

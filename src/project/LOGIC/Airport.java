@@ -54,7 +54,7 @@ public class Airport {
         }
         return nameOfPopulairAirports;
     }
-    
+     
     //Method to order the airports in alpabetic order: tested V 
     public static ArrayList<String> airportsAlphabetic() throws DBException {
         ArrayList<Airport> airportsAll = DBAirport.getAirports();
