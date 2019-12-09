@@ -52,13 +52,13 @@ public class ReportCustomerController implements Initializable {
     @FXML
     private Button donateBtn;
     @FXML
-    private Label totalEmissionLbl;
-    @FXML
     private Label emissionToInputLbl;
     @FXML
     private TableView<Customer> tableViewCustomers;
     @FXML
     private TableColumn<Customer, String> passportIDColumn;
+    @FXML
+    private Button showTotalEmissionBtn;
    
 
     /**
@@ -77,7 +77,9 @@ public class ReportCustomerController implements Initializable {
     
         tableViewCustomers.setItems(getCustomers());
         
-    }    
+    } 
+    
+
     
     public ObservableList<Customer> getCustomers(){
         ObservableList<Customer> customers = FXCollections.observableArrayList();
@@ -118,6 +120,21 @@ public class ReportCustomerController implements Initializable {
         chosenCustomer = customerSelected.get(0);
         System.out.println("gesecteerde customer is " + chosenCustomer.getPassportNumber());
         tableViewEmission.setItems(getFlightsFromCustomer());
+    }
+
+    @FXML
+    private void showTotalEmission(ActionEvent event) {
+        System.out.println("show button clicked");
+        try {
+            emissionToInputLbl.setText(chosenCustomer.totalEmissionCustomer().toString());
+        } catch (DBException ex) {
+            Logger.getLogger(ReportCustomerController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void donate(ActionEvent event) {
+        
     }
 
 

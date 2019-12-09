@@ -5,7 +5,6 @@
  */
 package project.GUI;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -21,7 +20,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -29,17 +27,16 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import project.DB.DBAirport;
-import static project.DB.DBAirport.getAirports;
 import project.DB.DBException;
-import project.LOGIC.Airport;
+import static project.LOGIC.Airline.airportsAlphabetic;
 import project.LOGIC.DomainController;
-import static project.LOGIC.DomainController.domainController;
 import project.LOGIC.Flight;
 
 /**
@@ -116,9 +113,22 @@ public class SearchFlightController implements Initializable {
     @FXML
     private Button clearFlightsBtn;
     
+    private ObservableList<Flight> flightsSelected;
+    private ArrayList<Flight> vluchtenGeselecteerd;    
     
     //Getters
     public SearchFlightController() {
+        /*flightsSelected = tableView.getSelectionModel().getSelectedItems();
+        
+        int size = flightsSelected.size();
+        for(int i=0; i<size; i++){
+            vluchtenGeselecteerd.add(flightsSelected.get(i));
+        }
+        
+        System.out.println("geselecteerde vluchten: " + vluchtenGeselecteerd.get(0));
+        
+        */
+
     }
 
     public String getDatePicker() {
@@ -160,9 +170,15 @@ public class SearchFlightController implements Initializable {
         priceColumn.setCellValueFactory(new PropertyValueFactory<Flight,Double>("price"));
         numberOfFlightLegsColumn.setCellValueFactory(new PropertyValueFactory<Flight,Integer>("getFlightLegs()"));
         
-        
+        tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
         
     }    
+    
+
+        
+
+    
 
     @FXML
     private void handleYesCheckBox(){
@@ -220,14 +236,13 @@ public class SearchFlightController implements Initializable {
     ObservableList list2 = FXCollections.observableArrayList();
     ObservableList list3 = FXCollections.observableArrayList();
     
-    ArrayList<Airport> test = new ArrayList<>();
+    ArrayList<String> test = new ArrayList<>();
     
       try {
-          test = getAirports();
-          System.out.println(test.size());
+          test = airportsAlphabetic();
           int size = test.size();
           for(int position = 0; position < size; position++)
-              list1.add(test.get(position).getAirportName());
+              list1.add(test.get(position));
     
 
             } catch (DBException ex) {
@@ -237,10 +252,7 @@ public class SearchFlightController implements Initializable {
       for(int i=1; i<5; i++){
           list2.add(i);
       }
-      for(int i=1; i<13; i++){
-          list3.add(i);
-      }
-      
+
       list3.addAll("Duration", "Price", "Emission");
       
         originCityChoice.getItems().addAll(list1);

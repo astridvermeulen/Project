@@ -107,10 +107,10 @@ public class Customer {
     }
 
     //Method to get the total emission of the booked flights of a customer
-    public double totalEmissionCustomer() throws DBException {
-        double emissionTot = 0.0;
+    public Double totalEmissionCustomer() throws DBException {
+        Double emissionTot = 0.0;
         ArrayList<Flight> flightsOfCustomer = DBFlight.getFlightsPerCustomer(this.passportNumber);
-        for (Flight vlucht : flightsOfCustomer) {
+        for (Flight vlucht : this.flightOverview()) {
             emissionTot = emissionTot + vlucht.getEmission();
         }
         return emissionTot;
