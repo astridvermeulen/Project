@@ -81,7 +81,7 @@ private DomainController model;
         firstNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         lastNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         bithDateColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-                
+        
     } 
     
     public ObservableList<Customer> getCustomers(){
