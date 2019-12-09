@@ -51,7 +51,7 @@ public class startWindowController implements Initializable {
     private Button salesReportBtn;
     
     
-    // dit initaliseerd de controller class
+    // dit initaliseert de controller class
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         model=domainController.getInstance();    
