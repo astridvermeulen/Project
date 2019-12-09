@@ -10,20 +10,11 @@ public class Airport {
     //Instance variables 
     private final String airportCode;
     private final String airportName;
-    private final int timesUsed; //Needed for the dataBoys
 
     //Constructor 
     public Airport(String airportCode, String airportName) {
         this.airportCode = airportCode;
         this.airportName = airportName;
-        this.timesUsed = -1;
-    }
-
-    //Constuctor needed for the dataBoys 
-    public Airport(String airportName, int timesUsed) {
-        this.airportCode = "";
-        this.airportName = airportName;
-        this.timesUsed = timesUsed;
     }
 
     //Getters
