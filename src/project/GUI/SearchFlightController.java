@@ -5,6 +5,7 @@
  */
 package project.GUI;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -20,6 +21,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -116,6 +118,8 @@ public class SearchFlightController implements Initializable {
     
     private ObservableList<Flight> flightsSelected;
     private ArrayList<Flight> vluchtenGeselecteerd;    
+    @FXML
+    private Button bookBtn;
     
     //Getters
     public SearchFlightController() {
@@ -156,7 +160,7 @@ public class SearchFlightController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        model=DomainController.getInstance();
+        model = DomainController.getInstance();
         addDataToChoiceBox();
         
         airlineColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("airline"));
@@ -169,7 +173,7 @@ public class SearchFlightController implements Initializable {
         arrivalTimeColumn.setCellValueFactory(new PropertyValueFactory<Flight,LocalTime>("arrivalTime"));
         flightNumberColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("flightNumber"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<Flight,Double>("price"));
-        numberOfFlightLegsColumn.setCellValueFactory(new PropertyValueFactory<Flight,Integer>("getFlightLegs()"));
+        numberOfFlightLegsColumn.setCellValueFactory(new PropertyValueFactory<Flight,Integer>("FlightLegs"));
         
         tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
@@ -266,7 +270,7 @@ public class SearchFlightController implements Initializable {
             
             selectedFlights.add(flight);
             //test
-            System.out.println(flight.getAirline());
+            System.out.println(selectedFlights);
             
         } catch (DBException ex) {
             Logger.getLogger(SearchFlightController.class.getName()).log(Level.SEVERE, null, ex);
@@ -302,6 +306,21 @@ public class SearchFlightController implements Initializable {
     @FXML
     private void clearFlights(ActionEvent event) {
         getFlights().clear();
+    }
+
+    @FXML
+    private void makeBooking(ActionEvent event) {
+        
+        
+        try {
+      
+            AnchorPane pane = (AnchorPane) FXMLLoader.load(getClass().getResource("dataCustomer.fxml"));
+            panelToUpdate.getChildren().setAll(pane);
+      
+      
+        } catch (IOException ex) {
+        Logger.getLogger(startWindowController.class.getName()).log(Level.SEVERE, null, ex);
+    }
     }
 
     
