@@ -29,6 +29,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -51,6 +52,7 @@ public class SearchFlightController implements Initializable {
     private DomainController model;
     private ArrayList<Flight> filteredFlights = new ArrayList<>();
     private Flight flight;
+    private ArrayList<Flight> selectedFlights = new ArrayList<>();
     
     
     // Overview of flights matching the criteria
@@ -160,6 +162,7 @@ public class SearchFlightController implements Initializable {
         priceColumn.setCellValueFactory(new PropertyValueFactory<Flight,Double>("price"));
         numberOfFlightLegsColumn.setCellValueFactory(new PropertyValueFactory<Flight,Integer>("getFlightLegs()"));
         
+        tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         
         
     }    
@@ -182,14 +185,6 @@ public class SearchFlightController implements Initializable {
     //Search flights
     @FXML
     private void searchFlight(ActionEvent event) {
-
-        try {
-            filteredFlights.addAll(model.searchFlight(getIntermediateStopsAllowed(), getSortBy(), getOriginAirport(), getDestinationAirport(), getDatePicker()));
-        }  catch (DBException ex) {
-            Logger.getLogger(SearchFlightController.class.getName()).log(Level.SEVERE, null, ex);
-        }  
-        tableView.setItems(getFlights());
-        
         try {
             filteredFlights.addAll(model.searchFlight(getIntermediateStopsAllowed(), getSortBy(), getOriginAirport(), getDestinationAirport(), getDatePicker()));
             System.out.println(filteredFlights.toString());
@@ -252,13 +247,16 @@ public class SearchFlightController implements Initializable {
     
     @FXML
     private void getFlightInfo(MouseEvent event) {
+        
         try {
-            Flight vlucht = new Flight(tableView.getSelectionModel().getSelectedItem().getOrigin(),tableView.getSelectionModel().getSelectedItem().getDestination(),
+            flight = new Flight(tableView.getSelectionModel().getSelectedItem().getOrigin(),tableView.getSelectionModel().getSelectedItem().getDestination(),
                     tableView.getSelectionModel().getSelectedItem().getDepartureDate(), tableView.getSelectionModel().getSelectedItem().getDepartureTime(),
                     tableView.getSelectionModel().getSelectedItem().getArrivalDate(),tableView.getSelectionModel().getSelectedItem().getArrivalTime(),
                     tableView.getSelectionModel().getSelectedItem().getFlightNumber(),tableView.getSelectionModel().getSelectedItem().getPrice());
+            
+            selectedFlights.add(flight);
             //test
-            System.out.println(vlucht.getAirline());
+            System.out.println(flight.getAirline());
             
         } catch (DBException ex) {
             Logger.getLogger(SearchFlightController.class.getName()).log(Level.SEVERE, null, ex);
