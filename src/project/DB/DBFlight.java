@@ -19,7 +19,7 @@ public class DBFlight {
      public static Flight getFlight(String flightNumber, String departureDate) throws DBException, SQLException {
         Connection con = null;
     try {
-      con = DBConnection.getConnection();
+      con = DBConnection.getInstance().getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
       String sql =  "SELECT origin, destination, departureDate, departureTime, arrivalDate, arrivalTime, flightNumber, price " + 
@@ -69,7 +69,7 @@ public static ArrayList <Flight> getFlightsPerCustomer(String passportNumber) th
         ArrayList<Flight> vlucht = new ArrayList<>();               
                           
       try {
-      con = DBConnection.getConnection();
+      con = DBConnection.getInstance().getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
       String sql =  "SELECT f.flightNumber, f.departureDate,f.departureTime, f.arrivalDate, f.arrivalTime, " +
@@ -118,7 +118,7 @@ public static Flight getFlightForBooking(int bookingNumber) throws DBException {
        Connection con = null;                   
                           
       try {
-      con = DBConnection.getConnection();
+      con = DBConnection.getInstance().getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
       String sql = "SELECT f.flightNumber, f.departureDate, f.departureTime, f.arrivalDate, f.arrivalTime, " + 
@@ -167,7 +167,7 @@ public static ArrayList<Flight> getFlights() throws DBException {
    
     Connection con = null;
     try {
-      con = DBConnection.getConnection();
+      con = DBConnection.getInstance().getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
       String sql = "SELECT flightNumber, departureDate "
@@ -193,7 +193,7 @@ public static ArrayList<Flight> getFlights() throws DBException {
          Connection con = null;
          Double co2 = 0.0;
     try {
-      con = DBConnection.getConnection();
+      con = DBConnection.getInstance().getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
       String sql = "SELECT co2 "

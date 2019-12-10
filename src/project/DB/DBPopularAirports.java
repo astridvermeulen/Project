@@ -24,7 +24,7 @@ public class DBPopularAirports {
         
          
     try {
-      con = DBConnection.getConnection();
+      con = DBConnection.getInstance().getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
       String sql = "SELECT distinct f.origin AS airport, count(*) AS aantal FROM booking as b " 

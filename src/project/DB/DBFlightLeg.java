@@ -20,7 +20,7 @@ public class DBFlightLeg {
     public static FlightLeg getFlightLeg(int legNumber, String flightNumber, String departureDate) throws DBException {
         Connection con = null;
     try {
-      con = DBConnection.getConnection();
+      con = DBConnection.getInstance().getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
       String sql =  "SELECT fl.legNumber, fl.originAirportCode, fl.destinationAirportCode, fl.departureDate, fl.arrivalDate, fl.departureTime, fl.arrivalTime " + 
@@ -66,7 +66,7 @@ public class DBFlightLeg {
         ArrayList<FlightLeg> vluchtdeel = new ArrayList<>();               
         
     try {
-      con = DBConnection.getConnection();
+      con = DBConnection.getInstance().getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
       String sql =  "SELECT fl.legNumber, fl.originAirportCode, fl.destinationAirportCode, fl.departureDate, fl.arrivalDate, fl.departureTime, fl.arrivalTime " + 

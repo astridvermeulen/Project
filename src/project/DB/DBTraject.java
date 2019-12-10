@@ -24,7 +24,7 @@ public class DBTraject {
         
          
     try {
-      con = DBConnection.getConnection();
+      con = DBConnection.getInstance().getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
       String sql =  "SELECT distinct f.origin, f.destination, count(*) AS aantal FROM booking as b " + 
