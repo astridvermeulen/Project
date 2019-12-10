@@ -18,7 +18,7 @@ public class DBCustomer {
      public static Customer getCustomer(String passportNumber) throws DBException{
          Connection con = null;
     try {
-      con = DBConnection.getConnection();
+      con = DBConnection.getInstance().getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
       String sql = "SELECT firstName, lastName, PassportNumber, birthDate "
@@ -58,7 +58,7 @@ public class DBCustomer {
      public static ArrayList<Customer> getCustomers() throws DBException {
     Connection con = null;
     try {
-      con = DBConnection.getConnection();
+      con = DBConnection.getInstance().getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
       String sql = "SELECT passportNumber "
@@ -83,7 +83,7 @@ public class DBCustomer {
      public static void saveCustomer(Customer s) throws DBException {
     Connection con = null;
     try {
-      con = DBConnection.getConnection();
+      con = DBConnection.getInstance().getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
       String sql = "SELECT passportNumber "
@@ -123,7 +123,7 @@ public class DBCustomer {
      public static void deleteCustomer(String s) throws DBException {
     Connection con = null;
     try {
-      con = DBConnection.getConnection();
+      con = DBConnection.getInstance().getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
       String sql = "SELECT passportNumber "

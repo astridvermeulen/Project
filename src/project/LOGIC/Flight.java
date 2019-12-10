@@ -9,6 +9,7 @@ import project.DB.DBAirline;
 import project.DB.DBException;
 import project.DB.DBFlight;
 import project.DB.DBFlightLeg;
+import project.DB.DBTraject;
 
 public class Flight {
 
@@ -155,8 +156,8 @@ public class Flight {
     }
 
     //Method to give an overview of the most populair booked flights 
-    public static ArrayList<Flight> topPopularTrips(String jaar) throws DBException {
-        ArrayList<Flight> populairFlights = DBFlight.getTopPopularTrips(jaar);//DATaboys nog methode doorgeven hier
+    public static ArrayList<Traject> topPopularTrips(String jaar) throws DBException {
+        ArrayList<Traject> populairFlights = DBTraject.getTopPopularTrips(jaar);//DATaboys nog methode doorgeven hier
         return populairFlights;
     }
 

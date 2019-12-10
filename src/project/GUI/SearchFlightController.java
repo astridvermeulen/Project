@@ -53,7 +53,7 @@ public class SearchFlightController implements Initializable {
     private DomainController model;
     private ArrayList<Flight> filteredFlights = new ArrayList<>();
     private Flight flight;
-    private ArrayList<Flight> selectedFlights = new ArrayList<>();
+    private ArrayList<Flight> selectedFlights = new ArrayList<>();    private ObservableList<Flight> flightsSelected = FXCollections.observableArrayList();
     private Booking booking;
     
     
@@ -69,15 +69,15 @@ public class SearchFlightController implements Initializable {
     @FXML
     private TableColumn<Flight, String> destinationAirportColumn;
     @FXML
-    private TableColumn<Flight, LocalTime> departureTimeColumn;
+    private TableColumn<Flight, String> departureTimeColumn;
     @FXML
     private TableColumn<Flight, Duration> durationColumn;
     @FXML
-    private TableColumn<Flight, LocalDate> departureDayColumn;
+    private TableColumn<Flight, String> departureDayColumn;
     @FXML
-    private TableColumn<Flight, LocalDate> arrivalDayColumn;
+    private TableColumn<Flight, String> arrivalDayColumn;
     @FXML
-    private TableColumn<Flight, LocalTime> arrivalTimeColumn;
+    private TableColumn<Flight, String> arrivalTimeColumn;
     @FXML
     private TableColumn<Flight, Integer> numberOfFlightLegsColumn;
     @FXML
@@ -119,10 +119,6 @@ public class SearchFlightController implements Initializable {
     private Button displayFlightsBtn;
     @FXML
     private Button clearFlightsBtn;
-
-    
-    private ObservableList<Flight> flightsSelected;
-    private ArrayList<Flight> vluchtenGeselecteerd;    
     @FXML
     private Button bookBtn;
     
@@ -131,16 +127,8 @@ public class SearchFlightController implements Initializable {
 
     
     public SearchFlightController() {
-        /*flightsSelected = tableView.getSelectionModel().getSelectedItems();
-        
-        int size = flightsSelected.size();
-        for(int i=0; i<size; i++){
-            vluchtenGeselecteerd.add(flightsSelected.get(i));
-        }
-        
-        System.out.println("geselecteerde vluchten: " + vluchtenGeselecteerd.get(0));
-        
-        */}
+
+    }
     
     //Getters   
     public ArrayList<Flight> getSelectedFlights() {
@@ -177,10 +165,10 @@ public class SearchFlightController implements Initializable {
         originAirportColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("origin"));
         destinationAirportColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("destination"));
         durationColumn.setCellValueFactory(new PropertyValueFactory<Flight,Duration>("duration"));
-        departureDayColumn.setCellValueFactory(new PropertyValueFactory<Flight,LocalDate>("departureDate"));
-        departureTimeColumn.setCellValueFactory(new PropertyValueFactory<Flight,LocalTime>("departureTime"));
-        arrivalDayColumn.setCellValueFactory(new PropertyValueFactory<Flight,LocalDate>("arrivalDate"));
-        arrivalTimeColumn.setCellValueFactory(new PropertyValueFactory<Flight,LocalTime>("arrivalTime"));
+        departureDayColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("departureDate"));
+        departureTimeColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("departureTime"));
+        arrivalDayColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("arrivalDate"));
+        arrivalTimeColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("arrivalTime"));
         flightNumberColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("flightNumber"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<Flight,Double>("price"));
         numberOfFlightLegsColumn.setCellValueFactory(new PropertyValueFactory<Flight,Integer>("FlightLegs"));
@@ -189,10 +177,6 @@ public class SearchFlightController implements Initializable {
 
         
     }    
-    
-
-        
-
     
 
     @FXML
@@ -272,6 +256,17 @@ public class SearchFlightController implements Initializable {
     
     @FXML
     private void getFlightInfo(MouseEvent event) {
+        ObservableList<Flight> flightsSelected;
+        
+        flightsSelected = tableView.getSelectionModel().getSelectedItems();
+        
+        int size = flightsSelected.size();
+        for(int i=0; i<size; i++){
+            selectedFlights.add(flightsSelected.get(i));
+        }
+        
+        System.out.println("geselecteerde vluchten: " + selectedFlights.get(0));
+        /*
         
         try {
             flight = new Flight(tableView.getSelectionModel().getSelectedItem().getOrigin(),tableView.getSelectionModel().getSelectedItem().getDestination(),
@@ -290,22 +285,8 @@ public class SearchFlightController implements Initializable {
         } catch (ParseException ex) {
             Logger.getLogger(SearchFlightController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        */
     }
-
-
-    
-            
-    public static void main(String[] args) throws DBException {
-       
-        
-    SearchFlightController object = new SearchFlightController();
-        
-       
-    }
-   
-    
-            
 
     @FXML
     private void displayFllights(ActionEvent event) {

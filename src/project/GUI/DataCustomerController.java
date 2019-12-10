@@ -15,8 +15,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import project.DB.DBBooking;
 import project.DB.DBException;
 import project.LOGIC.Booking;
+import static project.LOGIC.Booking.saveBooking;
 import project.LOGIC.Customer;
 import static project.LOGIC.Customer.saveCustomer;
 import project.LOGIC.DomainController;
@@ -207,9 +209,12 @@ public class DataCustomerController implements Initializable {
         controller = new SearchFlightController();
         
         try {
+            System.out.println(controller.getSelectedFlights());
+            System.out.println(customersLinkedToBooking);
             booking = new Booking(controller.getSelectedFlights(), customersLinkedToBooking);
+            System.out.println(booking.getFlight());
             try {
-                booking.saveBooking(booking);
+                saveBooking(booking);
             } catch (SQLException ex) {
                 Logger.getLogger(DataCustomerController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -218,6 +223,9 @@ public class DataCustomerController implements Initializable {
         } catch (ParseException ex) {
             Logger.getLogger(DataCustomerController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+    }
+    public static void main(String[] args) {
         
     }
 

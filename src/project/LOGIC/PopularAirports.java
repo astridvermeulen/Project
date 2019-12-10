@@ -11,4 +11,14 @@ public class PopularAirports {
         this.airportName = airportName;
         this.timesUsed = timesUsed;
     }
+    
+    //Getters
+    public String getAirportName() {
+        return airportName;
+    }
+
+    public int getTimesUsed() {
+        return timesUsed;
+    }
+    
 }
