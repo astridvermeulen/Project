@@ -177,9 +177,9 @@ public class Flight {
     }
 
     //Method to give an overview of the most populair booked flights 
-    public static ArrayList<Flight> tripsOriginDestinations() throws DBException {
-        ArrayList<Flight> populairFlights = DBFlight.topTenPopularTrips();//DATaboys nog methode doorgeven hier
+   /* public static ArrayList<Flight> tripsOriginDestinations() throws DBException {
+        ArrayList<Flight> populairFlights = DBFlight.getTopPopularTrips();//DATaboys nog methode doorgeven hier
         return populairFlights;
     }
-
+*/
 }

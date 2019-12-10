@@ -17,7 +17,7 @@ public class DBBooking {
  public static Booking getBooking(int bookingNumber) throws DBException{
          Connection con = null;
     try {
-      con = DBConnection.getConnection();
+      con = DBConnection.getInstance().getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
       String sql = "SELECT * "
@@ -57,7 +57,7 @@ public class DBBooking {
  public static ArrayList<Booking> getBookings() throws DBException {
     Connection con = null;
     try {
-      con = DBConnection.getConnection();
+      con = DBConnection.getInstance().getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
       String sql = "SELECT bookingNumber "

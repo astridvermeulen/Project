@@ -21,7 +21,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import project.DB.DBException;
 import project.LOGIC.DomainController;
 import project.LOGIC.Flight;
-import static project.LOGIC.Flight.tripsOriginDestinations;
+//import static project.LOGIC.Flight.tripsOriginDestinations;
 
 /**
  * FXML Controller class
@@ -54,10 +54,10 @@ public class OverviewTripsController implements Initializable {
         destinationColumn.setCellValueFactory(new PropertyValueFactory<Flight, String>("destination"));
         timesBookedColumn.setCellValueFactory(new PropertyValueFactory<Flight, Integer>("timesBooked"));
     
-        tableViewTrips.setItems(getTrips());
+      //  tableViewTrips.setItems(getTrips());
     } 
     
-    public ObservableList<Flight> getTrips(){
+   /* public ObservableList<Flight> getTrips(){
         ObservableList<Flight> trips = FXCollections.observableArrayList();
         
         try {
@@ -71,6 +71,6 @@ public class OverviewTripsController implements Initializable {
         }
         
         return trips;
-    }
+    }*/
     
 }

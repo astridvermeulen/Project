@@ -19,7 +19,7 @@ public class DBAirport {
      public static Airport getAirport(String airportCode) throws DBException{
          Connection con = null;
     try {
-      con = DBConnection.getConnection();
+      con = DBConnection.getInstance().getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
       String sql = "SELECT airportCode, airportName "
@@ -56,7 +56,7 @@ public class DBAirport {
      public static ArrayList<Airport> getAirports() throws DBException {
     Connection con = null;
     try {
-      con = DBConnection.getConnection();
+      con = DBConnection.getInstance().getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
       String sql = "SELECT airportCode "
@@ -84,7 +84,7 @@ public class DBAirport {
     public static void saveAirport(Airport s) throws DBException {
     Connection con = null;
     try {
-      con = DBConnection.getConnection();
+      con = DBConnection.getInstance().getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
       String sql = "SELECT airportCode "
@@ -119,7 +119,7 @@ public class DBAirport {
    public static void deleteAirport(Airport s) throws DBException {
     Connection con = null;
     try {
-      con = DBConnection.getConnection();
+      con = DBConnection.getInstance().getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
       String sql = "SELECT airportCode "
@@ -152,7 +152,7 @@ public class DBAirport {
         
          
     try {
-      con = DBConnection.getConnection();
+      con = DBConnection.getInstance().getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
       String sql = "SELECT distinct f.origin AS airport, count(*) AS aantal FROM booking as b " 
@@ -198,7 +198,7 @@ public class DBAirport {
   //test
   public static void main(String[] args) throws DBException {
       
-    
+      System.out.println(DBAirport.getAirports());
    
-}
+              }
 }
