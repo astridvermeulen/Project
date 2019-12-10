@@ -3,7 +3,11 @@ package project.DB;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -11,58 +15,95 @@ import java.sql.SQLException;
  */
 public class DBConnection {
     
-       private static final String DB_NAME = "db2019_18";//vul hier uw databank naam in
-    private static final String DB_PASS = "jshwuehd";//vul hier uw databank paswoord in
+  
+    private static DBConnection instance = null;
+    private static Connection con;
+   
+    
+      private DBConnection() {
 
-    public static Connection getConnection() throws DBException {
-        Connection con = null;
+    String url = "jdbc:mysql://pdbmbook.com/db2019_18";
+    String driver = "com.mysql.cj.jdbc.Driver";
+    String userName = "db2019_18"; 
+    String password = "jshwuehd";
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+                Class.forName(driver);
+                con = DriverManager.getConnection(url,userName, password);
+                }
 
-            String protocol = "jdbc";
-            String subProtocol = "mysql";
-            String myDatabase = "//pdbmbook.com/" + DB_NAME;
-            String URL = protocol + ":" + subProtocol + ":" + myDatabase;
+                    catch(ClassNotFoundException cnfErr)
+                    {cnfErr.printStackTrace();
+                    }
+                    catch(SQLException err)
+                    {err.printStackTrace();
+                    }
+}
 
-            con = DriverManager.getConnection(URL, DB_NAME, DB_PASS);
-            return con;
-        } catch (SQLException sqle) {
-            sqle.printStackTrace();
-            closeConnection(con);
-            throw new DBException(sqle);
-        } catch (ClassNotFoundException cnfe) {
-            cnfe.printStackTrace();
-            closeConnection(con);
-            throw new DBException(cnfe);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            closeConnection(con);
-            throw new DBException(ex);
-        }
-    }
+
+public static DBConnection getInstance() {
+if(instance == null)
+return new DBConnection();
+else
+return instance;
+}
+
+public static Connection getConnection() {
+    return con;
+}
+
+    
+
+
 
     public static void closeConnection(Connection con) {
         try {
 		 if(con != null)
             	con.close();
+   
         } catch (SQLException sqle) {
-            //do nothing
+          sqle.printStackTrace();
         }
         
     }
     
     public static void main(String[] args) {
-        String url = "jdbc:mysql://pdbmbook.com/db2019_18";
-        String username = "db2019_18";
-        String password = "jshwuehd";
+    
 
-System.out.println("Connecting database...");
+System.out.println("Begin...\n");
 
-try (Connection connection = DriverManager.getConnection(url, username, password)) {
-    System.out.println("Database connected!");
-} catch (SQLException e) {
-    throw new IllegalStateException("Cannot connect the database!", e);
+      try
+         {
+         System.out.println ("one");
+         String driver = "com.mysql.cj.jdbc.Driver";
+         System.out.println ("two");
+         Class.forName(driver).newInstance();
+         System.out.println ("three");
+         String url    = "jdbc:mysql://pdbmbook.com/db2019_18";
+         String userid = "db2019_18";
+         String passwd = "jshwuehd";
+         Connection DBconn = DriverManager.getConnection(url, userid, passwd);
+         System.out.println ("four");
+
+         Statement stmt = DBconn.createStatement();
+         System.out.println ("five");
+         ResultSet rSet = stmt.executeQuery("select * from flight");
+         while(rSet.next() == true)
+         {
+            double price = rSet.getDouble("price");
+            System.out.println("Price: " + price);
+         }
+         rSet.close();
+         stmt.close();
+
+         DBconn.close();
+      }
+      catch (Exception e)
+      {
+         System.out.println ("Exception: " + e.toString());
+         e.printStackTrace();
+      }
+      System.out.println ("...End\n");
+   }
 }
-        }
-    }
+    
 
