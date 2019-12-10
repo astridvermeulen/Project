@@ -6,8 +6,11 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static project.DB.DBFlight.getFlight;
+import project.LOGIC.Flight;
 
 /**
  *
@@ -20,7 +23,7 @@ public class DBConnection {
     private static Connection con;
    
     
-      private DBConnection() {
+      private DBConnection(){
 
     String url = "jdbc:mysql://pdbmbook.com/db2019_18";
     String driver = "com.mysql.cj.jdbc.Driver";
@@ -87,11 +90,14 @@ System.out.println("Begin...\n");
          Statement stmt = DBconn.createStatement();
          System.out.println ("five");
          ResultSet rSet = stmt.executeQuery("select * from flight");
-         while(rSet.next() == true)
-         {
-            double price = rSet.getDouble("price");
-            System.out.println("Price: " + price);
-         }
+         String sql = "SELECT flightNumber, departureDate "
+              + "FROM db2019_18.flight";
+      ResultSet srs = stmt.executeQuery(sql);
+      ArrayList<Flight> vluchten = new ArrayList<>();
+      while (srs.next()){
+        vluchten.add(getFlight(srs.getString("flightNumber"), srs.getString("departureDate")));
+          System.out.println(vluchten);
+      }
          rSet.close();
          stmt.close();
 

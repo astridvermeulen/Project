@@ -208,7 +208,10 @@ public class SearchFlightController implements Initializable {
         } catch (DBException ex) {
             Logger.getLogger(SearchFlightController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        }  
+    }
+        
+        
+        
         
         
     
