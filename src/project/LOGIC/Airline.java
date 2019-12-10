@@ -1,9 +1,6 @@
 package project.LOGIC;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import project.DB.DBAirline;
-import project.DB.DBAirport;
 import project.DB.DBException;
 
 public class Airline {

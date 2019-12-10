@@ -13,4 +13,18 @@ public class Traject {
         this.destination = destination;
         this.timesBooked = timesBooked;
     }
+    
+    //Getters
+    public String getOrigin() {
+        return origin;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public int getTimesBooked() {
+        return timesBooked;
+    }
+    
 }

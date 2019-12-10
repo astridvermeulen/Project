@@ -13,5 +13,19 @@ public class BookingNumberGenerator {
         this.serviceFee = serviceFee;
         this.bookingNumber = bookingNumber;
     }
+    
+    //Getters
+    public String getBookingDate() {
+        return bookingDate;
+    }
+
+    public double getServiceFee() {
+        return serviceFee;
+    }
+
+    public int getBookingNumber() {
+        return bookingNumber;
+    }
+    
 
 }

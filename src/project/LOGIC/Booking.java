@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import project.DB.DBBooking;
+import project.DB.DBBookingNumberGenerator;
 import project.DB.DBException;
 
 public class Booking {
@@ -93,7 +94,7 @@ public class Booking {
     //Method to calculate the revenue of a month: tested V
     public static ArrayList<Double> calculateRevenuePerMonth(String year) throws DBException {
         ArrayList<Double> revenuePerMonth = new ArrayList<>();
-        ArrayList<Booking> allBookings = DBBooking.getBookings();
+        ArrayList<BookingNumberGenerator> allBookings = DBBookingNumberGenerator.getBookings();
         Double revJan = 0.0;
         Double revFeb = 0.0;
         Double revMar = 0.0;
@@ -106,10 +107,10 @@ public class Booking {
         Double revOkt = 0.0;
         Double revNov = 0.0;
         Double revDec = 0.0;
-        for (Booking booking : allBookings) {
-            String jaar = booking.bookingDate.substring(6);
+        for (BookingNumberGenerator booking : allBookings) {
+            String jaar = booking.getBookingDate().substring(6);
             if (jaar.equals(year)) {
-                switch (booking.bookingDate.substring(3, 5)) {
+                switch (booking.getBookingDate().substring(3, 5)) {
                     case "01":
                         revJan = revJan + booking.getServiceFee();
                         break;

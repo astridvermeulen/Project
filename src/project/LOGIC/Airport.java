@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import project.DB.DBAirport;
 import project.DB.DBException;
+import project.DB.DBPopularAirports;
 
 public class Airport {
 
@@ -38,9 +39,9 @@ public class Airport {
 
     //Method to give an overview of the most populair airports 
     public static ArrayList<String> tenMostPopularAirports() throws DBException {
-        ArrayList<Airport> populairAirports = DBAirport.getPopularAirport();//DATaboys nog methode doorgeven hier 
+        ArrayList<PopularAirports> populairAirports = DBPopularAirports.getPopularAirport();//DATaboys nog methode doorgeven hier 
         ArrayList<String> nameOfPopulairAirports = new ArrayList<>();
-        for (Airport airport : populairAirports) {
+        for (PopularAirports airport : populairAirports) {
             nameOfPopulairAirports.add(airport.getAirportName());
         }
         return nameOfPopulairAirports;
