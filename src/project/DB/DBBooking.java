@@ -14,78 +14,13 @@ import project.LOGIC.BookingNumberGenerator;
  */
 
 public class DBBooking {
-  
-//retourneert een boeking 
- public static Booking getBooking(int bookingNumber) throws DBException{
-         Connection con = null;
-    try {
-      con = DBConnection.getInstance().getConnection();
-      Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
-      
-      String sql = "SELECT * "
-        + "FROM booking "
-	+ "WHERE bookingNumber = " + bookingNumber;
-
-      ResultSet srs = stmt.executeQuery(sql);
-
-      double serviceFee;
-      String bookingDate;
-      
-      if (srs.next()) {
-          bookingDate = srs.getString("bookingDate");
-          serviceFee = srs.getDouble("serviceFee");
-          
-	} 
-      else {// we verwachten slechts 1 rij...
-	DBConnection.closeConnection(con);
-	return null;
-      }
-      
-      Booking boeking = new Booking(bookingDate, serviceFee);
-              DBConnection.closeConnection(con);
-      return boeking;
-      
-    }
-    
-    catch (Exception ex) {
-      ex.printStackTrace();
-      DBConnection.closeConnection(con);
-      throw new DBException(ex);
-    }
-    
- }
  
- //retourneert alle bookings 
- public static ArrayList<Booking> getBookings() throws DBException {
-    Connection con = null;
-    try {
-      con = DBConnection.getInstance().getConnection();
-      Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
-      
-      String sql = "SELECT bookingNumber "
-              + "FROM db2019_18.booking";
-      ResultSet srs = stmt.executeQuery(sql);
-      ArrayList<Booking> boekingen = new ArrayList<>();
-      while (srs.next())
-        boekingen.add(getBooking(srs.getInt("bookingNumber")));
-      DBConnection.closeConnection(con);
-      return boekingen;
-    } catch (DBException dbe) {
-      dbe.printStackTrace();
-      DBConnection.closeConnection(con);
-      throw dbe;
-    } catch (Exception ex) {
-      ex.printStackTrace();
-      DBConnection.closeConnection(con);
-      throw new DBException(ex);
-    }
-  }
  
     //booking opslaan in de database en deze koppelen aan een customer
     public static void saveBooking(String bookingDate, double promotion, double serviceFee, String flightNumber, String departureDate, String passportNumber) throws DBException, SQLException {
     Connection con = null;
     try {
-      con = DBConnection.getConnection();
+      con = DBConnection.getInstance().getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
       String sql = "INSERT into booking "
@@ -116,7 +51,7 @@ public class DBBooking {
       public static void deleteBooking(int s) throws DBException {
     Connection con = null;
     try {
-      con = DBConnection.getConnection();
+      con = DBConnection.getInstance().getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
       String sql = "SELECT bookingNumber "
