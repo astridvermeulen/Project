@@ -2,6 +2,8 @@
 package project.GUI;
 
 import java.net.URL;
+import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -14,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import project.DB.DBException;
+import project.LOGIC.Booking;
 import project.LOGIC.Customer;
 import static project.LOGIC.Customer.saveCustomer;
 import project.LOGIC.DomainController;
@@ -25,8 +28,9 @@ import project.LOGIC.DomainController;
  */
 public class DataCustomerController implements Initializable {
     private DomainController model;
-
-    
+     private ArrayList<Customer> customersLinkedToBooking = new ArrayList<>();
+     private SearchFlightController controller;
+     private Booking booking;
    
     @FXML
     private HBox C1Pane; 
@@ -104,6 +108,8 @@ public class DataCustomerController implements Initializable {
     private TextField birthDateC4TxtField;
     @FXML
     private TextField birthDateC5TxtField;
+    @FXML
+    private Button confirmBookingBtn;
 
 
     /**
@@ -138,7 +144,7 @@ public class DataCustomerController implements Initializable {
         C5Pane.setVisible(true);
     }
 
-    private ArrayList<Customer> customersLinkedToBooking;
+    
     @FXML
     private void saveCustomer1(ActionEvent event) {
         Customer klant = new Customer(passportIDC1TxtField.getText(), firstNameC1TxtField.getText(), lastNameC1TxtField.getText(), birthDateC1TxtField.getText());
@@ -195,6 +201,27 @@ public class DataCustomerController implements Initializable {
         }
         customersLinkedToBooking.add(klant);
     }
+
+    @FXML
+    private void confirmBooking(ActionEvent event) {
+        controller = new SearchFlightController();
+        
+        try {
+            booking = new Booking(controller.getSelectedFlights(), customersLinkedToBooking);
+            try {
+                booking.saveBooking(booking);
+            } catch (SQLException ex) {
+                Logger.getLogger(DataCustomerController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (DBException ex) {
+            Logger.getLogger(DataCustomerController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(DataCustomerController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+
+    
 
 
      

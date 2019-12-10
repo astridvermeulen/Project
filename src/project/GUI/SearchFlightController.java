@@ -39,6 +39,7 @@ import project.DB.DBAirport;
 import project.DB.DBException;
 
 import static project.LOGIC.Airport.airportsAlphabetic;
+import project.LOGIC.Booking;
 
 import project.LOGIC.DomainController;
 import project.LOGIC.Flight;
@@ -53,6 +54,7 @@ public class SearchFlightController implements Initializable {
     private ArrayList<Flight> filteredFlights = new ArrayList<>();
     private Flight flight;
     private ArrayList<Flight> selectedFlights = new ArrayList<>();
+    private Booking booking;
     
     
     // Overview of flights matching the criteria
@@ -125,11 +127,9 @@ public class SearchFlightController implements Initializable {
     private Button bookBtn;
     
 
-    @FXML
-    private Button bookSelectedFlightsBtn;
       
 
-    //Getters
+    
     public SearchFlightController() {
         /*flightsSelected = tableView.getSelectionModel().getSelectedItems();
         
@@ -140,10 +140,12 @@ public class SearchFlightController implements Initializable {
         
         System.out.println("geselecteerde vluchten: " + vluchtenGeselecteerd.get(0));
         
-        */
-
+        */}
+    
+    //Getters   
+    public ArrayList<Flight> getSelectedFlights() {
+        return selectedFlights;
     }
-
     public String getDatePicker() {
         return datePicker.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
@@ -211,6 +213,7 @@ public class SearchFlightController implements Initializable {
     //Search flights
     @FXML
     private void searchFlight(ActionEvent event) {
+        
         try {
             filteredFlights.addAll(model.searchFlight(getIntermediateStopsAllowed(), getSortBy(), getOriginAirport(), getDestinationAirport(), getDatePicker()));
             System.out.println(filteredFlights.toString());
@@ -293,10 +296,10 @@ public class SearchFlightController implements Initializable {
 
     
             
-            public static void main(String[] args) throws DBException {
+    public static void main(String[] args) throws DBException {
        
         
-       SearchFlightController object = new SearchFlightController();
+    SearchFlightController object = new SearchFlightController();
         
        
     }
@@ -318,8 +321,7 @@ public class SearchFlightController implements Initializable {
 
     @FXML
 
-    private void makeBooking(ActionEvent event) {
-        
+   private void makeBooking(ActionEvent event) {
         
         try {
             AnchorPane pane = (AnchorPane) FXMLLoader.load(getClass().getResource("dataCustomer.fxml"));
@@ -329,14 +331,10 @@ public class SearchFlightController implements Initializable {
         }
 
     
-        
-        
-
-
     }
 
     
     
     
-    
+      
 }
