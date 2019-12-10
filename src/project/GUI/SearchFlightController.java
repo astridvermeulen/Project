@@ -51,9 +51,9 @@ import project.LOGIC.Flight;
  */
 public class SearchFlightController implements Initializable {
     private DomainController model;
-    private ArrayList<Flight> filteredFlights = new ArrayList<>();
+    private ArrayList<Flight> filteredFlights;
     private Flight flight;
-    private ArrayList<Flight> selectedFlights = new ArrayList<>();    
+    private ArrayList<Flight> selectedFlights;    
     private ObservableList<Flight> flightsSelected = FXCollections.observableArrayList();
     private Booking booking;
     
@@ -199,7 +199,7 @@ public class SearchFlightController implements Initializable {
     //Search flights
     @FXML
     private void searchFlight(ActionEvent event) {
-        
+        filteredFlights = new ArrayList<>();
         try {
             filteredFlights.addAll(model.searchFlight(getIntermediateStopsAllowed(), getSortBy(), getOriginAirport(), getDestinationAirport(), getDatePicker()));
             System.out.println(filteredFlights.toString());
@@ -260,17 +260,7 @@ public class SearchFlightController implements Initializable {
     
     @FXML
     private void getFlightInfo(MouseEvent event) {
-       /* ObservableList<Flight> flightsSelected;
-        
-        flightsSelected = tableView.getSelectionModel().getSelectedItems();
-        
-        int size = flightsSelected.size();
-        for(int i=0; i<size; i++){
-            selectedFlights.add(flightsSelected.get(i));
-        }
-        
-        System.out.println("geselecteerde vluchten: " + selectedFlights.get(0));
-        */
+      selectedFlights = new ArrayList<>();
         
         try {
             flight = new Flight(tableView.getSelectionModel().getSelectedItem().getOrigin(),tableView.getSelectionModel().getSelectedItem().getDestination(),
