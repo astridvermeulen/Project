@@ -193,16 +193,11 @@ public class SearchFlightController implements Initializable {
             filteredFlights.addAll(model.searchFlight(getIntermediateStopsAllowed(), getSortBy(), getOriginAirport(), getDestinationAirport(), getDatePicker()));
         }  catch (DBException ex) {
             Logger.getLogger(SearchFlightController.class.getName()).log(Level.SEVERE, null, ex);
-        }  
-        tableView.setItems(getFlights());
-        
-        try {
-            filteredFlights.addAll(model.searchFlight(getIntermediateStopsAllowed(), getSortBy(), getOriginAirport(), getDestinationAirport(), getDatePicker()));
-            System.out.println(filteredFlights.toString());
-        } catch (DBException ex) {
-            Logger.getLogger(SearchFlightController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        }  
+    }
+        
+        
+        
         
         
     
