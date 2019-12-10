@@ -9,7 +9,6 @@ import project.DB.DBAirline;
 import project.DB.DBException;
 import project.DB.DBFlight;
 import project.DB.DBFlightLeg;
-import project.DB.DBTraject;
 
 public class Flight {
 
