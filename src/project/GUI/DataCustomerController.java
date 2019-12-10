@@ -22,6 +22,7 @@ import static project.LOGIC.Booking.saveBooking;
 import project.LOGIC.Customer;
 import static project.LOGIC.Customer.saveCustomer;
 import project.LOGIC.DomainController;
+import project.LOGIC.Flight;
 
 /**
  * FXML Controller class
@@ -29,10 +30,11 @@ import project.LOGIC.DomainController;
  * @author Lars
  */
 public class DataCustomerController implements Initializable {
-    private DomainController model;
+     private DomainController model;
      private ArrayList<Customer> customersLinkedToBooking = new ArrayList<>();
      private SearchFlightController controller;
      private Booking booking;
+     private ArrayList<Flight> selectedFlights;
    
     @FXML
     private HBox C1Pane; 
@@ -203,15 +205,18 @@ public class DataCustomerController implements Initializable {
         }
         customersLinkedToBooking.add(klant);
     }
-
+    
+    public void setArrayList(ArrayList<Flight> list){
+        selectedFlights = new ArrayList(list);
+    }
     @FXML
     private void confirmBooking(ActionEvent event) {
         controller = new SearchFlightController();
         
         try {
-            System.out.println(controller.getSelectedFlights());
+            System.out.println(selectedFlights);
             System.out.println(customersLinkedToBooking);
-            booking = new Booking(controller.getSelectedFlights(), customersLinkedToBooking);
+            booking = new Booking(selectedFlights,customersLinkedToBooking);
             System.out.println(booking.getFlight());
             try {
                 saveBooking(booking);
@@ -225,6 +230,8 @@ public class DataCustomerController implements Initializable {
         }
         
     }
+   
+    
     public static void main(String[] args) {
         
     }

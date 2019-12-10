@@ -51,10 +51,9 @@ import project.LOGIC.Flight;
  */
 public class SearchFlightController implements Initializable {
     private DomainController model;
-    private ArrayList<Flight> filteredFlights;
+    private ArrayList<Flight> filteredFlights = new ArrayList();
     private Flight flight;
-    private ArrayList<Flight> selectedFlights;    
-    private ObservableList<Flight> flightsSelected = FXCollections.observableArrayList();
+    private ArrayList<Flight> selectedFlights = new ArrayList();    
     private Booking booking;
     
     
@@ -199,7 +198,7 @@ public class SearchFlightController implements Initializable {
     //Search flights
     @FXML
     private void searchFlight(ActionEvent event) {
-        filteredFlights = new ArrayList<>();
+        
         try {
             filteredFlights.addAll(model.searchFlight(getIntermediateStopsAllowed(), getSortBy(), getOriginAirport(), getDestinationAirport(), getDatePicker()));
             System.out.println(filteredFlights.toString());
@@ -263,8 +262,6 @@ public class SearchFlightController implements Initializable {
     
     @FXML
     private void getFlightInfo(MouseEvent event) {
-      selectedFlights = new ArrayList<>();
-        
         try {
             flight = new Flight(tableView.getSelectionModel().getSelectedItem().getOrigin(),tableView.getSelectionModel().getSelectedItem().getDestination(),
                     tableView.getSelectionModel().getSelectedItem().getDepartureDate(), tableView.getSelectionModel().getSelectedItem().getDepartureTime(),
@@ -283,6 +280,7 @@ public class SearchFlightController implements Initializable {
         } catch (ParseException ex) {
             Logger.getLogger(SearchFlightController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    
         
     }
 
@@ -299,22 +297,17 @@ public class SearchFlightController implements Initializable {
     }
 
     @FXML
-
-   private void makeBooking(ActionEvent event) {
-        
+    private void makeBooking(ActionEvent event) {
         try {
             AnchorPane pane = (AnchorPane) FXMLLoader.load(getClass().getResource("dataCustomer.fxml"));
             panelToUpdate.getChildren().setAll(pane);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("dataCustomer.fxml"));
+            loader.load();
+            DataCustomerController controller = (DataCustomerController) loader.getController();
+            controller.setArrayList(selectedFlights); 
         } catch (IOException ex) {
             Logger.getLogger(SearchFlightController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-    
-    }
    
-
-    
-    
-    
-      
+   }
 }
