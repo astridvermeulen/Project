@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.GUI.BookingSummaryController">
+   <children>
+      <VBox layoutY="6.0" prefHeight="323.0" prefWidth="600.0" spacing="6.0">
+         <children>
+            <Label text="Passenger(s)" />
+            <ScrollPane prefHeight="124.0" prefWidth="600.0">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="700.0">
+                     <children>
+                        <TableView fx:id="passengersTableView" prefHeight="200.0" prefWidth="700.0">
+                          <columns>
+                              <TableColumn fx:id="firstNameColumn" prefWidth="140.0" text="First name" />
+                              <TableColumn fx:id="lastNameColumn" prefWidth="140.0" text="Last name" />
+                              <TableColumn fx:id="passportNumberColumn" prefWidth="118.0" text="Passport number" />
+                              <TableColumn fx:id="homeCountryColumn" prefWidth="114.0" text="Home country" />
+                              <TableColumn fx:id="bithDateColumn" text="Birth date" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
+            <Label text="Flight(s)" />
+            <ScrollPane prefHeight="136.0" prefWidth="571.0">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="1000.0">
+                     <children>
+                        <TableView fx:id="flightsTableView" prefHeight="200.0" prefWidth="1000.0">
+                          <columns>
+                              <TableColumn fx:id="airlineColumn" prefWidth="140.0" text="Airline" />
+                              <TableColumn fx:id="originAirportColumn" minWidth="0.0" prefWidth="140.0" text="Origin airport" />
+                              <TableColumn fx:id="destinationAirportColumn" prefWidth="140.0" text="Destination airport" />
+                              <TableColumn fx:id="durationColumn" prefWidth="100.0" text="Duration" />
+                              <TableColumn fx:id="departureDayColumn" prefWidth="75.0" text="Departure day" />
+                              <TableColumn fx:id="departureTimeColumn" prefWidth="155.1177978515625" text="Departure time" />
+                              <TableColumn fx:id="arrivalDayColumn" prefWidth="75.0" text="Arrival day" />
+                              <TableColumn fx:id="arrivalTimeColumn" prefWidth="137.431884765625" text="Arrival time" />
+                              <TableColumn fx:id="flightNumberColumn" prefWidth="100.0" text="Flight number" />
+                              <TableColumn fx:id="priceColumn" prefWidth="65.0" text="Price (€)" />
+                              <TableColumn fx:id="numberOfFlightLegsColumn" prefWidth="70.0" text="Number of flight legs" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
+         </children>
+      </VBox>
+      <HBox layoutX="380.0" layoutY="323.0" prefHeight="63.0" prefWidth="200.0">
+         <children>
+            <VBox prefHeight="68.0" prefWidth="106.0">
+               <children>
+                  <Label prefHeight="17.0" prefWidth="99.0" text="+ Price Flight(s)" />
+                  <Label prefHeight="17.0" prefWidth="90.0" text="- Promotion" />
+                  <Label prefHeight="17.0" prefWidth="104.0" text="+ Service fee(s)" />
+                  <Label prefHeight="17.0" prefWidth="105.0" text="= Total amount" />
+               </children>
+            </VBox>
+            <VBox prefHeight="68.0" prefWidth="91.0">
+               <children>
+                  <Label fx:id="priceFlightToInputLbl" text="Label" />
+                  <Label fx:id="promotionToInputLbl" text="Label" />
+                  <Label fx:id="serviceFeeToInputLbl" text="Label" />
+                  <Label fx:id="totalAmountToInputLbl" text="Label" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
