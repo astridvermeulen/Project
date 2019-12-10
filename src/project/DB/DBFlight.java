@@ -224,62 +224,9 @@ public static ArrayList<Flight> getFlights() throws DBException {
     
     }
     
-    //toont 10 verschillende meest geboekte trips en hoe vaak deze geboekt zijn
-    public static ArrayList<Flight> getTopPopularTrips(String jaar) throws DBException{
-         Connection con = null;
-         ArrayList<Flight> vlucht = new ArrayList<>();               
-        
-         
-    try {
-      con = DBConnection.getConnection();
-      Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
-      
-      String sql =  "SELECT distinct f.origin, f.destination, count(*) AS aantal FROM booking as b " + 
-                    "INNER JOIN flight AS f " +
-                    "WHERE f.departureDate = b.departureDate " +
-                    "AND " + 
-                    "f.flightNumber = b.flightNumber " + 
-                    "AND f.departureDate LIKE '%" + jaar + "'" + 
-                    "GROUP BY f.origin, f.destination " + 
-                    "ORDER BY aantal DESC";
-
-      ResultSet srs = stmt.executeQuery(sql);
-      String origin, destination;
-      int aantal;
-
-      while (srs.next()) {
-          origin = srs.getString("origin");
-          destination = srs.getString("destination");
-          aantal = srs.getInt("aantal");
-          int i = 0;
-          Flight test = new Flight(origin,destination,aantal);
-          vlucht.add(i, test);
-          i++;  
-         
-	}
-      DBConnection.closeConnection(con);
-      reverse(vlucht);
-      return vlucht;
-        
-         
-     }
-    
-    catch (Exception ex) {
-      ex.printStackTrace();
-      DBConnection.closeConnection(con);
-      throw new DBException(ex);
-    }
-    }
-
-
-
+   
         public static void main (String[] args) throws DBException {
-           ArrayList<Flight> vlucht = new ArrayList<>();               
-           String jaar  ="2019";
-           vlucht = getTopPopularTrips(jaar);
-           for(int position = 0; position<vlucht.size(); position++){
-           System.out.println(vlucht.get(position).getOrigin() + " " + vlucht.get(position).getDestination());
-        }
+          
 }
 }
         
