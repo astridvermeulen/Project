@@ -53,7 +53,8 @@ public class SearchFlightController implements Initializable {
     private DomainController model;
     private ArrayList<Flight> filteredFlights = new ArrayList<>();
     private Flight flight;
-    private ArrayList<Flight> selectedFlights = new ArrayList<>();    private ObservableList<Flight> flightsSelected = FXCollections.observableArrayList();
+    private ArrayList<Flight> selectedFlights = new ArrayList<>();    
+    private ObservableList<Flight> flightsSelected = FXCollections.observableArrayList();
     private Booking booking;
     
     
@@ -127,10 +128,11 @@ public class SearchFlightController implements Initializable {
 
     
     public SearchFlightController() {
-
+        
     }
     
-    //Getters   
+    //Getters  
+    
     public ArrayList<Flight> getSelectedFlights() {
         return selectedFlights;
     }
@@ -201,6 +203,8 @@ public class SearchFlightController implements Initializable {
         try {
             filteredFlights.addAll(model.searchFlight(getIntermediateStopsAllowed(), getSortBy(), getOriginAirport(), getDestinationAirport(), getDatePicker()));
             System.out.println(filteredFlights.toString());
+            tableView.setItems(getFlights());
+            
         } catch (DBException ex) {
             Logger.getLogger(SearchFlightController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -256,7 +260,7 @@ public class SearchFlightController implements Initializable {
     
     @FXML
     private void getFlightInfo(MouseEvent event) {
-        ObservableList<Flight> flightsSelected;
+       /* ObservableList<Flight> flightsSelected;
         
         flightsSelected = tableView.getSelectionModel().getSelectedItems();
         
@@ -266,13 +270,14 @@ public class SearchFlightController implements Initializable {
         }
         
         System.out.println("geselecteerde vluchten: " + selectedFlights.get(0));
-        /*
+        */
         
         try {
             flight = new Flight(tableView.getSelectionModel().getSelectedItem().getOrigin(),tableView.getSelectionModel().getSelectedItem().getDestination(),
                     tableView.getSelectionModel().getSelectedItem().getDepartureDate(), tableView.getSelectionModel().getSelectedItem().getDepartureTime(),
                     tableView.getSelectionModel().getSelectedItem().getArrivalDate(),tableView.getSelectionModel().getSelectedItem().getArrivalTime(),
                     tableView.getSelectionModel().getSelectedItem().getFlightNumber(),tableView.getSelectionModel().getSelectedItem().getPrice());
+            
             
             selectedFlights.add(flight);
             //test
@@ -285,7 +290,7 @@ public class SearchFlightController implements Initializable {
         } catch (ParseException ex) {
             Logger.getLogger(SearchFlightController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        */
+        
     }
 
     @FXML
@@ -313,6 +318,7 @@ public class SearchFlightController implements Initializable {
 
     
     }
+   
 
     
     
