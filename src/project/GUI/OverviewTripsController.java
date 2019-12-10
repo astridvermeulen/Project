@@ -11,8 +11,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -21,7 +23,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import project.DB.DBException;
 import project.LOGIC.DomainController;
 import project.LOGIC.Flight;
-import static project.LOGIC.Flight.topPopularTrips;
+import project.LOGIC.Traject;
+import static project.LOGIC.Traject.topPopularTrips;
 
 /**
  * FXML Controller class
@@ -32,17 +35,19 @@ public class OverviewTripsController implements Initializable {
     private DomainController model;
     
     @FXML
-    private TableView<Flight> tableViewTrips;
+    private TableView<Traject> tableViewTrips;
     @FXML
     private ChoiceBox<String> yearChoiceBox;
     @FXML
     private Label chooseLbl;
     @FXML
-    private TableColumn<Flight, String> originColumn;
+    private TableColumn<Traject, String> originColumn;
     @FXML
-    private TableColumn<Flight, String> destinationColumn;
+    private TableColumn<Traject, String> destinationColumn;
     @FXML
-    private TableColumn<Flight, Integer> timesBookedColumn;
+    private TableColumn<Traject, Integer> timesBookedColumn;
+    @FXML
+    private Button showTripsBtn;
 
     /**
      * Initializes the controller class.
@@ -50,12 +55,12 @@ public class OverviewTripsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         model=DomainController.getInstance();
-        originColumn.setCellValueFactory(new PropertyValueFactory<Flight, String>("origin"));
-        destinationColumn.setCellValueFactory(new PropertyValueFactory<Flight, String>("destination"));
-        timesBookedColumn.setCellValueFactory(new PropertyValueFactory<Flight, Integer>("timesBooked"));
-    
-        tableViewTrips.setItems(getTrips());
         addDataToChoiceBox();
+        
+        originColumn.setCellValueFactory(new PropertyValueFactory<Traject, String>("origin"));
+        destinationColumn.setCellValueFactory(new PropertyValueFactory<Traject, String>("destination"));
+        timesBookedColumn.setCellValueFactory(new PropertyValueFactory<Traject, Integer>("timesBooked"));
+        
     } 
     
     private void addDataToChoiceBox(){
@@ -72,12 +77,13 @@ public class OverviewTripsController implements Initializable {
     public String getYear(){
         return yearChoiceBox.getValue();
     }
-    public ObservableList<Flight> getTrips(){
-        ObservableList<Flight> trips = FXCollections.observableArrayList();
+    
+    public ObservableList<Traject> getTrips(){
+        ObservableList<Traject> trips = FXCollections.observableArrayList();
         
         try {
-            for(Flight f: topPopularTrips(getYear())){
-                trips.add(f);
+            for(Traject t: topPopularTrips(getYear())){
+                trips.add(t);
                 
             }   
         } catch (DBException ex) {
@@ -85,6 +91,11 @@ public class OverviewTripsController implements Initializable {
         }
         
         return trips;
+    }
+
+    @FXML
+    private void showTrips(ActionEvent event) {
+        tableViewTrips.setItems(getTrips());
     }
     
 }
