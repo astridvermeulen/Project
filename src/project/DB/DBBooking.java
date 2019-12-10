@@ -5,7 +5,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import static project.DB.DBBookingNumberGenerator.getBooking;
 import project.LOGIC.Booking;
+import project.LOGIC.BookingNumberGenerator;
 /**
  *
  * @author TEAM DB

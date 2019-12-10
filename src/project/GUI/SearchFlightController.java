@@ -35,7 +35,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import project.DB.DBAirport;
 import project.DB.DBException;
-import static project.LOGIC.Airline.airportsAlphabetic;
+import static project.LOGIC.Airport.airportsAlphabetic;
 import project.LOGIC.DomainController;
 import project.LOGIC.Flight;
 
@@ -112,23 +112,13 @@ public class SearchFlightController implements Initializable {
     private Button displayFlightsBtn;
     @FXML
     private Button clearFlightsBtn;
-    
+    @FXML
+    private Button bookSelectedFlightsBtn;
+      
     private ObservableList<Flight> flightsSelected;
-    private ArrayList<Flight> vluchtenGeselecteerd;    
-    
+    private ArrayList<Flight> vluchtenGeselecteerd;   
     //Getters
     public SearchFlightController() {
-        /*flightsSelected = tableView.getSelectionModel().getSelectedItems();
-        
-        int size = flightsSelected.size();
-        for(int i=0; i<size; i++){
-            vluchtenGeselecteerd.add(flightsSelected.get(i));
-        }
-        
-        System.out.println("geselecteerde vluchten: " + vluchtenGeselecteerd.get(0));
-        
-        */
-
     }
 
     public String getDatePicker() {
@@ -306,6 +296,20 @@ public class SearchFlightController implements Initializable {
     @FXML
     private void clearFlights(ActionEvent event) {
         getFlights().clear();
+    }
+
+    @FXML
+    private void bookSelectedFlights(ActionEvent event) {
+        flightsSelected = tableView.getSelectionModel().getSelectedItems();
+        
+        int size = flightsSelected.size();
+        for(int i=0; i<size; i++){
+            vluchtenGeselecteerd.add(flightsSelected.get(i));
+            System.out.println("geselecteerde vluchten: " + vluchtenGeselecteerd.get(i));
+        }
+        
+        
+
     }
 
     

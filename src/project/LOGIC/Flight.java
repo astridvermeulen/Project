@@ -9,6 +9,7 @@ import project.DB.DBAirline;
 import project.DB.DBException;
 import project.DB.DBFlight;
 import project.DB.DBFlightLeg;
+import project.DB.DBTraject;
 
 public class Flight {
 
@@ -25,7 +26,6 @@ public class Flight {
     private final ArrayList<FlightLeg> flightLegs;
     private final double emission;
     private double duration;
-    private final int timesBooked;
 
     //Constructor
     public Flight(String origin, String destination, String departureDate, String departureTime, String arrivalDate, String arrivalTime, String flightNumber, double price) throws DBException, SQLException, ParseException {
@@ -42,23 +42,6 @@ public class Flight {
         this.flightLegs = DBFlightLeg.getFlightLegs(flightNumber, departureDate);
         this.emission = this.calculateEmission();
         this.setDuration(); //Zo blijft de volgorde behouden van de GUI kolommen 
-        this.timesBooked = -1;
-    }
-
-    public Flight(String origin, String destination, int timesBooked) {
-        this.origin = origin;
-        this.destination = destination;
-        this.timesBooked = timesBooked;
-        this.airline = null;
-        this.duration = 0.0;
-        this.departureDate = null;
-        this.departureTime = null;
-        this.arrivalDate = null;
-        this.arrivalTime = null;
-        this.flightNumber = null;
-        this.price = 0.0;
-        this.flightLegs = null;
-        this.emission = 0.0;
     }
 
     //Getters
@@ -108,10 +91,6 @@ public class Flight {
 
     public double getDuration() {
         return duration;
-    }
-
-    public int getTimesBooked() {
-        return timesBooked;
     }
 
     //Setters
@@ -177,9 +156,9 @@ public class Flight {
     }
 
     //Method to give an overview of the most populair booked flights 
-   /* public static ArrayList<Flight> tripsOriginDestinations() throws DBException {
-        ArrayList<Flight> populairFlights = DBFlight.getTopPopularTrips();//DATaboys nog methode doorgeven hier
+    public static ArrayList<Traject> topPopularTrips(String jaar) throws DBException {
+        ArrayList<Traject> populairFlights = DBTraject.getTopPopularTrips(jaar);//DATaboys nog methode doorgeven hier
         return populairFlights;
     }
-*/
+
 }
