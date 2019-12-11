@@ -35,9 +35,9 @@ import project.LOGIC.DomainController;
  * @author eliseverschelde
  */
 public class OverviewCustomersController implements Initializable {
-    
+
     // bekijk: https://www.youtube.com/watch?v=uz2sWCnTq6E
-private DomainController model;
+    private DomainController model;
 
     @FXML
     private TableColumn<Customer, String> firstNameColumn;
@@ -69,27 +69,27 @@ private DomainController model;
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        model=DomainController.getInstance();
+        model = DomainController.getInstance();
         passportNumberColumn.setCellValueFactory(new PropertyValueFactory<Customer, String>("passportNumber"));
         firstNameColumn.setCellValueFactory(new PropertyValueFactory<Customer, String>("firstName"));
         lastNameColumn.setCellValueFactory(new PropertyValueFactory<Customer, String>("lastName"));
         homeCountryColumn.setCellValueFactory(new PropertyValueFactory<Customer, String>("homeCountry"));
-        bithDateColumn.setCellValueFactory(new PropertyValueFactory<Customer, String>("birthDate"));      
-    
+        bithDateColumn.setCellValueFactory(new PropertyValueFactory<Customer, String>("birthDate"));
+
         tableViewCustomers.setItems(getCustomers());
         tableViewCustomers.setEditable(true);
         firstNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         lastNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         bithDateColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        
-    } 
-    
-    public ObservableList<Customer> getCustomers(){
+
+    }
+
+    public ObservableList<Customer> getCustomers() {
         ObservableList<Customer> customers = FXCollections.observableArrayList();
         try {
-            for(Customer c: customersOverview()){
-            customers.add(c);
-        }
+            for (Customer c : customersOverview()) {
+                customers.add(c);
+            }
         } catch (DBException ex) {
             Logger.getLogger(OverviewCustomersController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -98,28 +98,28 @@ private DomainController model;
 
     @FXML
     private void addBtnClicked(ActionEvent event) {
-        
+
         Customer customer = new Customer(passportIDTxtField.getText(), firstNameTxtField.getText(), lastNameTxtField.getText(), birthDateTxtField.getText());
-        
+
         //customer toevoegen of aanpassen indien ze al bestaat, in datalaag wordt de oude customer dan onmiddellijk verwijderd
         try {
             saveCustomer(customer);
         } catch (DBException ex) {
             Logger.getLogger(OverviewCustomersController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         tableViewCustomers.getItems().add(customer);
-        
+
         //tekstvakjes leeg maken
         passportIDTxtField.clear();
         firstNameTxtField.clear();
         lastNameTxtField.clear();
         birthDateTxtField.clear();
-        
+
     }
 
-@FXML
-    public void changeFirstNameCellEvent(CellEditEvent editedCell){
+    @FXML
+    public void changeFirstNameCellEvent(CellEditEvent editedCell) {
         Customer customerSelected = tableViewCustomers.getSelectionModel().getSelectedItem();
         customerSelected.setFirstName(editedCell.getNewValue().toString());
         try {
@@ -128,9 +128,9 @@ private DomainController model;
             Logger.getLogger(OverviewCustomersController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-@FXML
-    public void changeLastNameCellEvent(CellEditEvent editedCell){
+
+    @FXML
+    public void changeLastNameCellEvent(CellEditEvent editedCell) {
         Customer customerSelected = tableViewCustomers.getSelectionModel().getSelectedItem();
         customerSelected.setLastName(editedCell.getNewValue().toString());
         try {
@@ -139,9 +139,9 @@ private DomainController model;
             Logger.getLogger(OverviewCustomersController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-@FXML
-    public void changeBirthDateCellEvent(CellEditEvent editedCell){
+
+    @FXML
+    public void changeBirthDateCellEvent(CellEditEvent editedCell) {
         Customer customerSelected = tableViewCustomers.getSelectionModel().getSelectedItem();
         customerSelected.setBirthDate(editedCell.getNewValue().toString());
         try {
@@ -150,7 +150,7 @@ private DomainController model;
             Logger.getLogger(OverviewCustomersController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     @FXML
     private void deleteBtnClicked(ActionEvent event) {
         ObservableList<Customer> customerSelected, allCustomers;
@@ -163,5 +163,5 @@ private DomainController model;
         }
         customerSelected.forEach(allCustomers::remove);
     }
-    
+
 }

@@ -185,7 +185,7 @@ public class SearchFlightController implements Initializable {
             filteredFlights.addAll(model.searchFlight(getIntermediateStopsAllowed(), getSortBy(), getOriginAirport(), getDestinationAirport(), getDatePicker()));
             System.out.println(filteredFlights.toString());
             tableView.setItems(getFlights());
-            System.out.println(filteredFlights.get(0).getNumberOfStopOvers());
+            System.out.println(filteredFlights.get(0).getNumberOfStops());
         } catch (DBException ex) {
             Logger.getLogger(SearchFlightController.class.getName()).log(Level.SEVERE, null, ex);
         }

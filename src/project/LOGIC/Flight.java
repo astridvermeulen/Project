@@ -25,6 +25,7 @@ public class Flight {
     private final ArrayList<FlightLeg> flightLegs;
     private final double emission;
     private double duration;
+    private final int numberOfStops;
 
     //Constructor
     public Flight(String origin, String destination, String departureDate, String departureTime, String arrivalDate, String arrivalTime, String flightNumber, double price) throws DBException, SQLException, ParseException {
@@ -41,6 +42,7 @@ public class Flight {
         this.flightLegs = DBFlightLeg.getFlightLegs(flightNumber, departureDate); 
         this.emission = this.calculateEmission();
         this.setDuration(); //Zo blijft de volgorde behouden van de GUI kolommen 
+        this.numberOfStops = this.numberOfStopovers(); //
     }
 
     //Getters
@@ -90,6 +92,10 @@ public class Flight {
 
     public double getDuration() {
         return duration;
+    }
+
+    public int getNumberOfStops() {
+        return numberOfStops;
     }
 
     //Setters
