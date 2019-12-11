@@ -23,26 +23,6 @@ public class Booking {
     private final double promotion;
     private final double netPrice;
 
-    /*
-    
-    Dit voor Lars
-    
-    //Eerst Flight object aanmaken: hoe het object eruit moet zien is bepaald in de klasse Flight
-    //Hier maken we er gewoon een object van aan en steken er informatie in
-    Flight f = new Flight("Parijs", "Brussel", "12/10/2019", "12:40", "12/10/2019", "13:50", "84782", 100.0);
-
-    
-    //Customer object aanmaken: idem: hoe het object eruit moet zien is bepaald in de klasse Customer
-    //Hier maken we er gewoon een object van aan en steken er informatie in
-    Customer c = new Customer("BE8473","Astrid", "Vermeulen", "15/10/1999");
-:
-    
-    //Nu kan je een boeking aanmaken met die twee objecten
-    Booking b = new Booking(f, c);
-    
-    //Nu zitten alle gegevens samen 
-    */
-    
     //Constructor 
     public Booking(ArrayList<Flight> flight, ArrayList<Customer> customer) throws DBException, ParseException {
         this.bookingDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
@@ -81,8 +61,9 @@ public class Booking {
     //Helping method to safe a booking: one customer per booking 
     public static void saveBooking(Booking b) throws DBException, SQLException {
         for (int i = 0; i < b.customers.size(); i++) {
-            DBBooking.saveBooking(b.bookingDate, b.promotion, b.serviceFee, b.flight.get(i).getFlightNumber(), b.flight.get(i).getDepartureDate(), b.customers.get(i).getPassportNumber());
-        }
+            for(int j = 0; j <b.flight.size(); j++){
+            DBBooking.saveBooking(b.bookingDate, b.promotion, b.serviceFee, b.flight.get(j).getFlightNumber(), b.flight.get(j).getDepartureDate(), b.customers.get(i).getPassportNumber());
+        }}
     }
 
     //Method to delete a booking 
