@@ -26,6 +26,7 @@ public class DomainController {
         ArrayList<Flight> flightsDate = this.filterOnDate(departureDate, flightsOriginDestination);
         ArrayList<Flight> flightsFilteredOnLegs = this.fliterOnLegs(legs, flightsDate);
         ArrayList<Flight> output;
+        
         if (filter.equalsIgnoreCase("price")) {
             output = new ArrayList<>(flightsFilteredOnLegs.stream().sorted(Comparator.comparing(Flight::getPrice)).collect(Collectors.toList()));
         } else if (filter.equalsIgnoreCase("duration")) {

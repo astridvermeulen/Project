@@ -51,13 +51,11 @@ import project.LOGIC.Flight;
  */
 public class SearchFlightController implements Initializable {
     private DomainController model;
-    private ArrayList<Flight> filteredFlights = new ArrayList();
-    private Flight flight;
-    private ArrayList<Flight> selectedFlights = new ArrayList();    
+    private MakeBooking mb = MakeBooking.getInstance();
+    private ArrayList<Flight> filteredFlights = new ArrayList();  
     private Booking booking;
     
-    
-    // Overview of flights matching the criteria
+   
     @FXML
     private TableColumn<Flight, String> airlineColumn;
     @FXML
@@ -116,26 +114,13 @@ public class SearchFlightController implements Initializable {
     @FXML
     private ScrollPane scrollPane;
     @FXML
-    private Button displayFlightsBtn;
-    @FXML
     private Button clearFlightsBtn;
     @FXML
     private Button bookBtn;
     
-
-      
-
-    
-    public SearchFlightController() {
-        
-    }
     
     //Getters  
-    
-    public ArrayList<Flight> getSelectedFlights() {
-        return selectedFlights;
-    }
-    public String getDatePicker() {
+     public String getDatePicker() {
         return datePicker.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
     public String getOriginAirport(){
@@ -172,11 +157,9 @@ public class SearchFlightController implements Initializable {
         arrivalTimeColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("arrivalTime"));
         flightNumberColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("flightNumber"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<Flight,Double>("price"));
-        numberOfFlightLegsColumn.setCellValueFactory(new PropertyValueFactory<Flight,Integer>("FlightLegs"));
+        numberOfFlightLegsColumn.setCellValueFactory(new PropertyValueFactory<Flight,Integer>("numberOfStopOvers"));
         
         tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-
-        
     }    
     
 
@@ -198,23 +181,16 @@ public class SearchFlightController implements Initializable {
     //Search flights
     @FXML
     private void searchFlight(ActionEvent event) {
-        
         try {
             filteredFlights.addAll(model.searchFlight(getIntermediateStopsAllowed(), getSortBy(), getOriginAirport(), getDestinationAirport(), getDatePicker()));
             System.out.println(filteredFlights.toString());
             tableView.setItems(getFlights());
-            
+            System.out.println(filteredFlights.get(0).getNumberOfStopOvers());
         } catch (DBException ex) {
             Logger.getLogger(SearchFlightController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
         
-        
-        
-        
-        
-    
-    
     public ObservableList<Flight> getFlights(){
         
         ObservableList<Flight> flights = FXCollections.observableArrayList();
@@ -262,33 +238,7 @@ public class SearchFlightController implements Initializable {
     
     @FXML
     private void getFlightInfo(MouseEvent event) {
-        try {
-            flight = new Flight(tableView.getSelectionModel().getSelectedItem().getOrigin(),tableView.getSelectionModel().getSelectedItem().getDestination(),
-                    tableView.getSelectionModel().getSelectedItem().getDepartureDate(), tableView.getSelectionModel().getSelectedItem().getDepartureTime(),
-                    tableView.getSelectionModel().getSelectedItem().getArrivalDate(),tableView.getSelectionModel().getSelectedItem().getArrivalTime(),
-                    tableView.getSelectionModel().getSelectedItem().getFlightNumber(),tableView.getSelectionModel().getSelectedItem().getPrice());
-            
-            
-            selectedFlights.add(flight);
-            //test
-            System.out.println(selectedFlights);
-            
-        } catch (DBException ex) {
-            Logger.getLogger(SearchFlightController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(SearchFlightController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParseException ex) {
-            Logger.getLogger(SearchFlightController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    
-        
-    }
-
-    @FXML
-    private void displayFllights(ActionEvent event) {
-        
-        tableView.setItems(getFlights());
-        
+        mb.flightInfo(tableView);
     }
 
     @FXML
@@ -301,13 +251,10 @@ public class SearchFlightController implements Initializable {
         try {
             AnchorPane pane = (AnchorPane) FXMLLoader.load(getClass().getResource("dataCustomer.fxml"));
             panelToUpdate.getChildren().setAll(pane);
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("dataCustomer.fxml"));
-            loader.load();
-            DataCustomerController controller = (DataCustomerController) loader.getController();
-            controller.setArrayList(selectedFlights); 
         } catch (IOException ex) {
             Logger.getLogger(SearchFlightController.class.getName()).log(Level.SEVERE, null, ex);
         }
+          
    
    }
 }

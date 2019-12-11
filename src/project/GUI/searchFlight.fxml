@@ -38,7 +38,6 @@
                   <CheckBox fx:id="intermediateStopsNotAllowedCheck" layoutX="509.0" layoutY="270.0" mnemonicParsing="false" onAction="#handleNoCheckBox" prefHeight="25.0" prefWidth="53.0" text="No" AnchorPane.topAnchor="270.0" />
                   <DatePicker fx:id="datePicker" layoutX="90.0" layoutY="149.0" prefWidth="150.0" promptText="Departure Date" AnchorPane.topAnchor="170.0" />
                   <Label fx:id="numberOfPassengersLbl" layoutX="304.0" layoutY="153.0" prefHeight="1.0" prefWidth="120.0" text="Number of passengers" AnchorPane.topAnchor="174.0" />
-                  <Button fx:id="displayFlightsBtn" layoutX="393.0" layoutY="374.0" mnemonicParsing="false" onAction="#displayFllights" prefWidth="115.0" text="Display" AnchorPane.leftAnchor="393.0" />
                   <Button fx:id="clearFlightsBtn" layoutX="509.0" layoutY="374.0" mnemonicParsing="false" onAction="#clearFlights" prefWidth="115.0" text="Clear" AnchorPane.leftAnchor="509.0" />
                   <Button fx:id="bookBtn" layoutX="108.0" layoutY="409.0" mnemonicParsing="false" onAction="#makeBooking" prefHeight="30.0" prefWidth="115.0" text="Book">
                      <font>
