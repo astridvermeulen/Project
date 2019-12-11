@@ -72,6 +72,8 @@ public class SearchFlightController implements Initializable {
     @FXML
     private TableColumn<Flight, LocalTime> arrivalTimeColumn;
     @FXML
+    private TableColumn<Flight, Double> emissionColumn;
+    @FXML
     private TableColumn<Flight, Integer> numberOfFlightLegsColumn;
     @FXML
     private TableView<Flight> tableView;
@@ -112,11 +114,9 @@ public class SearchFlightController implements Initializable {
     private Button displayFlightsBtn;
     @FXML
     private Button clearFlightsBtn;
-    @FXML
-    private Button bookSelectedFlightsBtn;
+   
       
-    private ObservableList<Flight> flightsSelected;
-    private ArrayList<Flight> vluchtenGeselecteerd;   
+    
     //Getters
     public SearchFlightController() {
     }
@@ -142,7 +142,7 @@ public class SearchFlightController implements Initializable {
     
     
     
-    
+  
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         model=DomainController.getInstance();
@@ -158,16 +158,14 @@ public class SearchFlightController implements Initializable {
         arrivalTimeColumn.setCellValueFactory(new PropertyValueFactory<Flight,LocalTime>("arrivalTime"));
         flightNumberColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("flightNumber"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<Flight,Double>("price"));
-        numberOfFlightLegsColumn.setCellValueFactory(new PropertyValueFactory<Flight,Integer>("getFlightLegs()"));
+        emissionColumn.setCellValueFactory(new PropertyValueFactory<Flight,Double>("emission"));
+        numberOfFlightLegsColumn.setCellValueFactory(new PropertyValueFactory<Flight,Integer>("numberOfStops"));
         
         tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-
+        
+ 
         
     }    
-    
-
-        
-
     
 
     @FXML
@@ -184,7 +182,6 @@ public class SearchFlightController implements Initializable {
         }
     }
 
-    
     //Search flights
     @FXML
     private void searchFlight(ActionEvent event) {
@@ -205,7 +202,6 @@ public class SearchFlightController implements Initializable {
         }  
         
         
-    
     
     public ObservableList<Flight> getFlights(){
         
@@ -270,22 +266,8 @@ public class SearchFlightController implements Initializable {
             Logger.getLogger(SearchFlightController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-    }
-
-
+    }     
     
-            
-            public static void main(String[] args) throws DBException {
-       
-        
-       SearchFlightController object = new SearchFlightController();
-        
-       
-    }
-   
-    
-            
-
     @FXML
     private void displayFllights(ActionEvent event) {
         
@@ -296,24 +278,6 @@ public class SearchFlightController implements Initializable {
     @FXML
     private void clearFlights(ActionEvent event) {
         getFlights().clear();
-    }
-
-    @FXML
-    private void bookSelectedFlights(ActionEvent event) {
-        flightsSelected = tableView.getSelectionModel().getSelectedItems();
-        
-        int size = flightsSelected.size();
-        for(int i=0; i<size; i++){
-            vluchtenGeselecteerd.add(flightsSelected.get(i));
-            System.out.println("geselecteerde vluchten: " + vluchtenGeselecteerd.get(i));
-        }
-        
-        
-
-    }
-
-    
-    
-    
+    }    
     
 }
