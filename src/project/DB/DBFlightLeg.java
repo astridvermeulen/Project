@@ -23,11 +23,9 @@ public class DBFlightLeg {
       con = DBConnection.getInstance().getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
-      String sql =  "SELECT fl.legNumber, fl.originAirportCode, fl.destinationAirportCode, fl.departureDate, fl.arrivalDate, fl.departureTime, fl.arrivalTime " + 
-                    "FROM flight as f INNER JOIN flightleg AS fl " + 
-                    "WHERE fl.legNumber = " + legNumber + " AND f.flightNumber = '" + flightNumber + "' " + 
-                    "AND f.departureDate = '" + departureDate + "' " + 
-                    "AND fl.departureDate = f.departureDate AND fl.flightNumber = f.flightNumber";
+              String sql =  "SELECT * FROM flightleg " + 
+                            "WHERE legNumber = " + legNumber + " AND flightNumber = '" + flightNumber + "' " +
+                            "AND departureDate = '" + departureDate + "'";
  
       ResultSet srs = stmt.executeQuery(sql);
      
@@ -70,10 +68,10 @@ public class DBFlightLeg {
       con = DBConnection.getInstance().getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
-      String sql =  "SELECT fl.legNumber, fl.originAirportCode, fl.destinationAirportCode, fl.departureDate, fl.arrivalDate, fl.departureTime, fl.arrivalTime " + 
-                    "FROM flight as f INNER JOIN flightleg AS fl " + 
-                    "WHERE f.departureDate = '" + departureDate + "' " + "AND f.flightNumber = '" + flightNumber + "'";
-      ResultSet srs = stmt.executeQuery(sql);
+            String sql =    "SELECT * " +
+                            "FROM flightleg " +
+                            "WHERE departureDate = '" + departureDate + "' AND flightNumber = '" + flightNumber + "'";
+        ResultSet srs = stmt.executeQuery(sql);
      
        int legNumber;
        String originAirportCode, destinationAirportCode, departureTime, arrivalDate, arrivalTime;
