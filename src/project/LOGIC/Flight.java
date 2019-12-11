@@ -157,7 +157,7 @@ public class Flight {
     public static void main(String[] args) throws DBException {
         ArrayList<Flight> flightsAll = Flight.flightsOverview();
         System.out.println(flightsAll.get(0).flightLegs);
-        System.out.println(flightsAll.get(0).numberOfStopOvers);
+        System.out.println(flightsAll.get(0).numberOfStopovers());
     }
 
    
