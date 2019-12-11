@@ -77,7 +77,7 @@ public class SearchFlightController implements Initializable {
     @FXML
     private TableColumn<Flight, String> arrivalTimeColumn;
     @FXML
-    private TableColumn<Flight, Integer> numberOfFlightLegsColumn;
+    private TableColumn<Flight, Integer> numberOfStopOversColumn;
     @FXML
     private TableView<Flight> tableView;
 
@@ -157,9 +157,10 @@ public class SearchFlightController implements Initializable {
         arrivalTimeColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("arrivalTime"));
         flightNumberColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("flightNumber"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<Flight,Double>("price"));
-        numberOfFlightLegsColumn.setCellValueFactory(new PropertyValueFactory<Flight,Integer>("numberOfStopOvers"));
+        numberOfStopOversColumn.setCellValueFactory(new PropertyValueFactory<Flight,Integer>("numberOfStopOvers"));
         
         tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+       
     }    
     
 
@@ -238,16 +239,21 @@ public class SearchFlightController implements Initializable {
     
     @FXML
     private void getFlightInfo(MouseEvent event) {
-        mb.flightInfo(tableView);
+        if(event.getClickCount()>1){
+           mb.flightInfo(tableView); 
+        }
+        
     }
 
     @FXML
     private void clearFlights(ActionEvent event) {
-        getFlights().clear();
+        filteredFlights.clear();
+        tableView.getItems().clear();
     }
 
     @FXML
     private void makeBooking(ActionEvent event) {
+        
         try {
             AnchorPane pane = (AnchorPane) FXMLLoader.load(getClass().getResource("dataCustomer.fxml"));
             panelToUpdate.getChildren().setAll(pane);
