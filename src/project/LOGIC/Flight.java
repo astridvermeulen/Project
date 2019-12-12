@@ -40,7 +40,7 @@ public class Flight {
         this.price = price;
         this.flightLegs = DBFlightLeg.getFlightLegs(flightNumber, departureDate);
         this.emission = this.calculateEmission();
-        this.duration = this.calculateDuration(); 
+        this.duration = this.calculateDuration();
         this.numberOfStops = this.numberOfStopovers(); //
     }
 
@@ -144,7 +144,12 @@ public class Flight {
 
     //Method to calculate the stopovers from a flight, 1 flight leg = 0 stopovers 
     public int numberOfStopovers() {
-        int numberOfLegs = this.flightLegs.size() - 1;
+        int numberOfLegs;
+        if (this.flightLegs.isEmpty()) {
+            numberOfLegs = 0;
+        } else {
+            numberOfLegs = this.flightLegs.size() - 1;
+        }
         return numberOfLegs;
     }
 

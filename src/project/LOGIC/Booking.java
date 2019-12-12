@@ -61,9 +61,10 @@ public class Booking {
     //Helping method to safe a booking: one customer per booking 
     public static void saveBooking(Booking b) throws DBException, SQLException {
         for (int i = 0; i < b.customers.size(); i++) {
-            for(int j = 0; j <b.flight.size(); j++){
-            DBBooking.saveBooking(b.bookingDate, b.promotion, b.serviceFee, b.flight.get(j).getFlightNumber(), b.flight.get(j).getDepartureDate(), b.customers.get(i).getPassportNumber());
-        }}
+            for (int j = 0; j < b.flight.size(); j++) {
+                DBBooking.saveBooking(b.bookingDate, b.promotion, b.serviceFee, b.flight.get(j).getFlightNumber(), b.flight.get(j).getDepartureDate(), b.customers.get(i).getPassportNumber());
+            }
+        }
     }
 
     //Method to delete a booking 
