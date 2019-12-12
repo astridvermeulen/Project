@@ -32,16 +32,15 @@ public class Flight {
         this.airline = DBAirline.getAirlineForFlight(flightNumber, departureDate);
         this.origin = origin;
         this.destination = destination;
-        this.duration = 0.0;
         this.departureDate = departureDate;
         this.departureTime = departureTime;
         this.arrivalDate = arrivalDate;
         this.arrivalTime = arrivalTime;
         this.flightNumber = flightNumber;
         this.price = price;
-        this.flightLegs = DBFlightLeg.getFlightLegs(flightNumber, departureDate); 
+        this.flightLegs = DBFlightLeg.getFlightLegs(flightNumber, departureDate);
         this.emission = this.calculateEmission();
-        this.setDuration(); //Zo blijft de volgorde behouden van de GUI kolommen 
+        this.duration = this.calculateDuration();
         this.numberOfStops = this.numberOfStopovers(); //
     }
 
@@ -98,11 +97,6 @@ public class Flight {
         return numberOfStops;
     }
 
-    //Setters
-    public void setDuration() throws ParseException {
-        this.duration = this.calculateDuration();
-    }
-
     //Helping method to calculate the duration of a flight: tested V
     public double calculateDuration() throws ParseException { //methode nog terug naar private 
         String dateStart = departureDate + " " + departureTime;
@@ -150,7 +144,12 @@ public class Flight {
 
     //Method to calculate the stopovers from a flight, 1 flight leg = 0 stopovers 
     public int numberOfStopovers() {
-        int numberOfLegs = this.flightLegs.size()-1;
+        int numberOfLegs;
+        if (this.flightLegs.isEmpty()) {
+            numberOfLegs = 0;
+        } else {
+            numberOfLegs = this.flightLegs.size() - 1;
+        }
         return numberOfLegs;
     }
 
@@ -159,13 +158,11 @@ public class Flight {
         ArrayList<Flight> flightsAll = DBFlight.getFlights();
         return flightsAll;
     }
-    
+
     public static void main(String[] args) throws DBException {
         ArrayList<Flight> flightsAll = Flight.flightsOverview();
         System.out.println(flightsAll.get(0).flightLegs);
         System.out.println(flightsAll.get(0).numberOfStopovers());
     }
-
-   
 
 }
