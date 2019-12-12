@@ -81,7 +81,9 @@ public class MakeBooking {
         }
         customersLinkedToBooking.add(klant);
     }
-    
+    public void deleteSelectedFlights(){
+        selectedFlights.clear();
+    }
     
             
     
