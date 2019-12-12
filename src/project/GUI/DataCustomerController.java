@@ -1,6 +1,7 @@
 
 package project.GUI;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -10,10 +11,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import project.DB.DBBooking;
 import project.DB.DBException;
@@ -202,6 +205,7 @@ public class DataCustomerController implements Initializable {
     @FXML
     private void confirmBooking(ActionEvent event) {
         mb.makeBooking();
+
         
     }
 }

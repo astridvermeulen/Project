@@ -79,6 +79,8 @@ public class SearchFlightController implements Initializable {
     @FXML
     private TableColumn<Flight, Double> emissionColumn;
     @FXML
+    private TableColumn<Flight, Integer> numberOfStopoversColumn;
+    @FXML
     private TableView<Flight> tableView;
 
     
@@ -118,10 +120,11 @@ public class SearchFlightController implements Initializable {
     @FXML
     private Button bookBtn;
     @FXML
-    private TableColumn<Flight , Integer> numberOfStopoversColumn;
-
     private Button clearSelectedFlightsBtn;
+
    
+    
+    
     
     
     //Getters  

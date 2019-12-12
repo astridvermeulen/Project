@@ -96,6 +96,19 @@ public class OverviewTripsController implements Initializable {
     @FXML
     private void showTrips(ActionEvent event) {
         tableViewTrips.setItems(getTrips());
+        
+        ObservableList<Traject> list = tableViewTrips.getItems();
+        if(list.isEmpty()){
+            alertBox.display("Warning!", "There are no trips booked for this year.");
+        }
+       
+    }
+    
+    public void nothing(){
+        ObservableList<Traject> list = tableViewTrips.getItems();
+        if(list.isEmpty()){
+            
+        }
     }
     
 }
