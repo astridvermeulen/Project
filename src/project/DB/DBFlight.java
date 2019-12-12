@@ -177,6 +177,7 @@ public static ArrayList<Flight> getFlights() throws DBException {
       while (srs.next())
         vluchten.add(getFlight(srs.getString("flightNumber"), srs.getString("departureDate")));
       DBConnection.closeConnection(con);
+      reverse(vluchten);
       return vluchten;
     } catch (DBException dbe) {
       dbe.printStackTrace();
