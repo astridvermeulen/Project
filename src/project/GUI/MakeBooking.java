@@ -56,6 +56,7 @@ public class MakeBooking {
     
     
     public void flightInfo(TableView<Flight> tableView){
+        
         try {
             flight = new Flight(tableView.getSelectionModel().getSelectedItem().getOrigin(),tableView.getSelectionModel().getSelectedItem().getDestination(),
                     tableView.getSelectionModel().getSelectedItem().getDepartureDate(), tableView.getSelectionModel().getSelectedItem().getDepartureTime(),
@@ -64,6 +65,7 @@ public class MakeBooking {
             selectedFlights.add(flight);
             //test
             System.out.println(selectedFlights);
+            System.out.println(selectedFlights.get(0).getAirline());
         } catch (DBException ex) {
             Logger.getLogger(MakeBooking.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {

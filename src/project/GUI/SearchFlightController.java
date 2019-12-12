@@ -69,7 +69,7 @@ public class SearchFlightController implements Initializable {
     @FXML
     private TableColumn<Flight, String> departureTimeColumn;
     @FXML
-    private TableColumn<Flight, Duration> durationColumn;
+    private TableColumn<Flight, String> durationColumn;
     @FXML
     private TableColumn<Flight, String> departureDayColumn;
     @FXML
@@ -119,6 +119,8 @@ public class SearchFlightController implements Initializable {
     private Button clearFlightsBtn;
     @FXML
     private Button bookBtn;
+    @FXML
+    private Button clearSelectedFlightsBtn;
    
     
     
@@ -155,7 +157,7 @@ public class SearchFlightController implements Initializable {
         airlineColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("airline"));
         originAirportColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("origin"));
         destinationAirportColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("destination"));
-        durationColumn.setCellValueFactory(new PropertyValueFactory<Flight,Duration>("duration"));
+        durationColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("duration"));
         departureDayColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("departureDate"));
         departureTimeColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("departureTime"));
         arrivalDayColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("arrivalDate"));
@@ -167,6 +169,7 @@ public class SearchFlightController implements Initializable {
         
         tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         mb.deleteSelectedFlights();
+        filteredFlights.clear();
        
     }    
     
@@ -231,7 +234,7 @@ public class SearchFlightController implements Initializable {
         Logger.getLogger(DBAirport.class.getName()).log(Level.SEVERE, null, ex);
         }
       
-      for(int i=1; i<5; i++){
+      for(int i=1; i<6; i++){
           list2.add(i);
       }
 
@@ -270,4 +273,9 @@ public class SearchFlightController implements Initializable {
           
    
    }
+
+    @FXML
+    private void clearSelectedFlights(ActionEvent event) {
+        mb.deleteSelectedFlights();
+    }
 }
