@@ -25,29 +25,25 @@ public class Flight {
     private final ArrayList<FlightLeg> flightLegs;
     private final double emission;
     private double duration;
-    private final int numberOfStopOvers;
+    private final int numberOfStops;
 
     //Constructor
     public Flight(String origin, String destination, String departureDate, String departureTime, String arrivalDate, String arrivalTime, String flightNumber, double price) throws DBException, SQLException, ParseException {
         this.airline = DBAirline.getAirlineForFlight(flightNumber, departureDate);
         this.origin = origin;
         this.destination = destination;
-        this.duration = 0.0;
         this.departureDate = departureDate;
         this.departureTime = departureTime;
         this.arrivalDate = arrivalDate;
         this.arrivalTime = arrivalTime;
         this.flightNumber = flightNumber;
         this.price = price;
-        this.flightLegs = DBFlightLeg.getFlightLegs(flightNumber, departureDate); 
-        this.numberOfStopOvers = numberOfStopovers();
+        this.flightLegs = DBFlightLeg.getFlightLegs(flightNumber, departureDate);
         this.emission = this.calculateEmission();
-        this.setDuration(); //Zo blijft de volgorde behouden van de GUI kolommen 
+        this.duration = this.calculateDuration();
+        this.numberOfStops = this.numberOfStopovers(); //
     }
 
-    public int getNumberOfStopOvers() {
-        return numberOfStopOvers;
-    }
     //Getters
     public String getAirline() {
         return airline;
@@ -97,9 +93,8 @@ public class Flight {
         return duration;
     }
 
-    //Setters
-    public void setDuration() throws ParseException {
-        this.duration = this.calculateDuration();
+    public int getNumberOfStops() {
+        return numberOfStops;
     }
 
     //Helping method to calculate the duration of a flight: tested V
@@ -149,7 +144,12 @@ public class Flight {
 
     //Method to calculate the stopovers from a flight, 1 flight leg = 0 stopovers 
     public int numberOfStopovers() {
-        int numberOfLegs = this.flightLegs.size()-1;
+        int numberOfLegs;
+        if (this.flightLegs.isEmpty()) {
+            numberOfLegs = 0;
+        } else {
+            numberOfLegs = this.flightLegs.size() - 1;
+        }
         return numberOfLegs;
     }
 
@@ -159,6 +159,10 @@ public class Flight {
         return flightsAll;
     }
 
-   
+    public static void main(String[] args) throws DBException {
+        ArrayList<Flight> flightsAll = Flight.flightsOverview();
+        System.out.println(flightsAll.get(0).flightLegs);
+        System.out.println(flightsAll.get(0).numberOfStopovers());
+    }
 
 }

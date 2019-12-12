@@ -32,9 +32,10 @@ import project.LOGIC.Flight;
  * @author eliseverschelde
  */
 public class ReportCustomerController implements Initializable {
+
     private DomainController model;
     private Customer chosenCustomer;
-    
+
     @FXML
     private TableView<Flight> tableViewEmission;
     @FXML
@@ -59,49 +60,44 @@ public class ReportCustomerController implements Initializable {
     private TableColumn<Customer, String> passportIDColumn;
     @FXML
     private Button showTotalEmissionBtn;
-   
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        model=DomainController.getInstance();
+        model = DomainController.getInstance();
         passportIDColumn.setCellValueFactory(new PropertyValueFactory<Customer, String>("passportNumber"));
-        
+
         flightNumberColumn.setCellValueFactory(new PropertyValueFactory<Flight, String>("flightNumber"));
         departureDateColumn.setCellValueFactory(new PropertyValueFactory<Flight, String>("departureDate"));
         originAirportColumn.setCellValueFactory(new PropertyValueFactory<Flight, String>("origin"));
         destinationAirportColumn.setCellValueFactory(new PropertyValueFactory<Flight, String>("destination"));
         emissionColumn.setCellValueFactory(new PropertyValueFactory<Flight, Double>("emission"));
-    
-        tableViewCustomers.setItems(getCustomers());
-        
-    } 
-    
 
-    
-    public ObservableList<Customer> getCustomers(){
+        tableViewCustomers.setItems(getCustomers());
+
+    }
+
+    public ObservableList<Customer> getCustomers() {
         ObservableList<Customer> customers = FXCollections.observableArrayList();
         try {
-            for(Customer c: customersOverview()){
-            customers.add(c);
-        }
+            for (Customer c : customersOverview()) {
+                customers.add(c);
+            }
         } catch (DBException ex) {
             Logger.getLogger(OverviewCustomersController.class.getName()).log(Level.SEVERE, null, ex);
         }
         System.out.println("customers toegevoegd in tabel");
         return customers;
-        
+
     }
-    
-    
-    
-    public ObservableList<Flight> getFlightsFromCustomer(){
+
+    public ObservableList<Flight> getFlightsFromCustomer() {
         ObservableList<Flight> flights = FXCollections.observableArrayList();
-        ArrayList<Flight>  vlucht = new ArrayList();
+        ArrayList<Flight> vlucht = new ArrayList();
         try {
-            for(Flight f: chosenCustomer.flightOverview()){
+            for (Flight f : chosenCustomer.flightOverview()) {
                 flights.add(f);
                 vlucht.add(f);
             }
@@ -109,11 +105,10 @@ public class ReportCustomerController implements Initializable {
             Logger.getLogger(ReportCustomerController.class.getName()).log(Level.SEVERE, null, ex);
         }
         System.out.println(vlucht.get(0).getOrigin());
-           
+
         return flights;
     }
-    
-    
+
     @FXML
     private void chooseCustomer(ActionEvent event) {
         ObservableList<Customer> customerSelected = tableViewCustomers.getSelectionModel().getSelectedItems();
@@ -137,10 +132,4 @@ public class ReportCustomerController implements Initializable {
         donateBtn.setText("You donated");
     }
 
-
-    
-
-
-    
-    
 }

@@ -26,7 +26,8 @@ import static project.LOGIC.DomainController.domainController;
  * @author eliseverschelde
  */
 public class SalesReportController implements Initializable {
-private DomainController model;
+
+    private DomainController model;
     @FXML
     private Button overviewTripsBookedBtn;
     @FXML
@@ -35,54 +36,49 @@ private DomainController model;
     private Button revenuesBtn;
     @FXML
     private AnchorPane anchorPaneToUpdate;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        model=domainController.getInstance(); 
-    }    
+        model = domainController.getInstance();
+    }
 
     @FXML
     private void showOverviewTripsBooked(ActionEvent event) {
         try {
-      
-      
+
             AnchorPane pane = (AnchorPane) FXMLLoader.load(getClass().getResource("overviewTrips.fxml"));
             anchorPaneToUpdate.getChildren().setAll(pane);
-      
-      
+
         } catch (IOException ex) {
-        Logger.getLogger(startWindowController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(startWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     @FXML
     private void showMostPopularAirports(ActionEvent event) {
         try {
-      
-      
+
             AnchorPane pane = (AnchorPane) FXMLLoader.load(getClass().getResource("overviewMostPopularAirports.fxml"));
             anchorPaneToUpdate.getChildren().setAll(pane);
-      
-      
+
         } catch (IOException ex) {
-        Logger.getLogger(startWindowController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(startWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     @FXML
     private void showRevenues(ActionEvent event) {
         try {
-      
-      
+
             AnchorPane pane = (AnchorPane) FXMLLoader.load(getClass().getResource("overviewRevenues.fxml"));
             anchorPaneToUpdate.getChildren().setAll(pane);
-      
-      
+
         } catch (IOException ex) {
-        Logger.getLogger(startWindowController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(startWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
 }

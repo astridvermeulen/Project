@@ -77,10 +77,6 @@ public class SearchFlightController implements Initializable {
     @FXML
     private TableColumn<Flight, String> arrivalTimeColumn;
     @FXML
-    private TableColumn<Flight, Double> emissionColumn;
-    @FXML
-    private TableColumn<Flight, Integer> numberOfFlightLegsColumn;
-    @FXML
     private TableView<Flight> tableView;
 
     
@@ -119,6 +115,8 @@ public class SearchFlightController implements Initializable {
     private Button clearFlightsBtn;
     @FXML
     private Button bookBtn;
+    @FXML
+    private TableColumn<Flight , Integer> numberOfStopoversColumn;
     
     
     //Getters  
@@ -159,9 +157,10 @@ public class SearchFlightController implements Initializable {
         arrivalTimeColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("arrivalTime"));
         flightNumberColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("flightNumber"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<Flight,Double>("price"));
-        numberOfFlightLegsColumn.setCellValueFactory(new PropertyValueFactory<Flight,Integer>("numberOfStopOvers"));
+        numberOfStopoversColumn.setCellValueFactory(new PropertyValueFactory<Flight,Integer>("numberOfStops"));
         
         tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+       
     }    
     
 
@@ -186,7 +185,7 @@ public class SearchFlightController implements Initializable {
             filteredFlights.addAll(model.searchFlight(getIntermediateStopsAllowed(), getSortBy(), getOriginAirport(), getDestinationAirport(), getDatePicker()));
             System.out.println(filteredFlights.toString());
             tableView.setItems(getFlights());
-            System.out.println(filteredFlights.get(0).getNumberOfStopOvers());
+            System.out.println(filteredFlights.get(0).getNumberOfStops());
         } catch (DBException ex) {
             Logger.getLogger(SearchFlightController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -239,16 +238,21 @@ public class SearchFlightController implements Initializable {
     
     @FXML
     private void getFlightInfo(MouseEvent event) {
-        mb.flightInfo(tableView);
+        if(event.getClickCount()>1){
+           mb.flightInfo(tableView); 
+        }
+        
     }
 
     @FXML
     private void clearFlights(ActionEvent event) {
-        getFlights().clear();
+        filteredFlights.clear();
+        tableView.getItems().clear();
     }
 
     @FXML
     private void makeBooking(ActionEvent event) {
+        
         try {
             AnchorPane pane = (AnchorPane) FXMLLoader.load(getClass().getResource("dataCustomer.fxml"));
             panelToUpdate.getChildren().setAll(pane);
