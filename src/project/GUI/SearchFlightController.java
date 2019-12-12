@@ -77,7 +77,7 @@ public class SearchFlightController implements Initializable {
     @FXML
     private TableColumn<Flight, String> arrivalTimeColumn;
     @FXML
-    private TableColumn<Flight, Integer> numberOfStopOversColumn;
+    private TableColumn<Flight, Integer> numberOfStopoversColumn;
     @FXML
     private TableView<Flight> tableView;
 
@@ -157,7 +157,7 @@ public class SearchFlightController implements Initializable {
         arrivalTimeColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("arrivalTime"));
         flightNumberColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("flightNumber"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<Flight,Double>("price"));
-        numberOfStopOversColumn.setCellValueFactory(new PropertyValueFactory<Flight,Integer>("numberOfStopOvers"));
+        numberOfStopoversColumn.setCellValueFactory(new PropertyValueFactory<Flight,Integer>("numberOfStops"));
         
         tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
        

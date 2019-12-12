@@ -50,6 +50,7 @@ public class MakeBooking {
         } catch (ParseException ex) {
             Logger.getLogger(MakeBooking.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
     
     
