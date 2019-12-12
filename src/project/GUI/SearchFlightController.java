@@ -77,6 +77,8 @@ public class SearchFlightController implements Initializable {
     @FXML
     private TableColumn<Flight, String> arrivalTimeColumn;
     @FXML
+    private TableColumn<Flight, Double> emissionColumn;
+    @FXML
     private TableColumn<Flight, Integer> numberOfStopoversColumn;
     @FXML
     private TableView<Flight> tableView;
@@ -117,6 +119,9 @@ public class SearchFlightController implements Initializable {
     private Button clearFlightsBtn;
     @FXML
     private Button bookBtn;
+   
+    
+    
     
     
     //Getters  
@@ -157,9 +162,11 @@ public class SearchFlightController implements Initializable {
         arrivalTimeColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("arrivalTime"));
         flightNumberColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("flightNumber"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<Flight,Double>("price"));
+        emissionColumn.setCellValueFactory(new PropertyValueFactory<Flight,Double>("emission"));
         numberOfStopoversColumn.setCellValueFactory(new PropertyValueFactory<Flight,Integer>("numberOfStops"));
         
         tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        mb.deleteSelectedFlights();
        
     }    
     
@@ -239,7 +246,7 @@ public class SearchFlightController implements Initializable {
     
     @FXML
     private void getFlightInfo(MouseEvent event) {
-        if(event.getClickCount()>1){
+        if(event.getClickCount() == 2 && (tableView.getSelectionModel().getSelectedItems() != null)){
            mb.flightInfo(tableView); 
         }
         
