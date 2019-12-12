@@ -5,6 +5,7 @@
  */
 package project.GUI;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -20,6 +21,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -35,7 +37,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import project.DB.DBAirport;
 import project.DB.DBException;
+
 import static project.LOGIC.Airport.airportsAlphabetic;
+import project.LOGIC.Booking;
+
 import project.LOGIC.DomainController;
 import project.LOGIC.Flight;
 
@@ -46,11 +51,11 @@ import project.LOGIC.Flight;
  */
 public class SearchFlightController implements Initializable {
     private DomainController model;
-    private ArrayList<Flight> filteredFlights = new ArrayList<>();
-    private Flight flight;
+    private MakeBooking mb = MakeBooking.getInstance();
+    private ArrayList<Flight> filteredFlights = new ArrayList();  
+    private Booking booking;
     
-    
-    // Overview of flights matching the criteria
+   
     @FXML
     private TableColumn<Flight, String> airlineColumn;
     @FXML
@@ -62,15 +67,15 @@ public class SearchFlightController implements Initializable {
     @FXML
     private TableColumn<Flight, String> destinationAirportColumn;
     @FXML
-    private TableColumn<Flight, LocalTime> departureTimeColumn;
+    private TableColumn<Flight, String> departureTimeColumn;
     @FXML
     private TableColumn<Flight, Duration> durationColumn;
     @FXML
-    private TableColumn<Flight, LocalDate> departureDayColumn;
+    private TableColumn<Flight, String> departureDayColumn;
     @FXML
-    private TableColumn<Flight, LocalDate> arrivalDayColumn;
+    private TableColumn<Flight, String> arrivalDayColumn;
     @FXML
-    private TableColumn<Flight, LocalTime> arrivalTimeColumn;
+    private TableColumn<Flight, String> arrivalTimeColumn;
     @FXML
     private TableColumn<Flight, Double> emissionColumn;
     @FXML
@@ -111,17 +116,13 @@ public class SearchFlightController implements Initializable {
     @FXML
     private ScrollPane scrollPane;
     @FXML
-    private Button displayFlightsBtn;
-    @FXML
     private Button clearFlightsBtn;
-   
-      
+    @FXML
+    private Button bookBtn;
     
-    //Getters
-    public SearchFlightController() {
-    }
-
-    public String getDatePicker() {
+    
+    //Getters  
+     public String getDatePicker() {
         return datePicker.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
     public String getOriginAirport(){
@@ -145,26 +146,22 @@ public class SearchFlightController implements Initializable {
   
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        model=DomainController.getInstance();
+        model = DomainController.getInstance();
         addDataToChoiceBox();
         
         airlineColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("airline"));
         originAirportColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("origin"));
         destinationAirportColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("destination"));
         durationColumn.setCellValueFactory(new PropertyValueFactory<Flight,Duration>("duration"));
-        departureDayColumn.setCellValueFactory(new PropertyValueFactory<Flight,LocalDate>("departureDate"));
-        departureTimeColumn.setCellValueFactory(new PropertyValueFactory<Flight,LocalTime>("departureTime"));
-        arrivalDayColumn.setCellValueFactory(new PropertyValueFactory<Flight,LocalDate>("arrivalDate"));
-        arrivalTimeColumn.setCellValueFactory(new PropertyValueFactory<Flight,LocalTime>("arrivalTime"));
+        departureDayColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("departureDate"));
+        departureTimeColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("departureTime"));
+        arrivalDayColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("arrivalDate"));
+        arrivalTimeColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("arrivalTime"));
         flightNumberColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("flightNumber"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<Flight,Double>("price"));
-        emissionColumn.setCellValueFactory(new PropertyValueFactory<Flight,Double>("emission"));
-        numberOfFlightLegsColumn.setCellValueFactory(new PropertyValueFactory<Flight,Integer>("numberOfStops"));
+        numberOfFlightLegsColumn.setCellValueFactory(new PropertyValueFactory<Flight,Integer>("numberOfStopOvers"));
         
         tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        
- 
-        
     }    
     
 
@@ -185,24 +182,16 @@ public class SearchFlightController implements Initializable {
     //Search flights
     @FXML
     private void searchFlight(ActionEvent event) {
-
-        try {
-            filteredFlights.addAll(model.searchFlight(getIntermediateStopsAllowed(), getSortBy(), getOriginAirport(), getDestinationAirport(), getDatePicker()));
-        }  catch (DBException ex) {
-            Logger.getLogger(SearchFlightController.class.getName()).log(Level.SEVERE, null, ex);
-        }  
-        tableView.setItems(getFlights());
-        
         try {
             filteredFlights.addAll(model.searchFlight(getIntermediateStopsAllowed(), getSortBy(), getOriginAirport(), getDestinationAirport(), getDatePicker()));
             System.out.println(filteredFlights.toString());
+            tableView.setItems(getFlights());
+            System.out.println(filteredFlights.get(0).getNumberOfStopOvers());
         } catch (DBException ex) {
             Logger.getLogger(SearchFlightController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        }  
+    }
         
-        
-    
     public ObservableList<Flight> getFlights(){
         
         ObservableList<Flight> flights = FXCollections.observableArrayList();
@@ -250,34 +239,23 @@ public class SearchFlightController implements Initializable {
     
     @FXML
     private void getFlightInfo(MouseEvent event) {
-        try {
-            Flight vlucht = new Flight(tableView.getSelectionModel().getSelectedItem().getOrigin(),tableView.getSelectionModel().getSelectedItem().getDestination(),
-                    tableView.getSelectionModel().getSelectedItem().getDepartureDate(), tableView.getSelectionModel().getSelectedItem().getDepartureTime(),
-                    tableView.getSelectionModel().getSelectedItem().getArrivalDate(),tableView.getSelectionModel().getSelectedItem().getArrivalTime(),
-                    tableView.getSelectionModel().getSelectedItem().getFlightNumber(),tableView.getSelectionModel().getSelectedItem().getPrice());
-            //test
-            System.out.println(vlucht.getAirline());
-            
-        } catch (DBException ex) {
-            Logger.getLogger(SearchFlightController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(SearchFlightController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParseException ex) {
-            Logger.getLogger(SearchFlightController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }     
-    
-    @FXML
-    private void displayFllights(ActionEvent event) {
-        
-        tableView.setItems(getFlights());
-        
+        mb.flightInfo(tableView);
     }
 
     @FXML
     private void clearFlights(ActionEvent event) {
         getFlights().clear();
-    }    
-    
+    }
+
+    @FXML
+    private void makeBooking(ActionEvent event) {
+        try {
+            AnchorPane pane = (AnchorPane) FXMLLoader.load(getClass().getResource("dataCustomer.fxml"));
+            panelToUpdate.getChildren().setAll(pane);
+        } catch (IOException ex) {
+            Logger.getLogger(SearchFlightController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          
+   
+   }
 }

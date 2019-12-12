@@ -54,6 +54,7 @@ public class DBFlightLeg {
       
     }
     
+    
     catch (Exception ex) {
       ex.printStackTrace();
       DBConnection.closeConnection(con);

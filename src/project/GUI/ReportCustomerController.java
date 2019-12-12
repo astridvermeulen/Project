@@ -134,7 +134,7 @@ public class ReportCustomerController implements Initializable {
 
     @FXML
     private void donate(ActionEvent event) {
-        
+        donateBtn.setText("You donated");
     }
 
 

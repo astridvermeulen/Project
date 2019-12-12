@@ -2,6 +2,8 @@
 package project.GUI;
 
 import java.net.URL;
+import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -13,10 +15,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import project.DB.DBBooking;
 import project.DB.DBException;
+import project.LOGIC.Booking;
+import static project.LOGIC.Booking.saveBooking;
 import project.LOGIC.Customer;
 import static project.LOGIC.Customer.saveCustomer;
 import project.LOGIC.DomainController;
+import project.LOGIC.Flight;
 
 /**
  * FXML Controller class
@@ -24,9 +30,12 @@ import project.LOGIC.DomainController;
  * @author Lars
  */
 public class DataCustomerController implements Initializable {
-    private DomainController model;
-
-    
+     private DomainController model;
+     private MakeBooking mb = MakeBooking.getInstance();
+     private ArrayList<Customer> customersLinkedToBooking = new ArrayList<>();
+     private SearchFlightController controller;
+     private Booking booking;
+     private ArrayList<Flight> selectedFlights = new ArrayList<Flight>();
    
     @FXML
     private HBox C1Pane; 
@@ -104,6 +113,8 @@ public class DataCustomerController implements Initializable {
     private TextField birthDateC4TxtField;
     @FXML
     private TextField birthDateC5TxtField;
+    @FXML
+    private Button confirmBookingBtn;
 
 
     /**
@@ -122,81 +133,44 @@ public class DataCustomerController implements Initializable {
     private void showC2Pane(ActionEvent event) {
         C2Pane.setVisible(true);
     }
-
     @FXML
     private void showC3Pane(ActionEvent event) {
         C3Pane.setVisible(true);
     }
-
     @FXML
     private void showC4Pane(ActionEvent event) {
         C4Pane.setVisible(true);
     }
-
     @FXML
     private void showC5Pane(ActionEvent event) {
         C5Pane.setVisible(true);
     }
 
-    private ArrayList<Customer> customersLinkedToBooking;
+    
     @FXML
     private void saveCustomer1(ActionEvent event) {
-        Customer klant = new Customer(passportIDC1TxtField.getText(), firstNameC1TxtField.getText(), lastNameC1TxtField.getText(), birthDateC1TxtField.getText());
-
-        try {
-            saveCustomer(klant);
-        } catch (DBException ex) {
-            Logger.getLogger(DataCustomerController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        customersLinkedToBooking.add(klant);
+        mb.customerInfo(passportIDC1TxtField, firstNameC1TxtField, lastNameC1TxtField, birthDateC1TxtField);
     }
-
     @FXML
     private void saveCustomer2(ActionEvent event) {
-        Customer klant = new Customer(passportIDC2TxtField.getText(), firstNameC2TxtField.getText(), lastNameC2TxtField.getText(), birthDateC2TxtField.getText());
-        try {
-            saveCustomer(klant);
-        } catch (DBException ex) {
-            Logger.getLogger(DataCustomerController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        customersLinkedToBooking.add(klant);
-        }
-    
-
+        mb.customerInfo(passportIDC2TxtField, firstNameC2TxtField, lastNameC2TxtField, birthDateC2TxtField);
+    }
     @FXML
     private void saveCustomer3(ActionEvent event) {
-        Customer klant = new Customer(passportIDC3TxtField.getText(), firstNameC3TxtField.getText(), lastNameC3TxtField.getText(),birthDateC3TxtField.getText());
-        try {
-            saveCustomer(klant);
-        } catch (DBException ex) {
-            Logger.getLogger(DataCustomerController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        customersLinkedToBooking.add(klant);
+        mb.customerInfo(passportIDC3TxtField, firstNameC3TxtField, lastNameC3TxtField, birthDateC3TxtField);
     }
-
     @FXML
     private void saveCustomer4(ActionEvent event) {
-        Customer klant = new Customer(passportIDC4TxtField.getText(), firstNameC4TxtField.getText(), lastNameC4TxtField.getText(), birthDateC4TxtField.getText());
-        try {
-            saveCustomer(klant);
-        } catch (DBException ex) {
-            Logger.getLogger(DataCustomerController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        customersLinkedToBooking.add(klant);
+       mb.customerInfo(passportIDC4TxtField, firstNameC4TxtField, lastNameC4TxtField, birthDateC4TxtField);
     }
-
     @FXML
     private void saveCustomer5(ActionEvent event) {
-        Customer klant = new Customer(passportIDC5TxtField.getText(), firstNameC5TxtField.getText(), lastNameC5TxtField.getText(), birthDateC5TxtField.getText());
-        try {
-            saveCustomer(klant);
-        } catch (DBException ex) {
-            Logger.getLogger(DataCustomerController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        customersLinkedToBooking.add(klant);
+        mb.customerInfo(passportIDC5TxtField, firstNameC5TxtField, lastNameC5TxtField, birthDateC5TxtField);
     }
-
-
-     
+    @FXML
+    private void confirmBooking(ActionEvent event) {
+        mb.makeBooking();
+        
+    }
 }
          

@@ -1,23 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.GUI.startWindowController">
    <children>
       <HBox prefHeight="25.0" prefWidth="676.0">
          <children>
-            <Button fx:id="searchFlightBtn" mnemonicParsing="false" onAction="#loadSearchFlight" text="Search flight" />
-            <Button fx:id="salesReportBtn" mnemonicParsing="false" onAction="#loadSalesReport" text="Sales report" />
-            <Button fx:id="customerReportBtn" mnemonicParsing="false" onAction="#loadCustomerReport" text="Customer report" />
-            <Button fx:id="overviewCustomersBtn" mnemonicParsing="false" onAction="#loadOverviewCustomers" text="Overview customers" />
-            <Button fx:id="DataCustomerBtn" mnemonicParsing="false" onAction="#loadDataCustomer" text="Data customer" />
+            <Button fx:id="searchFlightBtn" mnemonicParsing="false" onAction="#loadSearchFlight" prefWidth="125.0" text="Search Flight" />
+            <Button fx:id="customerReportBtn" mnemonicParsing="false" onAction="#loadCustomerReport" prefWidth="125.0" text="Customer Report" />
+            <Button fx:id="overviewCustomersBtn" mnemonicParsing="false" onAction="#loadOverviewCustomers" prefWidth="125.0" text="Overview Customers" />
+            <Button fx:id="salesReportBtn" mnemonicParsing="false" onAction="#loadSalesReport" prefWidth="125.0" text="Sales Report" />
+            <Button fx:id="bookingSummaryBtn" mnemonicParsing="false" onAction="#loadBookingSummary" text="Booking summary" />
          </children>
       </HBox>
       <HBox layoutY="26.0" prefHeight="424.0" prefWidth="676.0">
          <children>
-            <AnchorPane fx:id="panelToUpdate" />
+            <AnchorPane fx:id="panelToUpdate" prefHeight="424.0" prefWidth="676.0">
+               <children>
+                  <Label layoutX="294.0" layoutY="177.0" text="Welkom">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children></AnchorPane>
          </children>
       </HBox>
    </children>
