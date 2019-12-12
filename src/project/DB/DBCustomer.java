@@ -96,18 +96,16 @@ public class DBCustomer {
                 + "SET firstname = '" + s.getFirstName() + "'"
 		+ ", lastname = '" + s.getLastName() + "'"
 		+ ", PassportNumber = '" + s.getPassportNumber() + "'"
-		+ ", homeCountry = '" + s.getHomeCountry() + "'"
-                + ", birthDate = '" + s.getBirthDate() + "'"
+		+ ", birthDate = '" + s.getBirthDate() + "'"
                 + " WHERE passportNumber = '" + s.getPassportNumber() + "'";
         stmt.executeUpdate(sql);
       } else {
 	// INSERT
 	sql = "INSERT into customer "
-                + "(firstName, lastName, passportNumber, homeCountry, birthDate) "
+                + "(firstName, lastName, passportNumber, birthDate) "
 		+ "VALUES ('" + s.getFirstName() + "'"
 		+ ", '" + s.getLastName() + "'"
 		+ ", '" + s.getPassportNumber() + "'"
-                + ", '" + s.getHomeCountry() + "'"
                 + ", '" + s.getBirthDate() + "'"
 		+ ")";
         stmt.executeUpdate(sql);
