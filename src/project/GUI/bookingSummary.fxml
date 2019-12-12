@@ -16,9 +16,9 @@
             <Label text="Passenger(s)" />
             <ScrollPane prefHeight="124.0" prefWidth="600.0">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="700.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="594.0">
                      <children>
-                        <TableView fx:id="passengersTableView" prefHeight="200.0" prefWidth="700.0">
+                        <TableView fx:id="passengersTableView" prefHeight="200.0" prefWidth="593.0">
                           <columns>
                               <TableColumn fx:id="firstNameColumn" prefWidth="140.0" text="First name" />
                               <TableColumn fx:id="lastNameColumn" prefWidth="140.0" text="Last name" />
@@ -34,9 +34,9 @@
             <Label text="Flight(s)" />
             <ScrollPane prefHeight="136.0" prefWidth="571.0">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="1000.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="1061.0">
                      <children>
-                        <TableView fx:id="flightsTableView" prefHeight="200.0" prefWidth="1000.0">
+                        <TableView fx:id="flightsTableView" prefHeight="200.0" prefWidth="1069.0">
                           <columns>
                               <TableColumn fx:id="flightAirlineColumn" prefWidth="140.0" text="Airline" />
                               <TableColumn fx:id="flightOriginColumn" minWidth="0.0" prefWidth="140.0" text="Origin airport" />
@@ -72,9 +72,9 @@
       </HBox>
       <ScrollPane layoutX="524.0" layoutY="37.0" prefHeight="308.0" prefWidth="259.0">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="340.0" prefWidth="640.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="340.0" prefWidth="759.0">
                <children>
-                  <TableView fx:id="legTableView" prefHeight="341.0" prefWidth="642.0">
+                  <TableView fx:id="legTableView" prefHeight="341.0" prefWidth="768.0">
                     <columns>
                       <TableColumn fx:id="legNumberColumn" text="Leg number" />
                       <TableColumn fx:id="legOriginColumn" prefWidth="75.0" text="Leg origin" />

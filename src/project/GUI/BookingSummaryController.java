@@ -168,7 +168,7 @@ public class BookingSummaryController implements Initializable {
 
     @FXML
     private void showNetPrice(ActionEvent event) {
-        totalAmountToInputLbl.setText(mb.returnNetPrice().toString());
+        totalAmountToInputLbl.setText("€ " + mb.returnNetPrice().toString());
     }
     
 }

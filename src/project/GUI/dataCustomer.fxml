@@ -8,119 +8,155 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="2000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.GUI.DataCustomerController">
+<AnchorPane prefHeight="415.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.GUI.DataCustomerController">
    <children>
       <ScrollPane layoutY="-7.0" prefHeight="415.0" prefWidth="612.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <content>
             <AnchorPane prefHeight="415.0" prefWidth="614.0">
                <children>
-                  <HBox layoutX="66.0" layoutY="78.0" prefHeight="50.0" prefWidth="614.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <VBox prefHeight="758.0" prefWidth="613.0">
                      <children>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                        <HBox prefHeight="80.0" prefWidth="613.0">
                            <children>
-                              <Label alignment="CENTER" layoutX="254.0" layoutY="12.0" text="Enter personal information " AnchorPane.leftAnchor="250.0" />
-                           </children>
-                        </AnchorPane>
-                     </children>
-                  </HBox>
-                  <HBox fx:id="C1Pane" layoutY="50.0" prefHeight="150.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-                     <children>
-                        <AnchorPane prefHeight="150.0" prefWidth="600.0">
-                           <children>
-                              <VBox layoutX="50.0" prefHeight="150.0" prefWidth="100.0" spacing="19.0">
+                              <AnchorPane prefHeight="120.0" prefWidth="613.0" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <Label fx:id="firstNameLbl" text="Firstname" />
-                                    <Label fx:id="lastNameLbl" text="LastName" />
-                                    <Label fx:id="passportIDLbl" text="Passport ID" />
-                                    <Label fx:id="birthDateLbl" text="Birth Date" />
+                                    <Label alignment="CENTER" layoutX="50.0" layoutY="11.0" text="Enter your personal information" AnchorPane.leftAnchor="50.0" />
+                                    <Button fx:id="confirmBookingBtn" layoutX="420.0" layoutY="-4.0" mnemonicParsing="false" onAction="#confirmBooking" prefHeight="49.0" prefWidth="192.0" text="Confirm Booking" />
                                  </children>
-                              </VBox>
-                              <VBox layoutX="207.0" layoutY="2.0" prefHeight="150.0" prefWidth="200.0" spacing="6.0">
+                              </AnchorPane>
+                           </children>
+                        </HBox>
+                        <HBox fx:id="C1Pane" prefHeight="150.0" prefWidth="600.0">
+                           <children>
+                              <AnchorPane prefHeight="150.0" prefWidth="600.0">
                                  <children>
-                                    <TextField fx:id="firstNameC1TxtField" />
-                                    <TextField fx:id="lastNameC1TxtField" />
-                                    <TextField fx:id="passportIDC1TxtField" />
-                                    <TextField fx:id="birthDateC1TxtField" />
+                                    <VBox layoutX="50.0" prefHeight="150.0" prefWidth="100.0" spacing="19.0">
+                                       <children>
+                                          <Label fx:id="firstNameLbl" text="Firstname" />
+                                          <Label fx:id="lastNameLbl" text="LastName" />
+                                          <Label fx:id="passportIDLbl" text="Passport ID" />
+                                          <Label fx:id="birthDateLbl" text="Birth Date" />
+                                       </children>
+                                    </VBox>
+                                    <VBox layoutX="211.0" layoutY="2.0" prefHeight="150.0" prefWidth="200.0" spacing="6.0">
+                                       <children>
+                                          <TextField fx:id="firstNameC1TxtField" />
+                                          <TextField fx:id="lastNameC1TxtField" />
+                                          <TextField fx:id="passportIDC1TxtField" />
+                                          <TextField fx:id="birthDateC1TxtField" />
+                                       </children>
+                                    </VBox>
+                                    <Button fx:id="nextPassenger1Btn" layoutX="453.0" layoutY="22.0" mnemonicParsing="false" onAction="#showC2Pane" prefHeight="27.0" prefWidth="123.0" text="Next Passenger" />
+                                    <Button fx:id="submitC1Btn" layoutX="453.0" layoutY="54.0" mnemonicParsing="false" onAction="#saveCustomer1" prefHeight="25.0" prefWidth="100.0" text="Submit" />
                                  </children>
-                              </VBox>
-                              <VBox layoutX="433.0" layoutY="2.0" prefHeight="150.0" prefWidth="100.0" spacing="15.0">
+                              </AnchorPane>
+                           </children>
+                        </HBox>
+                        <HBox fx:id="C2Pane" prefHeight="150.0" prefWidth="614.0">
+                           <children>
+                              <AnchorPane prefHeight="150.0" prefWidth="600.0">
                                  <children>
-                                    <Button fx:id="nextPassenger1Btn" mnemonicParsing="false" onAction="#showC2Pane" prefHeight="20.0" prefWidth="100.0" text="Next Passenger" />
-                                    <Button fx:id="submitC1Btn" mnemonicParsing="false" onAction="#saveCustomer1" prefHeight="25.0" prefWidth="100.0" text="Submit" />
+                                    <Button fx:id="nextPassenger2Btn" layoutX="452.0" layoutY="20.0" mnemonicParsing="false" onAction="#showC3Pane" text="Next Passenger" AnchorPane.leftAnchor="452.0" />
+                                    <Button fx:id="submitC2Btn" layoutX="452.0" layoutY="52.0" mnemonicParsing="false" onAction="#saveCustomer2" text="Submit" />
+                                    <VBox layoutX="48.0" layoutY="12.0" prefHeight="150.0" prefWidth="100.0" spacing="19.0">
+                                       <children>
+                                          <Label fx:id="firstNameLbl1" text="Firstname" />
+                                          <Label fx:id="lastNameLbl1" text="LastName" />
+                                          <Label fx:id="passportIDLbl1" text="Passport ID" />
+                                          <Label fx:id="birthDateLbl1" text="Birth Date" />
+                                       </children>
+                                    </VBox>
+                                    <VBox layoutX="212.0" layoutY="4.0" prefHeight="151.0" prefWidth="202.0" spacing="9.0">
+                                       <children>
+                                          <TextField fx:id="firstNameC2TxtField" prefWidth="200.0" />
+                                          <TextField fx:id="lastNameC2TxtField" prefWidth="200.0" />
+                                          <TextField fx:id="passportIDC2TxtField" prefWidth="200.0" />
+                                          <TextField fx:id="birthDateC2TxtField" prefWidth="200.0" />
+                                       </children>
+                                    </VBox>
                                  </children>
-                              </VBox>
+                              </AnchorPane>
                            </children>
-                        </AnchorPane>
-                     </children>
-                  </HBox>
-                  <HBox fx:id="C2Pane" layoutX="14.0" layoutY="200.0" prefHeight="150.0" prefWidth="614.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-                     <children>
-                        <AnchorPane prefHeight="150.0" prefWidth="600.0">
+                        </HBox>
+                        <HBox fx:id="C3Pane" prefHeight="150.0" prefWidth="200.0">
                            <children>
-                              <TextField fx:id="firstNameC2TxtField" layoutX="210.0" layoutY="12.0" prefWidth="200.0" AnchorPane.leftAnchor="210.0" AnchorPane.topAnchor="12.0" />
-                              <TextField fx:id="lastNameC2TxtField" layoutX="210.0" layoutY="41.0" prefWidth="200.0" AnchorPane.leftAnchor="210.0" AnchorPane.topAnchor="41.0" />
-                              <TextField fx:id="passportIDC2TxtField" layoutX="210.0" layoutY="73.0" prefWidth="200.0" AnchorPane.leftAnchor="210.0" AnchorPane.topAnchor="73.0" />
-                              <Label layoutX="67.0" layoutY="24.0" text="Firstname" AnchorPane.leftAnchor="60.0" />
-                              <Label layoutX="67.0" layoutY="64.0" text="LastName" AnchorPane.leftAnchor="60.0" />
-                              <Label layoutX="67.0" layoutY="104.0" text="Passport ID" AnchorPane.leftAnchor="60.0" />
-                              <Button fx:id="nextPassenger2Btn" layoutX="452.0" layoutY="20.0" mnemonicParsing="false" onAction="#showC3Pane" text="Next Passenger" AnchorPane.leftAnchor="452.0" />
-                              <Button fx:id="submitC2Btn" layoutX="452.0" layoutY="52.0" mnemonicParsing="false" onAction="#saveCustomer2" text="Submit" />
-                              <TextField fx:id="birthDateC2TxtField" layoutX="210.0" layoutY="105.0" prefWidth="200.0" />
-                              <Button fx:id="confirmBookingBtn" layoutX="453.0" layoutY="86.0" mnemonicParsing="false" onAction="#confirmBooking" text="Confirm Booking" />
+                              <AnchorPane prefHeight="165.0" prefWidth="614.0">
+                                 <children>
+                                    <Button fx:id="nextPassenger3Btn" layoutX="463.0" layoutY="60.0" mnemonicParsing="false" onAction="#showC4Pane" text="Next Passenger" AnchorPane.leftAnchor="460.0" />
+                                    <Button fx:id="submitC3Btn" layoutX="460.0" layoutY="92.0" mnemonicParsing="false" onAction="#saveCustomer3" text="Submit" />
+                                    <VBox layoutX="47.0" layoutY="18.0" prefHeight="133.0" prefWidth="113.0" spacing="19.0">
+                                       <children>
+                                          <Label fx:id="firstNameLbl11" text="Firstname" />
+                                          <Label fx:id="lastNameLbl11" text="LastName" />
+                                          <Label fx:id="passportIDLbl11" text="Passport ID" />
+                                          <Label fx:id="birthDateLbl11" text="Birth Date" />
+                                       </children>
+                                    </VBox>
+                                    <VBox layoutX="214.0" layoutY="14.0" prefHeight="145.0" prefWidth="204.0" spacing="8.0">
+                                       <children>
+                                          <TextField fx:id="firstNameC3TxtField" />
+                                          <TextField fx:id="lastNameC3TxtField" />
+                                          <TextField fx:id="passportIDC3TxtField" />
+                                          <TextField fx:id="birthDateC3TxtField" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
                            </children>
-                        </AnchorPane>
-                     </children>
-                  </HBox>
-                  <HBox fx:id="C3Pane" layoutY="350.0" prefHeight="150.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-                     <children>
-                        <AnchorPane prefHeight="150.0" prefWidth="614.0">
+                        </HBox>
+                        <HBox fx:id="C4Pane" prefHeight="150.0" prefWidth="200.0">
                            <children>
-                              <TextField fx:id="firstNameC3TxtField" layoutX="211.0" layoutY="12.0" AnchorPane.leftAnchor="211.0" AnchorPane.topAnchor="12.0" />
-                              <TextField fx:id="lastNameC3TxtField" layoutX="307.0" layoutY="63.0" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="60.0" />
-                              <TextField fx:id="passportIDC3TxtField" layoutX="307.0" layoutY="101.0" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="100.0" />
-                              <Label layoutX="67.0" layoutY="24.0" text="Firstname" AnchorPane.leftAnchor="60.0" />
-                              <Label layoutX="67.0" layoutY="64.0" text="LastName" AnchorPane.leftAnchor="60.0" />
-                              <Label layoutX="67.0" layoutY="104.0" text="Passport ID" AnchorPane.leftAnchor="60.0" />
-                              <TextField fx:id="birthDateC3TxtField" layoutX="250.0" layoutY="124.0" />
-                              <Button fx:id="nextPassenger3Btn" layoutX="463.0" layoutY="60.0" mnemonicParsing="false" onAction="#showC4Pane" text="Next Passenger" AnchorPane.leftAnchor="460.0" />
-                              <Button fx:id="submitC3Btn" layoutX="460.0" layoutY="92.0" mnemonicParsing="false" onAction="#saveCustomer3" text="Submit" />
+                              <AnchorPane prefHeight="150.0" prefWidth="614.0">
+                                 <children>
+                                    <Button fx:id="nextPassenger4Btn" layoutX="460.0" layoutY="59.0" mnemonicParsing="false" onAction="#showC5Pane" text="Next Passenger" AnchorPane.leftAnchor="460.0" />
+                                    <Button fx:id="submitC4Btn" layoutX="460.0" layoutY="91.0" mnemonicParsing="false" onAction="#saveCustomer4" text="Submit" />
+                                    <VBox layoutX="215.0" layoutY="18.0" prefHeight="147.0" prefWidth="205.0" spacing="8.0">
+                                       <children>
+                                          <TextField fx:id="firstNameC4TxtField" />
+                                          <TextField fx:id="lastNameC4TxtField" />
+                                          <TextField fx:id="passportIDC4TxtField" />
+                                          <TextField fx:id="birthDateC4TxtField" />
+                                       </children>
+                                    </VBox>
+                                    <VBox layoutX="48.0" layoutY="20.0" prefHeight="133.0" prefWidth="118.0" spacing="19.0">
+                                       <children>
+                                          <Label fx:id="firstNameLbl111" text="Firstname" />
+                                          <Label fx:id="lastNameLbl111" text="LastName" />
+                                          <Label fx:id="passportIDLbl111" text="Passport ID" />
+                                          <Label fx:id="birthDateLbl111" text="Birth Date" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
                            </children>
-                        </AnchorPane>
-                     </children>
-                  </HBox>
-                  <HBox fx:id="C4Pane" layoutY="500.0" prefHeight="150.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-                     <children>
-                        <AnchorPane prefHeight="150.0" prefWidth="614.0">
+                        </HBox>
+                        <HBox fx:id="C5Pane" prefHeight="150.0" prefWidth="200.0">
                            <children>
-                              <TextField fx:id="firstNameC4TxtField" layoutX="307.0" layoutY="22.0" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="20.0" />
-                              <TextField fx:id="lastNameC4TxtField" layoutX="307.0" layoutY="63.0" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="60.0" />
-                              <TextField fx:id="passportIDC4TxtField" layoutX="307.0" layoutY="101.0" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="100.0" />
-                              <Label layoutX="67.0" layoutY="24.0" text="Firstname" AnchorPane.leftAnchor="60.0" />
-                              <Label layoutX="67.0" layoutY="64.0" text="LastName" AnchorPane.leftAnchor="60.0" />
-                              <Label layoutX="67.0" layoutY="104.0" text="Passport ID" AnchorPane.leftAnchor="60.0" />
-                              <TextField fx:id="birthDateC4TxtField" />
-                              <Button fx:id="nextPassenger4Btn" layoutX="460.0" layoutY="59.0" mnemonicParsing="false" onAction="#showC5Pane" text="Next Passenger" AnchorPane.leftAnchor="460.0" />
-                              <Button fx:id="submitC4Btn" layoutX="460.0" layoutY="91.0" mnemonicParsing="false" onAction="#saveCustomer4" text="Submit" />
+                              <AnchorPane prefHeight="150.0" prefWidth="614.0">
+                                 <children>
+                                    <Button fx:id="submitC5Btn" layoutX="460.0" layoutY="91.0" mnemonicParsing="false" onAction="#saveCustomer5" text="Submit" />
+                                    <VBox layoutX="216.0" layoutY="14.0" prefHeight="149.0" prefWidth="204.0" spacing="8.0">
+                                       <children>
+                                          <TextField fx:id="firstNameC5TxtField" />
+                                          <TextField fx:id="lastNameC5TxtField" />
+                                          <TextField fx:id="passportIDC5TxtField" />
+                                          <TextField fx:id="birthDateC5TxtField" />
+                                       </children>
+                                    </VBox>
+                                    <VBox layoutX="50.0" layoutY="15.0" prefHeight="133.0" prefWidth="118.0" spacing="19.0">
+                                       <children>
+                                          <Label fx:id="firstNameLbl1111" text="Firstname" />
+                                          <Label fx:id="lastNameLbl1111" text="LastName" />
+                                          <Label fx:id="passportIDLbl1111" text="Passport ID" />
+                                          <Label fx:id="birthDateLbl1111" text="Birth Date" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
                            </children>
-                        </AnchorPane>
+                        </HBox>
                      </children>
-                  </HBox>
-                  <HBox fx:id="C5Pane" layoutY="650.0" prefHeight="150.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-                     <children>
-                        <AnchorPane prefHeight="150.0" prefWidth="614.0">
-                           <children>
-                              <TextField fx:id="firstNameC5TxtField" layoutX="307.0" layoutY="22.0" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="20.0" />
-                              <TextField fx:id="lastNameC5TxtField" layoutX="307.0" layoutY="63.0" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="60.0" />
-                              <TextField fx:id="passportIDC5TxtField" layoutX="307.0" layoutY="101.0" AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="100.0" />
-                              <Label layoutX="67.0" layoutY="24.0" text="Firstname" AnchorPane.leftAnchor="60.0" />
-                              <Label layoutX="67.0" layoutY="64.0" text="LastName" AnchorPane.leftAnchor="60.0" />
-                              <Label layoutX="67.0" layoutY="104.0" text="Passport ID" AnchorPane.leftAnchor="60.0" />
-                              <TextField fx:id="birthDateC5TxtField" />
-                              <Button fx:id="submitC5Btn" layoutX="460.0" layoutY="91.0" mnemonicParsing="false" onAction="#saveCustomer5" text="Submit" />
-                           </children>
-                        </AnchorPane>
-                     </children>
-                  </HBox>
+                  </VBox>
                </children>
             </AnchorPane>
          </content>

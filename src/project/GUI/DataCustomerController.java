@@ -115,6 +115,38 @@ public class DataCustomerController implements Initializable {
     private TextField birthDateC5TxtField;
     @FXML
     private Button confirmBookingBtn;
+    @FXML
+    private Label firstNameLbl1;
+    @FXML
+    private Label lastNameLbl1;
+    @FXML
+    private Label passportIDLbl1;
+    @FXML
+    private Label birthDateLbl1;
+    @FXML
+    private Label firstNameLbl11;
+    @FXML
+    private Label lastNameLbl11;
+    @FXML
+    private Label passportIDLbl11;
+    @FXML
+    private Label birthDateLbl11;
+    @FXML
+    private Label firstNameLbl111;
+    @FXML
+    private Label lastNameLbl111;
+    @FXML
+    private Label passportIDLbl111;
+    @FXML
+    private Label birthDateLbl111;
+    @FXML
+    private Label firstNameLbl1111;
+    @FXML
+    private Label lastNameLbl1111;
+    @FXML
+    private Label passportIDLbl1111;
+    @FXML
+    private Label birthDateLbl1111;
 
 
     /**

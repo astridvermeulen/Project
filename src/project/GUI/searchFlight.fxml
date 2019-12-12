@@ -14,7 +14,7 @@
 
 <AnchorPane prefHeight="452.0" prefWidth="676.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.GUI.SearchFlightController">
    <children>
-      <SplitPane dividerPositions="0.006696428571428571" orientation="VERTICAL" prefHeight="450.0" prefWidth="676.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <SplitPane dividerPositions="0.9910714285714286" orientation="VERTICAL" prefHeight="450.0" prefWidth="676.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <items>
             <AnchorPane fx:id="panelToUpdate" minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="674.0">
                <children>
