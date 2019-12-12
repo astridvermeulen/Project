@@ -21,7 +21,7 @@
          <children>
             <AnchorPane fx:id="panelToUpdate" prefHeight="424.0" prefWidth="676.0">
                <children>
-                  <Label layoutX="294.0" layoutY="177.0" text="Welkom">
+                  <Label layoutX="257.0" layoutY="177.0" text="CleanFlight Inc.">
                      <font>
                         <Font size="24.0" />
                      </font>

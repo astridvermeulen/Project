@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import static java.util.Collections.reverse;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import project.LOGIC.FlightLeg;
@@ -89,11 +90,11 @@ public class DBFlightLeg {
          FlightLeg test = new FlightLeg(legNumber,originAirportCode,destinationAirportCode,departureDate,arrivalDate,departureTime,arrivalTime);
          vluchtdeel.add(i, test);
          i++;              
-         
 	}
        
        DBConnection.closeConnection(con);   
        vluchtdeel.trimToSize();
+       reverse(vluchtdeel);
        return vluchtdeel; 
     
     }
@@ -106,8 +107,8 @@ public class DBFlightLeg {
     
     public static void main(String[] args) throws DBException, SQLException{
         ArrayList<FlightLeg> test = new ArrayList<>();
-        String num = "LU0945";
-        String date = "19/01/2019";
+        String num = "LU0645";
+        String date = "12/02/2021";
         
         try {
             test = getFlightLegs(num, date);
