@@ -151,10 +151,10 @@ public class DBCustomer {
     
    public static void main(String[] args) throws DBException {
       
-    Customer djanno = new Customer("DJ12000", "Djanno", "tje2", "12/12/2000");
+    Customer cr = new Customer("BE007", "Cridstiano", "Ronaldo", "12/12/1985");
     
       try {
-    saveCustomer(djanno);
+    saveCustomer(cr);
     } catch (DBException ex) {
       Logger.getLogger(DBAirport.class.getName()).log(Level.SEVERE, null, ex);
     }
