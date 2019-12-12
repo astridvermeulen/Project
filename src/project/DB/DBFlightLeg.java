@@ -90,12 +90,11 @@ public class DBFlightLeg {
          FlightLeg test = new FlightLeg(legNumber,originAirportCode,destinationAirportCode,departureDate,arrivalDate,departureTime,arrivalTime);
          vluchtdeel.add(i, test);
          i++;              
-         reverse(vluchtdeel);
 	}
        
        DBConnection.closeConnection(con);   
        vluchtdeel.trimToSize();
-       
+       reverse(vluchtdeel);
        return vluchtdeel; 
     
     }
