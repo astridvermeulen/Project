@@ -7,25 +7,15 @@ package project.GUI;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import project.DB.DBAirport;
-import static project.DB.DBAirport.getAirports;
-import project.DB.DBException;
-import project.LOGIC.Airport;
 import project.LOGIC.DomainController;
 import static project.LOGIC.DomainController.domainController;
 
@@ -42,8 +32,6 @@ public class startWindowController implements Initializable {
     @FXML
     private Button searchFlightBtn;
     @FXML
-    private Button DataCustomerBtn;
-    @FXML
     private Button overviewCustomersBtn;
     @FXML
     private Button customerReportBtn;
@@ -57,9 +45,8 @@ public class startWindowController implements Initializable {
         model=domainController.getInstance();    
     }
     
-//
-    // de volgende methodes updaten telkens een nieuwe panel zodat we naar een volgend "blad" gaan. 
 
+    // de volgende methodes updaten telkens een nieuwe panel zodat we naar een volgend "blad" gaan. 
     @FXML
     private void loadSearchFlight(ActionEvent event) {
         try {
@@ -73,7 +60,7 @@ public class startWindowController implements Initializable {
         Logger.getLogger(startWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-        
+    //Nog verwijderen !    
     private void loadOverviewFlights(ActionEvent event) {
         try {
       
@@ -85,8 +72,7 @@ public class startWindowController implements Initializable {
         Logger.getLogger(startWindowController.class.getName()).log(Level.SEVERE, null, ex);
     }
     }
-
-    @FXML
+    //Nog verwijderen !
     private void loadDataCustomer(ActionEvent event) {
         try {
       
