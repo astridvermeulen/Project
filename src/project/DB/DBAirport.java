@@ -5,8 +5,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import static java.util.Collections.reverse;
 import project.LOGIC.Airport;
+
 
 /**
  *
@@ -14,8 +14,7 @@ import project.LOGIC.Airport;
  */
 
 public class DBAirport {
-     
-     // retourneert 1 airport
+    // retourneert 1 airport
      public static Airport getAirport(String airportCode) throws DBException{
          Connection con = null;
     try {
@@ -76,81 +75,6 @@ public class DBAirport {
       DBConnection.closeConnection(con);
       throw new DBException(ex);
     }
-  }
-     
+  }  
    
-   
-    //nieuwe airport opslaan in de database, of bestaande aanpassen
-    public static void saveAirport(Airport s) throws DBException {
-    Connection con = null;
-    try {
-      con = DBConnection.getInstance().getConnection();
-      Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
-      
-      String sql = "SELECT airportCode "
-              + "FROM airport "
-              + "WHERE airportCode = '" + s.getAirportCode() + "'";
-      ResultSet srs = stmt.executeQuery(sql);
-      if (srs.next()) {
-        // UPDATE
-	sql = "UPDATE airport "
-                + "SET airportCode = '" + s.getAirportCode() + "'"
-		+ ", airportName = '" + s.getAirportName() + "'"
-                + " WHERE airportCode = '" + s.getAirportCode() + "'";
-        stmt.executeUpdate(sql);
-      } else {
-	// INSERT
-	sql = "INSERT into airport "
-                + "(airportCode, airportName) "
-		+ "VALUES ('" + s.getAirportCode() + "'"
-		+ ", '" + s.getAirportName() + "')";
-        
-        stmt.executeUpdate(sql);
-      }
-      DBConnection.closeConnection(con);
-    } catch (Exception ex) {
-      ex.printStackTrace();
-      DBConnection.closeConnection(con);
-      throw new DBException(ex);
-    }
-  }
-   
-     //airport verwijderen uit de database
-   public static void deleteAirport(Airport s) throws DBException {
-    Connection con = null;
-    try {
-      con = DBConnection.getInstance().getConnection();
-      Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
-      
-      String sql = "SELECT airportCode "
-              + "FROM airport "
-              + "WHERE airportCode = '" + s.getAirportCode() + "'";
-      ResultSet srs = stmt.executeQuery(sql);
-      if (srs.next()) {
-        // DELETE
-	sql = "DELETE FROM airport "
-                + "WHERE airportCode = '" + s.getAirportCode() + "'";
-		
-        stmt.executeUpdate(sql);
-        DBConnection.closeConnection(con);
-      } else{
-          //DOORGEGEVEN AIRLINE ZAT NIET IN DATABASE
-        DBConnection.closeConnection(con);	
-      }
-      
-    } catch (Exception ex) {
-      ex.printStackTrace();
-      DBConnection.closeConnection(con);
-      throw new DBException(ex);
-    }
-  }
-   
-  
-   
-  //test
-  public static void main(String[] args) throws DBException {
-      
-      System.out.println(DBAirport.getAirports());
-   
-              }
 }

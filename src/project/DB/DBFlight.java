@@ -224,17 +224,6 @@ public static ArrayList<Flight> getFlights() throws DBException {
     }
     
     }
-    
-   
-        public static void main (String[] args) throws DBException {
-            System.out.println(DBFlight.getFlights());
 }
-}
-        
-        
-    
-    
-
-
-    
+  
 
