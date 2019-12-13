@@ -104,11 +104,4 @@ public class OverviewTripsController implements Initializable {
        
     }
     
-    public void nothing(){
-        ObservableList<Traject> list = tableViewTrips.getItems();
-        if(list.isEmpty()){
-            
-        }
-    }
-    
 }

@@ -22,9 +22,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import project.DB.DBException;
-import static project.LOGIC.Booking.calculateRevenuePerMonth;
 import project.LOGIC.DomainController;
 import project.LOGIC.Revenue;
+import project.LOGIC.Traject;
 
 /**
  * FXML Controller class
@@ -77,14 +77,13 @@ public class OverviewRevenuesController implements Initializable {
     
     public ObservableList<Revenue> getRevenuesPerMonth(){
         ObservableList<Revenue> revenues = FXCollections.observableArrayList();
-        Revenue revenue=null;
         try {
-            revenue = new Revenue(getYear());
+            Revenue revenue = new Revenue(getYear());
+            revenues.addAll(revenue);
+
         } catch (DBException ex) {
             Logger.getLogger(OverviewRevenuesController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        revenues.addAll(revenue);
-      
+        }    
         return revenues;
     }
 
@@ -93,9 +92,4 @@ public class OverviewRevenuesController implements Initializable {
         revenueTableView.setItems(getRevenuesPerMonth());
     }
     
-    
-    
-    
-    
 }
- 
