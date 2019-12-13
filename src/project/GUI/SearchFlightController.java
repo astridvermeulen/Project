@@ -7,11 +7,6 @@ package project.GUI;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
-import java.text.ParseException;
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -29,7 +24,6 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -167,9 +161,10 @@ public class SearchFlightController implements Initializable {
         emissionColumn.setCellValueFactory(new PropertyValueFactory<Flight,Double>("emission"));
         numberOfStopoversColumn.setCellValueFactory(new PropertyValueFactory<Flight,Integer>("numberOfStops"));
         
-        tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        //tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         mb.deleteSelectedFlights();
         filteredFlights.clear();
+        
        
     }    
     
@@ -201,15 +196,13 @@ public class SearchFlightController implements Initializable {
             Logger.getLogger(SearchFlightController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-        
+    // ObservableList om te kunnen weergeven in TableView.    
     public ObservableList<Flight> getFlights(){
         
         ObservableList<Flight> flights = FXCollections.observableArrayList();
-        
         for(Flight f: filteredFlights){
             flights.add(f);
         }
-        
         return flights;
     }
 
@@ -249,10 +242,11 @@ public class SearchFlightController implements Initializable {
     
     @FXML
     private void getFlightInfo(MouseEvent event) {
-        if(event.getClickCount() == 2 && (tableView.getSelectionModel().getSelectedItems() != null)){
+        if(event.getClickCount() == 2 && ( !tableView.getSelectionModel().getSelectedItems().isEmpty())){
+            System.out.println("niet leeg");
            mb.flightInfo(tableView); 
         }
-        
+        tableView.getSelectionModel().clearSelection();
     }
 
     @FXML
