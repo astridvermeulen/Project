@@ -105,7 +105,6 @@ public class MakeBooking {
         return netPrice;
     }
     
-
     public void deleteSelectedFlights(){
         selectedFlights.clear();
     }

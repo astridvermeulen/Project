@@ -24,7 +24,8 @@ public class Flight {
     private final double price;
     private final ArrayList<FlightLeg> flightLegs;
     private final double emission;
-    private double duration;
+    private final double duration;
+    private final String durationGui;
     private final int numberOfStops;
 
     //Constructor
@@ -41,7 +42,8 @@ public class Flight {
         this.flightLegs = DBFlightLeg.getFlightLegs(flightNumber, departureDate);
         this.emission = this.calculateEmission();
         this.duration = this.calculateDuration();
-        this.numberOfStops = this.numberOfStopovers(); //
+        this.durationGui = this.presentDuration();
+        this.numberOfStops = this.numberOfStopovers();
     }
 
     //Getters
@@ -97,6 +99,10 @@ public class Flight {
         return numberOfStops;
     }
 
+    public String getDurationGui() {
+        return durationGui;
+    }
+
     //Helping method to calculate the duration of a flight: tested V
     public double calculateDuration() throws ParseException { //methode nog terug naar private 
         String dateStart = departureDate + " " + departureTime;
@@ -118,12 +124,13 @@ public class Flight {
 
     //Method to display the duration in hour:minutes: tested V
     public String presentDuration() throws ParseException { //methode nog terug naar private 
-        System.out.println("start");
         String dateStart = departureDate + " " + departureTime;
         String dateStop = arrivalDate + " " + arrivalTime;
+        String output;
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date d1;
         Date d2;
+
         d1 = format.parse(dateStart);
         d2 = format.parse(dateStop);
         long diff = d2.getTime() - d1.getTime();
@@ -132,8 +139,14 @@ public class Flight {
         long diffHours = diff / (60 * 60 * 1000) % 24;
         long diffDays = diff / (24 * 60 * 60 * 1000);
         long diffDaysInhours = diffDays * 24;
-        double output = diffHours + diffDaysInhours + diffMinutesKomma;
-        return String.valueOf(output).replace(".", ":");
+        double outputInDouble = diffHours + diffDaysInhours + diffMinutesKomma;
+        output = String.valueOf(outputInDouble).replace(".", "h");
+
+        if ((int) (diffMinutesKomma * 100) % 10 == 0) {
+            output = output + "0";
+        }
+        output = output + "min";
+        return output;
     }
 
     //Helping method to calculate the emission of a flight 

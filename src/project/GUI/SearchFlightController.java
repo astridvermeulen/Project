@@ -121,7 +121,6 @@ public class SearchFlightController implements Initializable {
     private Button bookBtn;
     @FXML
     private Button clearSelectedFlightsBtn;
-
    
     
     

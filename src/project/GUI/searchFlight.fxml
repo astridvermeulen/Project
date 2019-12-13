@@ -14,7 +14,7 @@
 
 <AnchorPane fx:id="panelToUpdate" prefHeight="452.0" prefWidth="676.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.GUI.SearchFlightController">
    <children>
-      <SplitPane dividerPositions="0.008928571428571428" layoutX="-29.0" layoutY="-4.0" orientation="VERTICAL" prefHeight="450.0" prefWidth="676.0" AnchorPane.leftAnchor="-29.0" AnchorPane.rightAnchor="29.0">
+      <SplitPane dividerPositions="0.9933035714285714" orientation="VERTICAL" prefHeight="450.0" prefWidth="676.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="674.0">
                <children>
@@ -44,7 +44,7 @@
                <children>
                   <ScrollPane fx:id="scrollPane" layoutY="32.0" prefHeight="442.0" prefWidth="687.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-13.0" AnchorPane.topAnchor="0.0">
                      <content>
-                        <AnchorPane prefHeight="495.0" prefWidth="1964.0">
+                        <AnchorPane prefHeight="495.0">
                            <children>
                               <TableView fx:id="tableView" layoutX="27.0" layoutY="-4.0" onMouseClicked="#getFlightInfo" prefWidth="2000.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="27.0" AnchorPane.rightAnchor="-27.0" AnchorPane.topAnchor="-4.0">
                                  <columns>
