@@ -69,7 +69,8 @@ public class DBFlightLeg {
       
             String sql =    "SELECT * " +
                             "FROM flightleg " +
-                            "WHERE departureDate = '" + departureDate + "' AND flightNumber = '" + flightNumber + "'";
+                            "WHERE departureDate = '" + departureDate + "' AND flightNumber = '" + flightNumber + "'" + 
+                            " ORDER BY legNumber ASC";
         ResultSet srs = stmt.executeQuery(sql);
      
        int legNumber;
