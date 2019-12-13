@@ -1,6 +1,7 @@
 
 package project.GUI;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -10,10 +11,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import project.DB.DBBooking;
 import project.DB.DBException;
@@ -115,6 +118,40 @@ public class DataCustomerController implements Initializable {
     private TextField birthDateC5TxtField;
     @FXML
     private Button confirmBookingBtn;
+    @FXML
+    private Label firstNameLbl1;
+    @FXML
+    private Label lastNameLbl1;
+    @FXML
+    private Label passportIDLbl1;
+    @FXML
+    private Label birthDateLbl1;
+    @FXML
+    private Label firstNameLbl11;
+    @FXML
+    private Label lastNameLbl11;
+    @FXML
+    private Label passportIDLbl11;
+    @FXML
+    private Label birthDateLbl11;
+    @FXML
+    private Label firstNameLbl111;
+    @FXML
+    private Label lastNameLbl111;
+    @FXML
+    private Label passportIDLbl111;
+    @FXML
+    private Label birthDateLbl111;
+    @FXML
+    private Label firstNameLbl1111;
+    @FXML
+    private Label lastNameLbl1111;
+    @FXML
+    private Label passportIDLbl1111;
+    @FXML
+    private Label birthDateLbl1111;
+    @FXML
+    private AnchorPane panelToUpdate;
 
 
     /**
@@ -170,6 +207,13 @@ public class DataCustomerController implements Initializable {
     @FXML
     private void confirmBooking(ActionEvent event) {
         mb.makeBooking();
+        try {
+             AnchorPane pane = (AnchorPane) FXMLLoader.load(getClass().getResource("bookingSummary.fxml"));
+             panelToUpdate.getChildren().setAll(pane);
+         } catch (IOException ex) {
+             Logger.getLogger(DataCustomerController.class.getName()).log(Level.SEVERE, null, ex);
+         }
+
         
     }
 }

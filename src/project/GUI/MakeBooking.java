@@ -83,6 +83,28 @@ public class MakeBooking {
         }
         customersLinkedToBooking.add(klant);
     }
+
+    public ArrayList<Customer> returnPassengers(){
+        ArrayList<Customer> passengers = new ArrayList();
+        for(Customer c: booking.getCustomers()){
+            passengers.add(c);
+        }
+        return passengers;
+    }
+    
+    public ArrayList<Flight> returnFlights(){
+        ArrayList<Flight> flights = new ArrayList();
+        for(Flight f: booking.getFlight()){
+            flights.add(f);
+        }
+        return flights;
+    }
+    
+    public Double returnNetPrice(){
+        Double netPrice = booking.getNetPrice();
+        return netPrice;
+    }
+    
     public void deleteSelectedFlights(){
         selectedFlights.clear();
     }

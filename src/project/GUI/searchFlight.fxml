@@ -46,7 +46,7 @@
                      <content>
                         <AnchorPane prefHeight="495.0">
                            <children>
-                              <TableView fx:id="tableView" layoutX="-7.0" onMouseClicked="#getFlightInfo" prefWidth="2000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <TableView fx:id="tableView" layoutX="27.0" layoutY="-4.0" onMouseClicked="#getFlightInfo" prefWidth="2000.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="27.0" AnchorPane.rightAnchor="-27.0" AnchorPane.topAnchor="-4.0">
                                  <columns>
                                     <TableColumn fx:id="airlineColumn" prefWidth="150.0" text="Airline" />
                                     <TableColumn fx:id="originAirportColumn" minWidth="0.0" prefWidth="200.0" text="Origin airport" />

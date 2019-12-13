@@ -14,6 +14,7 @@
             <Button fx:id="customerReportBtn" mnemonicParsing="false" onAction="#loadCustomerReport" prefWidth="125.0" text="Customer Report" />
             <Button fx:id="overviewCustomersBtn" mnemonicParsing="false" onAction="#loadOverviewCustomers" prefWidth="125.0" text="Overview Customers" />
             <Button fx:id="salesReportBtn" mnemonicParsing="false" onAction="#loadSalesReport" prefWidth="125.0" text="Sales Report" />
+            <Button fx:id="bookingSummaryBtn" mnemonicParsing="false" onAction="#loadBookingSummary" text="Booking summary" />
          </children>
       </HBox>
       <HBox layoutY="26.0" prefHeight="424.0" prefWidth="676.0">

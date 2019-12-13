@@ -142,7 +142,7 @@ public class SearchFlightController implements Initializable {
     
     
     
-    
+  
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         model = DomainController.getInstance();
@@ -183,7 +183,6 @@ public class SearchFlightController implements Initializable {
         }
     }
 
-    
     //Search flights
     @FXML
     private void searchFlight(ActionEvent event) {

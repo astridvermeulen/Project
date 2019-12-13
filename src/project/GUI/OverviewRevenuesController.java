@@ -18,10 +18,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import project.DB.DBException;
-import static project.LOGIC.Booking.calculateRevenuePerMonth;
 import project.LOGIC.DomainController;
+import project.LOGIC.Revenue;
+import project.LOGIC.Traject;
 
 /**
  * FXML Controller class
@@ -36,33 +39,13 @@ public class OverviewRevenuesController implements Initializable {
     @FXML
     private Label chooseYearLbl;
     @FXML
-    private Label januaryLbl;
-    @FXML
-    private Label februaryLbl;
-    @FXML
-    private Label marchLbl;
-    @FXML
-    private Label aprilLbl;
-    @FXML
-    private Label mayLbl;
-    @FXML
-    private Label juneLbl;
-    @FXML
-    private Label julyLbl;
-    @FXML
-    private Label augustLbl;
-    @FXML
-    private Label septemberLbl;
-    @FXML
-    private Label octoberLbl;
-    @FXML
-    private Label novemberLbl;
-    @FXML
-    private Label decemberLbl;
-    @FXML
-    private ListView<Double> listViewRevenues;
-    @FXML
     private Button showBtn;
+    @FXML
+    private TableView<Revenue> revenueTableView;
+    @FXML
+    private TableColumn<Revenue, String> monthColumn;
+    @FXML
+    private TableColumn<Revenue, Double> revenueColumn;
 
     /**
      * Initializes the controller class.
@@ -71,6 +54,10 @@ public class OverviewRevenuesController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         model=DomainController.getInstance();
         addDataToChoiceBox();
+        
+        monthColumn.setCellValueFactory(new PropertyValueFactory<Revenue,String>("months"));
+        revenueColumn.setCellValueFactory(new PropertyValueFactory<Revenue,Double>("revenuePerMonth"));
+        
     }   
     
     private void addDataToChoiceBox(){
@@ -88,25 +75,21 @@ public class OverviewRevenuesController implements Initializable {
         return yearChoiceBox.getValue();
     }
     
-    public ObservableList<Double> getRevenues(){
-        ObservableList<Double> revenues = FXCollections.observableArrayList();
-        
+    public ObservableList<Revenue> getRevenuesPerMonth(){
+        ObservableList<Revenue> revenues = FXCollections.observableArrayList();
         try {
-            for(Double d: calculateRevenuePerMonth(getYear())){
-                revenues.add(d);
-            }
+            Revenue revenue = new Revenue(getYear());
+            revenues.addAll(revenue);
+
         } catch (DBException ex) {
             Logger.getLogger(OverviewRevenuesController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-      
+        }    
         return revenues;
     }
 
     @FXML
     private void showRevenues(ActionEvent event) {
-        listViewRevenues.setItems(getRevenues());
+        revenueTableView.setItems(getRevenuesPerMonth());
     }
-    
-    
     
 }

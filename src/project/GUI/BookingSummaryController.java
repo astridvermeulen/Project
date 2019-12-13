@@ -7,11 +7,13 @@ package project.GUI;
 
 import java.net.URL;
 import java.time.Duration;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -19,6 +21,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import project.LOGIC.Customer;
 import project.LOGIC.DomainController;
 import project.LOGIC.Flight;
+import project.LOGIC.FlightLeg;
 
 /**
  * FXML Controller class
@@ -27,7 +30,16 @@ import project.LOGIC.Flight;
  */
 public class BookingSummaryController implements Initializable {
     private DomainController model;
-
+    private Flight selectedFlight;
+    private MakeBooking mb = MakeBooking.getInstance();
+    
+    @FXML
+    private TableView<Customer> passengersTableView;
+    @FXML
+    private TableView<Flight> flightsTableView;
+    @FXML
+    private TableView<FlightLeg> legTableView;
+    
     @FXML
     private TableColumn<Customer, String> firstNameColumn;
     @FXML
@@ -38,41 +50,51 @@ public class BookingSummaryController implements Initializable {
     private TableColumn<Customer, String> homeCountryColumn;
     @FXML
     private TableColumn<Customer, String> bithDateColumn;
-    @FXML
-    private TableColumn<Flight, String> airlineColumn;
-    @FXML
-    private TableColumn<Flight, String> originAirportColumn;
-    @FXML
-    private TableColumn<Flight, String> destinationAirportColumn;
-    @FXML
-    private TableColumn<Flight, Duration> durationColumn;
-    @FXML
-    private TableColumn<Flight, String> departureDayColumn;
-    @FXML
-    private TableColumn<Flight, String> departureTimeColumn;
-    @FXML
-    private TableColumn<Flight, String> arrivalDayColumn;
-    @FXML
-    private TableColumn<Flight, String> arrivalTimeColumn;
+
     @FXML
     private TableColumn<Flight, String> flightNumberColumn;
     @FXML
-    private TableColumn<Flight, Double> priceColumn;
+    private TableColumn<Flight, String> flightAirlineColumn;
     @FXML
-    private TableColumn<Flight, Integer> numberOfFlightLegsColumn;
+    private TableColumn<Flight, String> flightOriginColumn;
     @FXML
-    private Label priceFlightToInputLbl;
+    private TableColumn<Flight, String> flightDestinationColumn;
     @FXML
-    private Label promotionToInputLbl;
+    private TableColumn<Flight, Duration> flightDurationColumn;
     @FXML
-    private Label serviceFeeToInputLbl;
+    private TableColumn<Flight, String> flightDepartureDayColumn;
+    @FXML
+    private TableColumn<Flight, String> flightDepartureTimeColumn;
+    @FXML
+    private TableColumn<Flight, String> flightArrivalDayColumn;
+    @FXML
+    private TableColumn<Flight, String> flightArrivalTimeColumn;
+    @FXML
+    private TableColumn<Flight, Double> flightPriceColumn;
+    
+    @FXML
+    private TableColumn<FlightLeg, Integer> legNumberColumn;
+    @FXML
+    private TableColumn<FlightLeg, String> legOriginColumn;
+    @FXML
+    private TableColumn<FlightLeg, String> legDestinationColumn;
+    @FXML
+    private TableColumn<FlightLeg, String> legDepartureDayColumn;
+    @FXML
+    private TableColumn<FlightLeg, String> legDepartureTimeColumn;
+    @FXML
+    private TableColumn<FlightLeg, String> legArrivalDateColumn;
+    @FXML
+    private TableColumn<FlightLeg, String> legArrivalTimeColumn;
+    @FXML
+    private TableColumn<FlightLeg, Duration> legDurationColumn;
+
     @FXML
     private Label totalAmountToInputLbl;
     @FXML
-    private TableView<Customer> passengersTableView;
+    private Button showLegsBtn;
     @FXML
-    private TableView<Flight> flightsTableView;
-
+    private Button showNetPriceBtn;
     /**
      * Initializes the controller class.
      */
@@ -85,19 +107,68 @@ public class BookingSummaryController implements Initializable {
         homeCountryColumn.setCellValueFactory(new PropertyValueFactory<Customer, String>("homeCountry"));
         bithDateColumn.setCellValueFactory(new PropertyValueFactory<Customer, String>("birthDate"));      
     
-        airlineColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("airline"));
-        originAirportColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("origin"));
-        destinationAirportColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("destination"));
-        durationColumn.setCellValueFactory(new PropertyValueFactory<Flight,Duration>("duration"));
-        departureDayColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("departureDate"));
-        departureTimeColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("departureTime"));
-        arrivalDayColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("arrivalDate"));
-        arrivalTimeColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("arrivalTime"));
+        flightAirlineColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("airline"));
+        flightOriginColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("origin"));
+        flightDestinationColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("destination"));
+        flightDurationColumn.setCellValueFactory(new PropertyValueFactory<Flight,Duration>("duration"));
+        flightDepartureDayColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("departureDate"));
+        flightDepartureTimeColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("departureTime"));
+        flightArrivalDayColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("arrivalDate"));
+        flightArrivalTimeColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("arrivalTime"));
         flightNumberColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("flightNumber"));
-        priceColumn.setCellValueFactory(new PropertyValueFactory<Flight,Double>("price"));
-        numberOfFlightLegsColumn.setCellValueFactory(new PropertyValueFactory<Flight,Integer>("getFlightLegs()"));
+        flightPriceColumn.setCellValueFactory(new PropertyValueFactory<Flight,Double>("price"));
+ 
+        legNumberColumn.setCellValueFactory(new PropertyValueFactory<FlightLeg,Integer>("legNumber"));
+        legOriginColumn.setCellValueFactory(new PropertyValueFactory<FlightLeg,String>("legOrigin"));
+        legDestinationColumn.setCellValueFactory(new PropertyValueFactory<FlightLeg,String>("legDestination"));
+        legDepartureDayColumn.setCellValueFactory(new PropertyValueFactory<FlightLeg,String>("legDuration"));
+        legDepartureTimeColumn.setCellValueFactory(new PropertyValueFactory<FlightLeg,String>("legDepartureDate"));
+        legArrivalDateColumn.setCellValueFactory(new PropertyValueFactory<FlightLeg,String>("legDepartureTime"));
+        legArrivalTimeColumn.setCellValueFactory(new PropertyValueFactory<FlightLeg,String>("legArrivalDate"));
+        legDurationColumn.setCellValueFactory(new PropertyValueFactory<FlightLeg,Duration>("legArrivalTime"));
+       
+        passengersTableView.setItems(getPassengers());
+        flightsTableView.setItems(getFlights());
         
-    }    
+    } 
+     
+    
+    public ObservableList<Customer> getPassengers(){
+        ObservableList<Customer> passengers = FXCollections.observableArrayList();
+        for(Customer c: mb.returnPassengers()){
+            passengers.add(c);
+        }
+        return passengers;
+    }
+    
+    public ObservableList<Flight> getFlights(){
+        ObservableList<Flight> flights = FXCollections.observableArrayList();
+        for(Flight f: mb.returnFlights()){
+            flights.add(f);
+        }
+        return flights;
+    }
+    
+    @FXML
+    private void showLegs(ActionEvent event) {
+        ObservableList<Flight> flightSelected = flightsTableView.getSelectionModel().getSelectedItems();
+        selectedFlight = flightSelected.get(0);
+        
+        legTableView.setItems(getLegsFromFlight());
+    }
+    
+    public ObservableList<FlightLeg> getLegsFromFlight(){
+        ObservableList<FlightLeg> legs = FXCollections.observableArrayList();
+        for(FlightLeg l: selectedFlight.getFlightLegs()){
+            legs.add(l);
+        }
+        
+        return legs;
+    }
 
+    @FXML
+    private void showNetPrice(ActionEvent event) {
+        totalAmountToInputLbl.setText("€ " + mb.returnNetPrice().toString());
+    }
     
 }

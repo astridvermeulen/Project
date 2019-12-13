@@ -37,6 +37,8 @@ public class startWindowController implements Initializable {
     private Button customerReportBtn;
     @FXML
     private Button salesReportBtn;
+    @FXML
+    private Button bookingSummaryBtn;
     
     
     // dit initaliseert de controller class
@@ -60,31 +62,7 @@ public class startWindowController implements Initializable {
         Logger.getLogger(startWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    //Nog verwijderen !    
-    private void loadOverviewFlights(ActionEvent event) {
-        try {
-      
-            AnchorPane pane = (AnchorPane) FXMLLoader.load(getClass().getResource("project/GUI/overviewFlights.fxml"));
-            panelToUpdate.getChildren().setAll(pane);
-      
-      
-        } catch (IOException ex) {
-        Logger.getLogger(startWindowController.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    }
-    //Nog verwijderen !
-    private void loadDataCustomer(ActionEvent event) {
-        try {
-      
-            AnchorPane pane = (AnchorPane) FXMLLoader.load(getClass().getResource("dataCustomer.fxml"));
-            panelToUpdate.getChildren().setAll(pane);
-      
-      
-        } catch (IOException ex) {
-        Logger.getLogger(startWindowController.class.getName()).log(Level.SEVERE, null, ex);
-    }
-    }
-
+    
     @FXML
     private void loadOverviewCustomers(ActionEvent event) {
         try {
@@ -123,6 +101,19 @@ public class startWindowController implements Initializable {
         } catch (IOException ex) {
         Logger.getLogger(startWindowController.class.getName()).log(Level.SEVERE, null, ex);
     }
+    }
+
+    @FXML
+    private void loadBookingSummary(ActionEvent event) {
+        try {
+      
+            AnchorPane pane = (AnchorPane) FXMLLoader.load(getClass().getResource("bookingSummary.fxml"));
+            panelToUpdate.getChildren().setAll(pane);
+      
+      
+        } catch (IOException ex) {
+        Logger.getLogger(startWindowController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
   
     

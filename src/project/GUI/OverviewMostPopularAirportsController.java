@@ -45,7 +45,7 @@ public class OverviewMostPopularAirportsController implements Initializable {
         model=DomainController.getInstance();
        
         listViewTopAirports.setItems(getMostPopularAirports());
-        
+        thisIsLbl.setText("This is an overview of the top " + getMostPopularAirports().size() + "most popular airports.");
     } 
     
     public ObservableList<String> getMostPopularAirports(){
@@ -60,6 +60,8 @@ public class OverviewMostPopularAirportsController implements Initializable {
         }
         return airports;
     }
+    
+    
     
         
     
