@@ -106,13 +106,13 @@ public class SearchFlightController implements Initializable {
     @FXML
     private AnchorPane panelToUpdate;
     @FXML
-    private ScrollPane scrollPane;
-    @FXML
     private Button clearFlightsBtn;
     @FXML
     private Button bookBtn;
     @FXML
     private Button clearSelectedFlightsBtn;
+    @FXML
+    private Label fromLbl1;
     
      public String getDatePicker() {
         return datePicker.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));

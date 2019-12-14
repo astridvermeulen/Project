@@ -89,12 +89,15 @@ public class BookingSummaryController implements Initializable {
     @FXML
     private TableColumn<FlightLeg, Duration> legDurationColumn;
 
-    @FXML
     private Label totalAmountToInputLbl;
     @FXML
     private Button showLegsBtn;
     @FXML
-    private Button showNetPriceBtn;
+    private Label serviceFeeToInputLbl;
+    @FXML
+    private Label promotionToInputLbl;
+    @FXML
+    private Label netPriceToInputLbl;
     /**
      * Initializes the controller class.
      */
@@ -130,6 +133,10 @@ public class BookingSummaryController implements Initializable {
         passengersTableView.setItems(getPassengers());
         flightsTableView.setItems(getFlights());
         
+        serviceFeeToInputLbl.setText("€ " + mb.returnServiceFee());
+        promotionToInputLbl.setText("€ " + mb.returnPromotion());
+        netPriceToInputLbl.setText("€ " + mb.returnNetPrice().toString());
+        
     } 
      
     
@@ -155,6 +162,11 @@ public class BookingSummaryController implements Initializable {
         selectedFlight = flightSelected.get(0);
         
         legTableView.setItems(getLegsFromFlight());
+        
+        ObservableList<FlightLeg> list = legTableView.getItems();
+        if(list.isEmpty()){
+            alertBox.display("Warning!", "There are no flight legs for this booking.");
+        }
     }
     
     public ObservableList<FlightLeg> getLegsFromFlight(){
@@ -166,7 +178,6 @@ public class BookingSummaryController implements Initializable {
         return legs;
     }
 
-    @FXML
     private void showNetPrice(ActionEvent event) {
         totalAmountToInputLbl.setText("€ " + mb.returnNetPrice().toString());
     }

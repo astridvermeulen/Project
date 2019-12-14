@@ -150,7 +150,6 @@ public class DataCustomerController implements Initializable {
     private Label passportIDLbl1111;
     @FXML
     private Label birthDateLbl1111;
-    @FXML
     private AnchorPane panelToUpdate;
 
 
@@ -187,22 +186,27 @@ public class DataCustomerController implements Initializable {
     @FXML
     private void saveCustomer1(ActionEvent event) {
         mb.customerInfo(passportIDC1TxtField, firstNameC1TxtField, lastNameC1TxtField, birthDateC1TxtField);
+        submitC1Btn.setText("Submitted");
     }
     @FXML
     private void saveCustomer2(ActionEvent event) {
         mb.customerInfo(passportIDC2TxtField, firstNameC2TxtField, lastNameC2TxtField, birthDateC2TxtField);
+        submitC2Btn.setText("Submitted");
     }
     @FXML
     private void saveCustomer3(ActionEvent event) {
         mb.customerInfo(passportIDC3TxtField, firstNameC3TxtField, lastNameC3TxtField, birthDateC3TxtField);
+        submitC3Btn.setText("Submitted");
     }
     @FXML
     private void saveCustomer4(ActionEvent event) {
        mb.customerInfo(passportIDC4TxtField, firstNameC4TxtField, lastNameC4TxtField, birthDateC4TxtField);
+       submitC4Btn.setText("Submitted");
     }
     @FXML
     private void saveCustomer5(ActionEvent event) {
         mb.customerInfo(passportIDC5TxtField, firstNameC5TxtField, lastNameC5TxtField, birthDateC5TxtField);
+        submitC5Btn.setText("Submitted");
     }
     @FXML
     private void confirmBooking(ActionEvent event) {

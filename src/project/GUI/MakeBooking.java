@@ -105,8 +105,30 @@ public class MakeBooking {
         return netPrice;
     }
     
+    public Double returnPromotion(){
+        Double promotion = booking.getPromotion();
+        return promotion;
+    }
+    public Double returnServiceFee(){
+        Double serviceFee = booking.getServiceFee();
+        return serviceFee;
+    }
+    
     public void deleteSelectedFlights(){
         selectedFlights.clear();
+    }
+    
+    public ArrayList<Double> getRevenuesPerMonth(String year){
+        ArrayList<Double> revenues = new ArrayList();
+        try {   
+            for(Double d: booking.calculateRevenuePerMonth(year)){
+                revenues.add(d);
+            }
+          
+        } catch (DBException ex) {
+            Logger.getLogger(MakeBooking.class.getName()).log(Level.SEVERE, null, ex);
+        }  
+        return revenues;
     }
     
             
