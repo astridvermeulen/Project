@@ -1,7 +1,5 @@
 package project.LOGIC;
 
-import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.stream.Collectors;
@@ -75,16 +73,5 @@ public class DomainController {
         }
         return flightsFiltered;
     }
-    //15;45
     
-    public static void main(String[] args) throws DBException, SQLException, ParseException {
-        DomainController dc = new DomainController();
-        System.out.println("yu");
-        for(Flight vlucht: dc.searchFlight(Boolean.TRUE, "duration", "Beijing Capital International Airport", "Amsterdam-Schiphol", "02/10/2020")){
-            System.out.println(vlucht.getDuration());
-        }
-        //Flight vlucht = new Flight("origin", " destination", "11/02/2019", "13:20:00", "14/02/2019" ,  "16:28:00", " flightNumber", 100.0 );
-        //System.out.println(vlucht.presentDuration());
-        System.out.println("h");
-    }
 }

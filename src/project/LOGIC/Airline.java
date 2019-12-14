@@ -1,8 +1,5 @@
 package project.LOGIC;
 
-import project.DB.DBAirline;
-import project.DB.DBException;
-
 public class Airline {
 
     //Instance variables 
@@ -24,18 +21,4 @@ public class Airline {
         return airlineName;
     }
 
-    //Method to save an airline
-    public static void saveAirline(Airline airline) throws DBException {
-        DBAirline.saveAirline(airline);
-    }
-
-    //Method to delete an airline
-    public static void deleteAirline(Airline airline) throws DBException {
-        DBAirline.deleteAirline(airline);
-    }
-
-
-    //Main method to test the methods 
-    public static void main(String[] args) throws DBException {
-    }
 }

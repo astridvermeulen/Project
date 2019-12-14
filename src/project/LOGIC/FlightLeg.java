@@ -7,7 +7,7 @@ import java.util.Date;
 public class FlightLeg {
 
     //Instance variables 
-    private final Integer legNumber;
+    private final int legNumber;
     private final String legOrigin;
     private final String legDestination;
     private final String legDepartureDate;
@@ -17,7 +17,7 @@ public class FlightLeg {
     private final double legDuration;
 
     //Constructor
-    public FlightLeg(Integer legNumber, String legOrigin, String legDestination, String departureDate, String arrivalDate, String departureTime, String arrivalTime) throws ParseException {
+    public FlightLeg(int legNumber, String legOrigin, String legDestination, String departureDate, String arrivalDate, String departureTime, String arrivalTime) throws ParseException {
         this.legNumber = legNumber;
         this.legOrigin = legOrigin;
         this.legDestination = legDestination;
@@ -29,7 +29,7 @@ public class FlightLeg {
     }
 
     //Getters
-    public Integer getLegNumber() {
+    public int getLegNumber() {
         return legNumber;
     }
 

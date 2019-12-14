@@ -27,16 +27,6 @@ public class Airport {
         return airportName;
     }
 
-    //Method to save an airport
-    public static void saveAirport(Airport airport) throws DBException {
-        DBAirport.saveAirport(airport);
-    }
-
-    //Method to delete an airport
-    public static void deleteAirport(Airport airport) throws DBException {
-        DBAirport.deleteAirport(airport);
-    }
-
     //Method to give an overview of the most populair airports 
     public static ArrayList<String> tenMostPopularAirports() throws DBException {
         ArrayList<PopularAirports> populairAirports = DBPopularAirports.getPopularAirport();//DATaboys nog methode doorgeven hier 

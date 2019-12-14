@@ -4,10 +4,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import static project.DB.DBBookingNumberGenerator.getBooking;
-import project.LOGIC.Booking;
-import project.LOGIC.BookingNumberGenerator;
 /**
  *
  * @author TEAM DB
@@ -75,22 +71,5 @@ public class DBBooking {
       DBConnection.closeConnection(con);
       throw new DBException(ex);
     }
-  }
-      
-      
- public static void main(String[] args) throws DBException, SQLException{
-     String bookingDate, flightNumber, departureDate, passportNumber;
-     double promotion, serviceFee;
-     bookingDate = "11/02/2021";
-     departureDate = "12/02/2021";
-     passportNumber = "BE1207";
-     flightNumber = "TA0645";
-     promotion = 40.0;
-     serviceFee = 20.0;
-     saveBooking(bookingDate, promotion, serviceFee, flightNumber, departureDate, passportNumber);
-     
-     
-   
- }    
-      
+  }     
 }

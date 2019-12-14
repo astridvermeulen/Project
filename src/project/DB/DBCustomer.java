@@ -4,8 +4,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import project.LOGIC.Customer;
 
 /**
@@ -13,7 +11,7 @@ import project.LOGIC.Customer;
  * @author TEAM DB
  */
 public class DBCustomer {  
-   
+    
       // retourneert 1 klant 
      public static Customer getCustomer(String passportNumber) throws DBException{
          Connection con = null;
@@ -79,6 +77,8 @@ public class DBCustomer {
       throw new DBException(ex);
     }
   }
+   
+    
      //customer toevoegen aan de database of bestaande aanpassen 
      public static void saveCustomer(Customer s) throws DBException {
     Connection con = null;
@@ -147,19 +147,6 @@ public class DBCustomer {
     }
   }
      
-    
-    
-   public static void main(String[] args) throws DBException {
-      
-    Customer cr = new Customer("BE007", "Cridstiano", "Ronaldo", "12/12/1985");
-    
-      try {
-    saveCustomer(cr);
-    } catch (DBException ex) {
-      Logger.getLogger(DBAirport.class.getName()).log(Level.SEVERE, null, ex);
-    }
-  
-  }  
 }
    
 

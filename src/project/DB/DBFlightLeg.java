@@ -7,8 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import static java.util.Collections.reverse;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import project.LOGIC.FlightLeg;
 
 /**
@@ -71,7 +69,8 @@ public class DBFlightLeg {
       
             String sql =    "SELECT * " +
                             "FROM flightleg " +
-                            "WHERE departureDate = '" + departureDate + "' AND flightNumber = '" + flightNumber + "'";
+                            "WHERE departureDate = '" + departureDate + "' AND flightNumber = '" + flightNumber + "'" + 
+                            " ORDER BY legNumber ASC";
         ResultSet srs = stmt.executeQuery(sql);
      
        int legNumber;
@@ -105,21 +104,4 @@ public class DBFlightLeg {
     }   
     } 
     
-    public static void main(String[] args) throws DBException, SQLException{
-        ArrayList<FlightLeg> test = new ArrayList<>();
-        String num = "LU0645";
-        String date = "12/02/2021";
-        
-        try {
-            test = getFlightLegs(num, date);
-            int size = test.size();
-          for(int position = 0; position < size; position++)
-              System.out.println(test.get(position).getLegNumber() + test.get(position).getLegDestination());
-    } catch (DBException ex) {
-      Logger.getLogger(DBAirport.class.getName()).log(Level.SEVERE, null, ex);
-    }
-
-        
-    }
-        
 }
