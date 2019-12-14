@@ -1,7 +1,7 @@
 package project.LOGIC;
 
 public class Airline {
-
+//ELISE
     //Instance variables 
     private final int airlineCode;
     private final String airlineName;
