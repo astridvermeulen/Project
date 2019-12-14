@@ -47,7 +47,7 @@ public class SearchFlightController implements Initializable {
     private DomainController model;
     private MakeBooking mb = MakeBooking.getInstance();
     private ArrayList<Flight> filteredFlights = new ArrayList();  
-    private Booking booking;
+   
     
    
     @FXML
