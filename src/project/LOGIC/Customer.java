@@ -28,18 +28,6 @@ public class Customer {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = new SimpleStringProperty(firstName);
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = new SimpleStringProperty(lastName);
-    }
-
-    public void setBirthDate(String birthDate) {
-        this.birthDate = new SimpleStringProperty(birthDate);
-    }
-
     //Getters
     public String getPassportNumber() {
         return passportNumber;
@@ -61,6 +49,19 @@ public class Customer {
         return birthDate.get();
     }
 
+    //Setters
+    public void setFirstName(String firstName) {
+        this.firstName = new SimpleStringProperty(firstName);
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = new SimpleStringProperty(lastName);
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = new SimpleStringProperty(birthDate);
+    }
+    
     //Method to safe a customer 
     public static void saveCustomer(Customer s) throws DBException {
         DBCustomer.saveCustomer(s);
