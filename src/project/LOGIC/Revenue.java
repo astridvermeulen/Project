@@ -14,8 +14,8 @@ public class Revenue {
         this.revenuePerMonth = calculateRevenuePerMonth(year);
     }
 
-    //Method to initialize the months
-    public static ArrayList<String> months() {
+    //Helping method to initialize the moths: tested V
+    private static ArrayList<String> months() {
         ArrayList<String> m = new ArrayList<>();
         m.add("January");
         m.add("February");
@@ -29,13 +29,11 @@ public class Revenue {
         m.add("October");
         m.add("November");
         m.add("December");
-
         return m;
-
     }
 
-    //Method to calculate the revenue of a month: tested V
-    public static ArrayList<Double> calculateRevenuePerMonth(String year) throws DBException {
+    //Helping method to calculate the revenue of a month: tested V
+    private static ArrayList<Double> calculateRevenuePerMonth(String year) throws DBException {
         ArrayList<Double> revenuePerMonth = new ArrayList<>();
         ArrayList<BookingNumberGenerator> allBookings = DBBookingNumberGenerator.getBookings();
         Double revJan = 0.0;
@@ -107,13 +105,4 @@ public class Revenue {
         revenuePerMonth.add(11, revDec);
         return revenuePerMonth;
     }
-
-    public ArrayList<String> getMonths() {
-        return months;
-    }
-
-    public ArrayList<Double> getRevenuePerMonth() {
-        return revenuePerMonth;
-    }
-    
 }

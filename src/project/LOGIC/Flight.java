@@ -104,7 +104,7 @@ public class Flight {
     }
 
     //Helping method to calculate the duration of a flight: tested V
-    public double calculateDuration() throws ParseException { //methode nog terug naar private 
+    private double calculateDuration() throws ParseException { 
         String dateStart = departureDate + " " + departureTime;
         String dateStop = arrivalDate + " " + arrivalTime;
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -156,7 +156,7 @@ public class Flight {
     }
 
     //Method to calculate the stopovers from a flight, 1 flight leg = 0 stopovers 
-    public int numberOfStopovers() {
+    private int numberOfStopovers() {
         int numberOfLegs;
         if (this.flightLegs.isEmpty()) {
             numberOfLegs = 0;
@@ -170,12 +170,6 @@ public class Flight {
     public static ArrayList<Flight> flightsOverview() throws DBException {
         ArrayList<Flight> flightsAll = DBFlight.getFlights();
         return flightsAll;
-    }
-
-    public static void main(String[] args) throws DBException {
-        ArrayList<Flight> flightsAll = Flight.flightsOverview();
-        System.out.println(flightsAll.get(0).flightLegs);
-        System.out.println(flightsAll.get(0).numberOfStopovers());
     }
 
 }

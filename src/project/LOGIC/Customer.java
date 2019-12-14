@@ -73,7 +73,6 @@ public class Customer {
 
     //Helping method to get the home country out of a passportnumber: tested V
     private static String calculateHomeCountry(String passportNumb) {
-
         String homeCount = "";
         for (int i = 0; i < passportNumb.length(); i++) {
             String s = String.valueOf(passportNumb.charAt(i));

@@ -20,7 +20,7 @@ public class Booking {
     private final double serviceFee;
     private static final double PROMOTIONPROCENT = 0.10;
     private final double promotion;
-    private final Double netPrice;
+    private final double netPrice;
 
     //Constructor 
     public Booking(ArrayList<Flight> flight, ArrayList<Customer> customer) throws DBException, ParseException {
@@ -45,7 +45,7 @@ public class Booking {
         return promotion;
     }
 
-    public Double getNetPrice() {
+    public double getNetPrice() {
         return netPrice;
     }
 
@@ -111,9 +111,5 @@ public class Booking {
         return serviceFeeTotal;
     }
 
-    public static void main(String[] args) throws DBException, ParseException {
-        //Booking b = new Booking("12/10/2019", SERVICEFEEPROCENT);
-        //System.out.println(b.bookingDate.substring(3, 5));
-    }
 
 }
