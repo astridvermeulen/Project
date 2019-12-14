@@ -40,80 +40,55 @@ public class startWindowController implements Initializable {
     @FXML
     private Button bookingSummaryBtn;
     
-    
+    private AnchorPane paneSearchFlight;
+    private AnchorPane paneLoadOverviewCustomers;
+     private AnchorPane paneLoadCustomerReport;
+     private AnchorPane paneSalesReport;
+     private AnchorPane paneBookingSummary;
+     
     // dit initaliseert de controller class
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         model=domainController.getInstance();    
+        try{
+            paneSearchFlight = (AnchorPane) FXMLLoader.load(getClass().getResource("searchFlight.fxml"));
+            paneLoadOverviewCustomers = (AnchorPane) FXMLLoader.load(getClass().getResource("overviewCustomers.fxml"));
+            paneLoadCustomerReport = (AnchorPane) FXMLLoader.load(getClass().getResource("customerReport.fxml"));
+        paneSalesReport = (AnchorPane) FXMLLoader.load(getClass().getResource("salesReport.fxml"));
+        paneBookingSummary = (AnchorPane) FXMLLoader.load(getClass().getResource("bookingSummary.fxml"));
+        }catch (IOException ex) {
+        Logger.getLogger(startWindowController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
     
 
     // de volgende methodes updaten telkens een nieuwe panel zodat we naar een volgend "blad" gaan. 
     @FXML
     private void loadSearchFlight(ActionEvent event) {
-        try {
-      
-      
-            AnchorPane pane = (AnchorPane) FXMLLoader.load(getClass().getResource("searchFlight.fxml"));
-            panelToUpdate.getChildren().setAll(pane);
-      
-      
-        } catch (IOException ex) {
-        Logger.getLogger(startWindowController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            panelToUpdate.getChildren().setAll(paneSearchFlight);       
     }
     
     @FXML
     private void loadOverviewCustomers(ActionEvent event) {
-        try {
-      
-            AnchorPane pane = (AnchorPane) FXMLLoader.load(getClass().getResource("overviewCustomers.fxml"));
-            panelToUpdate.getChildren().setAll(pane);
-      
-      
-        } catch (IOException ex) {
-        Logger.getLogger(startWindowController.class.getName()).log(Level.SEVERE, null, ex);
-    }
+        panelToUpdate.getChildren().setAll(paneLoadOverviewCustomers);
     }
 
     @FXML
     private void loadCustomerReport(ActionEvent event) {
-        try {
-      
-            AnchorPane pane = (AnchorPane) FXMLLoader.load(getClass().getResource("customerReport.fxml"));
-            panelToUpdate.getChildren().setAll(pane);
-      
-      
-        } catch (IOException ex) {
-        Logger.getLogger(startWindowController.class.getName()).log(Level.SEVERE, null, ex);
-    }
+            panelToUpdate.getChildren().setAll(paneLoadCustomerReport);
     }
 
     
     @FXML
-    private void loadSalesReport(ActionEvent event) {
-        try {
-      
-            AnchorPane pane = (AnchorPane) FXMLLoader.load(getClass().getResource("salesReport.fxml"));
-            panelToUpdate.getChildren().setAll(pane);
-      
-      
-        } catch (IOException ex) {
-        Logger.getLogger(startWindowController.class.getName()).log(Level.SEVERE, null, ex);
-    }
+    private void loadSalesReport(ActionEvent event) { 
+            panelToUpdate.getChildren().setAll(paneSalesReport);
     }
 
     @FXML
     private void loadBookingSummary(ActionEvent event) {
-        try {
-      
-            AnchorPane pane = (AnchorPane) FXMLLoader.load(getClass().getResource("bookingSummary.fxml"));
-            panelToUpdate.getChildren().setAll(pane);
-      
-      
-        } catch (IOException ex) {
-        Logger.getLogger(startWindowController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            
+            panelToUpdate.getChildren().setAll(paneBookingSummary);
     }
   
     

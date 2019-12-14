@@ -174,8 +174,10 @@ public static ArrayList<Flight> getFlights() throws DBException {
               + "FROM db2019_18.flight";
       ResultSet srs = stmt.executeQuery(sql);
       ArrayList<Flight> vluchten = new ArrayList<>();
+      System.out.println(srs.toString());
       while (srs.next())
         vluchten.add(getFlight(srs.getString("flightNumber"), srs.getString("departureDate")));
+      System.out.println("na regel");
       DBConnection.closeConnection(con);
       reverse(vluchten);
       return vluchten;

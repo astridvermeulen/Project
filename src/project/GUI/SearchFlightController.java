@@ -76,9 +76,7 @@ public class SearchFlightController implements Initializable {
     private TableColumn<Flight, Integer> numberOfStopoversColumn;
     @FXML
     private TableView<Flight> tableView;
-
-    
-    
+  
     @FXML
     private DatePicker datePicker;
     @FXML
@@ -115,12 +113,7 @@ public class SearchFlightController implements Initializable {
     private Button bookBtn;
     @FXML
     private Button clearSelectedFlightsBtn;
-   
     
-    
-    
-    
-    //Getters  
      public String getDatePicker() {
         return datePicker.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }

@@ -20,6 +20,7 @@ public class DomainController {
     //Method to filter the flights, returns the filtered flights: tested V
     public ArrayList<Flight> searchFlight(Boolean legs, String filter, String origin, String destination, String departureDate) throws DBException {
         ArrayList<Flight> flightsAll = DBFlight.getFlights();
+        System.out.println(flightsAll);
         ArrayList<Flight> flightsOriginDestination = this.fliterOnOriginDestination(origin, destination, flightsAll);
         ArrayList<Flight> flightsDate = this.filterOnDate(departureDate, flightsOriginDestination);
         ArrayList<Flight> flightsFilteredOnLegs = this.fliterOnLegs(legs, flightsDate);
