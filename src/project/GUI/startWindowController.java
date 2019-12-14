@@ -40,11 +40,11 @@ public class startWindowController implements Initializable {
     @FXML
     private Button bookingSummaryBtn;
     
-    private AnchorPane paneSearchFlight;
-    private AnchorPane paneLoadOverviewCustomers;
+     private AnchorPane paneSearchFlight;
+     private AnchorPane paneLoadOverviewCustomers;
      private AnchorPane paneLoadCustomerReport;
      private AnchorPane paneSalesReport;
-     private AnchorPane paneBookingSummary;
+
      
     // dit initaliseert de controller class
     @Override
@@ -54,8 +54,8 @@ public class startWindowController implements Initializable {
             paneSearchFlight = (AnchorPane) FXMLLoader.load(getClass().getResource("searchFlight.fxml"));
             paneLoadOverviewCustomers = (AnchorPane) FXMLLoader.load(getClass().getResource("overviewCustomers.fxml"));
             paneLoadCustomerReport = (AnchorPane) FXMLLoader.load(getClass().getResource("customerReport.fxml"));
-        paneSalesReport = (AnchorPane) FXMLLoader.load(getClass().getResource("salesReport.fxml"));
-        paneBookingSummary = (AnchorPane) FXMLLoader.load(getClass().getResource("bookingSummary.fxml"));
+            paneSalesReport = (AnchorPane) FXMLLoader.load(getClass().getResource("salesReport.fxml"));
+           // paneBookingSummary = (AnchorPane) FXMLLoader.load(getClass().getResource("bookingSummary.fxml"));
         }catch (IOException ex) {
         Logger.getLogger(startWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -86,9 +86,8 @@ public class startWindowController implements Initializable {
     }
 
     @FXML
-    private void loadBookingSummary(ActionEvent event) {
-            
-            panelToUpdate.getChildren().setAll(paneBookingSummary);
+    private void loadBookingSummary(ActionEvent event) {   
+           // panelToUpdate.getChildren().setAll(paneBookingSummary);
     }
   
     
