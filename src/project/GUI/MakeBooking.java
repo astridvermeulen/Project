@@ -33,6 +33,10 @@ public class MakeBooking {
     public static MakeBooking getInstance() {
         return mb;
     }
+
+    public ArrayList<Flight> getSelectedFlights() {
+        return selectedFlights;
+    }
     
     public void makeBooking(){
         System.out.println(selectedFlights);

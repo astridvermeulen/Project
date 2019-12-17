@@ -118,6 +118,7 @@ public class ReportCustomerController implements Initializable {
         chosenCustomer = customerSelected.get(0);
         System.out.println("gesecteerde customer is " + chosenCustomer.getPassportNumber());
         tableViewEmission.setItems(getFlightsFromCustomer());
+        donateBtn.setText("Donate");
     }
 
     @FXML

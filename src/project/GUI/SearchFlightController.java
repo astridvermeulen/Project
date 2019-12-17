@@ -236,9 +236,10 @@ public class SearchFlightController implements Initializable {
     private void getFlightInfo(MouseEvent event) {
         if(event.getClickCount() == 2 && ( !tableView.getSelectionModel().getSelectedItems().isEmpty())){
             System.out.println("niet leeg");
-           mb.flightInfo(tableView); 
+            mb.flightInfo(tableView); 
         }
         tableView.getSelectionModel().clearSelection();
+        
     }
 
     @FXML
@@ -249,12 +250,16 @@ public class SearchFlightController implements Initializable {
 
     @FXML
     private void makeBooking(ActionEvent event) {
-        
+        if(!mb.getSelectedFlights().isEmpty()){
         try {
             AnchorPane pane = (AnchorPane) FXMLLoader.load(getClass().getResource("dataCustomer.fxml"));
             panelToUpdate.getChildren().setAll(pane);
         } catch (IOException ex) {
             Logger.getLogger(SearchFlightController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
+        else{
+            alertBox.display("Warning", "No flights selected");
         }
           
    
