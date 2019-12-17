@@ -60,6 +60,8 @@ public class ReportCustomerController implements Initializable {
     private TableColumn<Customer, String> passportIDColumn;
     @FXML
     private Button showTotalEmissionBtn;
+    @FXML
+    private TableColumn<Customer, String> lastNameColumn;
 
     /**
      * Initializes the controller class.
@@ -68,7 +70,8 @@ public class ReportCustomerController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         model = DomainController.getInstance();
         passportIDColumn.setCellValueFactory(new PropertyValueFactory<Customer, String>("passportNumber"));
-
+        lastNameColumn.setCellValueFactory(new PropertyValueFactory<Customer, String>("lastName"));
+        
         flightNumberColumn.setCellValueFactory(new PropertyValueFactory<Flight, String>("flightNumber"));
         departureDateColumn.setCellValueFactory(new PropertyValueFactory<Flight, String>("departureDate"));
         originAirportColumn.setCellValueFactory(new PropertyValueFactory<Flight, String>("origin"));

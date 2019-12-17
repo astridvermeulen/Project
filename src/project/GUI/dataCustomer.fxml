@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
@@ -8,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.GUI.DataCustomerController">
+<AnchorPane fx:id="panelToUpdate" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.GUI.DataCustomerController">
    <children>
       <ScrollPane layoutY="-7.0" prefHeight="415.0" prefWidth="612.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <content>
@@ -43,7 +44,7 @@
                                           <TextField fx:id="firstNameC1TxtField" />
                                           <TextField fx:id="lastNameC1TxtField" />
                                           <TextField fx:id="passportIDC1TxtField" />
-                                          <TextField fx:id="birthDateC1TxtField" />
+                                          <DatePicker fx:id="birthDateC1" prefHeight="27.0" prefWidth="200.0" />
                                        </children>
                                     </VBox>
                                     <Button fx:id="nextPassenger1Btn" layoutX="453.0" layoutY="22.0" mnemonicParsing="false" onAction="#showC2Pane" prefHeight="25.0" prefWidth="125.0" text="Next Passenger" />
@@ -71,7 +72,7 @@
                                           <TextField fx:id="firstNameC2TxtField" prefWidth="200.0" />
                                           <TextField fx:id="lastNameC2TxtField" prefWidth="200.0" />
                                           <TextField fx:id="passportIDC2TxtField" prefWidth="200.0" />
-                                          <TextField fx:id="birthDateC2TxtField" prefWidth="200.0" />
+                                          <DatePicker fx:id="birthDateC2" prefHeight="27.0" prefWidth="202.0" />
                                        </children>
                                     </VBox>
                                  </children>
@@ -97,7 +98,7 @@
                                           <TextField fx:id="firstNameC3TxtField" />
                                           <TextField fx:id="lastNameC3TxtField" />
                                           <TextField fx:id="passportIDC3TxtField" />
-                                          <TextField fx:id="birthDateC3TxtField" />
+                                          <DatePicker fx:id="birthDateC3" prefHeight="27.0" prefWidth="203.0" />
                                        </children>
                                     </VBox>
                                  </children>
@@ -115,7 +116,7 @@
                                           <TextField fx:id="firstNameC4TxtField" />
                                           <TextField fx:id="lastNameC4TxtField" />
                                           <TextField fx:id="passportIDC4TxtField" />
-                                          <TextField fx:id="birthDateC4TxtField" />
+                                          <DatePicker fx:id="birthDateC4" prefHeight="27.0" prefWidth="205.0" />
                                        </children>
                                     </VBox>
                                     <VBox layoutX="48.0" layoutY="20.0" prefHeight="133.0" prefWidth="118.0" spacing="19.0">
@@ -140,7 +141,7 @@
                                           <TextField fx:id="firstNameC5TxtField" />
                                           <TextField fx:id="lastNameC5TxtField" />
                                           <TextField fx:id="passportIDC5TxtField" />
-                                          <TextField fx:id="birthDateC5TxtField" />
+                                          <DatePicker fx:id="birthDateC5" prefHeight="27.0" prefWidth="208.0" />
                                        </children>
                                     </VBox>
                                     <VBox layoutX="50.0" layoutY="15.0" prefHeight="133.0" prefWidth="118.0" spacing="19.0">

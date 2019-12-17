@@ -74,8 +74,8 @@ public class MakeBooking {
             Logger.getLogger(MakeBooking.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public void customerInfo(TextField passportNr, TextField firstName, TextField lastName, TextField birthDate){
-        Customer klant = new Customer(passportNr.getText(), firstName.getText(), lastName.getText(), birthDate.getText());
+    public void customerInfo(TextField passportNr, TextField firstName, TextField lastName, String birthDate){
+        Customer klant = new Customer(passportNr.getText(), firstName.getText(), lastName.getText(), birthDate);
         try {
             saveCustomer(klant);
         } catch (DBException ex) {
