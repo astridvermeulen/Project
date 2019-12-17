@@ -10,19 +10,20 @@
    <children>
       <Button fx:id="chooseThisCustomerBtn" layoutX="16.0" layoutY="345.0" mnemonicParsing="false" onAction="#chooseCustomer" prefHeight="27.0" prefWidth="156.0" text="Choose this customer" />
       <Button fx:id="donateBtn" layoutX="456.0" layoutY="345.0" mnemonicParsing="false" onAction="#donate" text="Donate" />
-      <Label fx:id="emissionToInputLbl" layoutX="346.0" layoutY="350.0" text="Here" />
+      <Label fx:id="emissionToInputLbl" layoutX="346.0" layoutY="350.0" />
       <Button fx:id="showTotalEmissionBtn" layoutX="190.0" layoutY="345.0" mnemonicParsing="false" onAction="#showTotalEmission" text="Show total emission" />
       <Label layoutX="249.0" layoutY="28.0" text="Customer report" />
       <AnchorPane layoutX="27.0" layoutY="76.0" minHeight="0.0" minWidth="0.0" prefHeight="260.0" prefWidth="134.0">
          <children>
             <TableView fx:id="tableViewCustomers" prefHeight="260.0" prefWidth="134.0">
                <columns>
-                  <TableColumn fx:id="passportIDColumn" prefWidth="134.0" text="Passport Number" />
+                  <TableColumn fx:id="lastNameColumn" prefWidth="106.0" text="Last name" />
+                  <TableColumn fx:id="passportIDColumn" prefWidth="103.0" text="Passport Number" />
                </columns>
             </TableView>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="190.0" layoutY="76.0" minHeight="0.0" minWidth="0.0" prefHeight="260.0" prefWidth="439.0">
+      <AnchorPane layoutX="190.0" layoutY="76.0" minHeight="0.0" minWidth="0.0" prefHeight="260.0" prefWidth="446.0">
          <children>
             <TableView fx:id="tableViewEmission" prefHeight="260.0" prefWidth="447.0">
                <columns>
@@ -30,7 +31,7 @@
                   <TableColumn fx:id="departureDateColumn" prefWidth="106.0" text="Departure date" />
                   <TableColumn fx:id="originAirportColumn" prefWidth="89.0" text="Origin airport" />
                   <TableColumn fx:id="destinationAirportColumn" prefWidth="75.0" text="Destination airport" />
-                  <TableColumn fx:id="emissionColumn" prefWidth="75.0" text="Emission" />
+                  <TableColumn fx:id="emissionColumn" text="Emission" />
                </columns>
             </TableView>
          </children>

@@ -175,7 +175,7 @@ public static ArrayList<Flight> getFlights() throws DBException {
       ResultSet srs = stmt.executeQuery(sql);
       ArrayList<Flight> vluchten = new ArrayList<>();
       while (srs.next())
-        vluchten.add(getFlight(srs.getString("flightNumber"), srs.getString("departureDate")));
+            vluchten.add(getFlight(srs.getString("flightNumber"), srs.getString("departureDate")));
       DBConnection.closeConnection(con);
       reverse(vluchten);
       return vluchten;

@@ -74,8 +74,8 @@ public class MakeBooking {
             Logger.getLogger(MakeBooking.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public void customerInfo(TextField passportNr, TextField firstName, TextField lastName, TextField birthDate){
-        Customer klant = new Customer(passportNr.getText(), firstName.getText(), lastName.getText(), birthDate.getText());
+    public void customerInfo(TextField passportNr, TextField firstName, TextField lastName, String birthDate){
+        Customer klant = new Customer(passportNr.getText(), firstName.getText(), lastName.getText(), birthDate);
         try {
             saveCustomer(klant);
         } catch (DBException ex) {
@@ -105,8 +105,30 @@ public class MakeBooking {
         return netPrice;
     }
     
+    public Double returnPromotion(){
+        Double promotion = booking.getPromotion();
+        return promotion;
+    }
+    public Double returnServiceFee(){
+        Double serviceFee = booking.getServiceFee();
+        return serviceFee;
+    }
+    
     public void deleteSelectedFlights(){
         selectedFlights.clear();
+    }
+    
+    public ArrayList<Double> getRevenuesPerMonth(String year){
+        ArrayList<Double> revenues = new ArrayList();
+        try {   
+            for(Double d: booking.calculateRevenuePerMonth(year)){
+                revenues.add(d);
+            }
+          
+        } catch (DBException ex) {
+            Logger.getLogger(MakeBooking.class.getName()).log(Level.SEVERE, null, ex);
+        }  
+        return revenues;
     }
     
             

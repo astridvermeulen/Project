@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -14,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -107,16 +109,6 @@ public class DataCustomerController implements Initializable {
     @FXML
     private Label birthDateLbl;
     @FXML
-    private TextField birthDateC1TxtField;
-    @FXML
-    private TextField birthDateC2TxtField;
-    @FXML
-    private TextField birthDateC3TxtField;
-    @FXML
-    private TextField birthDateC4TxtField;
-    @FXML
-    private TextField birthDateC5TxtField;
-    @FXML
     private Button confirmBookingBtn;
     @FXML
     private Label firstNameLbl1;
@@ -152,6 +144,16 @@ public class DataCustomerController implements Initializable {
     private Label birthDateLbl1111;
     @FXML
     private AnchorPane panelToUpdate;
+    @FXML
+    private DatePicker birthDateC1;
+    @FXML
+    private DatePicker birthDateC2;
+    @FXML
+    private DatePicker birthDateC3;
+    @FXML
+    private DatePicker birthDateC4;
+    @FXML
+    private DatePicker birthDateC5;
 
 
     /**
@@ -183,26 +185,144 @@ public class DataCustomerController implements Initializable {
         C5Pane.setVisible(true);
     }
 
+    public String getDatePickerC1() {
+        return birthDateC1.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    }
+    public String getDatePickerC2() {
+        return birthDateC2.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    }
+    public String getDatePickerC3() {
+        return birthDateC3.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    }
+    public String getDatePickerC4() {
+        return birthDateC4.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    }
+    public String getDatePickerC5() {
+        return birthDateC5.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    }
+    
+    
     
     @FXML
     private void saveCustomer1(ActionEvent event) {
-        mb.customerInfo(passportIDC1TxtField, firstNameC1TxtField, lastNameC1TxtField, birthDateC1TxtField);
+        boolean firstNameCorrect = true;
+        boolean lastNameCorrect = true;
+        char[] firstName = firstNameC1TxtField.getText().toCharArray();
+        char[] lastName = lastNameC1TxtField.getText().toCharArray();
+        for (char c : firstName) {
+            if(!Character.isLetter(c)) {
+                firstNameCorrect = false;
+            }
+        }
+        for (char c : lastName) {
+            if(!Character.isLetter(c)) {
+                lastNameCorrect = false;
+            }
+        }
+        if(firstNameCorrect || lastNameCorrect){
+            mb.customerInfo(passportIDC1TxtField, firstNameC1TxtField, lastNameC1TxtField, getDatePickerC1());
+            submitC1Btn.setText("Submitted");
+        }
+        else{
+        alertBox.display("Warning!", "Please enter a valid input.");
+        }
+        
     }
     @FXML
     private void saveCustomer2(ActionEvent event) {
-        mb.customerInfo(passportIDC2TxtField, firstNameC2TxtField, lastNameC2TxtField, birthDateC2TxtField);
+        boolean firstNameCorrect = true;
+        boolean lastNameCorrect = true;
+        char[] firstName = firstNameC2TxtField.getText().toCharArray();
+        char[] lastName = lastNameC2TxtField.getText().toCharArray();
+        for (char c : firstName) {
+            if(!Character.isLetter(c)) {
+                firstNameCorrect = false;
+            }
+        }
+        for (char c : lastName) {
+            if(!Character.isLetter(c)) {
+                lastNameCorrect = false;
+            }
+        }
+        if(firstNameCorrect || lastNameCorrect){
+            mb.customerInfo(passportIDC2TxtField, firstNameC2TxtField, lastNameC2TxtField, getDatePickerC2());
+            submitC1Btn.setText("Submitted");
+        }
+        else{
+        alertBox.display("Warning!", "Please enter a valid input.");
+        }
     }
     @FXML
     private void saveCustomer3(ActionEvent event) {
-        mb.customerInfo(passportIDC3TxtField, firstNameC3TxtField, lastNameC3TxtField, birthDateC3TxtField);
+        boolean firstNameCorrect = true;
+        boolean lastNameCorrect = true;
+        char[] firstName = firstNameC3TxtField.getText().toCharArray();
+        char[] lastName = lastNameC3TxtField.getText().toCharArray();
+        for (char c : firstName) {
+            if(!Character.isLetter(c)) {
+                firstNameCorrect = false;
+            }
+        }
+        for (char c : lastName) {
+            if(!Character.isLetter(c)) {
+                lastNameCorrect = false;
+            }
+        }
+        if(firstNameCorrect || lastNameCorrect){
+            mb.customerInfo(passportIDC3TxtField, firstNameC3TxtField, lastNameC3TxtField, getDatePickerC3());
+            submitC1Btn.setText("Submitted");
+        }
+        else{
+        alertBox.display("Warning!", "Please enter a valid input.");
+        }
     }
     @FXML
     private void saveCustomer4(ActionEvent event) {
-       mb.customerInfo(passportIDC4TxtField, firstNameC4TxtField, lastNameC4TxtField, birthDateC4TxtField);
+        boolean firstNameCorrect = true;
+        boolean lastNameCorrect = true;
+        char[] firstName = firstNameC4TxtField.getText().toCharArray();
+        char[] lastName = lastNameC4TxtField.getText().toCharArray();
+        for (char c : firstName) {
+            if(!Character.isLetter(c)) {
+                firstNameCorrect = false;
+            }
+        }
+        for (char c : lastName) {
+            if(!Character.isLetter(c)) {
+                lastNameCorrect = false;
+            }
+        }
+        if(firstNameCorrect || lastNameCorrect){
+            mb.customerInfo(passportIDC4TxtField, firstNameC4TxtField, lastNameC4TxtField, getDatePickerC4());
+            submitC1Btn.setText("Submitted");
+        }
+        else{
+        alertBox.display("Warning!", "Please enter a valid input.");
+        }
     }
     @FXML
     private void saveCustomer5(ActionEvent event) {
-        mb.customerInfo(passportIDC5TxtField, firstNameC5TxtField, lastNameC5TxtField, birthDateC5TxtField);
+        boolean firstNameCorrect = true;
+        boolean lastNameCorrect = true;
+        char[] firstName = firstNameC5TxtField.getText().toCharArray();
+        char[] lastName = lastNameC5TxtField.getText().toCharArray();
+        for (char c : firstName) {
+            if(!Character.isLetter(c)) {
+                firstNameCorrect = false;
+            }
+        }
+        for (char c : lastName) {
+            if(!Character.isLetter(c)) {
+                lastNameCorrect = false;
+            }
+        }
+        if(firstNameCorrect || lastNameCorrect){
+            mb.customerInfo(passportIDC5TxtField, firstNameC5TxtField, lastNameC5TxtField, getDatePickerC5());
+            submitC1Btn.setText("Submitted");
+        }
+        else{
+        alertBox.display("Warning!", "Please enter a valid input.");
+        }
     }
     @FXML
     private void confirmBooking(ActionEvent event) {
@@ -212,9 +332,7 @@ public class DataCustomerController implements Initializable {
              panelToUpdate.getChildren().setAll(pane);
          } catch (IOException ex) {
              Logger.getLogger(DataCustomerController.class.getName()).log(Level.SEVERE, null, ex);
-         }
-
-        
+         }   
     }
 }
          

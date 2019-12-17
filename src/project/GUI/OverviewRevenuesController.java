@@ -7,8 +7,6 @@ package project.GUI;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,13 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-import project.DB.DBException;
 import project.LOGIC.DomainController;
-import project.LOGIC.Revenue;
-import project.LOGIC.Traject;
 
 /**
  * FXML Controller class
@@ -33,6 +25,7 @@ import project.LOGIC.Traject;
  */
 public class OverviewRevenuesController implements Initializable {
     private DomainController model;
+    private MakeBooking mb = MakeBooking.getInstance();
     
     @FXML
     private ChoiceBox<String> yearChoiceBox;
@@ -41,11 +34,7 @@ public class OverviewRevenuesController implements Initializable {
     @FXML
     private Button showBtn;
     @FXML
-    private TableView<Revenue> revenueTableView;
-    @FXML
-    private TableColumn<Revenue, String> monthColumn;
-    @FXML
-    private TableColumn<Revenue, Double> revenueColumn;
+    private ListView<Double> listViewRevenvues;
 
     /**
      * Initializes the controller class.
@@ -54,9 +43,6 @@ public class OverviewRevenuesController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         model=DomainController.getInstance();
         addDataToChoiceBox();
-        
-        monthColumn.setCellValueFactory(new PropertyValueFactory<Revenue,String>("months"));
-        revenueColumn.setCellValueFactory(new PropertyValueFactory<Revenue,Double>("revenuePerMonth"));
         
     }   
     
@@ -74,22 +60,18 @@ public class OverviewRevenuesController implements Initializable {
     public String getYear(){
         return yearChoiceBox.getValue();
     }
-    
-    public ObservableList<Revenue> getRevenuesPerMonth(){
-        ObservableList<Revenue> revenues = FXCollections.observableArrayList();
-        try {
-            Revenue revenue = new Revenue(getYear());
-            revenues.addAll(revenue);
-
-        } catch (DBException ex) {
-            Logger.getLogger(OverviewRevenuesController.class.getName()).log(Level.SEVERE, null, ex);
-        }    
-        return revenues;
-    }
 
     @FXML
     private void showRevenues(ActionEvent event) {
-        revenueTableView.setItems(getRevenuesPerMonth());
+        listViewRevenvues.setItems(returnRevenuesPerMonth());
+    }
+    
+    public ObservableList<Double> returnRevenuesPerMonth(){
+        ObservableList<Double> revenues = FXCollections.observableArrayList();
+        for(Double d: mb.getRevenuesPerMonth(getYear())){
+                revenues.add(d);
+        }
+        return revenues;
     }
     
 }

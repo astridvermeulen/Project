@@ -9,12 +9,12 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.GUI.BookingSummaryController">
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.GUI.BookingSummaryController">
    <children>
-      <VBox layoutX="15.0" layoutY="6.0" prefHeight="362.0" prefWidth="491.0" spacing="15.0">
+      <VBox layoutX="15.0" layoutY="6.0" prefHeight="400.0" prefWidth="431.0" spacing="25.0">
          <children>
             <Label text="Passenger(s)" />
-            <ScrollPane prefHeight="124.0" prefWidth="600.0">
+            <ScrollPane prefHeight="147.0" prefWidth="424.0">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="594.0">
                      <children>
@@ -56,21 +56,7 @@
             </ScrollPane>
          </children>
       </VBox>
-      <HBox layoutX="18.0" layoutY="357.0" prefHeight="27.0" prefWidth="259.0">
-         <children>
-            <VBox prefHeight="27.0" prefWidth="266.0">
-               <children>
-                  <Button fx:id="showNetPriceBtn" mnemonicParsing="false" onAction="#showNetPrice" prefHeight="39.0" prefWidth="175.0" text="Show total amount to pay" />
-               </children>
-            </VBox>
-            <VBox prefHeight="33.0" prefWidth="139.0">
-               <children>
-                  <Label fx:id="totalAmountToInputLbl" alignment="BOTTOM_CENTER" prefHeight="23.0" prefWidth="66.0" text="Amount" />
-               </children>
-            </VBox>
-         </children>
-      </HBox>
-      <ScrollPane layoutX="524.0" layoutY="37.0" prefHeight="308.0" prefWidth="259.0">
+      <ScrollPane layoutX="463.0" layoutY="47.0" prefHeight="350.0" prefWidth="220.0">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="340.0" prefWidth="759.0">
                <children>
@@ -90,6 +76,24 @@
             </AnchorPane>
         </content>
       </ScrollPane>
-      <Button fx:id="showLegsBtn" layoutX="437.0" layoutY="356.0" mnemonicParsing="false" onAction="#showLegs" prefHeight="27.0" prefWidth="345.0" text="Show information intermediate stops of this flight" />
+      <Button fx:id="showLegsBtn" layoutX="362.0" layoutY="419.0" mnemonicParsing="false" onAction="#showLegs" prefHeight="39.0" prefWidth="321.0" text="Show information intermediate stops of this flight" />
+      <HBox layoutX="14.0" layoutY="424.0" prefHeight="69.0" prefWidth="240.0" spacing="3.0">
+         <children>
+            <VBox prefHeight="69.0" prefWidth="166.0" spacing="5.0">
+               <children>
+                  <Label text="Service fee" />
+                  <Label text="Promotion" />
+                  <Label text="Total amount to pay" />
+               </children>
+            </VBox>
+            <VBox prefHeight="69.0" prefWidth="148.0" spacing="5.0">
+               <children>
+                  <Label fx:id="serviceFeeToInputLbl" />
+                  <Label fx:id="promotionToInputLbl" />
+                  <Label fx:id="netPriceToInputLbl" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>
