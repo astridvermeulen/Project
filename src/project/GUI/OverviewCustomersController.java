@@ -6,6 +6,7 @@
 package project.GUI;
 
 import java.net.URL;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -16,6 +17,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
@@ -60,9 +62,9 @@ public class OverviewCustomersController implements Initializable {
     @FXML
     private Button deleteBtn;
     @FXML
-    private TextField birthDateTxtField;
-    @FXML
     private TableColumn<Customer, String> bithDateColumn;
+    @FXML
+    private DatePicker birthDate;
 
     /**
      * Initializes the controller class.
@@ -96,25 +98,44 @@ public class OverviewCustomersController implements Initializable {
         return customers;
     }
 
+    public String getBirthDate() {
+        return birthDate.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    }
     @FXML
     private void addBtnClicked(ActionEvent event) {
-
-        Customer customer = new Customer(passportIDTxtField.getText(), firstNameTxtField.getText(), lastNameTxtField.getText(), birthDateTxtField.getText());
-
-        //customer toevoegen of aanpassen indien ze al bestaat, in datalaag wordt de oude customer dan onmiddellijk verwijderd
-        try {
-            saveCustomer(customer);
-        } catch (DBException ex) {
-            Logger.getLogger(OverviewCustomersController.class.getName()).log(Level.SEVERE, null, ex);
+        boolean firstNameCorrect = true;
+        boolean lastNameCorrect = true;
+        char[] firstName = firstNameTxtField.getText().toCharArray();
+        char[] lastName = lastNameTxtField.getText().toCharArray();
+        for (char c : firstName) {
+            if(!Character.isLetter(c)) {
+                firstNameCorrect = false;
+            }
         }
+        for (char c : lastName) {
+            if(!Character.isLetter(c)) {
+                lastNameCorrect = false;
+            }
+        }
+        if(firstNameCorrect && lastNameCorrect){
+            Customer customer = new Customer(passportIDTxtField.getText(), firstNameTxtField.getText(), lastNameTxtField.getText(), getBirthDate());
 
-        tableViewCustomers.getItems().add(customer);
+            //customer toevoegen of aanpassen indien ze al bestaat, in datalaag wordt de oude customer dan onmiddellijk verwijderd
+            try {
+                saveCustomer(customer);
+            } catch (DBException ex) {
+                Logger.getLogger(OverviewCustomersController.class.getName()).log(Level.SEVERE, null, ex);
+            }   
 
+            tableViewCustomers.getItems().add(customer);
+        }
+        else{
+        alertBox.display("Warning!", "Please enter a valid input.");
+        }
         //tekstvakjes leeg maken
         passportIDTxtField.clear();
         firstNameTxtField.clear();
         lastNameTxtField.clear();
-        birthDateTxtField.clear();
 
     }
 

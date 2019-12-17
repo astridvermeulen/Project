@@ -202,31 +202,33 @@ public class DataCustomerController implements Initializable {
     }
     
     
-    
+    //Wanneer een customer geen letters ingeeft als naam of voornaam wordt een error gegeven en moet de gebruiker opnieuw gegevens invoeren. 
     @FXML
     private void saveCustomer1(ActionEvent event) {
         boolean firstNameCorrect = true;
         boolean lastNameCorrect = true;
+        
         char[] firstName = firstNameC1TxtField.getText().toCharArray();
         char[] lastName = lastNameC1TxtField.getText().toCharArray();
         for (char c : firstName) {
             if(!Character.isLetter(c)) {
                 firstNameCorrect = false;
+                break;
             }
         }
         for (char c : lastName) {
             if(!Character.isLetter(c)) {
                 lastNameCorrect = false;
+                break;
             }
         }
-        if(firstNameCorrect || lastNameCorrect){
+        if(firstNameCorrect ==true && lastNameCorrect==true){
             mb.customerInfo(passportIDC1TxtField, firstNameC1TxtField, lastNameC1TxtField, getDatePickerC1());
             submitC1Btn.setText("Submitted");
         }
         else{
         alertBox.display("Warning!", "Please enter a valid input.");
-        }
-        
+        }  
     }
     @FXML
     private void saveCustomer2(ActionEvent event) {
@@ -244,7 +246,7 @@ public class DataCustomerController implements Initializable {
                 lastNameCorrect = false;
             }
         }
-        if(firstNameCorrect || lastNameCorrect){
+        if(firstNameCorrect && lastNameCorrect){
             mb.customerInfo(passportIDC2TxtField, firstNameC2TxtField, lastNameC2TxtField, getDatePickerC2());
             submitC1Btn.setText("Submitted");
         }
@@ -268,7 +270,7 @@ public class DataCustomerController implements Initializable {
                 lastNameCorrect = false;
             }
         }
-        if(firstNameCorrect || lastNameCorrect){
+        if(firstNameCorrect &&  lastNameCorrect){
             mb.customerInfo(passportIDC3TxtField, firstNameC3TxtField, lastNameC3TxtField, getDatePickerC3());
             submitC1Btn.setText("Submitted");
         }
@@ -292,7 +294,7 @@ public class DataCustomerController implements Initializable {
                 lastNameCorrect = false;
             }
         }
-        if(firstNameCorrect || lastNameCorrect){
+        if(firstNameCorrect &&  lastNameCorrect){
             mb.customerInfo(passportIDC4TxtField, firstNameC4TxtField, lastNameC4TxtField, getDatePickerC4());
             submitC1Btn.setText("Submitted");
         }
@@ -316,7 +318,7 @@ public class DataCustomerController implements Initializable {
                 lastNameCorrect = false;
             }
         }
-        if(firstNameCorrect || lastNameCorrect){
+        if(firstNameCorrect && lastNameCorrect){
             mb.customerInfo(passportIDC5TxtField, firstNameC5TxtField, lastNameC5TxtField, getDatePickerC5());
             submitC1Btn.setText("Submitted");
         }

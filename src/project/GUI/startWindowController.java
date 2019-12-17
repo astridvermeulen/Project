@@ -44,6 +44,7 @@ public class startWindowController implements Initializable {
      private AnchorPane paneLoadOverviewCustomers;
      private AnchorPane paneLoadCustomerReport;
      private AnchorPane paneSalesReport;
+     private AnchorPane paneSummaryBooking;
 
      
     // dit initaliseert de controller class
@@ -55,7 +56,6 @@ public class startWindowController implements Initializable {
             paneLoadOverviewCustomers = (AnchorPane) FXMLLoader.load(getClass().getResource("overviewCustomers.fxml"));
             paneLoadCustomerReport = (AnchorPane) FXMLLoader.load(getClass().getResource("customerReport.fxml"));
             paneSalesReport = (AnchorPane) FXMLLoader.load(getClass().getResource("salesReport.fxml"));
-           // paneBookingSummary = (AnchorPane) FXMLLoader.load(getClass().getResource("bookingSummary.fxml"));
         }catch (IOException ex) {
         Logger.getLogger(startWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -71,7 +71,7 @@ public class startWindowController implements Initializable {
     
     @FXML
     private void loadOverviewCustomers(ActionEvent event) {
-        panelToUpdate.getChildren().setAll(paneLoadOverviewCustomers);
+            panelToUpdate.getChildren().setAll(paneLoadOverviewCustomers);
     }
 
     @FXML
@@ -87,7 +87,7 @@ public class startWindowController implements Initializable {
 
     @FXML
     private void loadBookingSummary(ActionEvent event) {   
-           // panelToUpdate.getChildren().setAll(paneBookingSummary);
+            panelToUpdate.getChildren().setAll(paneSummaryBooking);
     }
   
     
