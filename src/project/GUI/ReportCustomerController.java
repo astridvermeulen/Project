@@ -35,6 +35,7 @@ public class ReportCustomerController implements Initializable {
 
     private DomainController model;
     private Customer chosenCustomer;
+    private ObservableList<Customer> customers = FXCollections.observableArrayList();
 
     @FXML
     private TableView<Flight> tableViewEmission;
@@ -81,9 +82,11 @@ public class ReportCustomerController implements Initializable {
         tableViewCustomers.setItems(getCustomers());
 
     }
-
+    public void addCustomerToTableView(Customer customer){
+        customers.add(customer);
+        tableViewCustomers.setItems(getCustomers());
+    }
     public ObservableList<Customer> getCustomers() {
-        ObservableList<Customer> customers = FXCollections.observableArrayList();
         try {
             for (Customer c : customersOverview()) {
                 customers.add(c);

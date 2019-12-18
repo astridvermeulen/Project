@@ -44,9 +44,10 @@ public class startWindowController implements Initializable {
      private AnchorPane paneLoadOverviewCustomers;
      private AnchorPane paneLoadCustomerReport;
      private AnchorPane paneSalesReport;
+     private AnchorPane paneSummaryBooking;
 
      
-    // dit initaliseert de controller class
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         model=domainController.getInstance();    
@@ -71,7 +72,7 @@ public class startWindowController implements Initializable {
     
     @FXML
     private void loadOverviewCustomers(ActionEvent event) {
-        panelToUpdate.getChildren().setAll(paneLoadOverviewCustomers);
+            panelToUpdate.getChildren().setAll(paneLoadOverviewCustomers);
     }
 
     @FXML
@@ -87,7 +88,7 @@ public class startWindowController implements Initializable {
 
     @FXML
     private void loadBookingSummary(ActionEvent event) {   
-           // panelToUpdate.getChildren().setAll(paneBookingSummary);
+            panelToUpdate.getChildren().setAll(paneSummaryBooking);
     }
   
     
