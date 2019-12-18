@@ -57,6 +57,7 @@ public class OverviewMostPopularAirportsController implements Initializable {
             }   
         } catch (DBException ex) {
             Logger.getLogger(OverviewMostPopularAirportsController.class.getName()).log(Level.SEVERE, null, ex);
+            alertBox.display("Warning!", ex.getMessage());
         }
         return airports;
     }

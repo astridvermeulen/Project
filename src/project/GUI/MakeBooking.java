@@ -48,11 +48,14 @@ public class MakeBooking {
                 saveBooking(booking);
             } catch (SQLException ex) {
                 Logger.getLogger(MakeBooking.class.getName()).log(Level.SEVERE, null, ex);
+                alertBox.display("Warning!", ex.getMessage());
             }
         } catch (DBException ex) {
             Logger.getLogger(MakeBooking.class.getName()).log(Level.SEVERE, null, ex);
+            alertBox.display("Warning!", ex.getMessage());
         } catch (ParseException ex) {
             Logger.getLogger(MakeBooking.class.getName()).log(Level.SEVERE, null, ex);
+            alertBox.display("Warning!", ex.getMessage());
         }
         
     }
@@ -72,10 +75,13 @@ public class MakeBooking {
             System.out.println(selectedFlights.get(0).getAirline());
         } catch (DBException ex) {
             Logger.getLogger(MakeBooking.class.getName()).log(Level.SEVERE, null, ex);
+            alertBox.display("Warning!", ex.getMessage());
         } catch (SQLException ex) {
             Logger.getLogger(MakeBooking.class.getName()).log(Level.SEVERE, null, ex);
+            alertBox.display("Warning!", ex.getMessage());
         } catch (ParseException ex) {
             Logger.getLogger(MakeBooking.class.getName()).log(Level.SEVERE, null, ex);
+            alertBox.display("Warning!", ex.getMessage());
         }
     }
     public void customerInfo(TextField passportNr, TextField firstName, TextField lastName, String birthDate){
@@ -84,6 +90,7 @@ public class MakeBooking {
             saveCustomer(klant);
         } catch (DBException ex) {
             Logger.getLogger(MakeBooking.class.getName()).log(Level.SEVERE, null, ex);
+            alertBox.display("Warning!", ex.getMessage());
         }
         customersLinkedToBooking.add(klant);
     }
@@ -131,6 +138,7 @@ public class MakeBooking {
           
         } catch (DBException ex) {
             Logger.getLogger(MakeBooking.class.getName()).log(Level.SEVERE, null, ex);
+            alertBox.display("Warning!", ex.getMessage());
         }  
         return revenues;
     }

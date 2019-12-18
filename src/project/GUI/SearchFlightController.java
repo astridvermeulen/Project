@@ -114,7 +114,7 @@ public class SearchFlightController implements Initializable {
     @FXML
     private Label fromLbl1;
     
-     public String getDatePicker() {
+    public String getDatePicker() {
         return datePicker.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
     public String getOriginAirport(){
@@ -154,11 +154,9 @@ public class SearchFlightController implements Initializable {
         emissionColumn.setCellValueFactory(new PropertyValueFactory<Flight,Double>("emission"));
         numberOfStopoversColumn.setCellValueFactory(new PropertyValueFactory<Flight,Integer>("numberOfStops"));
         
-        //tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         mb.deleteSelectedFlights();
         filteredFlights.clear();
-        
-       
+               
     }    
     
 
@@ -181,11 +179,10 @@ public class SearchFlightController implements Initializable {
     private void searchFlight(ActionEvent event) {
         try {
             filteredFlights.addAll(model.searchFlight(getIntermediateStopsAllowed(), getSortBy(), getOriginAirport(), getDestinationAirport(), getDatePicker()));
-            System.out.println(filteredFlights.toString());
             tableView.setItems(getFlights());
-            System.out.println(filteredFlights.get(0).getNumberOfStops());
         } catch (DBException ex) {
             Logger.getLogger(SearchFlightController.class.getName()).log(Level.SEVERE, null, ex);
+            alertBox.display("Warning!", ex.getMessage());
         }
     }
     // ObservableList om te kunnen weergeven in TableView.    
@@ -208,15 +205,16 @@ public class SearchFlightController implements Initializable {
     
     ArrayList<String> test = new ArrayList<>();
     
-      try {
+        try {
           test = airportsAlphabetic();
           int size = test.size();
           for(int position = 0; position < size; position++)
               list1.add(test.get(position));
     
 
-            } catch (DBException ex) {
+        } catch (DBException ex) {
         Logger.getLogger(DBAirport.class.getName()).log(Level.SEVERE, null, ex);
+        alertBox.display("Warning!", ex.getMessage());
         }
       
       for(int i=1; i<6; i++){
@@ -256,6 +254,7 @@ public class SearchFlightController implements Initializable {
             panelToUpdate.getChildren().setAll(pane);
         } catch (IOException ex) {
             Logger.getLogger(SearchFlightController.class.getName()).log(Level.SEVERE, null, ex);
+            alertBox.display("Warning!", ex.getMessage());
         }
         }
         else{

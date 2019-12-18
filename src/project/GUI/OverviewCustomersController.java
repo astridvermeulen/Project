@@ -94,6 +94,7 @@ public class OverviewCustomersController implements Initializable {
             }
         } catch (DBException ex) {
             Logger.getLogger(OverviewCustomersController.class.getName()).log(Level.SEVERE, null, ex);
+            alertBox.display("Warning!", ex.getMessage());
         }
         return customers;
     }
@@ -125,6 +126,7 @@ public class OverviewCustomersController implements Initializable {
                 saveCustomer(customer);
             } catch (DBException ex) {
                 Logger.getLogger(OverviewCustomersController.class.getName()).log(Level.SEVERE, null, ex);
+                alertBox.display("Warning!", ex.getMessage());
             }   
 
             tableViewCustomers.getItems().add(customer);
@@ -147,6 +149,7 @@ public class OverviewCustomersController implements Initializable {
             saveCustomer(customerSelected);
         } catch (DBException ex) {
             Logger.getLogger(OverviewCustomersController.class.getName()).log(Level.SEVERE, null, ex);
+            alertBox.display("Warning!", ex.getMessage());
         }
     }
 
@@ -158,6 +161,7 @@ public class OverviewCustomersController implements Initializable {
             saveCustomer(customerSelected);
         } catch (DBException ex) {
             Logger.getLogger(OverviewCustomersController.class.getName()).log(Level.SEVERE, null, ex);
+            alertBox.display("Warning!", ex.getMessage());
         }
     }
 
@@ -169,6 +173,7 @@ public class OverviewCustomersController implements Initializable {
             saveCustomer(customerSelected);
         } catch (DBException ex) {
             Logger.getLogger(OverviewCustomersController.class.getName()).log(Level.SEVERE, null, ex);
+            alertBox.display("Warning!", ex.getMessage());
         }
     }
 
@@ -181,6 +186,7 @@ public class OverviewCustomersController implements Initializable {
             deleteCustomer(customerSelected.get(0).getPassportNumber());
         } catch (DBException ex) {
             Logger.getLogger(OverviewCustomersController.class.getName()).log(Level.SEVERE, null, ex);
+            alertBox.display("Warning!", ex.getMessage());
         }
         customerSelected.forEach(allCustomers::remove);
     }

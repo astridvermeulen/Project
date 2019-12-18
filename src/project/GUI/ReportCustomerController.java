@@ -82,10 +82,12 @@ public class ReportCustomerController implements Initializable {
         tableViewCustomers.setItems(getCustomers());
 
     }
+    
     public void addCustomerToTableView(Customer customer){
         customers.add(customer);
         tableViewCustomers.setItems(getCustomers());
     }
+    
     public ObservableList<Customer> getCustomers() {
         try {
             for (Customer c : customersOverview()) {
@@ -93,6 +95,7 @@ public class ReportCustomerController implements Initializable {
             }
         } catch (DBException ex) {
             Logger.getLogger(OverviewCustomersController.class.getName()).log(Level.SEVERE, null, ex);
+            alertBox.display("Warning!", ex.getMessage());
         }
         System.out.println("customers toegevoegd in tabel");
         return customers;
@@ -101,17 +104,15 @@ public class ReportCustomerController implements Initializable {
 
     public ObservableList<Flight> getFlightsFromCustomer() {
         ObservableList<Flight> flights = FXCollections.observableArrayList();
-        ArrayList<Flight> vlucht = new ArrayList();
         try {
             for (Flight f : chosenCustomer.flightOverview()) {
                 flights.add(f);
-                vlucht.add(f);
             }
         } catch (DBException ex) {
             Logger.getLogger(ReportCustomerController.class.getName()).log(Level.SEVERE, null, ex);
+            alertBox.display("Warning!", ex.getMessage());
         }
-        System.out.println(vlucht.get(0).getOrigin());
-
+        
         return flights;
     }
 
@@ -119,18 +120,23 @@ public class ReportCustomerController implements Initializable {
     private void chooseCustomer(ActionEvent event) {
         ObservableList<Customer> customerSelected = tableViewCustomers.getSelectionModel().getSelectedItems();
         chosenCustomer = customerSelected.get(0);
-        System.out.println("gesecteerde customer is " + chosenCustomer.getPassportNumber());
         tableViewEmission.setItems(getFlightsFromCustomer());
+        
+        
+        ObservableList<Flight> list = tableViewEmission.getItems();
+        if(list.isEmpty()){
+            alertBox.display("Warning!", "This customer hasn't booked any flights yet.");
+        }
         donateBtn.setText("Donate");
     }
 
     @FXML
     private void showTotalEmission(ActionEvent event) {
-        System.out.println("show button clicked");
         try {
             emissionToInputLbl.setText(chosenCustomer.totalEmissionCustomer().toString());
         } catch (DBException ex) {
             Logger.getLogger(ReportCustomerController.class.getName()).log(Level.SEVERE, null, ex);
+            alertBox.display("Warning!", ex.getMessage());
         }
     }
 

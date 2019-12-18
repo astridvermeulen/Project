@@ -54,6 +54,7 @@ public class SalesReportController implements Initializable {
 
         } catch (IOException ex) {
             Logger.getLogger(startWindowController.class.getName()).log(Level.SEVERE, null, ex);
+            alertBox.display("Warning!", ex.getMessage());
         }
     }
 
@@ -66,6 +67,7 @@ public class SalesReportController implements Initializable {
 
         } catch (IOException ex) {
             Logger.getLogger(startWindowController.class.getName()).log(Level.SEVERE, null, ex);
+            alertBox.display("Warning!", ex.getMessage());
         }
     }
 
@@ -78,6 +80,7 @@ public class SalesReportController implements Initializable {
 
         } catch (IOException ex) {
             Logger.getLogger(startWindowController.class.getName()).log(Level.SEVERE, null, ex);
+            alertBox.display("Warning!", ex.getMessage());
         }
     }
 

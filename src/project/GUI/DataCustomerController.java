@@ -345,6 +345,7 @@ public class DataCustomerController implements Initializable {
              panelToUpdate.getChildren().setAll(pane);
          } catch (IOException ex) {
              Logger.getLogger(DataCustomerController.class.getName()).log(Level.SEVERE, null, ex);
+             alertBox.display("Warning!", ex.getMessage());
          }   
     }
 }
