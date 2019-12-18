@@ -104,7 +104,7 @@ public class Flight {
     }
 
     //Helping method to calculate the duration of a flight: tested V
-    private double calculateDuration() throws ParseException { 
+    private double calculateDuration() throws ParseException {
         String dateStart = departureDate + " " + departureTime;
         String dateStop = arrivalDate + " " + arrivalTime;
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -152,6 +152,7 @@ public class Flight {
     //Helping method to calculate the emission of a flight 
     private double calculateEmission() throws DBException {
         double em = DBFlight.getEmission(this.flightNumber, this.departureDate);
+        Math.round(em);
         return em;
     }
 
