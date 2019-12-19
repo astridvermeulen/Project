@@ -85,6 +85,8 @@ public class MakeBooking {
             alertBox.display("Warning!", "A ParseException has been thrown");
         }
     }
+    
+    
     public void customerInfo(TextField passportNr, TextField firstName, TextField lastName, String birthDate){
         Customer klant = new Customer(passportNr.getText(), firstName.getText(), lastName.getText(), birthDate);
         try {

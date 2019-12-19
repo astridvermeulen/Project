@@ -195,8 +195,7 @@ public class DataCustomerController implements Initializable {
         return birthDateC5.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
     
-    
-    //Wanneer een customer geen letters ingeeft als naam of voornaam wordt een error gegeven en moet de gebruiker opnieuw gegevens invoeren. 
+
     @FXML
     private void saveCustomer1(ActionEvent event) {
         boolean firstNameCorrect = true;
@@ -205,13 +204,13 @@ public class DataCustomerController implements Initializable {
         char[] firstName = firstNameC1TxtField.getText().toCharArray();
         char[] lastName = lastNameC1TxtField.getText().toCharArray();
         for (char c : firstName) {
-            if(!Character.isLetter(c)) {
+            if(!Character.isLetter(c) && c!=' ') {
                 firstNameCorrect = false;
                 break;
             }
         }
         for (char c : lastName) {
-            if(!Character.isLetter(c)) {
+            if(!Character.isLetter(c) && c!=' ') {
                 lastNameCorrect = false;
                 break;
             }
@@ -221,12 +220,13 @@ public class DataCustomerController implements Initializable {
                 mb.customerInfo(passportIDC1TxtField, firstNameC1TxtField, lastNameC1TxtField, getDatePickerC1());
                 Customer customer = new Customer(passportIDC1TxtField.getText(), firstNameC1TxtField.getText(), lastNameC1TxtField.getText(), getDatePickerC1());
                 submitC1Btn.setText("Submitted");
+                submitC1Btn.setVisible(false);
                 
         }
         else{
         alertBox.display("Warning!", "Please enter a valid input.");
         }         
-        submitC1Btn.setVisible(false);
+        
     }
     @FXML
     private void saveCustomer2(ActionEvent event) {
@@ -235,23 +235,24 @@ public class DataCustomerController implements Initializable {
         char[] firstName = firstNameC2TxtField.getText().toCharArray();
         char[] lastName = lastNameC2TxtField.getText().toCharArray();
         for (char c : firstName) {
-            if(!Character.isLetter(c)) {
+            if(!Character.isLetter(c) && c!=' ') {
                 firstNameCorrect = false;
             }
         }
         for (char c : lastName) {
-            if(!Character.isLetter(c)) {
+            if(!Character.isLetter(c) && c!=' ') {
                 lastNameCorrect = false;
             }
         }
         if(firstNameCorrect == true && lastNameCorrect == true){
             mb.customerInfo(passportIDC2TxtField, firstNameC2TxtField, lastNameC2TxtField, getDatePickerC2());
             submitC2Btn.setText("Submitted");
+            submitC2Btn.setVisible(false);
         }
         else{
         alertBox.display("Warning!", "Please enter a valid input.");
         }
-        submitC2Btn.setVisible(false);
+        
         
         
     }
@@ -262,24 +263,25 @@ public class DataCustomerController implements Initializable {
         char[] firstName = firstNameC3TxtField.getText().toCharArray();
         char[] lastName = lastNameC3TxtField.getText().toCharArray();
         for (char c : firstName) {
-            if(!Character.isLetter(c)) {
+            if(!Character.isLetter(c) && c!=' ') {
                 firstNameCorrect = false;
             }
         }
         for (char c : lastName) {
-            if(!Character.isLetter(c)) {
+            if(!Character.isLetter(c) && c!=' ') {
                 lastNameCorrect = false;
             }
         }
         if(firstNameCorrect &&  lastNameCorrect){
             mb.customerInfo(passportIDC3TxtField, firstNameC3TxtField, lastNameC3TxtField, getDatePickerC3());
             submitC3Btn.setText("Submitted");
+            submitC3Btn.setVisible(false);
         }
         else{
         alertBox.display("Warning!", "Please enter a valid input.");
         }
         
-        submitC3Btn.setVisible(false);
+        
     }
     @FXML
     private void saveCustomer4(ActionEvent event) {
@@ -288,23 +290,24 @@ public class DataCustomerController implements Initializable {
         char[] firstName = firstNameC4TxtField.getText().toCharArray();
         char[] lastName = lastNameC4TxtField.getText().toCharArray();
         for (char c : firstName) {
-            if(!Character.isLetter(c)) {
+            if(!Character.isLetter(c) && c!=' ') {
                 firstNameCorrect = false;
             }
         }
         for (char c : lastName) {
-            if(!Character.isLetter(c)) {
+            if(!Character.isLetter(c) && c!=' ') {
                 lastNameCorrect = false;
             }
         }
         if(firstNameCorrect == true  &&  lastNameCorrect == true){
             mb.customerInfo(passportIDC4TxtField, firstNameC4TxtField, lastNameC4TxtField, getDatePickerC4());
             submitC4Btn.setText("Submitted");
+            submitC4Btn.setVisible(false);
         }
         else{
         alertBox.display("Warning!", "Please enter a valid input.");
         }
-        submitC4Btn.setVisible(false);
+        
     }
     @FXML
     private void saveCustomer5(ActionEvent event) {
@@ -313,7 +316,7 @@ public class DataCustomerController implements Initializable {
         char[] firstName = firstNameC5TxtField.getText().toCharArray();
         char[] lastName = lastNameC5TxtField.getText().toCharArray();
         for (char c : firstName) {
-            if(!Character.isLetter(c)) {
+            if(!Character.isLetter(c) && c!=' ') {
                 firstNameCorrect = false;
             }
         }
@@ -325,11 +328,12 @@ public class DataCustomerController implements Initializable {
         if(firstNameCorrect && lastNameCorrect){
             mb.customerInfo(passportIDC5TxtField, firstNameC5TxtField, lastNameC5TxtField, getDatePickerC5());
             submitC5Btn.setText("Submitted");
+            submitC5Btn.setVisible(false);
         }
         else{
         alertBox.display("Warning!", "Please enter a valid input.");
         }
-        submitC5Btn.setVisible(false);
+        
     }
     @FXML
     private void confirmBooking(ActionEvent event) {

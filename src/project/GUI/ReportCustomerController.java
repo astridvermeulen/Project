@@ -93,7 +93,6 @@ public class ReportCustomerController implements Initializable {
             Logger.getLogger(OverviewCustomersController.class.getName()).log(Level.SEVERE, null, ex);
             alertBox.display("Warning!", "A Database exception has been thrown");
         }
-        System.out.println("customers toegevoegd in tabel");
         return customers;
 
     }
@@ -117,8 +116,7 @@ public class ReportCustomerController implements Initializable {
         ObservableList<Customer> customerSelected = tableViewCustomers.getSelectionModel().getSelectedItems();
         chosenCustomer = customerSelected.get(0);
         tableViewEmission.setItems(getFlightsFromCustomer());
-        
-        
+               
         ObservableList<Flight> list = tableViewEmission.getItems();
         if(list.isEmpty()){
             alertBox.display("Warning!", "This customer hasn't booked any flights yet.");

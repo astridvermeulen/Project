@@ -55,9 +55,5 @@ public class OverviewMostPopularAirportsController implements Initializable {
         }
         return airports;
     }
-    
-    
-    
-        
-    
+   
 }
