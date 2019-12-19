@@ -15,15 +15,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
 import project.DB.DBException;
-import project.LOGIC.Airport;
 import static project.LOGIC.Airport.tenMostPopularAirports;
 import project.LOGIC.DomainController;
-import project.LOGIC.PopularAirports;
 
 /**
  * FXML Controller class

@@ -24,7 +24,7 @@ public class DBBookingNumberGenerator {
       con = DBConnection.getInstance().getConnection();
       Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
       
-      String sql = "SELECT * "
+      String sql = "SELECT bookingDate, serviceFee "
         + "FROM booking "
 	+ "WHERE bookingNumber = " + bookingNumber;
 

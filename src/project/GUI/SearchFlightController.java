@@ -230,7 +230,7 @@ public class SearchFlightController implements Initializable {
     @FXML
     private void getFlightInfo(MouseEvent event) {
         if(event.getClickCount() == 2 && ( !tableView.getSelectionModel().getSelectedItems().isEmpty())){
-            System.out.println("niet leeg");
+            alertBox.display("Info", "Flight selected.");
             mb.flightInfo(tableView); 
         }
         tableView.getSelectionModel().clearSelection();
