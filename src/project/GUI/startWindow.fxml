@@ -6,20 +6,20 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.GUI.startWindowController">
+<AnchorPane prefHeight="525.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.GUI.startWindowController">
    <children>
-      <HBox prefHeight="25.0" prefWidth="676.0">
+      <HBox prefHeight="25.0" prefWidth="700.0">
          <children>
             <Button fx:id="searchFlightBtn" mnemonicParsing="false" onAction="#loadSearchFlight" prefWidth="125.0" text="Search Flight" />
             <Button fx:id="customerReportBtn" mnemonicParsing="false" onAction="#loadCustomerReport" prefWidth="125.0" text="Customer Report" />
-            <Button fx:id="overviewCustomersBtn" mnemonicParsing="false" onAction="#loadOverviewCustomers" prefWidth="125.0" text="Overview Customers" />
+            <Button fx:id="overviewCustomersBtn" mnemonicParsing="false" onAction="#loadOverviewCustomers" prefHeight="27.0" prefWidth="151.0" text="Overview Customers" />
             <Button fx:id="salesReportBtn" mnemonicParsing="false" onAction="#loadSalesReport" prefWidth="125.0" text="Sales Report" />
             <Button fx:id="bookingSummaryBtn" mnemonicParsing="false" onAction="#loadBookingSummary" text="Booking summary" />
          </children>
       </HBox>
-      <HBox layoutY="26.0" prefHeight="424.0" prefWidth="676.0">
+      <HBox layoutY="26.0" prefHeight="500.0" prefWidth="700.0">
          <children>
-            <AnchorPane fx:id="panelToUpdate" prefHeight="424.0" prefWidth="676.0">
+            <AnchorPane fx:id="panelToUpdate" prefHeight="500.0" prefWidth="800.0">
                <children>
                   <Label layoutX="257.0" layoutY="177.0" text="CleanFlight Inc.">
                      <font>

@@ -29,6 +29,10 @@ public class ProjectApplication extends Application {
         stage.setScene(scene);
         //stage.setResizable(false);
         stage.show();
+        stage.setMinHeight(550);
+        stage.setMinWidth(700);
+        stage.setMaxHeight(550);
+        stage.setMaxWidth(700);
     }
 
     /**

@@ -17,6 +17,7 @@ import project.LOGIC.Customer;
 import static project.LOGIC.Customer.saveCustomer;
 import javafx.scene.control.TextField;
 import project.LOGIC.Booking;
+import static project.LOGIC.Booking.calculateRevenuePerMonth;
 import static project.LOGIC.Booking.saveBooking;
 /**
  *
@@ -48,14 +49,14 @@ public class MakeBooking {
                 saveBooking(booking);
             } catch (SQLException ex) {
                 Logger.getLogger(MakeBooking.class.getName()).log(Level.SEVERE, null, ex);
-                alertBox.display("Warning!", ex.getMessage());
+                alertBox.display("Warning!", "An SQL exception has been thrown");
             }
         } catch (DBException ex) {
             Logger.getLogger(MakeBooking.class.getName()).log(Level.SEVERE, null, ex);
-            alertBox.display("Warning!", ex.getMessage());
+            alertBox.display("Warning!", "A Database exception has been thrown");
         } catch (ParseException ex) {
             Logger.getLogger(MakeBooking.class.getName()).log(Level.SEVERE, null, ex);
-            alertBox.display("Warning!", ex.getMessage());
+            alertBox.display("Warning!", "A ParseException has been thrown");
         }
         
     }
@@ -75,13 +76,13 @@ public class MakeBooking {
             System.out.println(selectedFlights.get(0).getAirline());
         } catch (DBException ex) {
             Logger.getLogger(MakeBooking.class.getName()).log(Level.SEVERE, null, ex);
-            alertBox.display("Warning!", ex.getMessage());
+            alertBox.display("Warning!", "A Database exception has been thrown");
         } catch (SQLException ex) {
             Logger.getLogger(MakeBooking.class.getName()).log(Level.SEVERE, null, ex);
-            alertBox.display("Warning!", ex.getMessage());
+            alertBox.display("Warning!", "An SQLException has been trhown");
         } catch (ParseException ex) {
             Logger.getLogger(MakeBooking.class.getName()).log(Level.SEVERE, null, ex);
-            alertBox.display("Warning!", ex.getMessage());
+            alertBox.display("Warning!", "A ParseException has been thrown");
         }
     }
     public void customerInfo(TextField passportNr, TextField firstName, TextField lastName, String birthDate){
@@ -90,7 +91,7 @@ public class MakeBooking {
             saveCustomer(klant);
         } catch (DBException ex) {
             Logger.getLogger(MakeBooking.class.getName()).log(Level.SEVERE, null, ex);
-            alertBox.display("Warning!", ex.getMessage());
+            alertBox.display("Warning!", "A Database exception has been thrown");
         }
         customersLinkedToBooking.add(klant);
     }
@@ -132,13 +133,13 @@ public class MakeBooking {
     public ArrayList<Double> getRevenuesPerMonth(String year){
         ArrayList<Double> revenues = new ArrayList();
         try {   
-            for(Double d: booking.calculateRevenuePerMonth(year)){
+            for(Double d: calculateRevenuePerMonth(year)){
                 revenues.add(d);
             }
           
         } catch (DBException ex) {
             Logger.getLogger(MakeBooking.class.getName()).log(Level.SEVERE, null, ex);
-            alertBox.display("Warning!", ex.getMessage());
+            alertBox.display("Warning!", "A Database exception has been thrown");
         }  
         return revenues;
     }
