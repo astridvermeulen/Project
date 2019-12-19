@@ -3,8 +3,6 @@ package project.GUI;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
-import java.text.ParseException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -20,12 +18,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import project.DB.DBBooking;
-import project.DB.DBException;
 import project.LOGIC.Booking;
-import static project.LOGIC.Booking.saveBooking;
 import project.LOGIC.Customer;
-import static project.LOGIC.Customer.saveCustomer;
 import project.LOGIC.DomainController;
 import project.LOGIC.Flight;
 

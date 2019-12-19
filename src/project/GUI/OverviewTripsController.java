@@ -22,7 +22,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import project.DB.DBException;
 import project.LOGIC.DomainController;
-import project.LOGIC.Flight;
 import project.LOGIC.Traject;
 import static project.LOGIC.Traject.topPopularTrips;
 
