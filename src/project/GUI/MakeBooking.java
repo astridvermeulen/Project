@@ -40,13 +40,11 @@ public class MakeBooking {
     }
     
     public void makeBooking(){
-        System.out.println(selectedFlights);
-        System.out.println(customersLinkedToBooking);
+        
         try {
             booking = new Booking(selectedFlights, customersLinkedToBooking);
             try {
-                System.out.println(booking);
-                saveBooking(booking);
+              saveBooking(booking);
             } catch (SQLException ex) {
                 Logger.getLogger(MakeBooking.class.getName()).log(Level.SEVERE, null, ex);
                 alertBox.display("Warning!", "An SQL exception has been thrown");
@@ -71,9 +69,7 @@ public class MakeBooking {
                     tableView.getSelectionModel().getSelectedItem().getArrivalDate(),tableView.getSelectionModel().getSelectedItem().getArrivalTime(),
                     tableView.getSelectionModel().getSelectedItem().getFlightNumber(),tableView.getSelectionModel().getSelectedItem().getPrice());
             selectedFlights.add(flight);
-            //test
-            System.out.println(selectedFlights);
-            System.out.println(selectedFlights.get(0).getAirline());
+            
         } catch (DBException ex) {
             Logger.getLogger(MakeBooking.class.getName()).log(Level.SEVERE, null, ex);
             alertBox.display("Warning!", "A Database exception has been thrown");
