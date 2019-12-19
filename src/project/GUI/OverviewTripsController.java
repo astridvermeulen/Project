@@ -88,7 +88,7 @@ public class OverviewTripsController implements Initializable {
             }   
         } catch (DBException ex) {
             Logger.getLogger(OverviewTripsController.class.getName()).log(Level.SEVERE, null, ex);
-            alertBox.display("Warning!", ex.getMessage());
+            alertBox.display("Warning!", "A Database exception has been thrown");
         }
         
         return trips;

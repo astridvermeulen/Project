@@ -231,7 +231,8 @@ public class DataCustomerController implements Initializable {
         }
         else{
         alertBox.display("Warning!", "Please enter a valid input.");
-        }  
+        }         
+        submitC1Btn.setVisible(false);
     }
     @FXML
     private void saveCustomer2(ActionEvent event) {
@@ -256,6 +257,9 @@ public class DataCustomerController implements Initializable {
         else{
         alertBox.display("Warning!", "Please enter a valid input.");
         }
+        submitC2Btn.setVisible(false);
+        
+        
     }
     @FXML
     private void saveCustomer3(ActionEvent event) {
@@ -280,6 +284,8 @@ public class DataCustomerController implements Initializable {
         else{
         alertBox.display("Warning!", "Please enter a valid input.");
         }
+        
+        submitC3Btn.setVisible(false);
     }
     @FXML
     private void saveCustomer4(ActionEvent event) {
@@ -304,6 +310,7 @@ public class DataCustomerController implements Initializable {
         else{
         alertBox.display("Warning!", "Please enter a valid input.");
         }
+        submitC4Btn.setVisible(false);
     }
     @FXML
     private void saveCustomer5(ActionEvent event) {
@@ -317,17 +324,18 @@ public class DataCustomerController implements Initializable {
             }
         }
         for (char c : lastName) {
-            if(!Character.isLetter(c)) {
+            if(!Character.isLetter(c) && c!=' ') {
                 lastNameCorrect = false;
             }
         }
-        if(firstNameCorrect == true && lastNameCorrect == true){
+        if(firstNameCorrect && lastNameCorrect){
             mb.customerInfo(passportIDC5TxtField, firstNameC5TxtField, lastNameC5TxtField, getDatePickerC5());
             submitC5Btn.setText("Submitted");
         }
         else{
         alertBox.display("Warning!", "Please enter a valid input.");
         }
+        submitC5Btn.setVisible(false);
     }
     @FXML
     private void confirmBooking(ActionEvent event) {
@@ -337,7 +345,7 @@ public class DataCustomerController implements Initializable {
              panelToUpdate.getChildren().setAll(pane);
          } catch (IOException ex) {
              Logger.getLogger(DataCustomerController.class.getName()).log(Level.SEVERE, null, ex);
-             alertBox.display("Warning!", ex.getMessage());
+             alertBox.display("Warning!", "An IOException has been thrown");
          }   
     }
 }

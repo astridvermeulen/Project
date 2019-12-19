@@ -54,7 +54,7 @@ public class SalesReportController implements Initializable {
 
         } catch (IOException ex) {
             Logger.getLogger(startWindowController.class.getName()).log(Level.SEVERE, null, ex);
-            alertBox.display("Warning!", ex.getMessage());
+            alertBox.display("Warning!", "An IOException has been thrown");
         }
     }
 
@@ -67,7 +67,7 @@ public class SalesReportController implements Initializable {
 
         } catch (IOException ex) {
             Logger.getLogger(startWindowController.class.getName()).log(Level.SEVERE, null, ex);
-            alertBox.display("Warning!", ex.getMessage());
+            alertBox.display("Warning!", "An IOException has been thrown");
         }
     }
 
@@ -80,7 +80,7 @@ public class SalesReportController implements Initializable {
 
         } catch (IOException ex) {
             Logger.getLogger(startWindowController.class.getName()).log(Level.SEVERE, null, ex);
-            alertBox.display("Warning!", ex.getMessage());
+            alertBox.display("Warning!", "An IOException has been thrown");
         }
     }
 

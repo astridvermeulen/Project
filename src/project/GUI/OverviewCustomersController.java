@@ -83,7 +83,7 @@ public class OverviewCustomersController implements Initializable {
         firstNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         lastNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         bithDateColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-
+        
     }
 
     public ObservableList<Customer> getCustomers() {
@@ -94,7 +94,7 @@ public class OverviewCustomersController implements Initializable {
             }
         } catch (DBException ex) {
             Logger.getLogger(OverviewCustomersController.class.getName()).log(Level.SEVERE, null, ex);
-            alertBox.display("Warning!", ex.getMessage());
+            alertBox.display("Warning!", "A Database exception has been thrown");
         }
         return customers;
     }
@@ -126,7 +126,7 @@ public class OverviewCustomersController implements Initializable {
                 saveCustomer(customer);
             } catch (DBException ex) {
                 Logger.getLogger(OverviewCustomersController.class.getName()).log(Level.SEVERE, null, ex);
-                alertBox.display("Warning!", ex.getMessage());
+                alertBox.display("Warning!", "A Database exception has been thrown");
             }   
 
             tableViewCustomers.getItems().add(customer);
@@ -149,7 +149,7 @@ public class OverviewCustomersController implements Initializable {
             saveCustomer(customerSelected);
         } catch (DBException ex) {
             Logger.getLogger(OverviewCustomersController.class.getName()).log(Level.SEVERE, null, ex);
-            alertBox.display("Warning!", ex.getMessage());
+            alertBox.display("Warning!","A Database exception has been thrown");
         }
     }
 
@@ -161,7 +161,7 @@ public class OverviewCustomersController implements Initializable {
             saveCustomer(customerSelected);
         } catch (DBException ex) {
             Logger.getLogger(OverviewCustomersController.class.getName()).log(Level.SEVERE, null, ex);
-            alertBox.display("Warning!", ex.getMessage());
+            alertBox.display("Warning!", "A Database exception has been thrown");
         }
     }
 
@@ -173,7 +173,7 @@ public class OverviewCustomersController implements Initializable {
             saveCustomer(customerSelected);
         } catch (DBException ex) {
             Logger.getLogger(OverviewCustomersController.class.getName()).log(Level.SEVERE, null, ex);
-            alertBox.display("Warning!", ex.getMessage());
+            alertBox.display("Warning!", "A Database exception has been thrown");
         }
     }
 
@@ -186,7 +186,7 @@ public class OverviewCustomersController implements Initializable {
             deleteCustomer(customerSelected.get(0).getPassportNumber());
         } catch (DBException ex) {
             Logger.getLogger(OverviewCustomersController.class.getName()).log(Level.SEVERE, null, ex);
-            alertBox.display("Warning!", ex.getMessage());
+            alertBox.display("Warning!", "A Database exception has been thrown");
         }
         customerSelected.forEach(allCustomers::remove);
     }

@@ -92,7 +92,7 @@ public class ReportCustomerController implements Initializable {
             }
         } catch (DBException ex) {
             Logger.getLogger(OverviewCustomersController.class.getName()).log(Level.SEVERE, null, ex);
-            alertBox.display("Warning!", ex.getMessage());
+            alertBox.display("Warning!", "A Database exception has been thrown");
         }
         System.out.println("customers toegevoegd in tabel");
         return customers;
@@ -107,7 +107,7 @@ public class ReportCustomerController implements Initializable {
             }
         } catch (DBException ex) {
             Logger.getLogger(ReportCustomerController.class.getName()).log(Level.SEVERE, null, ex);
-            alertBox.display("Warning!", ex.getMessage());
+            alertBox.display("Warning!", "A Database exception has been thrown");
         }
         
         return flights;
@@ -133,7 +133,7 @@ public class ReportCustomerController implements Initializable {
             emissionToInputLbl.setText(chosenCustomer.totalEmissionCustomer().toString());
         } catch (DBException ex) {
             Logger.getLogger(ReportCustomerController.class.getName()).log(Level.SEVERE, null, ex);
-            alertBox.display("Warning!", ex.getMessage());
+            alertBox.display("Warning!", "A Database exception has been thrown");
         }
     }
 
