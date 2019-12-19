@@ -37,7 +37,6 @@ import project.LOGIC.DomainController;
  */
 public class OverviewCustomersController implements Initializable {
 
-    
     private DomainController model;
 
     @FXML
@@ -82,7 +81,7 @@ public class OverviewCustomersController implements Initializable {
         firstNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         lastNameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         bithDateColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-
+        
     }
 
     public ObservableList<Customer> getCustomers() {
@@ -93,7 +92,7 @@ public class OverviewCustomersController implements Initializable {
             }
         } catch (DBException ex) {
             Logger.getLogger(OverviewCustomersController.class.getName()).log(Level.SEVERE, null, ex);
-            alertBox.display("Warning!", ex.getMessage());
+            alertBox.display("Warning!", "A Database exception has been thrown");
         }
         return customers;
     }
@@ -101,6 +100,7 @@ public class OverviewCustomersController implements Initializable {
     public String getBirthDate() {
         return birthDate.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
+    
     @FXML
     private void addBtnClicked(ActionEvent event) {
         boolean firstNameCorrect = true;
@@ -108,36 +108,49 @@ public class OverviewCustomersController implements Initializable {
         char[] firstName = firstNameTxtField.getText().toCharArray();
         char[] lastName = lastNameTxtField.getText().toCharArray();
         for (char c : firstName) {
-            if(!Character.isLetter(c)) {
+            if(!Character.isLetter(c) && c!=' ') {
                 firstNameCorrect = false;
             }
         }
         for (char c : lastName) {
-            if(!Character.isLetter(c)) {
+            if(!Character.isLetter(c) && c!=' ') {
                 lastNameCorrect = false;
             }
         }
+        
         if(firstNameCorrect && lastNameCorrect){
             Customer customer = new Customer(passportIDTxtField.getText(), firstNameTxtField.getText(), lastNameTxtField.getText(), getBirthDate());
             
-            //customer toevoegen of aanpassen indien ze al bestaat, in datalaag wordt de oude customer dan onmiddellijk verwijderd
             try {
                 saveCustomer(customer);
             } catch (DBException ex) {
                 Logger.getLogger(OverviewCustomersController.class.getName()).log(Level.SEVERE, null, ex);
-                alertBox.display("Warning!", ex.getMessage());
+                alertBox.display("Warning!", "A Database exception has been thrown");
             }   
-
             tableViewCustomers.getItems().add(customer);
         }
         else{
         alertBox.display("Warning!", "Please enter a valid input.");
         }
-        //tekstvakjes leeg maken
+
         passportIDTxtField.clear();
         firstNameTxtField.clear();
         lastNameTxtField.clear();
 
+    } 
+    
+    @FXML
+    private void deleteBtnClicked(ActionEvent event) {
+        ObservableList<Customer> customerSelected, allCustomers;
+        allCustomers = tableViewCustomers.getItems();
+        customerSelected = tableViewCustomers.getSelectionModel().getSelectedItems();
+        try {
+            deleteCustomer(customerSelected.get(0).getPassportNumber());
+        } catch (DBException ex) {
+            Logger.getLogger(OverviewCustomersController.class.getName()).log(Level.SEVERE, null, ex);
+            alertBox.display("Warning!", "A Database exception has been thrown");
+        }
+        customerSelected.forEach(allCustomers::remove);
     }
 
     @FXML
@@ -148,7 +161,7 @@ public class OverviewCustomersController implements Initializable {
             saveCustomer(customerSelected);
         } catch (DBException ex) {
             Logger.getLogger(OverviewCustomersController.class.getName()).log(Level.SEVERE, null, ex);
-            alertBox.display("Warning!", ex.getMessage());
+            alertBox.display("Warning!","A Database exception has been thrown");
         }
     }
 
@@ -160,7 +173,7 @@ public class OverviewCustomersController implements Initializable {
             saveCustomer(customerSelected);
         } catch (DBException ex) {
             Logger.getLogger(OverviewCustomersController.class.getName()).log(Level.SEVERE, null, ex);
-            alertBox.display("Warning!", ex.getMessage());
+            alertBox.display("Warning!", "A Database exception has been thrown");
         }
     }
 
@@ -172,22 +185,10 @@ public class OverviewCustomersController implements Initializable {
             saveCustomer(customerSelected);
         } catch (DBException ex) {
             Logger.getLogger(OverviewCustomersController.class.getName()).log(Level.SEVERE, null, ex);
-            alertBox.display("Warning!", ex.getMessage());
+            alertBox.display("Warning!", "A Database exception has been thrown");
         }
     }
 
-    @FXML
-    private void deleteBtnClicked(ActionEvent event) {
-        ObservableList<Customer> customerSelected, allCustomers;
-        allCustomers = tableViewCustomers.getItems();
-        customerSelected = tableViewCustomers.getSelectionModel().getSelectedItems();
-        try {
-            deleteCustomer(customerSelected.get(0).getPassportNumber());
-        } catch (DBException ex) {
-            Logger.getLogger(OverviewCustomersController.class.getName()).log(Level.SEVERE, null, ex);
-            alertBox.display("Warning!", ex.getMessage());
-        }
-        customerSelected.forEach(allCustomers::remove);
-    }
+   
 
 }

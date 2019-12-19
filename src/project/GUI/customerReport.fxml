@@ -6,16 +6,16 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="644.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.GUI.ReportCustomerController">
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.GUI.ReportCustomerController">
    <children>
-      <Button fx:id="chooseThisCustomerBtn" layoutX="16.0" layoutY="345.0" mnemonicParsing="false" onAction="#chooseCustomer" prefHeight="27.0" prefWidth="156.0" text="Choose this customer" />
-      <Button fx:id="donateBtn" layoutX="456.0" layoutY="345.0" mnemonicParsing="false" onAction="#donate" text="Donate" />
-      <Label fx:id="emissionToInputLbl" layoutX="346.0" layoutY="350.0" />
-      <Button fx:id="showTotalEmissionBtn" layoutX="190.0" layoutY="345.0" mnemonicParsing="false" onAction="#showTotalEmission" text="Show total emission" />
-      <Label layoutX="249.0" layoutY="28.0" text="Customer report" />
-      <AnchorPane layoutX="27.0" layoutY="76.0" minHeight="0.0" minWidth="0.0" prefHeight="260.0" prefWidth="134.0">
+      <Button fx:id="chooseThisCustomerBtn" layoutX="16.0" layoutY="345.0" mnemonicParsing="false" onAction="#chooseCustomer" prefHeight="27.0" prefWidth="156.0" text="Choose this customer" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="494.0" />
+      <Button fx:id="donateBtn" layoutX="456.0" layoutY="345.0" mnemonicParsing="false" onAction="#donate" text="Donate" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="50.0" />
+      <Label fx:id="emissionToInputLbl" layoutX="346.0" layoutY="350.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="390.0" />
+      <Button fx:id="showTotalEmissionBtn" layoutX="190.0" layoutY="345.0" mnemonicParsing="false" onAction="#showTotalEmission" text="Show total emission" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="230.0" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="249.0" layoutY="28.0" prefHeight="17.0" prefWidth="107.0" text="Customer report" textAlignment="JUSTIFY" AnchorPane.leftAnchor="269.0" AnchorPane.rightAnchor="269.0" />
+      <AnchorPane layoutX="27.0" layoutY="76.0" minHeight="0.0" minWidth="0.0" prefHeight="260.0" prefWidth="134.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="494.0" AnchorPane.topAnchor="80.0">
          <children>
-            <TableView fx:id="tableViewCustomers" prefHeight="260.0" prefWidth="134.0">
+            <TableView fx:id="tableViewCustomers" prefHeight="260.0" prefWidth="134.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <columns>
                   <TableColumn fx:id="lastNameColumn" prefWidth="106.0" text="Last name" />
                   <TableColumn fx:id="passportIDColumn" prefWidth="103.0" text="Passport Number" />
@@ -23,9 +23,9 @@
             </TableView>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="190.0" layoutY="76.0" minHeight="0.0" minWidth="0.0" prefHeight="260.0" prefWidth="446.0">
+      <AnchorPane layoutX="190.0" layoutY="76.0" minHeight="0.0" minWidth="0.0" prefHeight="260.0" prefWidth="446.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="80.0">
          <children>
-            <TableView fx:id="tableViewEmission" prefHeight="260.0" prefWidth="447.0">
+            <TableView fx:id="tableViewEmission" prefHeight="260.0" prefWidth="447.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <columns>
                   <TableColumn fx:id="flightNumberColumn" prefWidth="96.0" text="Flight number" />
                   <TableColumn fx:id="departureDateColumn" prefWidth="106.0" text="Departure date" />

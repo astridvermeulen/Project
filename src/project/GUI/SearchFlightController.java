@@ -184,7 +184,7 @@ public class SearchFlightController implements Initializable {
             } 
         }catch (DBException ex) {
             Logger.getLogger(SearchFlightController.class.getName()).log(Level.SEVERE, null, ex);
-            alertBox.display("Warning!", ex.getMessage());
+            alertBox.display("Warning!", "A database exception has been thrown.");
          }
         
     }
@@ -247,7 +247,7 @@ public class SearchFlightController implements Initializable {
             panelToUpdate.getChildren().setAll(pane);
         } catch (IOException ex) {
             Logger.getLogger(SearchFlightController.class.getName()).log(Level.SEVERE, null, ex);
-            alertBox.display("Warning!", ex.getMessage());
+            alertBox.display("Warning!", "An IOException has been thrown");
         }
         }
         else{

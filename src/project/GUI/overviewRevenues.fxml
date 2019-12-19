@@ -8,33 +8,32 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="394.0" prefWidth="453.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.GUI.OverviewRevenuesController">
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.GUI.OverviewRevenuesController">
    <children>
-      <Label fx:id="chooseYearLbl" layoutX="14.0" layoutY="72.0" prefHeight="17.0" prefWidth="207.0" text="Choose for which year you want " />
-      <ChoiceBox fx:id="yearChoiceBox" layoutX="13.0" layoutY="125.0" prefWidth="150.0" />
-      <Label layoutX="14.0" layoutY="89.0" text="to request the revenues" />
-      <Button fx:id="showBtn" layoutX="13.0" layoutY="164.0" mnemonicParsing="false" onAction="#showRevenues" text="Show revenues" />
-      <HBox layoutX="227.0" layoutY="72.0" prefHeight="301.0" prefWidth="200.0">
+      <Label fx:id="chooseYearLbl" layoutX="51.0" layoutY="58.0" prefHeight="17.0" prefWidth="352.0" text="Choose for which year you want to request the revenues " AnchorPane.leftAnchor="51.0" AnchorPane.rightAnchor="50.0" />
+      <ChoiceBox fx:id="yearChoiceBox" layoutX="146.0" layoutY="83.0" prefWidth="150.0" />
+      <Button fx:id="showBtn" layoutX="165.0" layoutY="119.0" mnemonicParsing="false" onAction="#showRevenues" text="Show revenues" />
+      <HBox layoutX="121.0" layoutY="175.0" prefHeight="306.0" prefWidth="198.0" AnchorPane.leftAnchor="126.0" AnchorPane.rightAnchor="126.0">
          <children>
-            <VBox prefHeight="200.0" prefWidth="100.0" spacing="8.0">
+            <VBox prefHeight="303.0" prefWidth="98.0" spacing="9.0">
                <children>
-                  <Label text="January" />
-                  <Label text="February" />
-                  <Label text="March" />
-                  <Label text="April" />
-                  <Label text="May" />
-                  <Label text="June" />
-                  <Label text="July" />
-                  <Label text="August" />
-                  <Label text="September" />
-                  <Label text="October" />
-                  <Label text="November" />
-                  <Label text="December" />
+                  <Label nodeOrientation="RIGHT_TO_LEFT" prefHeight="17.0" prefWidth="99.0" text="January " />
+                  <Label nodeOrientation="RIGHT_TO_LEFT" prefHeight="17.0" prefWidth="99.0" text="February " />
+                  <Label nodeOrientation="RIGHT_TO_LEFT" prefHeight="17.0" prefWidth="101.0" text="March " />
+                  <Label nodeOrientation="RIGHT_TO_LEFT" prefHeight="17.0" prefWidth="103.0" text="April " />
+                  <Label nodeOrientation="RIGHT_TO_LEFT" prefHeight="17.0" prefWidth="115.0" text="May " />
+                  <Label nodeOrientation="RIGHT_TO_LEFT" prefHeight="17.0" prefWidth="117.0" text="June " />
+                  <Label nodeOrientation="RIGHT_TO_LEFT" prefHeight="17.0" prefWidth="126.0" text="July " />
+                  <Label nodeOrientation="RIGHT_TO_LEFT" prefHeight="17.0" prefWidth="154.0" text="August " />
+                  <Label nodeOrientation="RIGHT_TO_LEFT" prefHeight="17.0" prefWidth="200.0" text="September " />
+                  <Label nodeOrientation="RIGHT_TO_LEFT" prefHeight="17.0" prefWidth="193.0" text="October " />
+                  <Label nodeOrientation="RIGHT_TO_LEFT" prefHeight="17.0" prefWidth="142.0" text="November " />
+                  <Label nodeOrientation="RIGHT_TO_LEFT" prefHeight="17.0" prefWidth="132.0" text="December " />
                </children>
             </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0">
+            <VBox prefHeight="314.0" prefWidth="101.0">
                <children>
-                  <ListView fx:id="listViewRevenvues" prefHeight="303.0" prefWidth="100.0" />
+                  <ListView fx:id="listViewRevenvues" prefHeight="313.0" prefWidth="87.0" />
                </children>
             </VBox>
          </children>
