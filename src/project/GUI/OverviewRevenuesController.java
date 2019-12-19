@@ -6,6 +6,8 @@
 package project.GUI;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,6 +28,7 @@ import project.LOGIC.DomainController;
 public class OverviewRevenuesController implements Initializable {
     private DomainController model;
     private MakeBooking mb = MakeBooking.getInstance();
+    private ObservableList<String> monthsRevenue = FXCollections.observableArrayList();
     
     @FXML
     private ChoiceBox<String> yearChoiceBox;
@@ -34,7 +37,7 @@ public class OverviewRevenuesController implements Initializable {
     @FXML
     private Button showBtn;
     @FXML
-    private ListView<Double> listViewRevenvues;
+    private ListView<String> listViewRevenvues;
 
     /**
      * Initializes the controller class.
@@ -43,7 +46,7 @@ public class OverviewRevenuesController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         model=DomainController.getInstance();
         addDataToChoiceBox();
-        
+        monthsRevenue.addAll(Arrays.asList("January ", "February ", "March ", "April ", "May ", "June ", "July ", "August ", "September ", "October ", "November ", "December " ));
     }   
     
     private void addDataToChoiceBox(){
@@ -66,12 +69,14 @@ public class OverviewRevenuesController implements Initializable {
         listViewRevenvues.setItems(returnRevenuesPerMonth());
     }
     
-    public ObservableList<Double> returnRevenuesPerMonth(){
-        ObservableList<Double> revenues = FXCollections.observableArrayList();
-        for(Double d: mb.getRevenuesPerMonth(getYear())){
-                revenues.add(d);
+    public ObservableList<String> returnRevenuesPerMonth(){
+        for(int i=0; i < mb.getRevenuesPerMonth(getYear()).size();i++){
+            String revenue = mb.getRevenuesPerMonth(getYear()).get(i).toString();
+            monthsRevenue.add(i, revenue);
         }
-        return revenues;
+       
+        return monthsRevenue;
     }
+    
     
 }
