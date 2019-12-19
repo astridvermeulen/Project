@@ -223,19 +223,11 @@ public class DataCustomerController implements Initializable {
             }
         }
         if(firstNameCorrect ==true && lastNameCorrect==true){
-            try {
+            
                 mb.customerInfo(passportIDC1TxtField, firstNameC1TxtField, lastNameC1TxtField, getDatePickerC1());
                 Customer customer = new Customer(passportIDC1TxtField.getText(), firstNameC1TxtField.getText(), lastNameC1TxtField.getText(), getDatePickerC1());
                 submitC1Btn.setText("Submitted");
                 
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("customerReport.fxml"));
-                loader.load();
-                ReportCustomerController controller =
-                        (ReportCustomerController) loader.getController();
-                controller.addCustomerToTableView(customer);
-            } catch (IOException ex) {
-                Logger.getLogger(DataCustomerController.class.getName()).log(Level.SEVERE, null, ex);
-            }
         }
         else{
         alertBox.display("Warning!", "Please enter a valid input.");
@@ -257,9 +249,9 @@ public class DataCustomerController implements Initializable {
                 lastNameCorrect = false;
             }
         }
-        if(firstNameCorrect && lastNameCorrect){
+        if(firstNameCorrect == true && lastNameCorrect == true){
             mb.customerInfo(passportIDC2TxtField, firstNameC2TxtField, lastNameC2TxtField, getDatePickerC2());
-            submitC1Btn.setText("Submitted");
+            submitC2Btn.setText("Submitted");
         }
         else{
         alertBox.display("Warning!", "Please enter a valid input.");
@@ -283,7 +275,7 @@ public class DataCustomerController implements Initializable {
         }
         if(firstNameCorrect &&  lastNameCorrect){
             mb.customerInfo(passportIDC3TxtField, firstNameC3TxtField, lastNameC3TxtField, getDatePickerC3());
-            submitC1Btn.setText("Submitted");
+            submitC3Btn.setText("Submitted");
         }
         else{
         alertBox.display("Warning!", "Please enter a valid input.");
@@ -305,9 +297,9 @@ public class DataCustomerController implements Initializable {
                 lastNameCorrect = false;
             }
         }
-        if(firstNameCorrect &&  lastNameCorrect){
+        if(firstNameCorrect == true  &&  lastNameCorrect == true){
             mb.customerInfo(passportIDC4TxtField, firstNameC4TxtField, lastNameC4TxtField, getDatePickerC4());
-            submitC1Btn.setText("Submitted");
+            submitC4Btn.setText("Submitted");
         }
         else{
         alertBox.display("Warning!", "Please enter a valid input.");
@@ -329,9 +321,9 @@ public class DataCustomerController implements Initializable {
                 lastNameCorrect = false;
             }
         }
-        if(firstNameCorrect && lastNameCorrect){
+        if(firstNameCorrect == true && lastNameCorrect == true){
             mb.customerInfo(passportIDC5TxtField, firstNameC5TxtField, lastNameC5TxtField, getDatePickerC5());
-            submitC1Btn.setText("Submitted");
+            submitC5Btn.setText("Submitted");
         }
         else{
         alertBox.display("Warning!", "Please enter a valid input.");

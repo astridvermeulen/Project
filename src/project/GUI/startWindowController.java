@@ -101,7 +101,7 @@ public class startWindowController implements Initializable {
             panelToUpdate.getChildren().setAll(paneBookingSummary);
         } catch (IOException ex) {
             Logger.getLogger(startWindowController.class.getName()).log(Level.SEVERE, null, ex);
-            alertBox.display("Warning!", ex.getMessage());
+            alertBox.display("Warning!", "No recent booking has been made!");
         }
     }
   

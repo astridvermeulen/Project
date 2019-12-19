@@ -23,7 +23,6 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -31,10 +30,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import project.DB.DBAirport;
 import project.DB.DBException;
-
 import static project.LOGIC.Airport.airportsAlphabetic;
-import project.LOGIC.Booking;
-
 import project.LOGIC.DomainController;
 import project.LOGIC.Flight;
 
@@ -44,12 +40,12 @@ import project.LOGIC.Flight;
  * @author eliseverschelde
  */
 public class SearchFlightController implements Initializable {
-    private DomainController model;
+    private DomainController dc;
     private MakeBooking mb = MakeBooking.getInstance();
-    private ArrayList<Flight> filteredFlights = new ArrayList();  
+    private ArrayList<Flight> filteredFlights;  
    
     
-   
+    
     @FXML
     private TableColumn<Flight, String> airlineColumn;
     @FXML
@@ -94,11 +90,9 @@ public class SearchFlightController implements Initializable {
     @FXML
     private ChoiceBox<?> destinationCityChoice;
     @FXML
-    private ChoiceBox<?> amountOfPassengersChoice;
+    private ChoiceBox<?> numberOfPassengersChoice;
     @FXML
     private ChoiceBox<?> sortByChoice;
-    @FXML
-    private Button searchFlightMethode;
     @FXML
     private CheckBox intermediateStopsAllowedCheck;
     @FXML
@@ -106,13 +100,16 @@ public class SearchFlightController implements Initializable {
     @FXML
     private AnchorPane panelToUpdate;
     @FXML
-    private Button clearFlightsBtn;
-    @FXML
     private Button bookBtn;
     @FXML
     private Button clearSelectedFlightsBtn;
     @FXML
     private Label fromLbl1;
+    @FXML
+    private Button searchFlightBtn;
+    @FXML
+    private Button clearSearchResultsBtn;
+  
     
     public String getDatePicker() {
         return datePicker.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
@@ -122,9 +119,6 @@ public class SearchFlightController implements Initializable {
     }
     public String getDestinationAirport(){
         return destinationCityChoice.getValue().toString();
-    }
-    public int getAmountOfPassengers(){
-        return (Integer) amountOfPassengersChoice.getValue();
     }
     public String getSortBy(){
         return sortByChoice.getValue().toString();
@@ -138,13 +132,13 @@ public class SearchFlightController implements Initializable {
   
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        model = DomainController.getInstance();
-        addDataToChoiceBox();
+        dc = DomainController.getInstance();
+        filteredFlights = new ArrayList();
         
         airlineColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("airline"));
         originAirportColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("origin"));
         destinationAirportColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("destination"));
-        durationColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("duration"));
+        durationColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("durationGui"));
         departureDayColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("departureDate"));
         departureTimeColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("departureTime"));
         arrivalDayColumn.setCellValueFactory(new PropertyValueFactory<Flight,String>("arrivalDate"));
@@ -154,9 +148,11 @@ public class SearchFlightController implements Initializable {
         emissionColumn.setCellValueFactory(new PropertyValueFactory<Flight,Double>("emission"));
         numberOfStopoversColumn.setCellValueFactory(new PropertyValueFactory<Flight,Integer>("numberOfStops"));
         
+        
+        addDataToChoiceBox();
+        
         mb.deleteSelectedFlights();
-        filteredFlights.clear();
-               
+        
     }    
     
 
@@ -172,19 +168,27 @@ public class SearchFlightController implements Initializable {
         if(intermediateStopsNotAllowedCheck.isSelected()){
             intermediateStopsAllowedCheck.setSelected(false);
         }
+        
     }
 
-    //Search flights
+    
     @FXML
     private void searchFlight(ActionEvent event) {
         try {
-            filteredFlights.addAll(model.searchFlight(getIntermediateStopsAllowed(), getSortBy(), getOriginAirport(), getDestinationAirport(), getDatePicker()));
+        if(dc.searchFlight(getIntermediateStopsAllowed(), getSortBy(), getOriginAirport(), getDestinationAirport(), getDatePicker()).isEmpty()){
+            alertBox.display("Oops!", "No matching flight(s) found.");
+        }
+        else{
+            filteredFlights.addAll(dc.searchFlight(getIntermediateStopsAllowed(), getSortBy(), getOriginAirport(), getDestinationAirport(), getDatePicker()));
             tableView.setItems(getFlights());
-        } catch (DBException ex) {
+            } 
+        }catch (DBException ex) {
             Logger.getLogger(SearchFlightController.class.getName()).log(Level.SEVERE, null, ex);
             alertBox.display("Warning!", ex.getMessage());
-        }
+         }
+        
     }
+    
     // ObservableList om te kunnen weergeven in TableView.    
     public ObservableList<Flight> getFlights(){
         
@@ -195,37 +199,30 @@ public class SearchFlightController implements Initializable {
         return flights;
     }
 
-    
-    // voor elke choicebox moet een lijst geïmporteerd worden. 
-     private void addDataToChoiceBox(){
+    //Fills the choiceboxes with data 
+    private void addDataToChoiceBox(){
         
-    ObservableList list1 = FXCollections.observableArrayList();
-    ObservableList list2 = FXCollections.observableArrayList();
-    ObservableList list3 = FXCollections.observableArrayList();
-    
-    ArrayList<String> test = new ArrayList<>();
-    
+        ObservableList list1 = FXCollections.observableArrayList();
+        ObservableList list2 = FXCollections.observableArrayList();
+        ObservableList list3 = FXCollections.observableArrayList();
+        //Airports
         try {
-          test = airportsAlphabetic();
-          int size = test.size();
-          for(int position = 0; position < size; position++)
-              list1.add(test.get(position));
-    
-
+            list1.addAll(airportsAlphabetic());
+        
         } catch (DBException ex) {
-        Logger.getLogger(DBAirport.class.getName()).log(Level.SEVERE, null, ex);
-        alertBox.display("Warning!", ex.getMessage());
+            Logger.getLogger(DBAirport.class.getName()).log(Level.SEVERE, null, ex);
+            alertBox.display("Warning!", ex.getMessage());
         }
-      
-      for(int i=1; i<6; i++){
-          list2.add(i);
-      }
-
-      list3.addAll("Duration", "Price", "Emission");
+        //Number of passengers 
+        for(int i=1; i<6; i++){
+        list2.add(i);
+        }
+        //Filter choices
+        list3.addAll("Duration", "Price", "Emission");
       
         originCityChoice.getItems().addAll(list1);
         destinationCityChoice.getItems().addAll(list1);
-        amountOfPassengersChoice.getItems().addAll(list2);
+        numberOfPassengersChoice.getItems().addAll(list2);
         sortByChoice.getItems().addAll(list3);
         
     }
@@ -240,11 +237,7 @@ public class SearchFlightController implements Initializable {
         
     }
 
-    @FXML
-    private void clearFlights(ActionEvent event) {
-        filteredFlights.clear();
-        tableView.getItems().clear();
-    }
+    
 
     @FXML
     private void makeBooking(ActionEvent event) {
@@ -267,5 +260,11 @@ public class SearchFlightController implements Initializable {
     @FXML
     private void clearSelectedFlights(ActionEvent event) {
         mb.deleteSelectedFlights();
+    }
+
+    @FXML
+    private void clearSearchResults(ActionEvent event) {
+        filteredFlights.clear();
+        tableView.getItems().clear();
     }
 }

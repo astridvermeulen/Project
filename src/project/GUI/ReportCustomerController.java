@@ -79,14 +79,11 @@ public class ReportCustomerController implements Initializable {
         destinationAirportColumn.setCellValueFactory(new PropertyValueFactory<Flight, String>("destination"));
         emissionColumn.setCellValueFactory(new PropertyValueFactory<Flight, Double>("emission"));
 
-        tableViewCustomers.setItems(getCustomers());
+        tableViewCustomers.setItems(getCustomers().sorted());
 
     }
     
-    public void addCustomerToTableView(Customer customer){
-        customers.add(customer);
-        tableViewCustomers.setItems(getCustomers());
-    }
+   
     
     public ObservableList<Customer> getCustomers() {
         try {
@@ -146,3 +143,4 @@ public class ReportCustomerController implements Initializable {
     }
 
 }
+
